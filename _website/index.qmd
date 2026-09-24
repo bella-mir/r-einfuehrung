@@ -26,5 +26,7 @@ toc: false
 ## Impressum
 
 **Autorin:** Bella Mironova, TU Wien, SRF
-**Überarbeitung:** mit Unterstützung von Claude (Anthropic)
+
 **Lizenz:** [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/deed.de)
+
+_Überarbeitung  mit Unterstützung von Claude (Anthropic)_

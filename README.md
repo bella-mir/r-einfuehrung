@@ -28,4 +28,4 @@ Die Website wird mit `source("_website/build_site.R")` nach `docs/` gebaut.
 
 **Lizenz:** [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/deed.de)
 
-_(Überarbeitung  mit Unterstützung von Claude (Anthropic))_
+_Überarbeitung  mit Unterstützung von Claude (Anthropic)_
