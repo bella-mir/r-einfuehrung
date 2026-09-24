@@ -41,7 +41,7 @@ Auf dem Mac: `Cmd` statt `Strg`, `Option` statt `Alt`.
 
 ---
 
-# Einheit 1 — Grundlagen, Vektoren, Matrizen & erste Grafiken
+# Einheit 1 — Grundlagen
 
 ## Rechnen, Zuweisen, Vergleichen
 
@@ -111,7 +111,7 @@ Auf dem Mac: `Cmd` statt `Strg`, `Option` statt `Alt`.
 
 ---
 
-# Einheit 2 — Data Frames, Daten einlesen & dplyr
+# Einheit 2 — Daten einlesen & aufräumen
 
 ## Listen & Faktoren
 
@@ -136,7 +136,7 @@ Auf dem Mac: `Cmd` statt `Strg`, `Option` statt `Alt`.
 | `df$neu <- df$a / df$b` | neue Spalte |
 | `df[order(df$x), ]` · `order(df$x, decreasing = TRUE)` | sortieren · absteigend |
 
-## Einlesen & Speichern
+## Einlesen
 
 | Code | Bedeutung |
 |---|---|
@@ -144,7 +144,30 @@ Auf dem Mac: `Cmd` statt `Strg`, `Option` statt `Alt`.
 | `read.csv2("data/raw/f.csv")` | CSV mit `;` und `,` (deutsches Excel) |
 | `skip = 4` · `header = FALSE` · `na.strings = c("", "-")` | Zeilen überspringen · keine Kopfzeile · was als `NA` gilt |
 | `readxl::read_excel("f.xlsx")` | Excel-Datei |
-| `write.csv(df, "data/processed/f.csv", row.names = FALSE)` | als CSV speichern |
+
+## Daten aufräumen
+
+| Code | Bedeutung |
+|---|---|
+| `names(df) <- as.character(df[5, ])` | Zeile 5 zur Kopfzeile machen |
+| `df[-(1:5), ]` · `rownames(df) <- NULL` | Zeilen entfernen · neu nummerieren |
+| `tolower(gsub(" ", "_", names(df)))` | Spaltennamen in snake_case |
+| `df[cols] <- lapply(df[cols], as.numeric)` | mehrere Spalten umwandeln |
+| `paste("a", "b")` · `paste0("a", "b")` | Text verbinden mit / ohne Leerzeichen |
+| `substr(x, 1, 2)` · `trimws(x)` | Zeichen ausschneiden · Randleerzeichen entfernen |
+| `cut(x, breaks = c(0, 10, Inf), labels = c("klein", "groß"))` | Zahlen → Kategorien |
+
+## Speichern
+
+| Code | Bedeutung |
+|---|---|
+| `write.csv(df, "data/processed/f.csv", row.names = FALSE)` | als CSV speichern (`,` und `.`) |
+| `write.csv2(df, "data/processed/f.csv", row.names = FALSE)` | als CSV für deutsches Excel (`;` und `,`) |
+| `saveRDS(df, "f.rds")` · `readRDS("f.rds")` | im R-Format speichern · laden (behält Typen) |
+
+---
+
+# Einheit 3 — Daten auswerten & visualisieren
 
 ## dplyr
 
@@ -161,10 +184,6 @@ Auf dem Mac: `Cmd` statt `Strg`, `Option` statt `Alt`.
 | `left_join(df1, df2, by = "id")` | verbinden, alle Zeilen von `df1` behalten |
 | `inner_join()` · `right_join()` · `full_join()` | nur gemeinsame · alle von `df2` · alle |
 
----
-
-# Einheit 3 — ggplot2 & Daten aufräumen
-
 ## ggplot2
 
 | Code | Bedeutung |
@@ -177,19 +196,6 @@ Auf dem Mac: `Cmd` statt `Strg`, `Option` statt `Alt`.
 | `facet_wrap(~ g)` | eine Teilgrafik pro Gruppe |
 | `theme_minimal()` · `theme_bw()` | Erscheinungsbild |
 | `ggsave("output/grafik.png", width = 8, height = 5)` | letzte Grafik speichern |
-
-## Daten aufräumen
-
-| Code | Bedeutung |
-|---|---|
-| `names(df) <- as.character(df[5, ])` | Zeile 5 zur Kopfzeile machen |
-| `df[-(1:5), ]` · `rownames(df) <- NULL` | Zeilen entfernen · neu nummerieren |
-| `tolower(gsub(" ", "_", names(df)))` | Spaltennamen in snake_case |
-| `df[cols] <- lapply(df[cols], as.numeric)` | mehrere Spalten umwandeln |
-| `paste("a", "b")` · `paste0("a", "b")` | Text verbinden mit / ohne Leerzeichen |
-| `substr(x, 1, 2)` · `trimws(x)` | Zeichen ausschneiden · Randleerzeichen entfernen |
-| `cut(x, breaks = c(0, 10, Inf), labels = c("klein", "groß"))` | Zahlen → Kategorien |
-| `saveRDS(df, "f.rds")` · `readRDS("f.rds")` | im R-Format speichern · laden (behält Typen) |
 
 ---
 

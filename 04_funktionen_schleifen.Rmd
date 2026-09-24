@@ -1,5 +1,5 @@
 ---
-title: "R-Einführung — Einheit 4: Bedingungen, Schleifen & eigene Funktionen"
+title: "R-Einführung — Einheit 4: Bedingungen, Schleifen & Funktionen"
 output: html_notebook
 ---
 
@@ -17,7 +17,7 @@ steuern und eigene Werkzeuge zu bauen:
 4. **Funktionen auf viele Elemente anwenden** — `sapply()` und `lapply()`
 5. **Alles zusammen** — eine Grafik pro Team
 
-Wir verwenden wieder die Temperaturen aus Einheit 1 und die Mitarbeitenden-Daten aus Einheit 2:
+Wir verwenden wieder die Temperaturen aus Einheit 1 und die Mitarbeitenden-Daten aus Einheit 3:
 
 ```{r}
 library(dplyr)
@@ -294,7 +294,7 @@ Eine Funktion sollte deshalb alles, was sie braucht, über ihre **Argumente** be
 ```
 
 
-# Teil 4: sapply() — eine Funktion auf viele Elemente anwenden
+# Teil 4: Funktionen anwenden mit sapply()
 
 ## Die Idee
 
@@ -405,7 +405,7 @@ sapply(alle_teams, function(t) {
 })
 ```
 
-Für Data Frames ist `group_by()` + `summarise()` (Einheit 2) meist die bequemere Lösung.
+Für Data Frames ist `group_by()` + `summarise()` (Einheit 3) meist die bequemere Lösung.
 `sapply()` ist dann praktisch, wenn man mit Vektoren, Listen oder Spalten arbeitet.
 
 **Kurzschreibweise:** In neuerem Code sieht man statt `function(x)` oft `\(x)` — das ist
@@ -413,7 +413,7 @@ seit R 4.1 dasselbe, nur kürzer: `sapply(c(10, 20, 30), \(x) x^2)`.
 
 ## sapply() oder lapply()?
 
-`lapply()` (Einheit 3) funktioniert genauso, gibt aber **immer eine Liste** zurück — das *l*
+`lapply()` (Einheit 2) funktioniert genauso, gibt aber **immer eine Liste** zurück — das *l*
 steht für *list*:
 
 ```{r}
@@ -500,5 +500,7 @@ auf.
 - **Funktionen:** `name <- function(arg, arg2 = standard) { … }` · letzter Ausdruck ist das
   Ergebnis · mehrere Werte als benannter Vektor oder Liste · Eingaben mit `stop()` prüfen ·
   Variablen innerhalb bleiben lokal
-- **Anwenden:** `sapply(X, FUN, ...)` wendet `FUN` auf jedes Element an (Data Frame: jede Spalte) · Funktion ohne Klammern übergeben · weitere Argumente wie `na.rm = TRUE` dahinter · Ergebnis Vektor, Matrix oder Liste · `lapply()` gibt immer eine Liste · anonyme Funktion
+- **Anwenden:** `sapply(X, FUN, ...)` wendet `FUN` auf jedes Element an (Data Frame: jede
+  Spalte) · Funktion ohne Klammern übergeben · weitere Argumente wie `na.rm = TRUE` dahinter ·
+  Ergebnis Vektor, Matrix oder Liste · `lapply()` gibt immer eine Liste · anonyme Funktion
   `function(x) …`

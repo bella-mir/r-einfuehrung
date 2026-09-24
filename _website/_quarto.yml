@@ -8,6 +8,7 @@ project:
     - einheit-2.Rmd
     - einheit-3.Rmd
     - einheit-4.Rmd
+    - abschlussprojekt.Rmd
     - cheatsheet.md
 
 lang: de
@@ -33,11 +34,13 @@ website:
           - href: einheit-1.Rmd
             text: "1 · Grundlagen"
           - href: einheit-2.Rmd
-            text: "2 · Data Frames & dplyr"
+            text: "2 · Daten einlesen & aufräumen"
           - href: einheit-3.Rmd
-            text: "3 · ggplot2 & Daten aufräumen"
+            text: "3 · Daten auswerten & visualisieren"
           - href: einheit-4.Rmd
-            text: "4 · Funktionen & Schleifen"
+            text: "4 · Bedingungen, Schleifen & Funktionen"
+      - href: abschlussprojekt.Rmd
+        text: Abschlussprojekt
       - href: cheatsheet.md
         text: Cheatsheet
 

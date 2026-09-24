@@ -1,5 +1,5 @@
 ---
-title: "R-Einführung — Einheit 2: Data Frames, Daten einlesen & dplyr"
+title: "R-Einführung — Einheit 2: Daten einlesen & aufräumen"
 output: html_notebook
 ---
 
@@ -7,19 +7,17 @@ output: html_notebook
 knitr::opts_chunk$set(echo = TRUE, message = FALSE)
 ```
 
-In dieser Einheit geht es vom einzelnen Vektor zur ganzen Tabelle:
+In dieser Einheit geht es vom einzelnen Vektor zur ganzen Tabelle — und von der Datei zu
+sauberen Daten:
 
 1. **Listen und Faktoren** — zwei weitere Datenstrukturen, die in Tabellen ständig vorkommen
 2. **Data Frames** — die zentrale Struktur für tabellarische Daten in R
-3. **Daten einlesen und speichern** — CSV & Co.
-4. **Datenbearbeitung mit `dplyr`** — filtern, sortieren, umformen, gruppieren, verbinden
+3. **Daten einlesen** — CSV & Co. in R laden
+4. **Unordentliche Daten aufräumen** — Kopfzeilen, falsche Datentypen und Spaltennamen in
+   Ordnung bringen
+5. **Ergebnisse speichern** — CSV, RDS und RData
 
-Für Teil 4 wird das Paket `dplyr` gebraucht. Falls noch nicht geschehen, einmalig **in der
-Console** installieren:
-
-```{r, eval=FALSE}
-install.packages("dplyr")
-```
+In dieser Einheit arbeiten wir nur mit Basis-R, es werden keine Zusatzpakete gebraucht.
 
 
 # Teil 1: Listen und Faktoren
@@ -252,14 +250,14 @@ planeten[order(planeten$durchmesser, decreasing = TRUE), ] # absteigend
 ```
 
 
-# Teil 3: Daten einlesen und speichern
+# Teil 3: Daten einlesen
 
 In der Praxis liegen Daten fast immer als **Datei** vor — meistens als CSV (*comma-separated
 values*): eine Textdatei mit einer Beobachtung pro Zeile und einem Trennzeichen zwischen den
 Spalten.
 
 R sucht Dateien relativ zum **Arbeitsverzeichnis**. Wird das Projekt über
-`RIntroduction.Rproj` geöffnet, ist das der Projektordner (siehe Einheit 0):
+`r-einfuehrung.Rproj` geöffnet, ist das der Projektordner (siehe Einheit 0):
 
 ```{r}
 getwd()
@@ -314,239 +312,160 @@ Weitere nützliche Argumente:
 | CSV, schneller & strenger | `read_csv("datei.csv")` | `readr` |
 | R-eigenes Format (`.rds`) | `readRDS("datei.rds")` | Basis-R |
 
-## Ergebnisse speichern
-
-`write.csv()` schreibt einen Data Frame als CSV; `row.names = FALSE` verhindert eine zusätzliche
-Spalte mit Zeilennummern. Gespeichert wird nach `data/processed/` — `data/raw/` bleibt
-unverändert:
-
-```{r, eval=FALSE}
-write.csv(mitarbeitende, "data/processed/mitarbeitende_clean.csv", row.names = FALSE)
-```
-
 <!-- TODO: Übung „Daten einlesen" — Datensatz folgt (Trennzeichen, skip, na.strings, str()). -->
 
 
-# Teil 4: Datenbearbeitung mit dplyr
+# Teil 4: Daten aufräumen
 
-`dplyr` bündelt die typischen Arbeitsschritte in wenige, gut lesbare Funktionen („Verben").
-Jedes Verb bekommt einen Data Frame und gibt einen neuen Data Frame zurück.
+Echte Dateien sind selten sofort verwendbar: oben stehen Info-Zeilen, Zahlen kommen als Text
+an, Spaltennamen enthalten Leerzeichen. Die Datei `data/raw/bezirke_roh.csv` ist so ein Fall —
+Semikolon-getrennt, mit vier Info-Zeilen vor der eigentlichen Kopfzeile.
 
-```{r}
-library(dplyr)
-```
+## Die Rohdatei ansehen
 
-## filter() — Zeilen auswählen
-
-```{r}
-filter(mitarbeitende, plusstunden > 40)
-filter(mitarbeitende, land %in% c("AT", "DE"), projekte >= 10)   # Komma = und
-```
-
-Zeilen, bei denen die Bedingung `NA` ergibt (hier: Vera), fallen bei `filter()` weg.
-
-## select() — Spalten auswählen
+Wir lesen zunächst **ohne** Kopfzeile ein (`header = FALSE`), um zu sehen, was in der Datei
+steht. Weil in jeder Spalte auch Text vorkommt, sind alle Spalten `character`:
 
 ```{r}
-select(mitarbeitende, name, team, projekte)
+roh <- read.csv2("data/raw/bezirke_roh.csv", header = FALSE)
+roh
 ```
 
-## arrange() — sortieren
+## Kopfzeile setzen und Info-Zeilen entfernen
 
-`arrange()` sortiert nach einer oder mehreren Spalten; `desc()` dreht die Reihenfolge um:
+Die echten Spaltennamen stehen in Zeile 5. Wir machen sie zu Spaltennamen und entfernen dann
+die ersten fünf Zeilen. Das Ergebnis speichern wir unter einem sprechenden Namen:
 
 ```{r}
-arrange(mitarbeitende, desc(plusstunden))
+names(roh) <- as.character(roh[5, ])   # Zeile 5 wird zur Kopfzeile
+bezirke <- roh[-(1:5), ]               # Zeilen 1–5 entfernen
+rownames(bezirke) <- NULL              # Zeilennummerierung zurücksetzen
+bezirke
 ```
 
-## Der Pipe-Operator: %>% und |>
+## Spaltennamen säubern: gsub() und tolower()
 
-### Das Problem: mehrere Schritte hintereinander
-
-Sollen mehrere Funktionen nacheinander angewendet werden, gibt es ohne Pipe zwei Wege — beide
-sind unhandlich:
+Rohdaten halten sich selten an die Namensregeln aus Einheit 1. `gsub(muster, ersatz, text)`
+ist Suchen-und-Ersetzen: Wir tauschen Leerzeichen gegen Unterstriche — dann funktioniert `$`
+ohne Backticks. `tolower()` macht alles klein, damit die Namen snake_case sind:
 
 ```{r}
-# 1. Verschachteln: muss von innen nach außen gelesen werden
-arrange(filter(mitarbeitende, land == "AT"), desc(plusstunden))
-
-# 2. Zwischenergebnisse speichern: lesbar, aber viele Hilfsvariablen
-nur_at <- filter(mitarbeitende, land == "AT")
-arrange(nur_at, desc(plusstunden))
+names(bezirke)
+names(bezirke) <- tolower(gsub(" ", "_", names(bezirke)))
+names(bezirke)
 ```
 
-### Die Lösung: die Pipe
+## Datentypen reparieren: as.numeric() & lapply()
 
-Der **Pipe-Operator** nimmt das Ergebnis auf seiner linken Seite und setzt es als **erstes
-Argument** in die Funktion auf der rechten Seite ein:
-
-```
-x %>% f(y)      ist dasselbe wie      f(x, y)
-```
-
-Damit wird aus der Verschachtelung eine Kette, die man von oben nach unten liest. Die Pipe
-spricht man am besten als **„und dann"**: *Nimm `mitarbeitende`, und dann filtere nach
-Österreich, und dann sortiere nach Plusstunden.*
+Die Zahlenspalten sind noch Text (`chr`). Für eine Spalte ginge das mit
+`bezirke$haushalte <- as.numeric(bezirke$haushalte)`. Für mehrere Spalten auf einmal nimmt man
+`lapply()`: Es wendet eine Funktion auf jede Spalte an und gibt die Ergebnisse als Liste
+zurück, die wir direkt in die Spalten zurückschreiben:
 
 ```{r}
-mitarbeitende %>%
-  filter(land == "AT") %>%
-  arrange(desc(plusstunden))
+zahl_spalten <- c("bezirk_nummer", "haushalte", "mittleres_einkommen")
+bezirke[zahl_spalten] <- lapply(bezirke[zahl_spalten], as.numeric)
+
+str(bezirke)
 ```
 
-Beachte: In der Kette steht in `filter()` und `arrange()` **kein** Data Frame mehr — den
-liefert die Pipe von oben.
+## Der kurze Weg: skip = 4
 
-### Zwei Schreibweisen: %>% und |>
-
-In R gibt es zwei Pipes. Für alles, was in dieser Einführung vorkommt, verhalten sie sich
-**gleich** — dieselbe Kette mit der eingebauten Pipe `|>`:
+Der Weg oben zeigt, was beim Aufräumen passiert. In der Praxis erledigt `skip = 4` Kopfzeile
+**und** Datentypen in einem Schritt: Die ersten vier Zeilen werden übersprungen, Zeile 5 wird
+Kopfzeile, und R erkennt die Zahlenspalten selbst. Leerzeichen in Spaltennamen ersetzt R dabei
+durch Punkte:
 
 ```{r}
-mitarbeitende |>
-  filter(land == "AT") |>
-  arrange(desc(plusstunden))
+str(read.csv2("data/raw/bezirke_roh.csv", skip = 4))
 ```
 
-| | `%>%` | `\|>` |
-|---|---|---|
-| Name | magrittr-Pipe | native Pipe (eingebaut) |
-| Herkunft | Paket `magrittr`, wird von `dplyr` mitgeladen | fester Bestandteil von R seit Version 4.1 (2021) |
-| braucht ein Paket? | ja — ohne `library(dplyr)` gibt es einen Fehler | nein |
-| wo man sie sieht | ältere Tutorials, Stack Overflow, viele Kurse — **auch in den weiteren Kursmaterialien** | aktuelle R-Dokumentation, *R for Data Science* (2. Auflage), tidyverse-Stilempfehlung |
+## Text zusammensetzen und zerlegen: paste(), substr(), trimws()
 
-**In diesem Kurs verwenden wir `%>%`**, weil es in den weiteren Kursmaterialien verwendet wird.
-Die aktuelle Empfehlung für neuen Code ist `|>`. Du solltest **beide lesen können** — wenn du
-eine der beiden siehst, denk einfach „und dann".
-
-### Zwei kleine Unterschiede
-
-Für den Anfang selten wichtig, aber gut zu wissen, wenn Code aus dem Netz nicht funktioniert:
-
-1. **Klammern:** Bei `|>` muss rechts immer ein Funktions*aufruf* mit Klammern stehen.
-   `mitarbeitende %>% head` funktioniert, `mitarbeitende |> head` nicht — richtig ist
-   `mitarbeitende |> head()`. Einfachste Regel: **immer Klammern schreiben.**
-2. **Platzhalter:** Soll das Ergebnis *nicht* an die erste Stelle, markiert man die Stelle mit
-   einem Platzhalter — bei `%>%` ein Punkt `.`, bei `|>` ein Unterstrich `_` (nur mit
-   Argumentnamen). Beispiel: `lm()` berechnet eine Regression und erwartet die Daten erst im
-   Argument `data`:
+`paste()` verbindet Textstücke mit einem Leerzeichen, `paste0()` ohne Trennzeichen:
 
 ```{r}
-mitarbeitende %>% lm(plusstunden ~ projekte, data = .)
-mitarbeitende |>  lm(plusstunden ~ projekte, data = _)
+paste("AT", "13", "01")     # "AT 13 01"
+paste0("AT", "13", "01")    # "AT1301"
+
+bezirke$label <- paste0(bezirke$bezirk_nummer, ". ", bezirke$bezirk_name)
+head(bezirke$label)
 ```
 
-**Tastenkürzel:** *Strg/Cmd + Shift + M* fügt eine Pipe ein. Welche, stellt man unter
-*Tools → Global Options → Code → „Use native pipe operator, |>"* ein — für diesen Kurs den Haken
-**nicht** setzen, dann kommt `%>%`.
-
-## mutate() — neue Spalten berechnen
-
-`mutate()` berechnet eine neue Spalte aus bestehenden — elementweise für jede Zeile.
-Gleichwertig in Basis-R wäre
-`mitarbeitende$stunden_pro_projekt <- mitarbeitende$plusstunden / mitarbeitende$projekte`.
+`substr(text, start, stop)` schneidet Zeichen nach Position heraus — nützlich, um kombinierte
+Codes zu trennen:
 
 ```{r}
-mitarbeitende <- mitarbeitende %>%
-  mutate(stunden_pro_projekt = round(plusstunden / projekte, 1))
-
-head(mitarbeitende)
+codes <- c("AT130", "AT127", "AT111")
+substr(codes, 1, 2)   # Land
+substr(codes, 3, 5)   # Regionscode
 ```
 
-## Mehrere Schritte kombinieren
+`trimws()` entfernt überflüssige Leerzeichen am Anfang und Ende — ein häufiges Problem bei
+Daten aus Excel:
 
 ```{r}
-mitarbeitende %>%
-  filter(land == "AT") %>%
-  select(name, team, plusstunden) %>%
-  arrange(desc(plusstunden))
+trimws("   Wien   ")
 ```
 
-## count() — Häufigkeiten zählen
+## Zahlen in Kategorien einteilen: cut()
 
-`count()` zählt, wie oft jeder Wert vorkommt — das `dplyr`-Gegenstück zu `table()`:
+`cut()` teilt eine Zahlenspalte anhand von Grenzen (`breaks`) in Kategorien ein und liefert
+einen **Faktor** zurück (siehe Teil 1, *Faktoren*):
 
 ```{r}
-mitarbeitende %>% count(team)
+bezirke$groesse <- cut(bezirke$haushalte,
+                       breaks = c(0, 15000, 40000, Inf),
+                       labels = c("klein", "mittel", "groß"))
+
+bezirke[, c("bezirk_name", "haushalte", "groesse")]
+table(bezirke$groesse)
 ```
-
-## group_by() + summarise() — Kennzahlen pro Gruppe
-
-Eine der häufigsten Aufgaben: eine Kennzahl je Gruppe — z. B. die durchschnittlichen
-Plusstunden pro Team.
-
-```{r}
-mitarbeitende %>%
-  group_by(team) %>%
-  summarise(
-    anzahl           = n(),
-    plusstunden_mean = mean(plusstunden),
-    projekte_max     = max(projekte)
-  )
-```
-
-Die Ausgabe beginnt mit `# A tibble`. Ein **Tibble** ist die `dplyr`-Variante eines Data
-Frames — er zeigt zusätzlich Größe und Spaltentypen an, alles andere funktioniert wie gewohnt.
-
-Bei `Team_B` steht `NA`, weil Veras Plusstunden fehlen (siehe Einheit 1, *Fehlende Werte: NA*).
-Mit `na.rm = TRUE` wird der fehlende Wert ausgelassen:
-
-```{r}
-mitarbeitende %>%
-  group_by(team) %>%
-  summarise(anzahl = n(), plusstunden_mean = mean(plusstunden, na.rm = TRUE))
-```
-
-## Datensätze verbinden: Joins
-
-`teams` enthält zu jedem Team die Region. Mit einem **Join** wird diese Information über die
-gemeinsame Spalte `team` an `mitarbeitende` angehängt.
-
-Die Datensätze passen nicht perfekt zusammen — wie so oft in echten Daten:
-
-- **Uwe** gehört zu `Team_E`, das in `teams` fehlt.
-- **`Team_D`** steht in `teams`, hat aber keine Mitarbeitenden.
-
-Die vier Join-Varianten unterscheiden sich genau darin, was mit solchen Zeilen passiert:
-
-| Funktion | Behält |
-|---|---|
-| `left_join(x, y)` | alle Zeilen von `x`; fehlt die Entsprechung in `y` → `NA` |
-| `right_join(x, y)` | alle Zeilen von `y` |
-| `inner_join(x, y)` | nur Zeilen, die in **beiden** vorkommen |
-| `full_join(x, y)` | alle Zeilen aus **beiden** |
-
-```{r}
-nrow(left_join(mitarbeitende, teams, by = "team"))    # alle 22 Personen, Uwe mit Region NA
-nrow(inner_join(mitarbeitende, teams, by = "team"))   # 21 — Uwe fällt weg
-nrow(full_join(mitarbeitende, teams, by = "team"))    # 23 — alle Personen + Team_D
-```
-
-Meist will man keine Personen verlieren, deshalb ist `left_join()` der Standard:
-
-```{r}
-mitarbeitende_join <- mitarbeitende %>%
-  left_join(teams, by = "team")
-
-mitarbeitende_join %>% filter(is.na(region))
-```
-
-Über mehrere Spalten verbindet man mit `by = c("spalte1", "spalte2")`. In Basis-R heißt die
-Funktion `merge()` (`merge(x, y, by = "team", all.x = TRUE)` entspricht `left_join`).
 
 ### Übung
 
-1. Welche drei Personen haben die meisten Projekte? Zeige nur `name` und `projekte`.
-2. Berechne pro `land` die Anzahl Personen und die durchschnittlichen Plusstunden, absteigend
-   sortiert nach dem Durchschnitt.
-3. Wie viele Frauen und Männer gibt es pro Team? (Tipp: `count()` mit zwei Spalten)
-4. Schreibe deine Lösung zu Aufgabe 2 einmal mit `|>` statt `%>%` und prüfe, dass dasselbe
-   herauskommt.
+1. Berechne das mittlere Einkommen über alle Bezirke und zeige die Bezirke, die darüber liegen.
+2. Zeichne mit `barplot()` die Haushalte pro Bezirk; beschrifte die Balken mit
+   `names.arg = bezirke$bezirk_name` (Tipp: `las = 2` dreht die Beschriftung).
 
 ```{r}
 # dein Code
 
 ```
+
+
+# Teil 5: Ergebnisse speichern
+
+Bereinigte Daten speichert man nach `data/processed/` — `data/raw/` bleibt unverändert.
+
+## Als CSV: write.csv() und write.csv2()
+
+Gut zum Weitergeben, auch an Excel. `row.names = FALSE` verhindert eine zusätzliche Spalte mit
+Zeilennummern:
+
+```{r, eval=FALSE}
+write.csv(bezirke, "data/processed/bezirke_clean.csv", row.names = FALSE)    # , und .
+write.csv2(bezirke, "data/processed/bezirke_clean.csv", row.names = FALSE)   # ; und ,
+```
+
+`write.csv2()` schreibt mit `;` und Dezimalkomma — so öffnet ein deutschsprachiges Excel die
+Datei direkt richtig. Nachteil von CSV: Faktor-Stufen gehen verloren, und beim erneuten
+Einlesen muss R die Datentypen neu erkennen.
+
+## Im R-Format: saveRDS() und save()
+
+```{r, eval=FALSE}
+# RDS — ein Objekt, behält Datentypen und Faktor-Stufen exakt
+saveRDS(bezirke, "data/processed/bezirke.rds")
+bezirke <- readRDS("data/processed/bezirke.rds")
+
+# RData — mehrere Objekte in einer Datei
+save(bezirke, roh, file = "data/processed/bezirke.RData")
+load("data/processed/bezirke.RData")   # holt sie unter denselben Namen zurück
+```
+
+Faustregel: **CSV** zum Weitergeben, **RDS** als Zwischenstand für die eigene Weiterarbeit
+in R.
 
 
 # Zusammenfassung
@@ -557,10 +476,12 @@ Funktion `merge()` (`merge(x, y, by = "team", all.x = TRUE)` entspricht `left_jo
   negativer Index · `unique()` / `table()` · filtern mit logischem Vektor oder `subset()` ·
   sortieren mit `order()`
 - **Einlesen:** relative Pfade im RStudio-Projekt · `read.csv()` / `read.csv2()` · danach mit
-  `str()` prüfen · `write.csv(..., row.names = FALSE)`
-- **dplyr:** `filter` / `select` / `arrange` / `mutate` / `count` · Pipe `%>%` bzw. `|>` ·
-  `group_by` + `summarise` (`na.rm = TRUE`) · `left_join` & Co.
+  `str()` prüfen
+- **Aufräumen:** `header = FALSE` zum Ansehen · `skip = n` für Info-Zeilen ·
+  `tolower(gsub(" ", "_", names(df)))` · Typen mit `as.numeric()` bzw.
+  `lapply(df[cols], as.numeric)` · `paste()` / `paste0()` / `substr()` / `trimws()` · `cut()`
+- **Speichern:** `write.csv()` / `write.csv2()` · `saveRDS()` / `readRDS()` · `save()` /
+  `load()`
 
-**Wie es weitergeht:** In Einheit 3 werden die Daten mit `ggplot2` visualisiert. Hilfe gibt es
-über `?funktionsname`, die RStudio Cheat Sheets (*Help → Cheat Sheets*) und das frei verfügbare
-Buch *R for Data Science* (r4ds.hadley.nz).
+**Wie es weitergeht:** In Einheit 3 werden Daten mit `dplyr` bearbeitet und mit `ggplot2`
+visualisiert.

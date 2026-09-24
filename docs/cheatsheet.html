@@ -33,7 +33,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./einheit-4.html" rel="prev">
+<link href="./abschlussprojekt.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -143,23 +143,29 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./einheit-2.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">2 · Data Frames &amp; dplyr</span></a>
+ <span class="menu-text">2 · Daten einlesen &amp; aufräumen</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./einheit-3.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">3 · ggplot2 &amp; Daten aufräumen</span></a>
+ <span class="menu-text">3 · Daten auswerten &amp; visualisieren</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./einheit-4.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">4 · Funktionen &amp; Schleifen</span></a>
+ <span class="menu-text">4 · Bedingungen, Schleifen &amp; Funktionen</span></a>
   </div>
 </li>
       </ul>
   </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./abschlussprojekt.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Abschlussprojekt</span></a>
+  </div>
+</li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./cheatsheet.html" class="sidebar-item-text sidebar-link active">
@@ -181,7 +187,7 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#pakete-hilfe" id="toc-pakete-hilfe" class="nav-link" data-scroll-target="#pakete-hilfe">Pakete &amp; Hilfe</a></li>
   <li><a href="#rstudio-r-markdown" id="toc-rstudio-r-markdown" class="nav-link" data-scroll-target="#rstudio-r-markdown">RStudio &amp; R Markdown</a></li>
   </ul></li>
-  <li><a href="#einheit-1-grundlagen-vektoren-matrizen-erste-grafiken" id="toc-einheit-1-grundlagen-vektoren-matrizen-erste-grafiken" class="nav-link" data-scroll-target="#einheit-1-grundlagen-vektoren-matrizen-erste-grafiken">Einheit 1 — Grundlagen, Vektoren, Matrizen &amp; erste Grafiken</a>
+  <li><a href="#einheit-1-grundlagen" id="toc-einheit-1-grundlagen" class="nav-link" data-scroll-target="#einheit-1-grundlagen">Einheit 1 — Grundlagen</a>
   <ul class="collapse">
   <li><a href="#rechnen-zuweisen-vergleichen" id="toc-rechnen-zuweisen-vergleichen" class="nav-link" data-scroll-target="#rechnen-zuweisen-vergleichen">Rechnen, Zuweisen, Vergleichen</a></li>
   <li><a href="#datentypen" id="toc-datentypen" class="nav-link" data-scroll-target="#datentypen">Datentypen</a></li>
@@ -190,17 +196,18 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#matrizen" id="toc-matrizen" class="nav-link" data-scroll-target="#matrizen">Matrizen</a></li>
   <li><a href="#base-r-grafik" id="toc-base-r-grafik" class="nav-link" data-scroll-target="#base-r-grafik">Base-R-Grafik</a></li>
   </ul></li>
-  <li><a href="#einheit-2-data-frames-daten-einlesen-dplyr" id="toc-einheit-2-data-frames-daten-einlesen-dplyr" class="nav-link" data-scroll-target="#einheit-2-data-frames-daten-einlesen-dplyr">Einheit 2 — Data Frames, Daten einlesen &amp; dplyr</a>
+  <li><a href="#einheit-2-daten-einlesen-aufräumen" id="toc-einheit-2-daten-einlesen-aufräumen" class="nav-link" data-scroll-target="#einheit-2-daten-einlesen-aufräumen">Einheit 2 — Daten einlesen &amp; aufräumen</a>
   <ul class="collapse">
   <li><a href="#listen-faktoren" id="toc-listen-faktoren" class="nav-link" data-scroll-target="#listen-faktoren">Listen &amp; Faktoren</a></li>
   <li><a href="#data-frames" id="toc-data-frames" class="nav-link" data-scroll-target="#data-frames">Data Frames</a></li>
-  <li><a href="#einlesen-speichern" id="toc-einlesen-speichern" class="nav-link" data-scroll-target="#einlesen-speichern">Einlesen &amp; Speichern</a></li>
-  <li><a href="#dplyr" id="toc-dplyr" class="nav-link" data-scroll-target="#dplyr">dplyr</a></li>
-  </ul></li>
-  <li><a href="#einheit-3-ggplot2-daten-aufräumen" id="toc-einheit-3-ggplot2-daten-aufräumen" class="nav-link" data-scroll-target="#einheit-3-ggplot2-daten-aufräumen">Einheit 3 — ggplot2 &amp; Daten aufräumen</a>
-  <ul class="collapse">
-  <li><a href="#ggplot2" id="toc-ggplot2" class="nav-link" data-scroll-target="#ggplot2">ggplot2</a></li>
+  <li><a href="#einlesen" id="toc-einlesen" class="nav-link" data-scroll-target="#einlesen">Einlesen</a></li>
   <li><a href="#daten-aufräumen" id="toc-daten-aufräumen" class="nav-link" data-scroll-target="#daten-aufräumen">Daten aufräumen</a></li>
+  <li><a href="#speichern" id="toc-speichern" class="nav-link" data-scroll-target="#speichern">Speichern</a></li>
+  </ul></li>
+  <li><a href="#einheit-3-daten-auswerten-visualisieren" id="toc-einheit-3-daten-auswerten-visualisieren" class="nav-link" data-scroll-target="#einheit-3-daten-auswerten-visualisieren">Einheit 3 — Daten auswerten &amp; visualisieren</a>
+  <ul class="collapse">
+  <li><a href="#dplyr" id="toc-dplyr" class="nav-link" data-scroll-target="#dplyr">dplyr</a></li>
+  <li><a href="#ggplot2" id="toc-ggplot2" class="nav-link" data-scroll-target="#ggplot2">ggplot2</a></li>
   </ul></li>
   <li><a href="#einheit-4-bedingungen-schleifen-funktionen" id="toc-einheit-4-bedingungen-schleifen-funktionen" class="nav-link" data-scroll-target="#einheit-4-bedingungen-schleifen-funktionen">Einheit 4 — Bedingungen, Schleifen &amp; Funktionen</a></li>
   </ul>
@@ -343,8 +350,8 @@ ul.task-list li input[type="checkbox"] {
 <hr>
 </section>
 </section>
-<section id="einheit-1-grundlagen-vektoren-matrizen-erste-grafiken" class="level1">
-<h1>Einheit 1 — Grundlagen, Vektoren, Matrizen &amp; erste Grafiken</h1>
+<section id="einheit-1-grundlagen" class="level1">
+<h1>Einheit 1 — Grundlagen</h1>
 <section id="rechnen-zuweisen-vergleichen" class="level2">
 <h2 class="anchored" data-anchor-id="rechnen-zuweisen-vergleichen">Rechnen, Zuweisen, Vergleichen</h2>
 <table class="caption-top table">
@@ -589,8 +596,8 @@ ul.task-list li input[type="checkbox"] {
 <hr>
 </section>
 </section>
-<section id="einheit-2-data-frames-daten-einlesen-dplyr" class="level1">
-<h1>Einheit 2 — Data Frames, Daten einlesen &amp; dplyr</h1>
+<section id="einheit-2-daten-einlesen-aufräumen" class="level1">
+<h1>Einheit 2 — Daten einlesen &amp; aufräumen</h1>
 <section id="listen-faktoren" class="level2">
 <h2 class="anchored" data-anchor-id="listen-faktoren">Listen &amp; Faktoren</h2>
 <table class="caption-top table">
@@ -677,8 +684,8 @@ ul.task-list li input[type="checkbox"] {
 </tbody>
 </table>
 </section>
-<section id="einlesen-speichern" class="level2">
-<h2 class="anchored" data-anchor-id="einlesen-speichern">Einlesen &amp; Speichern</h2>
+<section id="einlesen" class="level2">
+<h2 class="anchored" data-anchor-id="einlesen">Einlesen</h2>
 <table class="caption-top table">
 <colgroup>
 <col style="width: 50%">
@@ -707,13 +714,87 @@ ul.task-list li input[type="checkbox"] {
 <td><code>readxl::read_excel("f.xlsx")</code></td>
 <td>Excel-Datei</td>
 </tr>
+</tbody>
+</table>
+</section>
+<section id="daten-aufräumen" class="level2">
+<h2 class="anchored" data-anchor-id="daten-aufräumen">Daten aufräumen</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Code</th>
+<th>Bedeutung</th>
+</tr>
+</thead>
+<tbody>
 <tr class="odd">
-<td><code>write.csv(df, "data/processed/f.csv", row.names = FALSE)</code></td>
-<td>als CSV speichern</td>
+<td><code>names(df) &lt;- as.character(df[5, ])</code></td>
+<td>Zeile 5 zur Kopfzeile machen</td>
+</tr>
+<tr class="even">
+<td><code>df[-(1:5), ]</code> · <code>rownames(df) &lt;- NULL</code></td>
+<td>Zeilen entfernen · neu nummerieren</td>
+</tr>
+<tr class="odd">
+<td><code>tolower(gsub(" ", "_", names(df)))</code></td>
+<td>Spaltennamen in snake_case</td>
+</tr>
+<tr class="even">
+<td><code>df[cols] &lt;- lapply(df[cols], as.numeric)</code></td>
+<td>mehrere Spalten umwandeln</td>
+</tr>
+<tr class="odd">
+<td><code>paste("a", "b")</code> · <code>paste0("a", "b")</code></td>
+<td>Text verbinden mit / ohne Leerzeichen</td>
+</tr>
+<tr class="even">
+<td><code>substr(x, 1, 2)</code> · <code>trimws(x)</code></td>
+<td>Zeichen ausschneiden · Randleerzeichen entfernen</td>
+</tr>
+<tr class="odd">
+<td><code>cut(x, breaks = c(0, 10, Inf), labels = c("klein", "groß"))</code></td>
+<td>Zahlen → Kategorien</td>
 </tr>
 </tbody>
 </table>
 </section>
+<section id="speichern" class="level2">
+<h2 class="anchored" data-anchor-id="speichern">Speichern</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Code</th>
+<th>Bedeutung</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>write.csv(df, "data/processed/f.csv", row.names = FALSE)</code></td>
+<td>als CSV speichern (<code>,</code> und <code>.</code>)</td>
+</tr>
+<tr class="even">
+<td><code>write.csv2(df, "data/processed/f.csv", row.names = FALSE)</code></td>
+<td>als CSV für deutsches Excel (<code>;</code> und <code>,</code>)</td>
+</tr>
+<tr class="odd">
+<td><code>saveRDS(df, "f.rds")</code> · <code>readRDS("f.rds")</code></td>
+<td>im R-Format speichern · laden (behält Typen)</td>
+</tr>
+</tbody>
+</table>
+<hr>
+</section>
+</section>
+<section id="einheit-3-daten-auswerten-visualisieren" class="level1">
+<h1>Einheit 3 — Daten auswerten &amp; visualisieren</h1>
 <section id="dplyr" class="level2">
 <h2 class="anchored" data-anchor-id="dplyr">dplyr</h2>
 <table class="caption-top table">
@@ -770,11 +851,7 @@ ul.task-list li input[type="checkbox"] {
 </tr>
 </tbody>
 </table>
-<hr>
 </section>
-</section>
-<section id="einheit-3-ggplot2-daten-aufräumen" class="level1">
-<h1>Einheit 3 — ggplot2 &amp; Daten aufräumen</h1>
 <section id="ggplot2" class="level2">
 <h2 class="anchored" data-anchor-id="ggplot2">ggplot2</h2>
 <table class="caption-top table">
@@ -820,55 +897,6 @@ ul.task-list li input[type="checkbox"] {
 <tr class="even">
 <td><code>ggsave("output/grafik.png", width = 8, height = 5)</code></td>
 <td>letzte Grafik speichern</td>
-</tr>
-</tbody>
-</table>
-</section>
-<section id="daten-aufräumen" class="level2">
-<h2 class="anchored" data-anchor-id="daten-aufräumen">Daten aufräumen</h2>
-<table class="caption-top table">
-<colgroup>
-<col style="width: 50%">
-<col style="width: 50%">
-</colgroup>
-<thead>
-<tr class="header">
-<th>Code</th>
-<th>Bedeutung</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code>names(df) &lt;- as.character(df[5, ])</code></td>
-<td>Zeile 5 zur Kopfzeile machen</td>
-</tr>
-<tr class="even">
-<td><code>df[-(1:5), ]</code> · <code>rownames(df) &lt;- NULL</code></td>
-<td>Zeilen entfernen · neu nummerieren</td>
-</tr>
-<tr class="odd">
-<td><code>tolower(gsub(" ", "_", names(df)))</code></td>
-<td>Spaltennamen in snake_case</td>
-</tr>
-<tr class="even">
-<td><code>df[cols] &lt;- lapply(df[cols], as.numeric)</code></td>
-<td>mehrere Spalten umwandeln</td>
-</tr>
-<tr class="odd">
-<td><code>paste("a", "b")</code> · <code>paste0("a", "b")</code></td>
-<td>Text verbinden mit / ohne Leerzeichen</td>
-</tr>
-<tr class="even">
-<td><code>substr(x, 1, 2)</code> · <code>trimws(x)</code></td>
-<td>Zeichen ausschneiden · Randleerzeichen entfernen</td>
-</tr>
-<tr class="odd">
-<td><code>cut(x, breaks = c(0, 10, Inf), labels = c("klein", "groß"))</code></td>
-<td>Zahlen → Kategorien</td>
-</tr>
-<tr class="even">
-<td><code>saveRDS(df, "f.rds")</code> · <code>readRDS("f.rds")</code></td>
-<td>im R-Format speichern · laden (behält Typen)</td>
 </tr>
 </tbody>
 </table>
@@ -1350,8 +1378,8 @@ ul.task-list li input[type="checkbox"] {
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./einheit-4.html" class="pagination-link" aria-label="4 · Funktionen &amp; Schleifen">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">4 · Funktionen &amp; Schleifen</span>
+      <a href="./abschlussprojekt.html" class="pagination-link" aria-label="Abschlussprojekt">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Abschlussprojekt</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">

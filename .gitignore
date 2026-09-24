@@ -21,6 +21,7 @@ output/*
 
 # Website: Arbeitskopien, die build_site.R erzeugt
 _website/einheit-*.Rmd
+_website/abschlussprojekt.Rmd
 _website/cheatsheet.md
 _website/data/
 _website/.quarto/

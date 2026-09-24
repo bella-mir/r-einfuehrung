@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>R-Einführung</title>
+<title>Abschlussprojekt – R-Einführung</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -33,7 +33,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./einheit-0.html" rel="next">
+<link href="./cheatsheet.html" rel="next">
+<link href="./einheit-4.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -76,7 +77,7 @@ ul.task-list li input[type="checkbox"] {
 <link rel="stylesheet" href="styles.css">
 </head>
 
-<body class="nav-sidebar docked fullcontent quarto-light">
+<body class="nav-sidebar docked quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -85,7 +86,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Seitenleiste umschalten" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">Start</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./abschlussprojekt.html">Abschlussprojekt</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Seitenleiste umschalten" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Suchen" onclick="window.quartoOpenSearch();">
@@ -115,7 +116,7 @@ ul.task-list li input[type="checkbox"] {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link active">
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Start</span></a>
   </div>
 </li>
@@ -162,7 +163,7 @@ ul.task-list li input[type="checkbox"] {
   </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./abschlussprojekt.html" class="sidebar-item-text sidebar-link">
+  <a href="./abschlussprojekt.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Abschlussprojekt</span></a>
   </div>
 </li>
@@ -177,14 +178,22 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Auf dieser Seite</h2>
+   
+  <ul class="collapse">
+  <li><a href="#aufgabe" id="toc-aufgabe" class="nav-link active" data-scroll-target="#aufgabe">Aufgabe</a></li>
+  <li><a href="#checkliste-vor-der-abgabe" id="toc-checkliste-vor-der-abgabe" class="nav-link" data-scroll-target="#checkliste-vor-der-abgabe">Checkliste vor der Abgabe</a></li>
+  </ul>
+</nav>
+    </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">R-Einführung</h1>
-<p class="subtitle lead">Einführungsmaterialien zur Lehrveranstaltung <em>Quantitative Analysemethoden in der Raumforschung</em></p>
+<h1 class="title">Abschlussprojekt</h1>
 </div>
 
 
@@ -201,58 +210,64 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>Alle Materialien der R-Einführung zum Nachlesen — auch ohne RStudio.</p>
+<p>Als Abschluss entsteht euer erstes eigenständiges Portfolio-Stück. Alles, was dafür nötig ist, steht in Einheit 1–3.</p>
+<section id="aufgabe" class="level2">
+<h2 class="anchored" data-anchor-id="aufgabe">Aufgabe</h2>
 <table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
 <thead>
 <tr class="header">
-<th>Einheit</th>
-<th>Inhalt</th>
+<th>Schritt</th>
+<th>Nachschlagen in</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td><a href="./einheit-0.html">0 · RStudio, Projekte &amp; Pakete</a></td>
-<td>Installation, Projekte, R Markdown, Pakete, Hilfe</td>
+<td>1. Neues <code>.Rmd</code> im Projektordner anlegen (<em>File → New File → R Markdown</em>).</td>
+<td>Einheit 0</td>
 </tr>
 <tr class="even">
-<td><a href="./einheit-1.html">1 · Grundlagen</a></td>
-<td>Rechnen, Variablen, Funktionen, Vektoren, Matrizen, erste Grafiken</td>
+<td>2. <code>data/raw/mitarbeitende.csv</code> und <code>data/raw/teams.csv</code> über relative Pfade einlesen und mit <code>str()</code> prüfen.</td>
+<td>Einheit 2, Teil 3</td>
 </tr>
 <tr class="odd">
-<td><a href="./einheit-2.html">2 · Daten einlesen &amp; aufräumen</a></td>
-<td>Listen, Faktoren, Data Frames, CSV einlesen, Daten bereinigen, speichern</td>
+<td>3. Die beiden Datensätze mit einem Join verbinden und begründen, welchen Join ihr wählt.</td>
+<td>Einheit 3, <em>Joins</em></td>
 </tr>
 <tr class="even">
-<td><a href="./einheit-3.html">3 · Daten auswerten &amp; visualisieren</a></td>
-<td>Datenbearbeitung mit <code>dplyr</code>, Grafiken mit <code>ggplot2</code></td>
+<td>4. Mindestens einen <code>filter()</code>- und einen <code>mutate()</code>-Schritt anwenden.</td>
+<td>Einheit 3, Teil 1</td>
 </tr>
 <tr class="odd">
-<td><a href="./einheit-4.html">4 · Bedingungen, Schleifen &amp; Funktionen</a></td>
-<td><code>if</code>/<code>else</code>, <code>for</code>, <code>while</code>, eigene Funktionen, <code>sapply()</code></td>
+<td>5. Eine Zusammenfassungstabelle mit <code>group_by()</code> + <code>summarise()</code> erstellen (fehlende Werte beachten).</td>
+<td>Einheit 3, Teil 1</td>
 </tr>
 <tr class="even">
-<td><a href="./abschlussprojekt.html">Abschlussprojekt</a></td>
-<td>eigene Auswertung mit Einheit 1–3, Checkliste zur Abgabe</td>
+<td>6. Eine <code>ggplot2</code>-Grafik bauen, die diese Tabelle sichtbar macht, und mit <code>ggsave()</code> nach <code>output/</code> speichern.</td>
+<td>Einheit 3, Teil 2</td>
 </tr>
 <tr class="odd">
-<td><a href="./cheatsheet.html">Cheatsheet</a></td>
-<td>alle Funktionen auf einen Blick</td>
+<td>7. Das Dokument zu HTML knitten.</td>
+<td>Einheit 0</td>
 </tr>
 </tbody>
 </table>
-<section id="selbst-ausprobieren" class="level2">
-<h2 class="anchored" data-anchor-id="selbst-ausprobieren">Selbst ausprobieren</h2>
-<ol type="1">
-<li>R und RStudio installieren (siehe <a href="./einheit-0.html#installation">Einheit 0</a>).</li>
-<li><a href="https://github.com/bella-mir/r-einfuehrung/archive/refs/heads/main.zip">Kursmaterialien als ZIP</a> herunterladen und entpacken.</li>
-<li><code>r-einfuehrung.Rproj</code> per Doppelklick öffnen und die Notebooks (<code>01_grundlagen.Rmd</code>, …) Block für Block ausführen.</li>
-</ol>
+<p><strong>Abgabe:</strong> die <code>.Rmd</code>-Datei <strong>und</strong> die geknittete <code>.html</code>-Datei.</p>
 </section>
-<section id="über-diese-materialien" class="level2">
-<h2 class="anchored" data-anchor-id="über-diese-materialien">Über diese Materialien</h2>
-<p><strong>Autorin:</strong> Bella Mironova, TU Wien, SRF</p>
-<p>Die Materialien wurden mit Unterstützung von Claude (Anthropic) überarbeitet und von der Autorin geprüft.</p>
-<p><strong>Lizenz:</strong> <a href="https://creativecommons.org/licenses/by/4.0/deed.de">CC BY 4.0</a> — die Materialien dürfen unter Nennung der Autorin weiterverwendet und angepasst werden.</p>
+<section id="checkliste-vor-der-abgabe" class="level2">
+<h2 class="anchored" data-anchor-id="checkliste-vor-der-abgabe">Checkliste vor der Abgabe</h2>
+<ul class="task-list">
+<li><label><input type="checkbox">Das Dokument läuft nach einem Neustart von R (<code>Strg + Shift + F10</code>) fehlerfrei durch.</label></li>
+<li><label><input type="checkbox">Keine absoluten Pfade und kein <code>setwd()</code>; kein <code>install.packages()</code> im Dokument.</label></li>
+<li><label><input type="checkbox">Alle Pakete werden oben im Dokument mit <code>library()</code> geladen.</label></li>
+<li><label><input type="checkbox">Jeder Arbeitsschritt hat 1–2 Sätze Text: <strong>was</strong> wird gemacht und <strong>warum</strong>.</label></li>
+<li><label><input type="checkbox">Fehlende Werte (Vera, Uwe) sind bemerkt und bewusst behandelt.</label></li>
+<li><label><input type="checkbox">Die Grafik hat Titel, Achsenbeschriftungen und ggf. eine Legende.</label></li>
+<li><label><input type="checkbox">Die Grafik liegt als Datei in <code>output/</code>.</label></li>
+</ul>
 
 
 </section>
@@ -660,10 +675,13 @@ ul.task-list li input[type="checkbox"] {
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
+      <a href="./einheit-4.html" class="pagination-link" aria-label="4 · Bedingungen, Schleifen &amp; Funktionen">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">4 · Bedingungen, Schleifen &amp; Funktionen</span>
+      </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./einheit-0.html" class="pagination-link" aria-label="0 · RStudio, Projekte &amp; Pakete">
-        <span class="nav-page-text">0 · RStudio, Projekte &amp; Pakete</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./cheatsheet.html" class="pagination-link" aria-label="Cheatsheet">
+        <span class="nav-page-text">Cheatsheet</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Einheit 1: Grundlagen, Vektoren, Matrizen &amp; erste Grafiken – R-Einführung</title>
+<title>Einheit 1: Grundlagen – R-Einführung</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -179,23 +179,29 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./einheit-2.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">2 · Data Frames &amp; dplyr</span></a>
+ <span class="menu-text">2 · Daten einlesen &amp; aufräumen</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./einheit-3.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">3 · ggplot2 &amp; Daten aufräumen</span></a>
+ <span class="menu-text">3 · Daten auswerten &amp; visualisieren</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./einheit-4.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">4 · Funktionen &amp; Schleifen</span></a>
+ <span class="menu-text">4 · Bedingungen, Schleifen &amp; Funktionen</span></a>
   </div>
 </li>
       </ul>
   </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./abschlussprojekt.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Abschlussprojekt</span></a>
+  </div>
+</li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./cheatsheet.html" class="sidebar-item-text sidebar-link">
@@ -212,7 +218,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Auf dieser Seite</h2>
    
   <ul class="collapse">
-  <li><a href="#teil-1-grundlagen" id="toc-teil-1-grundlagen" class="nav-link active" data-scroll-target="#teil-1-grundlagen">Teil 1: Grundlagen</a>
+  <li><a href="#teil-1-rechnen-variablen-datentypen" id="toc-teil-1-rechnen-variablen-datentypen" class="nav-link active" data-scroll-target="#teil-1-rechnen-variablen-datentypen">Teil 1: Rechnen, Variablen &amp; Datentypen</a>
   <ul class="collapse">
   <li><a href="#rechnen" id="toc-rechnen" class="nav-link" data-scroll-target="#rechnen">Rechnen</a></li>
   <li><a href="#variablen" id="toc-variablen" class="nav-link" data-scroll-target="#variablen">Variablen</a></li>
@@ -249,6 +255,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#gruppenvergleich-boxplot" id="toc-gruppenvergleich-boxplot" class="nav-link" data-scroll-target="#gruppenvergleich-boxplot">Gruppenvergleich: boxplot()</a></li>
   <li><a href="#mehrere-grafiken-nebeneinander-parmfrow" id="toc-mehrere-grafiken-nebeneinander-parmfrow" class="nav-link" data-scroll-target="#mehrere-grafiken-nebeneinander-parmfrow">Mehrere Grafiken nebeneinander: par(mfrow)</a></li>
   </ul></li>
+  <li><a href="#zusammenfassung" id="toc-zusammenfassung" class="nav-link" data-scroll-target="#zusammenfassung">Zusammenfassung</a></li>
   </ul>
 </nav>
     </div>
@@ -257,7 +264,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./einheit-0.html">Einheiten</a></li><li class="breadcrumb-item"><a href="./einheit-1.html">1 · Grundlagen</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Einheit 1: Grundlagen, Vektoren, Matrizen &amp; erste Grafiken</h1>
+<h1 class="title">Einheit 1: Grundlagen</h1>
 </div>
 
 
@@ -281,10 +288,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><strong>Matrizen</strong> — zweidimensionale Daten aufbauen, benennen und auswerten</li>
 <li><strong>Schnelle Grafiken mit Base-R</strong> — <code>plot()</code>, <code>hist()</code>, <code>boxplot()</code></li>
 </ol>
-<p>Wie man mit RStudio, Projekten und Paketen arbeitet, steht in Einheit 0 (<code>0_RINTRO.Rmd</code>).</p>
+<p>Wie man mit RStudio, Projekten und Paketen arbeitet, steht in Einheit 0 (<code>00_rstudio_projekte.Rmd</code>).</p>
 <p>Führe die Code-Blöcke der Reihe nach aus (grüner Pfeil oben rechts im Block oder <em>Strg/Cmd + Enter</em>) — spätere Blöcke bauen auf den Variablen früherer Blöcke auf.</p>
-<section id="teil-1-grundlagen" class="level1">
-<h1>Teil 1: Grundlagen</h1>
+<section id="teil-1-rechnen-variablen-datentypen" class="level1">
+<h1>Teil 1: Rechnen, Variablen &amp; Datentypen</h1>
 <section id="rechnen" class="level2">
 <h2 class="anchored" data-anchor-id="rechnen">Rechnen</h2>
 <p>R lässt sich zunächst wie ein Taschenrechner nutzen:</p>
@@ -1077,10 +1084,21 @@ Gesamt    23.3 13.8   18.5</code></pre>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb157"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb157-1"><a href="#cb157-1" aria-hidden="true" tabindex="-1"></a><span class="co"># dein Code</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-
-
 </section>
 </section>
+</section>
+<section id="zusammenfassung" class="level1">
+<h1>Zusammenfassung</h1>
+<ul>
+<li><strong>Rechnen &amp; Variablen:</strong> <code>+ - * / ^ %/% %%</code> · Zuweisung mit <code>&lt;-</code> · Funktionen mit Argumenten, z. B. <code>round(x, digits = 1)</code> · Datentypen <code>numeric</code>, <code>character</code>, <code>logical</code> · <code>class()</code> · umwandeln mit <code>as.numeric()</code> &amp; Co.</li>
+<li><strong>Vergleiche:</strong> <code>&gt; &gt;= &lt; &lt;= == !=</code> · verknüpfen mit <code>&amp;</code>, <code>|</code>, <code>!</code> · <code>=</code> ist kein Vergleich</li>
+<li><strong>Vektoren:</strong> <code>c()</code>, <code>:</code>, <code>seq()</code> · <code>names()</code> · elementweise rechnen · <code>mean()</code>, <code>sum()</code>, <code>max()</code> · auswählen mit <code>[ ]</code> (Index ab 1, Name, Bedingung) · <code>%in%</code> · <code>NA</code> und <code>na.rm = TRUE</code></li>
+<li><strong>Matrizen:</strong> <code>matrix()</code> · <code>rownames()</code> / <code>colnames()</code> · <code>[Zeile, Spalte]</code> · <code>rowMeans()</code> / <code>colMeans()</code> · <code>cbind()</code> / <code>rbind()</code></li>
+<li><strong>Base-Grafik:</strong> <code>barplot()</code>, <code>plot()</code>, <code>hist()</code>, <code>boxplot()</code> · <code>par(mfrow = …)</code> und zurücksetzen</li>
+</ul>
+<p><strong>Wie es weitergeht:</strong> In Einheit 2 geht es von Vektoren zu ganzen Tabellen — und zu Daten aus Dateien.</p>
+
+
 </section>
 
 </main> <!-- /main -->
@@ -1491,8 +1509,8 @@ Gesamt    23.3 13.8   18.5</code></pre>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./einheit-2.html" class="pagination-link" aria-label="2 · Data Frames &amp; dplyr">
-        <span class="nav-page-text">2 · Data Frames &amp; dplyr</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./einheit-2.html" class="pagination-link" aria-label="2 · Daten einlesen &amp; aufräumen">
+        <span class="nav-page-text">2 · Daten einlesen &amp; aufräumen</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

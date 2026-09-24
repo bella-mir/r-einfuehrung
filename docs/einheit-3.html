@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Einheit 3: Visualisierung mit ggplot2 &amp; Daten aufräumen – R-Einführung</title>
+<title>Einheit 3: Daten auswerten &amp; visualisieren – R-Einführung</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -121,7 +121,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Seitenleiste umschalten" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./einheit-0.html">Einheiten</a></li><li class="breadcrumb-item"><a href="./einheit-3.html">3 · ggplot2 &amp; Daten aufräumen</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./einheit-0.html">Einheiten</a></li><li class="breadcrumb-item"><a href="./einheit-3.html">3 · Daten auswerten &amp; visualisieren</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Seitenleiste umschalten" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Suchen" onclick="window.quartoOpenSearch();">
@@ -179,23 +179,29 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./einheit-2.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">2 · Data Frames &amp; dplyr</span></a>
+ <span class="menu-text">2 · Daten einlesen &amp; aufräumen</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./einheit-3.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">3 · ggplot2 &amp; Daten aufräumen</span></a>
+ <span class="menu-text">3 · Daten auswerten &amp; visualisieren</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./einheit-4.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">4 · Funktionen &amp; Schleifen</span></a>
+ <span class="menu-text">4 · Bedingungen, Schleifen &amp; Funktionen</span></a>
   </div>
 </li>
       </ul>
   </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./abschlussprojekt.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Abschlussprojekt</span></a>
+  </div>
+</li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./cheatsheet.html" class="sidebar-item-text sidebar-link">
@@ -212,7 +218,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Auf dieser Seite</h2>
    
   <ul class="collapse">
-  <li><a href="#teil-1-visualisierung-mit-ggplot2" id="toc-teil-1-visualisierung-mit-ggplot2" class="nav-link active" data-scroll-target="#teil-1-visualisierung-mit-ggplot2">Teil 1: Visualisierung mit ggplot2</a>
+  <li><a href="#teil-1-datenbearbeitung-mit-dplyr" id="toc-teil-1-datenbearbeitung-mit-dplyr" class="nav-link active" data-scroll-target="#teil-1-datenbearbeitung-mit-dplyr">Teil 1: Datenbearbeitung mit dplyr</a>
+  <ul class="collapse">
+  <li><a href="#filter-zeilen-auswählen" id="toc-filter-zeilen-auswählen" class="nav-link" data-scroll-target="#filter-zeilen-auswählen">filter() — Zeilen auswählen</a></li>
+  <li><a href="#select-spalten-auswählen" id="toc-select-spalten-auswählen" class="nav-link" data-scroll-target="#select-spalten-auswählen">select() — Spalten auswählen</a></li>
+  <li><a href="#arrange-sortieren" id="toc-arrange-sortieren" class="nav-link" data-scroll-target="#arrange-sortieren">arrange() — sortieren</a></li>
+  <li><a href="#der-pipe-operator-und" id="toc-der-pipe-operator-und" class="nav-link" data-scroll-target="#der-pipe-operator-und">Der Pipe-Operator: %&gt;% und |&gt;</a></li>
+  <li><a href="#mutate-neue-spalten-berechnen" id="toc-mutate-neue-spalten-berechnen" class="nav-link" data-scroll-target="#mutate-neue-spalten-berechnen">mutate() — neue Spalten berechnen</a></li>
+  <li><a href="#mehrere-schritte-kombinieren" id="toc-mehrere-schritte-kombinieren" class="nav-link" data-scroll-target="#mehrere-schritte-kombinieren">Mehrere Schritte kombinieren</a></li>
+  <li><a href="#count-häufigkeiten-zählen" id="toc-count-häufigkeiten-zählen" class="nav-link" data-scroll-target="#count-häufigkeiten-zählen">count() — Häufigkeiten zählen</a></li>
+  <li><a href="#group_by-summarise-kennzahlen-pro-gruppe" id="toc-group_by-summarise-kennzahlen-pro-gruppe" class="nav-link" data-scroll-target="#group_by-summarise-kennzahlen-pro-gruppe">group_by() + summarise() — Kennzahlen pro Gruppe</a></li>
+  <li><a href="#datensätze-verbinden-joins" id="toc-datensätze-verbinden-joins" class="nav-link" data-scroll-target="#datensätze-verbinden-joins">Datensätze verbinden: Joins</a></li>
+  </ul></li>
+  <li><a href="#teil-2-visualisierung-mit-ggplot2" id="toc-teil-2-visualisierung-mit-ggplot2" class="nav-link" data-scroll-target="#teil-2-visualisierung-mit-ggplot2">Teil 2: Visualisierung mit ggplot2</a>
   <ul class="collapse">
   <li><a href="#die-daten-vorbereiten" id="toc-die-daten-vorbereiten" class="nav-link" data-scroll-target="#die-daten-vorbereiten">Die Daten vorbereiten</a></li>
   <li><a href="#der-grundaufbau" id="toc-der-grundaufbau" class="nav-link" data-scroll-target="#der-grundaufbau">Der Grundaufbau</a></li>
@@ -223,31 +241,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#teilgrafiken-facet_wrap" id="toc-teilgrafiken-facet_wrap" class="nav-link" data-scroll-target="#teilgrafiken-facet_wrap">Teilgrafiken: facet_wrap()</a></li>
   <li><a href="#grafik-speichern-ggsave" id="toc-grafik-speichern-ggsave" class="nav-link" data-scroll-target="#grafik-speichern-ggsave">Grafik speichern: ggsave()</a></li>
   </ul></li>
-  <li><a href="#teil-2-unordentliche-daten-aufräumen" id="toc-teil-2-unordentliche-daten-aufräumen" class="nav-link" data-scroll-target="#teil-2-unordentliche-daten-aufräumen">Teil 2: Unordentliche Daten aufräumen</a>
-  <ul class="collapse">
-  <li><a href="#die-rohdatei-ansehen" id="toc-die-rohdatei-ansehen" class="nav-link" data-scroll-target="#die-rohdatei-ansehen">Die Rohdatei ansehen</a></li>
-  <li><a href="#kopfzeile-setzen-und-info-zeilen-entfernen" id="toc-kopfzeile-setzen-und-info-zeilen-entfernen" class="nav-link" data-scroll-target="#kopfzeile-setzen-und-info-zeilen-entfernen">Kopfzeile setzen und Info-Zeilen entfernen</a></li>
-  <li><a href="#spaltennamen-säubern-gsub-und-tolower" id="toc-spaltennamen-säubern-gsub-und-tolower" class="nav-link" data-scroll-target="#spaltennamen-säubern-gsub-und-tolower">Spaltennamen säubern: gsub() und tolower()</a></li>
-  <li><a href="#datentypen-reparieren-as.numeric-lapply" id="toc-datentypen-reparieren-as.numeric-lapply" class="nav-link" data-scroll-target="#datentypen-reparieren-as.numeric-lapply">Datentypen reparieren: as.numeric() &amp; lapply()</a></li>
-  <li><a href="#der-kurze-weg-skip-4" id="toc-der-kurze-weg-skip-4" class="nav-link" data-scroll-target="#der-kurze-weg-skip-4">Der kurze Weg: skip = 4</a></li>
-  <li><a href="#text-zusammensetzen-und-zerlegen-paste-substr-trimws" id="toc-text-zusammensetzen-und-zerlegen-paste-substr-trimws" class="nav-link" data-scroll-target="#text-zusammensetzen-und-zerlegen-paste-substr-trimws">Text zusammensetzen und zerlegen: paste(), substr(), trimws()</a></li>
-  <li><a href="#zahlen-in-kategorien-einteilen-cut" id="toc-zahlen-in-kategorien-einteilen-cut" class="nav-link" data-scroll-target="#zahlen-in-kategorien-einteilen-cut">Zahlen in Kategorien einteilen: cut()</a></li>
-  </ul></li>
-  <li><a href="#teil-3-ergebnisse-sichern-csv-rds-rdata" id="toc-teil-3-ergebnisse-sichern-csv-rds-rdata" class="nav-link" data-scroll-target="#teil-3-ergebnisse-sichern-csv-rds-rdata">Teil 3: Ergebnisse sichern (CSV, RDS, RData)</a></li>
   <li><a href="#zusammenfassung" id="toc-zusammenfassung" class="nav-link" data-scroll-target="#zusammenfassung">Zusammenfassung</a></li>
-  <li><a href="#abschlussprojekt" id="toc-abschlussprojekt" class="nav-link" data-scroll-target="#abschlussprojekt">Abschlussprojekt</a>
-  <ul class="collapse">
-  <li><a href="#checkliste-vor-der-abgabe" id="toc-checkliste-vor-der-abgabe" class="nav-link" data-scroll-target="#checkliste-vor-der-abgabe">Checkliste vor der Abgabe</a></li>
-  </ul></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./einheit-0.html">Einheiten</a></li><li class="breadcrumb-item"><a href="./einheit-3.html">3 · ggplot2 &amp; Daten aufräumen</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./einheit-0.html">Einheiten</a></li><li class="breadcrumb-item"><a href="./einheit-3.html">3 · Daten auswerten &amp; visualisieren</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Einheit 3: Visualisierung mit ggplot2 &amp; Daten aufräumen</h1>
+<h1 class="title">Einheit 3: Daten auswerten &amp; visualisieren</h1>
 </div>
 
 
@@ -264,33 +267,456 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<p>In dieser Einheit geht es um zwei Dinge, die beim echten Arbeiten sofort gebraucht werden:</p>
+<p>In Einheit 2 hast du Daten eingelesen und aufgeräumt. Jetzt geht es darum, sie auszuwerten und darzustellen:</p>
 <ol type="1">
-<li><strong>Visualisierung mit <code>ggplot2</code></strong> — vorzeigbare Grafiken schichtweise aufbauen</li>
-<li><strong>Unordentliche Daten aufräumen</strong> — Kopfzeilen, falsche Datentypen und Spaltennamen in Ordnung bringen</li>
-<li><strong>Ergebnisse sichern</strong> — Daten und Grafiken speichern</li>
+<li><strong>Datenbearbeitung mit <code>dplyr</code></strong> — filtern, sortieren, umformen, gruppieren, verbinden</li>
+<li><strong>Visualisierung mit <code>ggplot2</code></strong> — Grafiken schichtweise aufbauen</li>
 </ol>
-<p>Am Ende steht das <strong>Abschlussprojekt</strong> zu allen Einheiten.</p>
-<p>Für Teil 1 wird zusätzlich das Paket <code>ggplot2</code> gebraucht. Falls noch nicht geschehen, einmalig <strong>in der Console</strong> installieren:</p>
+<p>Dafür werden zwei Pakete gebraucht. Falls noch nicht geschehen, einmalig <strong>in der Console</strong> installieren:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"ggplot2"</span>)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="fu">c</span>(<span class="st">"dplyr"</span>, <span class="st">"ggplot2"</span>))</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<section id="teil-1-visualisierung-mit-ggplot2" class="level1">
-<h1>Teil 1: Visualisierung mit ggplot2</h1>
+<p>Wir arbeiten mit den Mitarbeitenden-Daten, die du in Einheit 2 schon eingelesen hast:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>mitarbeitende <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"data/raw/mitarbeitende.csv"</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>teams         <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"data/raw/teams.csv"</span>)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(mitarbeitende)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>'data.frame':   22 obs. of  7 variables:
+ $ id         : chr  "M001" "M002" "M003" "M004" ...
+ $ name       : chr  "Anna" "Bertram" "Charlotte" "Dennis" ...
+ $ team       : chr  "Team_C" "Team_A" "Team_A" "Team_A" ...
+ $ land       : chr  "AT" "FR" "FR" "FR" ...
+ $ geschlecht : chr  "w" "m" "w" "m" ...
+ $ plusstunden: num  16.5 44.4 1.8 33.7 13.2 9.6 57.4 21.5 43.8 17.6 ...
+ $ projekte   : int  4 9 4 12 10 7 6 6 9 11 ...</code></pre>
+</div>
+</div>
+<p>Bei Vera fehlen die Plusstunden (<code>NA</code>) — darauf kommen wir mehrmals zurück.</p>
+<section id="teil-1-datenbearbeitung-mit-dplyr" class="level1">
+<h1>Teil 1: Datenbearbeitung mit dplyr</h1>
+<p><code>dplyr</code> bündelt die typischen Arbeitsschritte in wenige, gut lesbare Funktionen („Verben”). Jedes Verb bekommt einen Data Frame und gibt einen neuen Data Frame zurück.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<section id="filter-zeilen-auswählen" class="level2">
+<h2 class="anchored" data-anchor-id="filter-zeilen-auswählen">filter() — Zeilen auswählen</h2>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">filter</span>(mitarbeitende, plusstunden <span class="sc">&gt;</span> <span class="dv">40</span>)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>    id    name   team land geschlecht plusstunden projekte
+1 M002 Bertram Team_A   FR          m        44.4        9
+2 M007   Greta Team_B   DE          w        57.4        6
+3 M009    Ines Team_C   DE          w        43.8        9
+4 M011   Klara Team_C   DE          w        42.3        1
+5 M012   Lukas Team_C   AT          m        59.1        4
+6 M014    Noah Team_A   DE          m        40.2       12</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">filter</span>(mitarbeitende, land <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"AT"</span>, <span class="st">"DE"</span>), projekte <span class="sc">&gt;=</span> <span class="dv">10</span>)   <span class="co"># Komma = und</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>    id  name   team land geschlecht plusstunden projekte
+1 M010 Jonas Team_A   DE          m        17.6       11
+2 M014  Noah Team_A   DE          m        40.2       12
+3 M016  Paul Team_C   AT          m        22.8       11</code></pre>
+</div>
+</div>
+<p>Zeilen, bei denen die Bedingung <code>NA</code> ergibt (hier: Vera), fallen bei <code>filter()</code> weg.</p>
+</section>
+<section id="select-spalten-auswählen" class="level2">
+<h2 class="anchored" data-anchor-id="select-spalten-auswählen">select() — Spalten auswählen</h2>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">select</span>(mitarbeitende, name, team, projekte)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>        name   team projekte
+1       Anna Team_C        4
+2    Bertram Team_A        9
+3  Charlotte Team_A        4
+4     Dennis Team_A       12
+5      Emily Team_C       10
+6      Farid Team_B        7
+7      Greta Team_B        6
+8     Hannes Team_A        6
+9       Ines Team_C        9
+10     Jonas Team_A       11
+11     Klara Team_C        1
+12     Lukas Team_C        4
+13      Mira Team_A        6
+14      Noah Team_A       12
+15      Olga Team_C        9
+16      Paul Team_C       11
+17   Quentin Team_C        1
+18      Rosa Team_A        2
+19     Simon Team_A       11
+20      Tara Team_B        3
+21       Uwe Team_E        5
+22      Vera Team_B        4</code></pre>
+</div>
+</div>
+</section>
+<section id="arrange-sortieren" class="level2">
+<h2 class="anchored" data-anchor-id="arrange-sortieren">arrange() — sortieren</h2>
+<p><code>arrange()</code> sortiert nach einer oder mehreren Spalten; <code>desc()</code> dreht die Reihenfolge um:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">arrange</span>(mitarbeitende, <span class="fu">desc</span>(plusstunden))</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     id      name   team land geschlecht plusstunden projekte
+1  M012     Lukas Team_C   AT          m        59.1        4
+2  M007     Greta Team_B   DE          w        57.4        6
+3  M002   Bertram Team_A   FR          m        44.4        9
+4  M009      Ines Team_C   DE          w        43.8        9
+5  M011     Klara Team_C   DE          w        42.3        1
+6  M014      Noah Team_A   DE          m        40.2       12
+7  M020      Tara Team_B   DE          w        38.6        3
+8  M013      Mira Team_A   DE          w        38.1        6
+9  M015      Olga Team_C   FR          w        38.1        9
+10 M004    Dennis Team_A   FR          m        33.7       12
+11 M021       Uwe Team_E   AT          m        27.3        5
+12 M018      Rosa Team_A   AT          w        24.1        2
+13 M016      Paul Team_C   AT          m        22.8       11
+14 M008    Hannes Team_A   AT          m        21.5        6
+15 M017   Quentin Team_C   FR          m        19.5        1
+16 M019     Simon Team_A   FR          m        18.9       11
+17 M010     Jonas Team_A   DE          m        17.6       11
+18 M001      Anna Team_C   AT          w        16.5        4
+19 M005     Emily Team_C   FR          w        13.2       10
+20 M006     Farid Team_B   AT          m         9.6        7
+21 M003 Charlotte Team_A   FR          w         1.8        4
+22 M022      Vera Team_B   DE          w          NA        4</code></pre>
+</div>
+</div>
+</section>
+<section id="der-pipe-operator-und" class="level2">
+<h2 class="anchored" data-anchor-id="der-pipe-operator-und">Der Pipe-Operator: %&gt;% und |&gt;</h2>
+<section id="das-problem-mehrere-schritte-hintereinander" class="level3">
+<h3 class="anchored" data-anchor-id="das-problem-mehrere-schritte-hintereinander">Das Problem: mehrere Schritte hintereinander</h3>
+<p>Sollen mehrere Funktionen nacheinander angewendet werden, gibt es ohne Pipe zwei Wege — beide sind unhandlich:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Verschachteln: muss von innen nach außen gelesen werden</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="fu">arrange</span>(<span class="fu">filter</span>(mitarbeitende, land <span class="sc">==</span> <span class="st">"AT"</span>), <span class="fu">desc</span>(plusstunden))</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>    id   name   team land geschlecht plusstunden projekte
+1 M012  Lukas Team_C   AT          m        59.1        4
+2 M021    Uwe Team_E   AT          m        27.3        5
+3 M018   Rosa Team_A   AT          w        24.1        2
+4 M016   Paul Team_C   AT          m        22.8       11
+5 M008 Hannes Team_A   AT          m        21.5        6
+6 M001   Anna Team_C   AT          w        16.5        4
+7 M006  Farid Team_B   AT          m         9.6        7</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Zwischenergebnisse speichern: lesbar, aber viele Hilfsvariablen</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>nur_at <span class="ot">&lt;-</span> <span class="fu">filter</span>(mitarbeitende, land <span class="sc">==</span> <span class="st">"AT"</span>)</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="fu">arrange</span>(nur_at, <span class="fu">desc</span>(plusstunden))</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>    id   name   team land geschlecht plusstunden projekte
+1 M012  Lukas Team_C   AT          m        59.1        4
+2 M021    Uwe Team_E   AT          m        27.3        5
+3 M018   Rosa Team_A   AT          w        24.1        2
+4 M016   Paul Team_C   AT          m        22.8       11
+5 M008 Hannes Team_A   AT          m        21.5        6
+6 M001   Anna Team_C   AT          w        16.5        4
+7 M006  Farid Team_B   AT          m         9.6        7</code></pre>
+</div>
+</div>
+</section>
+<section id="die-lösung-die-pipe" class="level3">
+<h3 class="anchored" data-anchor-id="die-lösung-die-pipe">Die Lösung: die Pipe</h3>
+<p>Der <strong>Pipe-Operator</strong> nimmt das Ergebnis auf seiner linken Seite und setzt es als <strong>erstes Argument</strong> in die Funktion auf der rechten Seite ein:</p>
+<pre><code>x %&gt;% f(y)      ist dasselbe wie      f(x, y)</code></pre>
+<p>Damit wird aus der Verschachtelung eine Kette, die man von oben nach unten liest. Die Pipe spricht man am besten als <strong>„und dann”</strong>: <em>Nimm <code>mitarbeitende</code>, und dann filtere nach Österreich, und dann sortiere nach Plusstunden.</em></p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>mitarbeitende <span class="sc">%&gt;%</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(land <span class="sc">==</span> <span class="st">"AT"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(plusstunden))</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>    id   name   team land geschlecht plusstunden projekte
+1 M012  Lukas Team_C   AT          m        59.1        4
+2 M021    Uwe Team_E   AT          m        27.3        5
+3 M018   Rosa Team_A   AT          w        24.1        2
+4 M016   Paul Team_C   AT          m        22.8       11
+5 M008 Hannes Team_A   AT          m        21.5        6
+6 M001   Anna Team_C   AT          w        16.5        4
+7 M006  Farid Team_B   AT          m         9.6        7</code></pre>
+</div>
+</div>
+<p>Beachte: In der Kette steht in <code>filter()</code> und <code>arrange()</code> <strong>kein</strong> Data Frame mehr — den liefert die Pipe von oben.</p>
+</section>
+<section id="zwei-schreibweisen-und" class="level3">
+<h3 class="anchored" data-anchor-id="zwei-schreibweisen-und">Zwei Schreibweisen: %&gt;% und |&gt;</h3>
+<p>In R gibt es zwei Pipes. Für alles, was in dieser Einführung vorkommt, verhalten sie sich <strong>gleich</strong> — dieselbe Kette mit der eingebauten Pipe <code>|&gt;</code>:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>mitarbeitende <span class="sc">|&gt;</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(land <span class="sc">==</span> <span class="st">"AT"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(plusstunden))</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>    id   name   team land geschlecht plusstunden projekte
+1 M012  Lukas Team_C   AT          m        59.1        4
+2 M021    Uwe Team_E   AT          m        27.3        5
+3 M018   Rosa Team_A   AT          w        24.1        2
+4 M016   Paul Team_C   AT          m        22.8       11
+5 M008 Hannes Team_A   AT          m        21.5        6
+6 M001   Anna Team_C   AT          w        16.5        4
+7 M006  Farid Team_B   AT          m         9.6        7</code></pre>
+</div>
+</div>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th><code>%&gt;%</code></th>
+<th><code>\|&gt;</code></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Name</td>
+<td>magrittr-Pipe</td>
+<td>native Pipe (eingebaut)</td>
+</tr>
+<tr class="even">
+<td>Herkunft</td>
+<td>Paket <code>magrittr</code>, wird von <code>dplyr</code> mitgeladen</td>
+<td>fester Bestandteil von R seit Version 4.1 (2021)</td>
+</tr>
+<tr class="odd">
+<td>braucht ein Paket?</td>
+<td>ja — ohne <code>library(dplyr)</code> gibt es einen Fehler</td>
+<td>nein</td>
+</tr>
+<tr class="even">
+<td>wo man sie sieht</td>
+<td>ältere Tutorials, Stack Overflow, viele Kurse — <strong>auch in den weiteren Kursmaterialien</strong></td>
+<td>aktuelle R-Dokumentation, <em>R for Data Science</em> (2. Auflage), tidyverse-Stilempfehlung</td>
+</tr>
+</tbody>
+</table>
+<p><strong>In diesem Kurs verwenden wir <code>%&gt;%</code></strong>, weil es in den weiteren Kursmaterialien verwendet wird. Die aktuelle Empfehlung für neuen Code ist <code>|&gt;</code>. Du solltest <strong>beide lesen können</strong> — wenn du eine der beiden siehst, denk einfach „und dann”.</p>
+</section>
+<section id="zwei-kleine-unterschiede" class="level3">
+<h3 class="anchored" data-anchor-id="zwei-kleine-unterschiede">Zwei kleine Unterschiede</h3>
+<p>Für den Anfang selten wichtig, aber gut zu wissen, wenn Code aus dem Netz nicht funktioniert:</p>
+<ol type="1">
+<li><strong>Klammern:</strong> Bei <code>|&gt;</code> muss rechts immer ein Funktions<em>aufruf</em> mit Klammern stehen. <code>mitarbeitende %&gt;% head</code> funktioniert, <code>mitarbeitende |&gt; head</code> nicht — richtig ist <code>mitarbeitende |&gt; head()</code>. Einfachste Regel: <strong>immer Klammern schreiben.</strong></li>
+<li><strong>Platzhalter:</strong> Soll das Ergebnis <em>nicht</em> an die erste Stelle, markiert man die Stelle mit einem Platzhalter — bei <code>%&gt;%</code> ein Punkt <code>.</code>, bei <code>|&gt;</code> ein Unterstrich <code>_</code> (nur mit Argumentnamen). Beispiel: <code>lm()</code> berechnet eine Regression und erwartet die Daten erst im Argument <code>data</code>:</li>
+</ol>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>mitarbeitende <span class="sc">%&gt;%</span> <span class="fu">lm</span>(plusstunden <span class="sc">~</span> projekte, <span class="at">data =</span> .)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = plusstunden ~ projekte, data = .)
+
+Coefficients:
+(Intercept)     projekte  
+    30.7215      -0.1164  </code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>mitarbeitende <span class="sc">|&gt;</span>  <span class="fu">lm</span>(plusstunden <span class="sc">~</span> projekte, <span class="at">data =</span> _)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = plusstunden ~ projekte, data = mitarbeitende)
+
+Coefficients:
+(Intercept)     projekte  
+    30.7215      -0.1164  </code></pre>
+</div>
+</div>
+<p><strong>Tastenkürzel:</strong> <em>Strg/Cmd + Shift + M</em> fügt eine Pipe ein. Welche, stellt man unter <em>Tools → Global Options → Code → „Use native pipe operator, |&gt;“</em> ein — für diesen Kurs den Haken <strong>nicht</strong> setzen, dann kommt <code>%&gt;%</code>.</p>
+</section>
+</section>
+<section id="mutate-neue-spalten-berechnen" class="level2">
+<h2 class="anchored" data-anchor-id="mutate-neue-spalten-berechnen">mutate() — neue Spalten berechnen</h2>
+<p><code>mutate()</code> berechnet eine neue Spalte aus bestehenden — elementweise für jede Zeile. Gleichwertig in Basis-R wäre <code>mitarbeitende$stunden_pro_projekt &lt;- mitarbeitende$plusstunden / mitarbeitende$projekte</code>.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>mitarbeitende <span class="ot">&lt;-</span> mitarbeitende <span class="sc">%&gt;%</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">stunden_pro_projekt =</span> <span class="fu">round</span>(plusstunden <span class="sc">/</span> projekte, <span class="dv">1</span>))</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(mitarbeitende)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>    id      name   team land geschlecht plusstunden projekte
+1 M001      Anna Team_C   AT          w        16.5        4
+2 M002   Bertram Team_A   FR          m        44.4        9
+3 M003 Charlotte Team_A   FR          w         1.8        4
+4 M004    Dennis Team_A   FR          m        33.7       12
+5 M005     Emily Team_C   FR          w        13.2       10
+6 M006     Farid Team_B   AT          m         9.6        7
+  stunden_pro_projekt
+1                 4.1
+2                 4.9
+3                 0.4
+4                 2.8
+5                 1.3
+6                 1.4</code></pre>
+</div>
+</div>
+</section>
+<section id="mehrere-schritte-kombinieren" class="level2">
+<h2 class="anchored" data-anchor-id="mehrere-schritte-kombinieren">Mehrere Schritte kombinieren</h2>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>mitarbeitende <span class="sc">%&gt;%</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(land <span class="sc">==</span> <span class="st">"AT"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(name, team, plusstunden) <span class="sc">%&gt;%</span></span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(plusstunden))</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>    name   team plusstunden
+1  Lukas Team_C        59.1
+2    Uwe Team_E        27.3
+3   Rosa Team_A        24.1
+4   Paul Team_C        22.8
+5 Hannes Team_A        21.5
+6   Anna Team_C        16.5
+7  Farid Team_B         9.6</code></pre>
+</div>
+</div>
+</section>
+<section id="count-häufigkeiten-zählen" class="level2">
+<h2 class="anchored" data-anchor-id="count-häufigkeiten-zählen">count() — Häufigkeiten zählen</h2>
+<p><code>count()</code> zählt, wie oft jeder Wert vorkommt — das <code>dplyr</code>-Gegenstück zu <code>table()</code>:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>mitarbeitende <span class="sc">%&gt;%</span> <span class="fu">count</span>(team)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>    team n
+1 Team_A 9
+2 Team_B 4
+3 Team_C 8
+4 Team_E 1</code></pre>
+</div>
+</div>
+</section>
+<section id="group_by-summarise-kennzahlen-pro-gruppe" class="level2">
+<h2 class="anchored" data-anchor-id="group_by-summarise-kennzahlen-pro-gruppe">group_by() + summarise() — Kennzahlen pro Gruppe</h2>
+<p>Eine der häufigsten Aufgaben: eine Kennzahl je Gruppe — z. B. die durchschnittlichen Plusstunden pro Team.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>mitarbeitende <span class="sc">%&gt;%</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(team) <span class="sc">%&gt;%</span></span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">anzahl           =</span> <span class="fu">n</span>(),</span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">plusstunden_mean =</span> <span class="fu">mean</span>(plusstunden),</span>
+<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">projekte_max     =</span> <span class="fu">max</span>(projekte)</span>
+<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 4 × 4
+  team   anzahl plusstunden_mean projekte_max
+  &lt;chr&gt;   &lt;int&gt;            &lt;dbl&gt;        &lt;int&gt;
+1 Team_A      9             26.7           12
+2 Team_B      4             NA              7
+3 Team_C      8             31.9           11
+4 Team_E      1             27.3            5</code></pre>
+</div>
+</div>
+<p>Die Ausgabe beginnt mit <code># A tibble</code>. Ein <strong>Tibble</strong> ist die <code>dplyr</code>-Variante eines Data Frames — er zeigt zusätzlich Größe und Spaltentypen an, alles andere funktioniert wie gewohnt.</p>
+<p>Bei <code>Team_B</code> steht <code>NA</code>, weil Veras Plusstunden fehlen (siehe Einheit 1, <em>Fehlende Werte: NA</em>). Mit <code>na.rm = TRUE</code> wird der fehlende Wert ausgelassen:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>mitarbeitende <span class="sc">%&gt;%</span></span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(team) <span class="sc">%&gt;%</span></span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">anzahl =</span> <span class="fu">n</span>(), <span class="at">plusstunden_mean =</span> <span class="fu">mean</span>(plusstunden, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 4 × 3
+  team   anzahl plusstunden_mean
+  &lt;chr&gt;   &lt;int&gt;            &lt;dbl&gt;
+1 Team_A      9             26.7
+2 Team_B      4             35.2
+3 Team_C      8             31.9
+4 Team_E      1             27.3</code></pre>
+</div>
+</div>
+</section>
+<section id="datensätze-verbinden-joins" class="level2">
+<h2 class="anchored" data-anchor-id="datensätze-verbinden-joins">Datensätze verbinden: Joins</h2>
+<p><code>teams</code> enthält zu jedem Team die Region. Mit einem <strong>Join</strong> wird diese Information über die gemeinsame Spalte <code>team</code> an <code>mitarbeitende</code> angehängt.</p>
+<p>Die Datensätze passen nicht perfekt zusammen — wie so oft in echten Daten:</p>
+<ul>
+<li><strong>Uwe</strong> gehört zu <code>Team_E</code>, das in <code>teams</code> fehlt.</li>
+<li><strong><code>Team_D</code></strong> steht in <code>teams</code>, hat aber keine Mitarbeitenden.</li>
+</ul>
+<p>Die vier Join-Varianten unterscheiden sich genau darin, was mit solchen Zeilen passiert:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Funktion</th>
+<th>Behält</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>left_join(x, y)</code></td>
+<td>alle Zeilen von <code>x</code>; fehlt die Entsprechung in <code>y</code> → <code>NA</code></td>
+</tr>
+<tr class="even">
+<td><code>right_join(x, y)</code></td>
+<td>alle Zeilen von <code>y</code></td>
+</tr>
+<tr class="odd">
+<td><code>inner_join(x, y)</code></td>
+<td>nur Zeilen, die in <strong>beiden</strong> vorkommen</td>
+</tr>
+<tr class="even">
+<td><code>full_join(x, y)</code></td>
+<td>alle Zeilen aus <strong>beiden</strong></td>
+</tr>
+</tbody>
+</table>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>(<span class="fu">left_join</span>(mitarbeitende, teams, <span class="at">by =</span> <span class="st">"team"</span>))    <span class="co"># alle 22 Personen, Uwe mit Region NA</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 22</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>(<span class="fu">inner_join</span>(mitarbeitende, teams, <span class="at">by =</span> <span class="st">"team"</span>))   <span class="co"># 21 — Uwe fällt weg</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 21</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>(<span class="fu">full_join</span>(mitarbeitende, teams, <span class="at">by =</span> <span class="st">"team"</span>))    <span class="co"># 23 — alle Personen + Team_D</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 23</code></pre>
+</div>
+</div>
+<p>Meist will man keine Personen verlieren, deshalb ist <code>left_join()</code> der Standard:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>mitarbeitende_join <span class="ot">&lt;-</span> mitarbeitende <span class="sc">%&gt;%</span></span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(teams, <span class="at">by =</span> <span class="st">"team"</span>)</span>
+<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a>mitarbeitende_join <span class="sc">%&gt;%</span> <span class="fu">filter</span>(<span class="fu">is.na</span>(region))</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>    id name   team land geschlecht plusstunden projekte stunden_pro_projekt
+1 M021  Uwe Team_E   AT          m        27.3        5                 5.5
+  region
+1   &lt;NA&gt;</code></pre>
+</div>
+</div>
+<p>Über mehrere Spalten verbindet man mit <code>by = c("spalte1", "spalte2")</code>. In Basis-R heißt die Funktion <code>merge()</code> (<code>merge(x, y, by = "team", all.x = TRUE)</code> entspricht <code>left_join</code>).</p>
+<section id="übung" class="level3">
+<h3 class="anchored" data-anchor-id="übung">Übung</h3>
+<ol type="1">
+<li>Welche drei Personen haben die meisten Projekte? Zeige nur <code>name</code> und <code>projekte</code>.</li>
+<li>Berechne pro <code>land</code> die Anzahl Personen und die durchschnittlichen Plusstunden, absteigend sortiert nach dem Durchschnitt.</li>
+<li>Wie viele Frauen und Männer gibt es pro Team? (Tipp: <code>count()</code> mit zwei Spalten)</li>
+<li>Schreibe deine Lösung zu Aufgabe 2 einmal mit <code>|&gt;</code> statt <code>%&gt;%</code> und prüfe, dass dasselbe herauskommt.</li>
+</ol>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="co"># dein Code</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+</section>
+</section>
+<section id="teil-2-visualisierung-mit-ggplot2" class="level1">
+<h1>Teil 2: Visualisierung mit ggplot2</h1>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
 <section id="die-daten-vorbereiten" class="level2">
 <h2 class="anchored" data-anchor-id="die-daten-vorbereiten">Die Daten vorbereiten</h2>
-<p>Wir arbeiten mit den Mitarbeitenden-Daten aus Einheit 2 — eingelesen und mit der Region verbunden:</p>
+<p>Wir verwenden <code>mitarbeitende_join</code> aus Teil 1 (Mitarbeitende mit Region). Bei Vera fehlen die Plusstunden. Ohne y-Wert kann <code>ggplot</code> keinen Punkt zeichnen und würde bei jeder Grafik warnen (<em>„Removed 1 row containing missing values”</em>). Deshalb entfernen wir diese Zeile einmal vorab:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>mitarbeitende_join <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"data/raw/mitarbeitende.csv"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(<span class="fu">read.csv</span>(<span class="st">"data/raw/teams.csv"</span>), <span class="at">by =</span> <span class="st">"team"</span>)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<p>Bei Vera fehlen die Plusstunden. Ohne y-Wert kann <code>ggplot</code> keinen Punkt zeichnen und würde bei jeder Grafik warnen (<em>„Removed 1 row containing missing values”</em>). Deshalb entfernen wir diese Zeile einmal vorab:</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>mitarbeitende_plot <span class="ot">&lt;-</span> mitarbeitende_join <span class="sc">%&gt;%</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(plusstunden))</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>mitarbeitende_plot <span class="ot">&lt;-</span> mitarbeitende_join <span class="sc">%&gt;%</span></span>
+<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(plusstunden))</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="der-grundaufbau" class="level2">
@@ -302,15 +728,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="streudiagramm-geom_point" class="level2">
 <h2 class="anchored" data-anchor-id="streudiagramm-geom_point">Streudiagramm: geom_point()</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mitarbeitende_plot, <span class="fu">aes</span>(<span class="at">x =</span> projekte, <span class="at">y =</span> plusstunden)) <span class="sc">+</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">color =</span> <span class="st">"steelblue"</span>, <span class="at">size =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Plusstunden nach Anzahl Projekte"</span>,</span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Anzahl Projekte"</span>, <span class="at">y =</span> <span class="st">"Plusstunden"</span>) <span class="sc">+</span></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mitarbeitende_plot, <span class="fu">aes</span>(<span class="at">x =</span> projekte, <span class="at">y =</span> plusstunden)) <span class="sc">+</span></span>
+<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">color =</span> <span class="st">"steelblue"</span>, <span class="at">size =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Plusstunden nach Anzahl Projekte"</span>,</span>
+<span id="cb48-4"><a href="#cb48-4" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Anzahl Projekte"</span>, <span class="at">y =</span> <span class="st">"Plusstunden"</span>) <span class="sc">+</span></span>
+<span id="cb48-5"><a href="#cb48-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="einheit-3_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="einheit-3_files/figure-html/unnamed-chunk-21-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -320,14 +746,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="nach-gruppe-einfärben">Nach Gruppe einfärben</h2>
 <p>Eine weitere Spalte in <code>aes()</code> auf <code>color</code> legen — <code>ggplot</code> vergibt automatisch Farben und eine Legende:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mitarbeitende_plot, <span class="fu">aes</span>(<span class="at">x =</span> projekte, <span class="at">y =</span> plusstunden, <span class="at">color =</span> team)) <span class="sc">+</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Plusstunden nach Projekten, eingefärbt nach Team"</span>) <span class="sc">+</span></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mitarbeitende_plot, <span class="fu">aes</span>(<span class="at">x =</span> projekte, <span class="at">y =</span> plusstunden, <span class="at">color =</span> team)) <span class="sc">+</span></span>
+<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Plusstunden nach Projekten, eingefärbt nach Team"</span>) <span class="sc">+</span></span>
+<span id="cb49-4"><a href="#cb49-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="einheit-3_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="einheit-3_files/figure-html/unnamed-chunk-22-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -338,19 +764,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="balkendiagramm-einer-kennzahl-geom_col">Balkendiagramm einer Kennzahl: geom_col()</h2>
 <p><code>dplyr</code> und <code>ggplot2</code> greifen ineinander: erst die Kennzahl berechnen, dann direkt an <code>ggplot()</code> weiterreichen. Personen ohne Region (Uwe) filtern wir vorher heraus. Die Farbe dient hier nur der Optik — die Regionen stehen schon auf der x-Achse, deshalb blenden wir die Legende mit <code>show.legend = FALSE</code> aus:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>mitarbeitende_plot <span class="sc">%&gt;%</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(region)) <span class="sc">%&gt;%</span></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(region) <span class="sc">%&gt;%</span></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">plusstunden_mean =</span> <span class="fu">mean</span>(plusstunden)) <span class="sc">%&gt;%</span></span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> region, <span class="at">y =</span> plusstunden_mean, <span class="at">fill =</span> region)) <span class="sc">+</span></span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Durchschnittliche Plusstunden pro Region"</span>,</span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Region"</span>, <span class="at">y =</span> <span class="st">"Ø Plusstunden"</span>) <span class="sc">+</span></span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a>mitarbeitende_plot <span class="sc">%&gt;%</span></span>
+<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(region)) <span class="sc">%&gt;%</span></span>
+<span id="cb50-3"><a href="#cb50-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(region) <span class="sc">%&gt;%</span></span>
+<span id="cb50-4"><a href="#cb50-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">plusstunden_mean =</span> <span class="fu">mean</span>(plusstunden)) <span class="sc">%&gt;%</span></span>
+<span id="cb50-5"><a href="#cb50-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> region, <span class="at">y =</span> plusstunden_mean, <span class="at">fill =</span> region)) <span class="sc">+</span></span>
+<span id="cb50-6"><a href="#cb50-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb50-7"><a href="#cb50-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Durchschnittliche Plusstunden pro Region"</span>,</span>
+<span id="cb50-8"><a href="#cb50-8" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Region"</span>, <span class="at">y =</span> <span class="st">"Ø Plusstunden"</span>) <span class="sc">+</span></span>
+<span id="cb50-9"><a href="#cb50-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="einheit-3_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="einheit-3_files/figure-html/unnamed-chunk-23-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -359,27 +785,27 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="verteilungen-geom_boxplot-und-geom_histogram" class="level2">
 <h2 class="anchored" data-anchor-id="verteilungen-geom_boxplot-und-geom_histogram">Verteilungen: geom_boxplot() und geom_histogram()</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mitarbeitende_plot, <span class="fu">aes</span>(<span class="at">x =</span> team, <span class="at">y =</span> plusstunden)) <span class="sc">+</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">fill =</span> <span class="st">"lightgrey"</span>) <span class="sc">+</span></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Plusstunden je Team"</span>) <span class="sc">+</span></span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mitarbeitende_plot, <span class="fu">aes</span>(<span class="at">x =</span> team, <span class="at">y =</span> plusstunden)) <span class="sc">+</span></span>
+<span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">fill =</span> <span class="st">"lightgrey"</span>) <span class="sc">+</span></span>
+<span id="cb51-3"><a href="#cb51-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Plusstunden je Team"</span>) <span class="sc">+</span></span>
+<span id="cb51-4"><a href="#cb51-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="einheit-3_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="einheit-3_files/figure-html/unnamed-chunk-24-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
 <p><code>geom_histogram()</code> zeigt die Verteilung einer einzelnen Zahlenspalte:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mitarbeitende_plot, <span class="fu">aes</span>(<span class="at">x =</span> plusstunden)) <span class="sc">+</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">bins =</span> <span class="dv">8</span>, <span class="at">fill =</span> <span class="st">"steelblue"</span>, <span class="at">color =</span> <span class="st">"white"</span>) <span class="sc">+</span></span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mitarbeitende_plot, <span class="fu">aes</span>(<span class="at">x =</span> plusstunden)) <span class="sc">+</span></span>
+<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">bins =</span> <span class="dv">8</span>, <span class="at">fill =</span> <span class="st">"steelblue"</span>, <span class="at">color =</span> <span class="st">"white"</span>) <span class="sc">+</span></span>
+<span id="cb52-3"><a href="#cb52-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="einheit-3_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="einheit-3_files/figure-html/unnamed-chunk-25-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -389,15 +815,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="teilgrafiken-facet_wrap">Teilgrafiken: facet_wrap()</h2>
 <p><code>facet_wrap(~spalte)</code> zerlegt eine Grafik in ein Raster — eine Teilgrafik pro Ausprägung:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mitarbeitende_plot, <span class="fu">aes</span>(<span class="at">x =</span> projekte, <span class="at">y =</span> plusstunden)) <span class="sc">+</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">color =</span> <span class="st">"darkred"</span>) <span class="sc">+</span></span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>team) <span class="sc">+</span></span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Plusstunden nach Projekten, aufgeteilt nach Team"</span>) <span class="sc">+</span></span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mitarbeitende_plot, <span class="fu">aes</span>(<span class="at">x =</span> projekte, <span class="at">y =</span> plusstunden)) <span class="sc">+</span></span>
+<span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">color =</span> <span class="st">"darkred"</span>) <span class="sc">+</span></span>
+<span id="cb53-3"><a href="#cb53-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>team) <span class="sc">+</span></span>
+<span id="cb53-4"><a href="#cb53-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Plusstunden nach Projekten, aufgeteilt nach Team"</span>) <span class="sc">+</span></span>
+<span id="cb53-5"><a href="#cb53-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="einheit-3_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="einheit-3_files/figure-html/unnamed-chunk-26-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -407,246 +833,29 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="grafik-speichern-ggsave">Grafik speichern: ggsave()</h2>
 <p><code>ggsave()</code> speichert die zuletzt erzeugte Grafik:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsave</span>(<span class="st">"output/plusstunden_team.png"</span>, <span class="at">width =</span> <span class="dv">8</span>, <span class="at">height =</span> <span class="dv">5</span>)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsave</span>(<span class="st">"output/plusstunden_team.png"</span>, <span class="at">width =</span> <span class="dv">8</span>, <span class="at">height =</span> <span class="dv">5</span>)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<section id="übung" class="level3">
-<h3 class="anchored" data-anchor-id="übung">Übung</h3>
+<section id="übung-1" class="level3">
+<h3 class="anchored" data-anchor-id="übung-1">Übung</h3>
 <ol type="1">
 <li>Zeichne ein Streudiagramm von <code>projekte</code> gegen <code>plusstunden</code>, eingefärbt nach <code>geschlecht</code>.</li>
 <li>Erstelle ein Balkendiagramm mit der Anzahl Personen pro <code>land</code> (Tipp: erst <code>count()</code>, dann <code>geom_col()</code>).</li>
 </ol>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># dein Code</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="co"># dein Code</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 </section>
-</section>
-<section id="teil-2-unordentliche-daten-aufräumen" class="level1">
-<h1>Teil 2: Unordentliche Daten aufräumen</h1>
-<p>Echte Dateien sind selten sofort verwendbar: oben stehen Info-Zeilen, Zahlen kommen als Text an, Spaltennamen enthalten Leerzeichen. Die Datei <code>data/raw/bezirke_roh.csv</code> ist so ein Fall — Semikolon-getrennt, mit vier Info-Zeilen vor der eigentlichen Kopfzeile.</p>
-<section id="die-rohdatei-ansehen" class="level2">
-<h2 class="anchored" data-anchor-id="die-rohdatei-ansehen">Die Rohdatei ansehen</h2>
-<p>Wir lesen zunächst <strong>ohne</strong> Kopfzeile ein (<code>header = FALSE</code>), um zu sehen, was in der Datei steht. Weil in jeder Spalte auch Text vorkommt, sind alle Spalten <code>character</code>:</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>roh <span class="ot">&lt;-</span> <span class="fu">read.csv2</span>(<span class="st">"data/raw/bezirke_roh.csv"</span>, <span class="at">header =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>roh</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>                               V1           V2        V3                  V4
-1             Export Bezirksdaten                                           
-2  Quelle: Beispielstatistik Wien                                           
-3               Stand: Maerz 2026                                           
-4                                                                           
-5                   Bezirk Nummer  Bezirk Name Haushalte Mittleres Einkommen
-6                               1 Innere Stadt      9800               52000
-7                               2 Leopoldstadt     54000               38500
-8                               3  Landstrasse     46000               41200
-9                               4       Wieden     16000               49800
-10                              5   Margareten     30000               36400
-11                              6    Mariahilf     15000               44700
-12                              7       Neubau     16000               47300
-13                              8   Josefstadt     12000               50100</code></pre>
-</div>
-</div>
-</section>
-<section id="kopfzeile-setzen-und-info-zeilen-entfernen" class="level2">
-<h2 class="anchored" data-anchor-id="kopfzeile-setzen-und-info-zeilen-entfernen">Kopfzeile setzen und Info-Zeilen entfernen</h2>
-<p>Die echten Spaltennamen stehen in Zeile 5. Wir machen sie zu Spaltennamen und entfernen dann die ersten fünf Zeilen. Das Ergebnis speichern wir unter einem sprechenden Namen:</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(roh) <span class="ot">&lt;-</span> <span class="fu">as.character</span>(roh[<span class="dv">5</span>, ])   <span class="co"># Zeile 5 wird zur Kopfzeile</span></span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>bezirke <span class="ot">&lt;-</span> roh[<span class="sc">-</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>), ]               <span class="co"># Zeilen 1–5 entfernen</span></span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(bezirke) <span class="ot">&lt;-</span> <span class="cn">NULL</span>              <span class="co"># Zeilennummerierung zurücksetzen</span></span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>bezirke</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>  Bezirk Nummer  Bezirk Name Haushalte Mittleres Einkommen
-1             1 Innere Stadt      9800               52000
-2             2 Leopoldstadt     54000               38500
-3             3  Landstrasse     46000               41200
-4             4       Wieden     16000               49800
-5             5   Margareten     30000               36400
-6             6    Mariahilf     15000               44700
-7             7       Neubau     16000               47300
-8             8   Josefstadt     12000               50100</code></pre>
-</div>
-</div>
-</section>
-<section id="spaltennamen-säubern-gsub-und-tolower" class="level2">
-<h2 class="anchored" data-anchor-id="spaltennamen-säubern-gsub-und-tolower">Spaltennamen säubern: gsub() und tolower()</h2>
-<p>Rohdaten halten sich selten an die Namensregeln aus Einheit 1. <code>gsub(muster, ersatz, text)</code> ist Suchen-und-Ersetzen: Wir tauschen Leerzeichen gegen Unterstriche — dann funktioniert <code>$</code> ohne Backticks. <code>tolower()</code> macht alles klein, damit die Namen snake_case sind:</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(bezirke)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] "Bezirk Nummer"       "Bezirk Name"         "Haushalte"          
-[4] "Mittleres Einkommen"</code></pre>
-</div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(bezirke) <span class="ot">&lt;-</span> <span class="fu">tolower</span>(<span class="fu">gsub</span>(<span class="st">" "</span>, <span class="st">"_"</span>, <span class="fu">names</span>(bezirke)))</span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(bezirke)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] "bezirk_nummer"       "bezirk_name"         "haushalte"          
-[4] "mittleres_einkommen"</code></pre>
-</div>
-</div>
-</section>
-<section id="datentypen-reparieren-as.numeric-lapply" class="level2">
-<h2 class="anchored" data-anchor-id="datentypen-reparieren-as.numeric-lapply">Datentypen reparieren: as.numeric() &amp; lapply()</h2>
-<p>Die Zahlenspalten sind noch Text (<code>chr</code>). Für eine Spalte ginge das mit <code>bezirke$haushalte &lt;- as.numeric(bezirke$haushalte)</code>. Für mehrere Spalten auf einmal nimmt man <code>lapply()</code>: Es wendet eine Funktion auf jede Spalte an und gibt die Ergebnisse als Liste zurück, die wir direkt in die Spalten zurückschreiben:</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>zahl_spalten <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"bezirk_nummer"</span>, <span class="st">"haushalte"</span>, <span class="st">"mittleres_einkommen"</span>)</span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>bezirke[zahl_spalten] <span class="ot">&lt;-</span> <span class="fu">lapply</span>(bezirke[zahl_spalten], as.numeric)</span>
-<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(bezirke)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>'data.frame':   8 obs. of  4 variables:
- $ bezirk_nummer      : num  1 2 3 4 5 6 7 8
- $ bezirk_name        : chr  "Innere Stadt" "Leopoldstadt" "Landstrasse" "Wieden" ...
- $ haushalte          : num  9800 54000 46000 16000 30000 15000 16000 12000
- $ mittleres_einkommen: num  52000 38500 41200 49800 36400 44700 47300 50100</code></pre>
-</div>
-</div>
-</section>
-<section id="der-kurze-weg-skip-4" class="level2">
-<h2 class="anchored" data-anchor-id="der-kurze-weg-skip-4">Der kurze Weg: skip = 4</h2>
-<p>Der Weg oben zeigt, was beim Aufräumen passiert. In der Praxis erledigt <code>skip = 4</code> Kopfzeile <strong>und</strong> Datentypen in einem Schritt: Die ersten vier Zeilen werden übersprungen, Zeile 5 wird Kopfzeile, und R erkennt die Zahlenspalten selbst. Leerzeichen in Spaltennamen ersetzt R dabei durch Punkte:</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(<span class="fu">read.csv2</span>(<span class="st">"data/raw/bezirke_roh.csv"</span>, <span class="at">skip =</span> <span class="dv">4</span>))</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>'data.frame':   8 obs. of  4 variables:
- $ Bezirk.Nummer      : int  1 2 3 4 5 6 7 8
- $ Bezirk.Name        : chr  "Innere Stadt" "Leopoldstadt" "Landstrasse" "Wieden" ...
- $ Haushalte          : int  9800 54000 46000 16000 30000 15000 16000 12000
- $ Mittleres.Einkommen: int  52000 38500 41200 49800 36400 44700 47300 50100</code></pre>
-</div>
-</div>
-</section>
-<section id="text-zusammensetzen-und-zerlegen-paste-substr-trimws" class="level2">
-<h2 class="anchored" data-anchor-id="text-zusammensetzen-und-zerlegen-paste-substr-trimws">Text zusammensetzen und zerlegen: paste(), substr(), trimws()</h2>
-<p><code>paste()</code> verbindet Textstücke mit einem Leerzeichen, <code>paste0()</code> ohne Trennzeichen:</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">paste</span>(<span class="st">"AT"</span>, <span class="st">"13"</span>, <span class="st">"01"</span>)     <span class="co"># "AT 13 01"</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] "AT 13 01"</code></pre>
-</div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">paste0</span>(<span class="st">"AT"</span>, <span class="st">"13"</span>, <span class="st">"01"</span>)    <span class="co"># "AT1301"</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] "AT1301"</code></pre>
-</div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>bezirke<span class="sc">$</span>label <span class="ot">&lt;-</span> <span class="fu">paste0</span>(bezirke<span class="sc">$</span>bezirk_nummer, <span class="st">". "</span>, bezirke<span class="sc">$</span>bezirk_name)</span>
-<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(bezirke<span class="sc">$</span>label)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] "1. Innere Stadt" "2. Leopoldstadt" "3. Landstrasse"  "4. Wieden"      
-[5] "5. Margareten"   "6. Mariahilf"   </code></pre>
-</div>
-</div>
-<p><code>substr(text, start, stop)</code> schneidet Zeichen nach Position heraus — nützlich, um kombinierte Codes zu trennen:</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>codes <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"AT130"</span>, <span class="st">"AT127"</span>, <span class="st">"AT111"</span>)</span>
-<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="fu">substr</span>(codes, <span class="dv">1</span>, <span class="dv">2</span>)   <span class="co"># Land</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] "AT" "AT" "AT"</code></pre>
-</div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">substr</span>(codes, <span class="dv">3</span>, <span class="dv">5</span>)   <span class="co"># Regionscode</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] "130" "127" "111"</code></pre>
-</div>
-</div>
-<p><code>trimws()</code> entfernt überflüssige Leerzeichen am Anfang und Ende — ein häufiges Problem bei Daten aus Excel:</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">trimws</span>(<span class="st">"   Wien   "</span>)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] "Wien"</code></pre>
-</div>
-</div>
-</section>
-<section id="zahlen-in-kategorien-einteilen-cut" class="level2">
-<h2 class="anchored" data-anchor-id="zahlen-in-kategorien-einteilen-cut">Zahlen in Kategorien einteilen: cut()</h2>
-<p><code>cut()</code> teilt eine Zahlenspalte anhand von Grenzen (<code>breaks</code>) in Kategorien ein und liefert einen <strong>Faktor</strong> zurück (siehe Einheit 2, <em>Faktoren</em>):</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>bezirke<span class="sc">$</span>groesse <span class="ot">&lt;-</span> <span class="fu">cut</span>(bezirke<span class="sc">$</span>haushalte,</span>
-<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>                       <span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">15000</span>, <span class="dv">40000</span>, <span class="cn">Inf</span>),</span>
-<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>                       <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"klein"</span>, <span class="st">"mittel"</span>, <span class="st">"groß"</span>))</span>
-<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a>bezirke[, <span class="fu">c</span>(<span class="st">"bezirk_name"</span>, <span class="st">"haushalte"</span>, <span class="st">"groesse"</span>)]</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>   bezirk_name haushalte groesse
-1 Innere Stadt      9800   klein
-2 Leopoldstadt     54000    groß
-3  Landstrasse     46000    groß
-4       Wieden     16000  mittel
-5   Margareten     30000  mittel
-6    Mariahilf     15000   klein
-7       Neubau     16000  mittel
-8   Josefstadt     12000   klein</code></pre>
-</div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(bezirke<span class="sc">$</span>groesse)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
- klein mittel   groß 
-     3      3      2 </code></pre>
-</div>
-</div>
-<section id="übung-1" class="level3">
-<h3 class="anchored" data-anchor-id="übung-1">Übung</h3>
-<ol type="1">
-<li>Berechne das mittlere Einkommen über alle Bezirke und zeige die Bezirke, die darüber liegen.</li>
-<li>Zeichne mit <code>barplot()</code> die Haushalte pro Bezirk; beschrifte die Balken mit <code>names.arg = bezirke$bezirk_name</code> (Tipp: <code>las = 2</code> dreht die Beschriftung).</li>
-</ol>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="co"># dein Code</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-</section>
-</section>
-</section>
-<section id="teil-3-ergebnisse-sichern-csv-rds-rdata" class="level1">
-<h1>Teil 3: Ergebnisse sichern (CSV, RDS, RData)</h1>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Als CSV — gut zum Weitergeben (auch an Excel). Faktor-Stufen gehen verloren;</span></span>
-<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a><span class="co"># beim erneuten Einlesen muss R die Datentypen neu erkennen.</span></span>
-<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv2</span>(bezirke, <span class="st">"data/processed/bezirke_clean.csv"</span>, <span class="at">row.names =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb42-5"><a href="#cb42-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Als RDS — R-eigenes Format, behält Datentypen und Faktor-Stufen exakt</span></span>
-<span id="cb42-6"><a href="#cb42-6" aria-hidden="true" tabindex="-1"></a><span class="fu">saveRDS</span>(bezirke, <span class="st">"data/processed/bezirke.rds"</span>)</span>
-<span id="cb42-7"><a href="#cb42-7" aria-hidden="true" tabindex="-1"></a>bezirke <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">"data/processed/bezirke.rds"</span>)</span>
-<span id="cb42-8"><a href="#cb42-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb42-9"><a href="#cb42-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Mehrere Objekte in einer Datei</span></span>
-<span id="cb42-10"><a href="#cb42-10" aria-hidden="true" tabindex="-1"></a><span class="fu">save</span>(bezirke, roh, <span class="at">file =</span> <span class="st">"data/processed/bezirke.RData"</span>)</span>
-<span id="cb42-11"><a href="#cb42-11" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="st">"data/processed/bezirke.RData"</span>)   <span class="co"># holt sie unter denselben Namen zurück</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<p><code>write.csv2()</code> schreibt mit <code>;</code> und Dezimalkomma — so öffnet ein deutschsprachiges Excel die Datei direkt richtig. <code>write.csv()</code> (Einheit 2) schreibt mit <code>,</code> und Dezimalpunkt.</p>
 </section>
 <section id="zusammenfassung" class="level1">
 <h1>Zusammenfassung</h1>
 <ul>
+<li><strong>dplyr:</strong> <code>filter</code> / <code>select</code> / <code>arrange</code> / <code>mutate</code> / <code>count</code> · Pipe <code>%&gt;%</code> („und dann”), in neuerem Code <code>|&gt;</code> · <code>group_by</code> + <code>summarise</code> (<code>na.rm = TRUE</code>) · <code>left_join</code> &amp; Co.</li>
 <li><strong>ggplot2:</strong> <code>ggplot(daten, aes(...)) + geom_...()</code> · <code>geom_point</code>, <code>geom_col</code>, <code>geom_boxplot</code>, <code>geom_histogram</code> · <code>color</code> / <code>fill</code> in oder außerhalb von <code>aes()</code> · <code>facet_wrap</code> · <code>ggsave</code></li>
-<li><strong>Aufräumen:</strong> <code>header = FALSE</code> zum Ansehen · <code>skip = n</code> für Info-Zeilen · <code>tolower(gsub(" ", "_", names(df)))</code> · Typen mit <code>as.numeric()</code> bzw. <code>lapply(df[cols], as.numeric)</code> · <code>paste()</code> / <code>paste0()</code> / <code>substr()</code> / <code>trimws()</code> · <code>cut()</code> für Kategorien</li>
-<li><strong>Sichern:</strong> <code>write.csv2()</code> · <code>saveRDS()</code> / <code>readRDS()</code> · <code>save()</code> / <code>load()</code></li>
 </ul>
-</section>
-<section id="abschlussprojekt" class="level1">
-<h1>Abschlussprojekt</h1>
-<p>Als Abschluss entsteht euer erstes eigenständiges Portfolio-Stück zu Einheit 1–3:</p>
-<ol type="1">
-<li>Neues <code>.Rmd</code> im Projektordner anlegen (<em>File → New File → R Markdown</em>).</li>
-<li><code>data/raw/mitarbeitende.csv</code> und <code>data/raw/teams.csv</code> über relative Pfade einlesen und mit <code>str()</code> prüfen.</li>
-<li>Die beiden Datensätze mit einem Join verbinden und begründen, welchen Join ihr wählt.</li>
-<li>Mindestens einen <code>filter()</code>- und einen <code>mutate()</code>-Schritt anwenden.</li>
-<li>Eine Zusammenfassungstabelle mit <code>group_by()</code> + <code>summarise()</code> erstellen (fehlende Werte beachten).</li>
-<li>Eine <code>ggplot2</code>-Grafik bauen, die diese Tabelle sichtbar macht, und mit <code>ggsave()</code> nach <code>output/</code> speichern.</li>
-<li>Das Dokument zu HTML knitten.</li>
-</ol>
-<p><strong>Abgabe:</strong> die <code>.Rmd</code>-Datei <strong>und</strong> die geknittete <code>.html</code>-Datei.</p>
-<section id="checkliste-vor-der-abgabe" class="level2">
-<h2 class="anchored" data-anchor-id="checkliste-vor-der-abgabe">Checkliste vor der Abgabe</h2>
-<ul class="task-list">
-<li><label><input type="checkbox">Das Dokument läuft nach einem Neustart von R (<code>Strg + Shift + F10</code>) fehlerfrei durch.</label></li>
-<li><label><input type="checkbox">Keine absoluten Pfade und kein <code>setwd()</code>; kein <code>install.packages()</code> im Dokument.</label></li>
-<li><label><input type="checkbox">Alle Pakete werden oben im Dokument mit <code>library()</code> geladen.</label></li>
-<li><label><input type="checkbox">Jeder Arbeitsschritt hat 1–2 Sätze Text: <strong>was</strong> wird gemacht und <strong>warum</strong>.</label></li>
-<li><label><input type="checkbox">Fehlende Werte (Vera, Uwe) sind bemerkt und bewusst behandelt.</label></li>
-<li><label><input type="checkbox">Die Grafik hat Titel, Achsenbeschriftungen und ggf. eine Legende.</label></li>
-<li><label><input type="checkbox">Die Grafik liegt als Datei in <code>output/</code>.</label></li>
-</ul>
+<p><strong>Wie es weitergeht:</strong> Mit Einheit 1–3 hast du alles für das Abschlussprojekt (<code>05_abschlussprojekt.Rmd</code>). Einheit 4 zeigt, wie man mit Bedingungen, Schleifen und eigenen Funktionen wiederkehrende Arbeitsschritte automatisiert. Hilfe gibt es über <code>?funktionsname</code>, die RStudio Cheat Sheets (<em>Help → Cheat Sheets</em>) und das frei verfügbare Buch <em>R for Data Science</em> (r4ds.hadley.nz).</p>
 
 
-</section>
 </section>
 
 </main> <!-- /main -->
@@ -1052,13 +1261,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./einheit-2.html" class="pagination-link" aria-label="2 · Data Frames &amp; dplyr">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">2 · Data Frames &amp; dplyr</span>
+      <a href="./einheit-2.html" class="pagination-link" aria-label="2 · Daten einlesen &amp; aufräumen">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">2 · Daten einlesen &amp; aufräumen</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./einheit-4.html" class="pagination-link" aria-label="4 · Funktionen &amp; Schleifen">
-        <span class="nav-page-text">4 · Funktionen &amp; Schleifen</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./einheit-4.html" class="pagination-link" aria-label="4 · Bedingungen, Schleifen &amp; Funktionen">
+        <span class="nav-page-text">4 · Bedingungen, Schleifen &amp; Funktionen</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

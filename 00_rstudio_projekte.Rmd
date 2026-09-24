@@ -3,9 +3,9 @@ title: "R-Einführung — Einheit 0: RStudio, Projekte & Pakete"
 output: html_document
 ---
 
-Diese Einführung klärt, womit man in R arbeitet (R, RStudio, Projekte, R Markdown), wie
-Pakete installiert werden und wo man Hilfe findet — und fasst am Ende die Grundregeln
-zusammen, die den Einstieg leichter machen.
+Diese Einheit klärt, womit man in R arbeitet (R, RStudio, Projekte, R Markdown), wie Pakete
+installiert werden und wo man Hilfe findet. Am Ende stehen die wichtigsten Grundregeln und eine
+erste Übung.
 
 
 # Installation
@@ -35,6 +35,10 @@ genau das macht es reproduzierbar.
 | **Files / Plots / Packages / Help** (unten rechts) | Dateien, Grafiken, installierte Pakete, Hilfeseiten |
 
 Nur was in einer **Datei** steht, ist reproduzierbar — die Console ist ein Notizzettel.
+
+Code steht in einer Datei in grauen **Code-Blöcken** (*Chunks*). Ausgeführt wird er mit
+`Strg + Enter` (aktuelle Zeile) oder mit dem grünen Pfeil oben rechts im Block (ganzer Block);
+das Ergebnis erscheint direkt darunter:
 
 ```{r}
 1 + 2
@@ -88,6 +92,19 @@ Sonderzeichen — Pfade immer mit **Schrägstrich** `/` schreiben (oder doppelte
 read.csv("data/raw/daten.csv")     # richtig
 read.csv("data\raw\daten.csv")     # Fehler
 ```
+
+## Die Kursmaterialien
+
+Der Kurs ist selbst ein RStudio-Projekt:
+
+1. [Kursmaterialien als ZIP](https://github.com/bella-mir/r-einfuehrung/archive/refs/heads/main.zip)
+   herunterladen und entpacken.
+2. `r-einfuehrung.Rproj` per Doppelklick öffnen.
+3. Die Notebooks der Reihe nach bearbeiten: `00_…`, `01_…`, … — die Nummer entspricht der
+   Einheit. Die Kursdaten liegen in `data/raw/`.
+
+Der Kursordner ist etwas vereinfacht: Die Notebooks liegen direkt im Projektordner statt in
+`scripts/`.
 
 
 # R Markdown
@@ -191,7 +208,7 @@ mean(c(1, 2, "drei"))   # Warnung: das Argument ist nicht numerisch
 sqrt("vier")            # Fehler: nicht-numerisches Argument
 ```
 
-Eine kompakte Übersicht aller Funktionen dieser Einführung steht in `R_Cheatsheet.md`.
+Eine kompakte Übersicht aller Funktionen dieser Einführung steht in `cheatsheet.md`.
 
 
 # Grundregeln für den Anfang

@@ -1,13 +1,13 @@
 # Builds the course website with Quarto into docs/ (published with GitHub Pages).
 #
-# Run from the project folder (open RIntroduction.Rproj first):
+# Run from the project folder (open r-einfuehrung.Rproj first):
 #   source("_website/build_site.R")
 #
 # The notebooks are copied into _website/ and rendered there, so the course files
 # themselves stay unchanged (no Quarto config in the folder students work in).
 
-if (!file.exists("RIntroduction.Rproj")) {
-  stop("Bitte aus dem Projektordner ausführen (RIntroduction.Rproj öffnen).")
+if (!file.exists("r-einfuehrung.Rproj")) {
+  stop("Bitte aus dem Projektordner ausführen (r-einfuehrung.Rproj öffnen).")
 }
 
 # Quarto: on the PATH, otherwise the version bundled with RStudio
@@ -18,11 +18,12 @@ if (quarto == "") {
 
 # Source file -> file name inside _website/ (becomes the page name on the website)
 seiten <- c(
-  "0_RINTRO.Rmd"   = "einheit-0.Rmd",
-  "I_RINTRO.Rmd"   = "einheit-1.Rmd",
-  "II_RINTRO.Rmd"  = "einheit-2.Rmd",
-  "III_RINTRO.Rmd" = "einheit-3.Rmd",
-  "IV_RINTRO.Rmd"  = "einheit-4.Rmd"
+  "00_rstudio_projekte.Rmd"              = "einheit-0.Rmd",
+  "01_grundlagen.Rmd"                    = "einheit-1.Rmd",
+  "02_daten_einlesen_aufraeumen.Rmd"     = "einheit-2.Rmd",
+  "03_daten_auswerten_visualisieren.Rmd" = "einheit-3.Rmd",
+  "04_funktionen_schleifen.Rmd"          = "einheit-4.Rmd",
+  "05_abschlussprojekt.Rmd"              = "abschlussprojekt.Rmd"
 )
 
 for (quelle in names(seiten)) {
@@ -33,13 +34,17 @@ for (quelle in names(seiten)) {
 }
 
 # The cheat sheet has no YAML header: its first heading becomes the page title
-cheatsheet <- readLines("R_Cheatsheet.md", encoding = "UTF-8")
+cheatsheet <- readLines("cheatsheet.md", encoding = "UTF-8")
 writeLines(c("---", 'title: "Cheatsheet"', "---", cheatsheet[-1]),
            "_website/cheatsheet.md", useBytes = TRUE)
 
 # Course data, so that paths like "data/raw/..." work while rendering
 dir.create("_website/data/raw", recursive = TRUE, showWarnings = FALSE)
 file.copy(list.files("data/raw", full.names = TRUE), "_website/data/raw", overwrite = TRUE)
+
+# docs/ lies outside the Quarto project, so Quarto does not clean it up itself:
+# start from an empty folder to avoid leftover files from earlier builds
+unlink("docs", recursive = TRUE)
 
 Sys.setenv(QUARTO_R = R.home("bin"))
 status <- system2(quarto, c("render", shQuote("_website")))

@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Einheit 4: Bedingungen, Schleifen &amp; eigene Funktionen – R-Einführung</title>
+<title>Einheit 4: Bedingungen, Schleifen &amp; Funktionen – R-Einführung</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -68,7 +68,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./cheatsheet.html" rel="next">
+<link href="./abschlussprojekt.html" rel="next">
 <link href="./einheit-3.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
@@ -121,7 +121,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Seitenleiste umschalten" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./einheit-0.html">Einheiten</a></li><li class="breadcrumb-item"><a href="./einheit-4.html">4 · Funktionen &amp; Schleifen</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./einheit-0.html">Einheiten</a></li><li class="breadcrumb-item"><a href="./einheit-4.html">4 · Bedingungen, Schleifen &amp; Funktionen</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Seitenleiste umschalten" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Suchen" onclick="window.quartoOpenSearch();">
@@ -179,23 +179,29 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./einheit-2.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">2 · Data Frames &amp; dplyr</span></a>
+ <span class="menu-text">2 · Daten einlesen &amp; aufräumen</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./einheit-3.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">3 · ggplot2 &amp; Daten aufräumen</span></a>
+ <span class="menu-text">3 · Daten auswerten &amp; visualisieren</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./einheit-4.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">4 · Funktionen &amp; Schleifen</span></a>
+ <span class="menu-text">4 · Bedingungen, Schleifen &amp; Funktionen</span></a>
   </div>
 </li>
       </ul>
   </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./abschlussprojekt.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Abschlussprojekt</span></a>
+  </div>
+</li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./cheatsheet.html" class="sidebar-item-text sidebar-link">
@@ -233,7 +239,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#eingaben-prüfen-stop" id="toc-eingaben-prüfen-stop" class="nav-link" data-scroll-target="#eingaben-prüfen-stop">Eingaben prüfen: stop()</a></li>
   <li><a href="#variablen-in-funktionen-bleiben-lokal" id="toc-variablen-in-funktionen-bleiben-lokal" class="nav-link" data-scroll-target="#variablen-in-funktionen-bleiben-lokal">Variablen in Funktionen bleiben lokal</a></li>
   </ul></li>
-  <li><a href="#teil-4-sapply-eine-funktion-auf-viele-elemente-anwenden" id="toc-teil-4-sapply-eine-funktion-auf-viele-elemente-anwenden" class="nav-link" data-scroll-target="#teil-4-sapply-eine-funktion-auf-viele-elemente-anwenden">Teil 4: sapply() — eine Funktion auf viele Elemente anwenden</a>
+  <li><a href="#teil-4-funktionen-anwenden-mit-sapply" id="toc-teil-4-funktionen-anwenden-mit-sapply" class="nav-link" data-scroll-target="#teil-4-funktionen-anwenden-mit-sapply">Teil 4: Funktionen anwenden mit sapply()</a>
   <ul class="collapse">
   <li><a href="#die-idee" id="toc-die-idee" class="nav-link" data-scroll-target="#die-idee">Die Idee</a></li>
   <li><a href="#der-aufbau-sapplyx-fun" id="toc-der-aufbau-sapplyx-fun" class="nav-link" data-scroll-target="#der-aufbau-sapplyx-fun">Der Aufbau: sapply(X, FUN, …)</a></li>
@@ -250,9 +256,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./einheit-0.html">Einheiten</a></li><li class="breadcrumb-item"><a href="./einheit-4.html">4 · Funktionen &amp; Schleifen</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./einheit-0.html">Einheiten</a></li><li class="breadcrumb-item"><a href="./einheit-4.html">4 · Bedingungen, Schleifen &amp; Funktionen</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Einheit 4: Bedingungen, Schleifen &amp; eigene Funktionen</h1>
+<h1 class="title">Einheit 4: Bedingungen, Schleifen &amp; Funktionen</h1>
 </div>
 
 
@@ -277,7 +283,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><strong>Funktionen auf viele Elemente anwenden</strong> — <code>sapply()</code> und <code>lapply()</code></li>
 <li><strong>Alles zusammen</strong> — eine Grafik pro Team</li>
 </ol>
-<p>Wir verwenden wieder die Temperaturen aus Einheit 1 und die Mitarbeitenden-Daten aus Einheit 2:</p>
+<p>Wir verwenden wieder die Temperaturen aus Einheit 1 und die Mitarbeitenden-Daten aus Einheit 3:</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
@@ -576,8 +582,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 </section>
 </section>
-<section id="teil-4-sapply-eine-funktion-auf-viele-elemente-anwenden" class="level1">
-<h1>Teil 4: sapply() — eine Funktion auf viele Elemente anwenden</h1>
+<section id="teil-4-funktionen-anwenden-mit-sapply" class="level1">
+<h1>Teil 4: Funktionen anwenden mit sapply()</h1>
 <section id="die-idee" class="level2">
 <h2 class="anchored" data-anchor-id="die-idee">Die Idee</h2>
 <p>Sehr oft will man <strong>dieselbe Funktion auf mehrere Dinge</strong> anwenden: den Mittelwert jeder Spalte, die Länge jedes Textes, eine Kennzahl für jedes Team. Mit einer <code>for</code>-Schleife sieht das so aus:</p>
@@ -749,12 +755,12 @@ maximum    33.9 335.0  5.424</code></pre>
 31.9125 26.7000 35.2000 27.3000 </code></pre>
 </div>
 </div>
-<p>Für Data Frames ist <code>group_by()</code> + <code>summarise()</code> (Einheit 2) meist die bequemere Lösung. <code>sapply()</code> ist dann praktisch, wenn man mit Vektoren, Listen oder Spalten arbeitet.</p>
+<p>Für Data Frames ist <code>group_by()</code> + <code>summarise()</code> (Einheit 3) meist die bequemere Lösung. <code>sapply()</code> ist dann praktisch, wenn man mit Vektoren, Listen oder Spalten arbeitet.</p>
 <p><strong>Kurzschreibweise:</strong> In neuerem Code sieht man statt <code>function(x)</code> oft <code>\(x)</code> — das ist seit R 4.1 dasselbe, nur kürzer: <code>sapply(c(10, 20, 30), \(x) x^2)</code>.</p>
 </section>
 <section id="sapply-oder-lapply" class="level2">
 <h2 class="anchored" data-anchor-id="sapply-oder-lapply">sapply() oder lapply()?</h2>
-<p><code>lapply()</code> (Einheit 3) funktioniert genauso, gibt aber <strong>immer eine Liste</strong> zurück — das <em>l</em> steht für <em>list</em>:</p>
+<p><code>lapply()</code> (Einheit 2) funktioniert genauso, gibt aber <strong>immer eine Liste</strong> zurück — das <em>l</em> steht für <em>list</em>:</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb62"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a><span class="fu">lapply</span>(spalten, mean)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
@@ -1272,13 +1278,13 @@ $wt
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./einheit-3.html" class="pagination-link" aria-label="3 · ggplot2 &amp; Daten aufräumen">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">3 · ggplot2 &amp; Daten aufräumen</span>
+      <a href="./einheit-3.html" class="pagination-link" aria-label="3 · Daten auswerten &amp; visualisieren">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">3 · Daten auswerten &amp; visualisieren</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./cheatsheet.html" class="pagination-link" aria-label="Cheatsheet">
-        <span class="nav-page-text">Cheatsheet</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./abschlussprojekt.html" class="pagination-link" aria-label="Abschlussprojekt">
+        <span class="nav-page-text">Abschlussprojekt</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

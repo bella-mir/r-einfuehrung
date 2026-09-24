@@ -1,0 +1,388 @@
+---
+title: "R-Einführung — Einheit 3: Daten auswerten & visualisieren"
+output: html_notebook
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, message = FALSE)
+```
+
+In Einheit 2 hast du Daten eingelesen und aufgeräumt. Jetzt geht es darum, sie auszuwerten
+und darzustellen:
+
+1. **Datenbearbeitung mit `dplyr`** — filtern, sortieren, umformen, gruppieren, verbinden
+2. **Visualisierung mit `ggplot2`** — Grafiken schichtweise aufbauen
+
+Dafür werden zwei Pakete gebraucht. Falls noch nicht geschehen, einmalig **in der Console**
+installieren:
+
+```{r, eval=FALSE}
+install.packages(c("dplyr", "ggplot2"))
+```
+
+Wir arbeiten mit den Mitarbeitenden-Daten, die du in Einheit 2 schon eingelesen hast:
+
+```{r}
+mitarbeitende <- read.csv("data/raw/mitarbeitende.csv")
+teams         <- read.csv("data/raw/teams.csv")
+str(mitarbeitende)
+```
+
+Bei Vera fehlen die Plusstunden (`NA`) — darauf kommen wir mehrmals zurück.
+
+
+# Teil 1: Datenbearbeitung mit dplyr
+
+`dplyr` bündelt die typischen Arbeitsschritte in wenige, gut lesbare Funktionen („Verben").
+Jedes Verb bekommt einen Data Frame und gibt einen neuen Data Frame zurück.
+
+```{r}
+library(dplyr)
+```
+
+## filter() — Zeilen auswählen
+
+```{r}
+filter(mitarbeitende, plusstunden > 40)
+filter(mitarbeitende, land %in% c("AT", "DE"), projekte >= 10)   # Komma = und
+```
+
+Zeilen, bei denen die Bedingung `NA` ergibt (hier: Vera), fallen bei `filter()` weg.
+
+## select() — Spalten auswählen
+
+```{r}
+select(mitarbeitende, name, team, projekte)
+```
+
+## arrange() — sortieren
+
+`arrange()` sortiert nach einer oder mehreren Spalten; `desc()` dreht die Reihenfolge um:
+
+```{r}
+arrange(mitarbeitende, desc(plusstunden))
+```
+
+## Der Pipe-Operator: %>% und |>
+
+### Das Problem: mehrere Schritte hintereinander
+
+Sollen mehrere Funktionen nacheinander angewendet werden, gibt es ohne Pipe zwei Wege — beide
+sind unhandlich:
+
+```{r}
+# 1. Verschachteln: muss von innen nach außen gelesen werden
+arrange(filter(mitarbeitende, land == "AT"), desc(plusstunden))
+
+# 2. Zwischenergebnisse speichern: lesbar, aber viele Hilfsvariablen
+nur_at <- filter(mitarbeitende, land == "AT")
+arrange(nur_at, desc(plusstunden))
+```
+
+### Die Lösung: die Pipe
+
+Der **Pipe-Operator** nimmt das Ergebnis auf seiner linken Seite und setzt es als **erstes
+Argument** in die Funktion auf der rechten Seite ein:
+
+```
+x %>% f(y)      ist dasselbe wie      f(x, y)
+```
+
+Damit wird aus der Verschachtelung eine Kette, die man von oben nach unten liest. Die Pipe
+spricht man am besten als **„und dann"**: *Nimm `mitarbeitende`, und dann filtere nach
+Österreich, und dann sortiere nach Plusstunden.*
+
+```{r}
+mitarbeitende %>%
+  filter(land == "AT") %>%
+  arrange(desc(plusstunden))
+```
+
+Beachte: In der Kette steht in `filter()` und `arrange()` **kein** Data Frame mehr — den
+liefert die Pipe von oben.
+
+### Zwei Schreibweisen: %>% und |>
+
+In R gibt es zwei Pipes. Für alles, was in dieser Einführung vorkommt, verhalten sie sich
+**gleich** — dieselbe Kette mit der eingebauten Pipe `|>`:
+
+```{r}
+mitarbeitende |>
+  filter(land == "AT") |>
+  arrange(desc(plusstunden))
+```
+
+| | `%>%` | `\|>` |
+|---|---|---|
+| Name | magrittr-Pipe | native Pipe (eingebaut) |
+| Herkunft | Paket `magrittr`, wird von `dplyr` mitgeladen | fester Bestandteil von R seit Version 4.1 (2021) |
+| braucht ein Paket? | ja — ohne `library(dplyr)` gibt es einen Fehler | nein |
+| wo man sie sieht | ältere Tutorials, Stack Overflow, viele Kurse — **auch in den weiteren Kursmaterialien** | aktuelle R-Dokumentation, *R for Data Science* (2. Auflage), tidyverse-Stilempfehlung |
+
+**In diesem Kurs verwenden wir `%>%`**, weil es in den weiteren Kursmaterialien verwendet wird.
+Die aktuelle Empfehlung für neuen Code ist `|>`. Du solltest **beide lesen können** — wenn du
+eine der beiden siehst, denk einfach „und dann".
+
+### Zwei kleine Unterschiede
+
+Für den Anfang selten wichtig, aber gut zu wissen, wenn Code aus dem Netz nicht funktioniert:
+
+1. **Klammern:** Bei `|>` muss rechts immer ein Funktions*aufruf* mit Klammern stehen.
+   `mitarbeitende %>% head` funktioniert, `mitarbeitende |> head` nicht — richtig ist
+   `mitarbeitende |> head()`. Einfachste Regel: **immer Klammern schreiben.**
+2. **Platzhalter:** Soll das Ergebnis *nicht* an die erste Stelle, markiert man die Stelle mit
+   einem Platzhalter — bei `%>%` ein Punkt `.`, bei `|>` ein Unterstrich `_` (nur mit
+   Argumentnamen). Beispiel: `lm()` berechnet eine Regression und erwartet die Daten erst im
+   Argument `data`:
+
+```{r}
+mitarbeitende %>% lm(plusstunden ~ projekte, data = .)
+mitarbeitende |>  lm(plusstunden ~ projekte, data = _)
+```
+
+**Tastenkürzel:** *Strg/Cmd + Shift + M* fügt eine Pipe ein. Welche, stellt man unter
+*Tools → Global Options → Code → „Use native pipe operator, |>"* ein — für diesen Kurs den Haken
+**nicht** setzen, dann kommt `%>%`.
+
+## mutate() — neue Spalten berechnen
+
+`mutate()` berechnet eine neue Spalte aus bestehenden — elementweise für jede Zeile.
+Gleichwertig in Basis-R wäre
+`mitarbeitende$stunden_pro_projekt <- mitarbeitende$plusstunden / mitarbeitende$projekte`.
+
+```{r}
+mitarbeitende <- mitarbeitende %>%
+  mutate(stunden_pro_projekt = round(plusstunden / projekte, 1))
+
+head(mitarbeitende)
+```
+
+## Mehrere Schritte kombinieren
+
+```{r}
+mitarbeitende %>%
+  filter(land == "AT") %>%
+  select(name, team, plusstunden) %>%
+  arrange(desc(plusstunden))
+```
+
+## count() — Häufigkeiten zählen
+
+`count()` zählt, wie oft jeder Wert vorkommt — das `dplyr`-Gegenstück zu `table()`:
+
+```{r}
+mitarbeitende %>% count(team)
+```
+
+## group_by() + summarise() — Kennzahlen pro Gruppe
+
+Eine der häufigsten Aufgaben: eine Kennzahl je Gruppe — z. B. die durchschnittlichen
+Plusstunden pro Team.
+
+```{r}
+mitarbeitende %>%
+  group_by(team) %>%
+  summarise(
+    anzahl           = n(),
+    plusstunden_mean = mean(plusstunden),
+    projekte_max     = max(projekte)
+  )
+```
+
+Die Ausgabe beginnt mit `# A tibble`. Ein **Tibble** ist die `dplyr`-Variante eines Data
+Frames — er zeigt zusätzlich Größe und Spaltentypen an, alles andere funktioniert wie gewohnt.
+
+Bei `Team_B` steht `NA`, weil Veras Plusstunden fehlen (siehe Einheit 1, *Fehlende Werte: NA*).
+Mit `na.rm = TRUE` wird der fehlende Wert ausgelassen:
+
+```{r}
+mitarbeitende %>%
+  group_by(team) %>%
+  summarise(anzahl = n(), plusstunden_mean = mean(plusstunden, na.rm = TRUE))
+```
+
+## Datensätze verbinden: Joins
+
+`teams` enthält zu jedem Team die Region. Mit einem **Join** wird diese Information über die
+gemeinsame Spalte `team` an `mitarbeitende` angehängt.
+
+Die Datensätze passen nicht perfekt zusammen — wie so oft in echten Daten:
+
+- **Uwe** gehört zu `Team_E`, das in `teams` fehlt.
+- **`Team_D`** steht in `teams`, hat aber keine Mitarbeitenden.
+
+Die vier Join-Varianten unterscheiden sich genau darin, was mit solchen Zeilen passiert:
+
+| Funktion | Behält |
+|---|---|
+| `left_join(x, y)` | alle Zeilen von `x`; fehlt die Entsprechung in `y` → `NA` |
+| `right_join(x, y)` | alle Zeilen von `y` |
+| `inner_join(x, y)` | nur Zeilen, die in **beiden** vorkommen |
+| `full_join(x, y)` | alle Zeilen aus **beiden** |
+
+```{r}
+nrow(left_join(mitarbeitende, teams, by = "team"))    # alle 22 Personen, Uwe mit Region NA
+nrow(inner_join(mitarbeitende, teams, by = "team"))   # 21 — Uwe fällt weg
+nrow(full_join(mitarbeitende, teams, by = "team"))    # 23 — alle Personen + Team_D
+```
+
+Meist will man keine Personen verlieren, deshalb ist `left_join()` der Standard:
+
+```{r}
+mitarbeitende_join <- mitarbeitende %>%
+  left_join(teams, by = "team")
+
+mitarbeitende_join %>% filter(is.na(region))
+```
+
+Über mehrere Spalten verbindet man mit `by = c("spalte1", "spalte2")`. In Basis-R heißt die
+Funktion `merge()` (`merge(x, y, by = "team", all.x = TRUE)` entspricht `left_join`).
+
+### Übung
+
+1. Welche drei Personen haben die meisten Projekte? Zeige nur `name` und `projekte`.
+2. Berechne pro `land` die Anzahl Personen und die durchschnittlichen Plusstunden, absteigend
+   sortiert nach dem Durchschnitt.
+3. Wie viele Frauen und Männer gibt es pro Team? (Tipp: `count()` mit zwei Spalten)
+4. Schreibe deine Lösung zu Aufgabe 2 einmal mit `|>` statt `%>%` und prüfe, dass dasselbe
+   herauskommt.
+
+```{r}
+# dein Code
+
+```
+
+
+# Teil 2: Visualisierung mit ggplot2
+
+```{r}
+library(ggplot2)
+```
+
+## Die Daten vorbereiten
+
+Wir verwenden `mitarbeitende_join` aus Teil 1 (Mitarbeitende mit Region). Bei Vera fehlen die
+Plusstunden. Ohne y-Wert kann `ggplot` keinen Punkt zeichnen und würde bei jeder Grafik warnen
+(*„Removed 1 row containing missing values"*). Deshalb entfernen wir diese Zeile einmal vorab:
+
+```{r}
+mitarbeitende_plot <- mitarbeitende_join %>%
+  filter(!is.na(plusstunden))
+```
+
+## Der Grundaufbau
+
+`ggplot2` baut Grafiken **schichtweise** mit `+` auf. Der Grundaufbau ist immer gleich:
+
+```
+ggplot(daten, aes(x = ..., y = ...)) +   # Daten + welche Spalte auf welche Achse
+  geom_...()                             # welche Form: Punkte, Balken, Linien …
+```
+
+## Streudiagramm: geom_point()
+
+```{r}
+ggplot(mitarbeitende_plot, aes(x = projekte, y = plusstunden)) +
+  geom_point(color = "steelblue", size = 2) +
+  labs(title = "Plusstunden nach Anzahl Projekte",
+       x = "Anzahl Projekte", y = "Plusstunden") +
+  theme_minimal()
+```
+
+## Nach Gruppe einfärben
+
+Eine weitere Spalte in `aes()` auf `color` legen — `ggplot` vergibt automatisch Farben und eine
+Legende:
+
+```{r}
+ggplot(mitarbeitende_plot, aes(x = projekte, y = plusstunden, color = team)) +
+  geom_point(size = 2) +
+  labs(title = "Plusstunden nach Projekten, eingefärbt nach Team") +
+  theme_minimal()
+```
+
+`color = "steelblue"` **außerhalb** von `aes()` setzt eine feste Farbe; `color = team`
+**innerhalb** von `aes()` färbt nach den Werten einer Spalte.
+
+## Balkendiagramm einer Kennzahl: geom_col()
+
+`dplyr` und `ggplot2` greifen ineinander: erst die Kennzahl berechnen, dann direkt an
+`ggplot()` weiterreichen. Personen ohne Region (Uwe) filtern wir vorher heraus. Die Farbe
+dient hier nur der Optik — die Regionen stehen schon auf der x-Achse, deshalb blenden wir die
+Legende mit `show.legend = FALSE` aus:
+
+```{r}
+mitarbeitende_plot %>%
+  filter(!is.na(region)) %>%
+  group_by(region) %>%
+  summarise(plusstunden_mean = mean(plusstunden)) %>%
+  ggplot(aes(x = region, y = plusstunden_mean, fill = region)) +
+  geom_col(show.legend = FALSE) +
+  labs(title = "Durchschnittliche Plusstunden pro Region",
+       x = "Region", y = "Ø Plusstunden") +
+  theme_minimal()
+```
+
+## Verteilungen: geom_boxplot() und geom_histogram()
+
+```{r}
+ggplot(mitarbeitende_plot, aes(x = team, y = plusstunden)) +
+  geom_boxplot(fill = "lightgrey") +
+  labs(title = "Plusstunden je Team") +
+  theme_minimal()
+```
+
+`geom_histogram()` zeigt die Verteilung einer einzelnen Zahlenspalte:
+
+```{r}
+ggplot(mitarbeitende_plot, aes(x = plusstunden)) +
+  geom_histogram(bins = 8, fill = "steelblue", color = "white") +
+  theme_minimal()
+```
+
+## Teilgrafiken: facet_wrap()
+
+`facet_wrap(~spalte)` zerlegt eine Grafik in ein Raster — eine Teilgrafik pro Ausprägung:
+
+```{r}
+ggplot(mitarbeitende_plot, aes(x = projekte, y = plusstunden)) +
+  geom_point(color = "darkred") +
+  facet_wrap(~team) +
+  labs(title = "Plusstunden nach Projekten, aufgeteilt nach Team") +
+  theme_bw()
+```
+
+## Grafik speichern: ggsave()
+
+`ggsave()` speichert die zuletzt erzeugte Grafik:
+
+```{r, eval=FALSE}
+ggsave("output/plusstunden_team.png", width = 8, height = 5)
+```
+
+### Übung
+
+1. Zeichne ein Streudiagramm von `projekte` gegen `plusstunden`, eingefärbt nach
+   `geschlecht`.
+2. Erstelle ein Balkendiagramm mit der Anzahl Personen pro `land` (Tipp: erst `count()`, dann
+   `geom_col()`).
+
+```{r}
+# dein Code
+
+```
+
+
+# Zusammenfassung
+
+- **dplyr:** `filter` / `select` / `arrange` / `mutate` / `count` · Pipe `%>%` („und dann"),
+  in neuerem Code `|>` · `group_by` + `summarise` (`na.rm = TRUE`) · `left_join` & Co.
+- **ggplot2:** `ggplot(daten, aes(...)) + geom_...()` · `geom_point`, `geom_col`,
+  `geom_boxplot`, `geom_histogram` · `color` / `fill` in oder außerhalb von `aes()` ·
+  `facet_wrap` · `ggsave`
+
+**Wie es weitergeht:** Mit Einheit 1–3 hast du alles für das
+Abschlussprojekt (`05_abschlussprojekt.Rmd`). Einheit 4 zeigt, wie man mit Bedingungen,
+Schleifen und eigenen Funktionen wiederkehrende Arbeitsschritte automatisiert. Hilfe gibt es
+über `?funktionsname`, die RStudio Cheat Sheets (*Help → Cheat Sheets*) und das frei verfügbare
+Buch *R for Data Science* (r4ds.hadley.nz).

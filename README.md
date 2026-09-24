@@ -6,16 +6,17 @@ Raumforschung* (TU Wien, SRF) — Einheit 0 bis 4 und ein Cheatsheet.
 **Zum Lesen im Browser:** https://bella-mir.github.io/r-einfuehrung/
 
 **Zum Selbst-Ausprobieren:** Repository als ZIP herunterladen (*Code → Download ZIP*),
-entpacken und `RIntroduction.Rproj` in RStudio öffnen.
+entpacken und `r-einfuehrung.Rproj` in RStudio öffnen.
 
 | Datei | Inhalt |
 |---|---|
-| `0_RINTRO.Rmd` | RStudio, Projekte & Pakete |
-| `I_RINTRO.Rmd` | Grundlagen, Vektoren, Matrizen & erste Grafiken |
-| `II_RINTRO.Rmd` | Data Frames, Daten einlesen & dplyr |
-| `III_RINTRO.Rmd` | Visualisierung mit ggplot2 & Daten aufräumen |
-| `IV_RINTRO.Rmd` | Bedingungen, Schleifen & eigene Funktionen |
-| `R_Cheatsheet.md` | alle Funktionen auf einen Blick |
+| `00_rstudio_projekte.Rmd` | Einheit 0: RStudio, Projekte & Pakete |
+| `01_grundlagen.Rmd` | Einheit 1: Grundlagen |
+| `02_daten_einlesen_aufraeumen.Rmd` | Einheit 2: Daten einlesen & aufräumen |
+| `03_daten_auswerten_visualisieren.Rmd` | Einheit 3: Daten auswerten & visualisieren |
+| `04_funktionen_schleifen.Rmd` | Einheit 4: Bedingungen, Schleifen & Funktionen |
+| `05_abschlussprojekt.Rmd` | Abschlussprojekt mit Checkliste |
+| `cheatsheet.md` | alle Funktionen auf einen Blick |
 | `data/raw/` | Kursdaten |
 
 Die Website wird mit `source("_website/build_site.R")` nach `docs/` gebaut.

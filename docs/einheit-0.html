@@ -179,23 +179,29 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./einheit-2.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">2 · Data Frames &amp; dplyr</span></a>
+ <span class="menu-text">2 · Daten einlesen &amp; aufräumen</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./einheit-3.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">3 · ggplot2 &amp; Daten aufräumen</span></a>
+ <span class="menu-text">3 · Daten auswerten &amp; visualisieren</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./einheit-4.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">4 · Funktionen &amp; Schleifen</span></a>
+ <span class="menu-text">4 · Bedingungen, Schleifen &amp; Funktionen</span></a>
   </div>
 </li>
       </ul>
   </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./abschlussprojekt.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Abschlussprojekt</span></a>
+  </div>
+</li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./cheatsheet.html" class="sidebar-item-text sidebar-link">
@@ -214,7 +220,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul class="collapse">
   <li><a href="#installation" id="toc-installation" class="nav-link active" data-scroll-target="#installation">Installation</a></li>
   <li><a href="#rstudio-die-vier-bereiche" id="toc-rstudio-die-vier-bereiche" class="nav-link" data-scroll-target="#rstudio-die-vier-bereiche">RStudio: die vier Bereiche</a></li>
-  <li><a href="#projekte-und-arbeitsverzeichnis" id="toc-projekte-und-arbeitsverzeichnis" class="nav-link" data-scroll-target="#projekte-und-arbeitsverzeichnis">Projekte und Arbeitsverzeichnis</a></li>
+  <li><a href="#projekte-und-arbeitsverzeichnis" id="toc-projekte-und-arbeitsverzeichnis" class="nav-link" data-scroll-target="#projekte-und-arbeitsverzeichnis">Projekte und Arbeitsverzeichnis</a>
+  <ul class="collapse">
+  <li><a href="#die-kursmaterialien" id="toc-die-kursmaterialien" class="nav-link" data-scroll-target="#die-kursmaterialien">Die Kursmaterialien</a></li>
+  </ul></li>
   <li><a href="#r-markdown" id="toc-r-markdown" class="nav-link" data-scroll-target="#r-markdown">R Markdown</a></li>
   <li><a href="#wichtige-tastenkürzel" id="toc-wichtige-tastenkürzel" class="nav-link" data-scroll-target="#wichtige-tastenkürzel">Wichtige Tastenkürzel</a></li>
   <li><a href="#pakete-installieren-und-laden" id="toc-pakete-installieren-und-laden" class="nav-link" data-scroll-target="#pakete-installieren-und-laden">Pakete installieren und laden</a></li>
@@ -246,7 +255,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<p>Diese Einführung klärt, womit man in R arbeitet (R, RStudio, Projekte, R Markdown), wie Pakete installiert werden und wo man Hilfe findet — und fasst am Ende die Grundregeln zusammen, die den Einstieg leichter machen.</p>
+<p>Diese Einheit klärt, womit man in R arbeitet (R, RStudio, Projekte, R Markdown), wie Pakete installiert werden und wo man Hilfe findet. Am Ende stehen die wichtigsten Grundregeln und eine erste Übung.</p>
 <section id="installation" class="level1">
 <h1>Installation</h1>
 <ol type="1">
@@ -294,6 +303,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tbody>
 </table>
 <p>Nur was in einer <strong>Datei</strong> steht, ist reproduzierbar — die Console ist ein Notizzettel.</p>
+<p>Code steht in einer Datei in grauen <strong>Code-Blöcken</strong> (<em>Chunks</em>). Ausgeführt wird er mit <code>Strg + Enter</code> (aktuelle Zeile) oder mit dem grünen Pfeil oben rechts im Block (ganzer Block); das Ergebnis erscheint direkt darunter:</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="sc">+</span> <span class="dv">2</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
@@ -329,6 +339,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">read.csv</span>(<span class="st">"data/raw/daten.csv"</span>)     <span class="co"># richtig</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">read.csv</span>(<span class="st">"data</span><span class="sc">\r</span><span class="st">aw\daten.csv"</span>)     <span class="co"># Fehler</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
+<section id="die-kursmaterialien" class="level2">
+<h2 class="anchored" data-anchor-id="die-kursmaterialien">Die Kursmaterialien</h2>
+<p>Der Kurs ist selbst ein RStudio-Projekt:</p>
+<ol type="1">
+<li><a href="https://github.com/bella-mir/r-einfuehrung/archive/refs/heads/main.zip">Kursmaterialien als ZIP</a> herunterladen und entpacken.</li>
+<li><code>r-einfuehrung.Rproj</code> per Doppelklick öffnen.</li>
+<li>Die Notebooks der Reihe nach bearbeiten: <code>00_…</code>, <code>01_…</code>, … — die Nummer entspricht der Einheit. Die Kursdaten liegen in <code>data/raw/</code>.</li>
+</ol>
+<p>Der Kursordner ist etwas vereinfacht: Die Notebooks liegen direkt im Projektordner statt in <code>scripts/</code>.</p>
+</section>
 </section>
 <section id="r-markdown" class="level1">
 <h1>R Markdown</h1>
@@ -512,7 +532,7 @@ boolesch: gebe NA zurück</code></pre>
 ! Nicht-numerisches Argument für mathematische Funktion</code></pre>
 </div>
 </div>
-<p>Eine kompakte Übersicht aller Funktionen dieser Einführung steht in <code>R_Cheatsheet.md</code>.</p>
+<p>Eine kompakte Übersicht aller Funktionen dieser Einführung steht in <code>cheatsheet.md</code>.</p>
 </section>
 <section id="grundregeln-für-den-anfang" class="level1">
 <h1>Grundregeln für den Anfang</h1>
