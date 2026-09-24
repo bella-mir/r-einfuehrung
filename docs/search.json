@@ -70,21 +70,21 @@
     ]
   },
   {
-    "objectID": "cheatsheet.html#matrizen",
-    "href": "cheatsheet.html#matrizen",
-    "title": "Cheatsheet",
-    "section": "Matrizen",
-    "text": "Matrizen\n\n\n\n\n\n\n\nCode\nBedeutung\n\n\n\n\nmatrix(1:6, nrow = 2)\nMatrix bauen (spaltenweise; byrow = TRUE zeilenweise)\n\n\nmatrix(..., dimnames = list(zeilen, spalten))\ndirekt benennen\n\n\nrownames(m) &lt;- ... · colnames(m) &lt;- ...\nNamen setzen\n\n\nm[i, j] · m[, j] · m[i, ] · m[\"Juli\", \"TMax\"]\nauswählen\n\n\nrowMeans(m) · colMeans(m)\nMittelwert je Zeile · je Spalte\n\n\ncbind(m, neu = x) · rbind(m, neu = x)\nSpalte · Zeile anhängen\n\n\nt(m)\nZeilen und Spalten tauschen",
-    "crumbs": [
-      "Cheatsheet"
-    ]
-  },
-  {
     "objectID": "cheatsheet.html#base-r-grafik",
     "href": "cheatsheet.html#base-r-grafik",
     "title": "Cheatsheet",
     "section": "Base-R-Grafik",
     "text": "Base-R-Grafik\n\n\n\n\n\n\n\nCode\nBedeutung\n\n\n\n\nbarplot(x)\nBalken (Namen → Achsenbeschriftung)\n\n\nplot(x, type = \"b\") · plot(x, y)\nVerlauf · Streudiagramm\n\n\nhist(x, breaks = 8)\nHistogramm\n\n\nboxplot(y ~ g, data = df)\nBoxplot je Gruppe\n\n\nmain = · xlab = · ylab = · col = · pch = 19\nTitel · Achsen · Farbe · Punktsymbol\n\n\npar(mfrow = c(1, 2)) … par(mfrow = c(1, 1))\nGrafiken nebeneinander — danach zurücksetzen",
+    "crumbs": [
+      "Cheatsheet"
+    ]
+  },
+  {
+    "objectID": "cheatsheet.html#matrizen",
+    "href": "cheatsheet.html#matrizen",
+    "title": "Cheatsheet",
+    "section": "Matrizen",
+    "text": "Matrizen\n\n\n\n\n\n\n\nCode\nBedeutung\n\n\n\n\nmatrix(1:6, nrow = 2)\nMatrix bauen (spaltenweise; byrow = TRUE zeilenweise)\n\n\nmatrix(..., dimnames = list(zeilen, spalten))\ndirekt benennen\n\n\nrownames(m) &lt;- ... · colnames(m) &lt;- ...\nNamen setzen\n\n\nm[i, j] · m[, j] · m[i, ] · m[\"Juli\", \"TMax\"]\nauswählen\n\n\nrowMeans(m) · colMeans(m)\nMittelwert je Zeile · je Spalte\n\n\ncbind(m, neu = x) · rbind(m, neu = x)\nSpalte · Zeile anhängen\n\n\nt(m)\nZeilen und Spalten tauschen",
     "crumbs": [
       "Cheatsheet"
     ]
@@ -371,265 +371,364 @@
   {
     "objectID": "einheit-2.html",
     "href": "einheit-2.html",
-    "title": "Einheit 2: Daten einlesen & aufräumen",
+    "title": "Einheit 2: Datenstrukturen & Daten einlesen",
     "section": "",
     "text": "In dieser Einheit geht es vom einzelnen Vektor zur ganzen Tabelle — und von der Datei zu sauberen Daten:\nIn dieser Einheit arbeiten wir nur mit Basis-R, es werden keine Zusatzpakete gebraucht.",
     "crumbs": [
       "Einheiten",
-      "2 · Daten einlesen & aufräumen"
+      "2 · Datenstrukturen & Daten einlesen"
+    ]
+  },
+  {
+    "objectID": "einheit-2.html#was-ist-eine-matrix",
+    "href": "einheit-2.html#was-ist-eine-matrix",
+    "title": "Einheit 2: Datenstrukturen & Daten einlesen",
+    "section": "Was ist eine Matrix?",
+    "text": "Was ist eine Matrix?\nEine Matrix ist eine Sammlung von Elementen desselben Datentyps, angeordnet in Zeilen und Spalten — also zweidimensional, im Gegensatz zum eindimensionalen Vektor. Erzeugt wird sie mit matrix():\n\nmatrix(1:6, nrow = 2)                 # Standard: spaltenweise gefüllt\n\n     [,1] [,2] [,3]\n[1,]    1    3    5\n[2,]    2    4    6\n\nmatrix(1:6, nrow = 2, byrow = TRUE)   # zeilenweise gefüllt\n\n     [,1] [,2] [,3]\n[1,]    1    2    3\n[2,]    4    5    6\n\n\n\nDas erste Argument sind die Elemente.\nnrow (oder ncol) legt die Anzahl der Zeilen (Spalten) fest.\nbyrow = TRUE füllt zeilenweise; Standard ist spaltenweise.",
+    "crumbs": [
+      "Einheiten",
+      "2 · Datenstrukturen & Daten einlesen"
+    ]
+  },
+  {
+    "objectID": "einheit-2.html#eine-matrix-aus-vektoren-bauen",
+    "href": "einheit-2.html#eine-matrix-aus-vektoren-bauen",
+    "title": "Einheit 2: Datenstrukturen & Daten einlesen",
+    "section": "Eine Matrix aus Vektoren bauen",
+    "text": "Eine Matrix aus Vektoren bauen\nDie beiden Temperaturvektoren lassen sich direkt zu einer Matrix zusammenfügen: erst alle Höchstwerte, dann alle Tiefstwerte — spaltenweise gefüllt, ergibt das genau eine Spalte pro Messwert:\n\nwien_matrix &lt;- matrix(c(tmax_wien, tmin_wien), ncol = 2)\nwien_matrix\n\n     [,1] [,2]\n[1,] 20.1 10.4\n[2,] 24.1 14.3\n[3,] 26.0 16.4\n[4,] 25.7 16.0\n[5,] 20.5 11.9",
+    "crumbs": [
+      "Einheiten",
+      "2 · Datenstrukturen & Daten einlesen"
+    ]
+  },
+  {
+    "objectID": "einheit-2.html#matrizen-benennen",
+    "href": "einheit-2.html#matrizen-benennen",
+    "title": "Einheit 2: Datenstrukturen & Daten einlesen",
+    "section": "Matrizen benennen",
+    "text": "Matrizen benennen\nWie names() bei Vektoren — nur getrennt für Zeilen und Spalten:\n\ncolnames(wien_matrix) &lt;- c(\"TMax\", \"TMin\")\nrownames(wien_matrix) &lt;- monate\nwien_matrix\n\n          TMax TMin\nMai       20.1 10.4\nJuni      24.1 14.3\nJuli      26.0 16.4\nAugust    25.7 16.0\nSeptember 20.5 11.9\n\n\nAlternativ setzt man beides direkt beim Erstellen mit dimnames = list(zeilen, spalten):\n\nwien_matrix &lt;- matrix(c(tmax_wien, tmin_wien), ncol = 2,\n                      dimnames = list(monate, c(\"TMax\", \"TMin\")))",
+    "crumbs": [
+      "Einheiten",
+      "2 · Datenstrukturen & Daten einlesen"
+    ]
+  },
+  {
+    "objectID": "einheit-2.html#matrixelemente-auswählen",
+    "href": "einheit-2.html#matrixelemente-auswählen",
+    "title": "Einheit 2: Datenstrukturen & Daten einlesen",
+    "section": "Matrixelemente auswählen",
+    "text": "Matrixelemente auswählen\nWie bei Vektoren mit [ ] — aber mit zwei Angaben: [Zeile, Spalte].\n\nm[1, 2] → Element in Zeile 1, Spalte 2\nm[, 1] → alle Zeilen der 1. Spalte\nm[1, ] → alle Spalten der 1. Zeile\nstatt Nummern gehen auch Namen: m[\"Juli\", \"TMax\"]\n\n\nwien_matrix[\"Juli\", \"TMax\"]\n\n[1] 26\n\nmean(wien_matrix[, \"TMin\"])           # Ø Tiefsttemperatur, alle Monate\n\n[1] 13.8\n\nmean(wien_matrix[1:2, \"TMin\"])        # nur Mai und Juni\n\n[1] 12.35",
+    "crumbs": [
+      "Einheiten",
+      "2 · Datenstrukturen & Daten einlesen"
+    ]
+  },
+  {
+    "objectID": "einheit-2.html#zeilen--und-spaltenmittelwerte",
+    "href": "einheit-2.html#zeilen--und-spaltenmittelwerte",
+    "title": "Einheit 2: Datenstrukturen & Daten einlesen",
+    "section": "Zeilen- und Spaltenmittelwerte",
+    "text": "Zeilen- und Spaltenmittelwerte\nrowMeans() berechnet den Mittelwert jeder Zeile — hier also die Durchschnittstemperatur pro Monat (in Einheit 1 haben wir sie als tmittel_wien noch von Hand berechnet):\n\ndurchschnitt &lt;- rowMeans(wien_matrix)\ndurchschnitt\n\n      Mai      Juni      Juli    August September \n    15.25     19.20     21.20     20.85     16.20 \n\n\ncolMeans() rechnet pro Spalte — die mittlere Höchst- bzw. Tiefsttemperatur über den ganzen Zeitraum:\n\ncolMeans(wien_matrix)\n\n TMax  TMin \n23.28 13.80",
+    "crumbs": [
+      "Einheiten",
+      "2 · Datenstrukturen & Daten einlesen"
+    ]
+  },
+  {
+    "objectID": "einheit-2.html#spalten-und-zeilen-anhängen-cbind-und-rbind",
+    "href": "einheit-2.html#spalten-und-zeilen-anhängen-cbind-und-rbind",
+    "title": "Einheit 2: Datenstrukturen & Daten einlesen",
+    "section": "Spalten und Zeilen anhängen: cbind() und rbind()",
+    "text": "Spalten und Zeilen anhängen: cbind() und rbind()\ncbind() fügt spaltenweise zusammen (column bind), rbind() zeilenweise (row bind). Wir hängen die Durchschnittstemperatur als Spalte an und die Spaltenmittelwerte als Zeile:\n\nwien_erweitert &lt;- cbind(wien_matrix, Mittel = durchschnitt)\nwien_erweitert &lt;- rbind(wien_erweitert, Gesamt = colMeans(wien_erweitert))\nround(wien_erweitert, 1)\n\n          TMax TMin Mittel\nMai       20.1 10.4   15.2\nJuni      24.1 14.3   19.2\nJuli      26.0 16.4   21.2\nAugust    25.7 16.0   20.9\nSeptember 20.5 11.9   16.2\nGesamt    23.3 13.8   18.5",
+    "crumbs": [
+      "Einheiten",
+      "2 · Datenstrukturen & Daten einlesen"
+    ]
+  },
+  {
+    "objectID": "einheit-2.html#die-matrix-als-balkendiagramm",
+    "href": "einheit-2.html#die-matrix-als-balkendiagramm",
+    "title": "Einheit 2: Datenstrukturen & Daten einlesen",
+    "section": "Die Matrix als Balkendiagramm",
+    "text": "Die Matrix als Balkendiagramm\nbarplot() funktioniert auch mit einer Matrix. t() dreht sie (Zeilen ↔︎ Spalten), damit die Monate auf der x-Achse landen; beside = TRUE stellt TMax und TMin nebeneinander:\n\nbarplot(t(wien_matrix), beside = TRUE,\n        legend.text = TRUE,\n        main = \"Höchst- und Tiefsttemperaturen in Wien, Mai–September\",\n        ylab = \"°C\",\n        col  = c(\"tomato\", \"steelblue\"))\n\n\n\n\n\n\n\n\n\nÜbung\n\nWähle aus wien_matrix die Werte für Juli und August (beide Spalten) aus.\nBerechne für jeden Monat die Spanne TMax - TMin und hänge sie mit cbind() als Spalte Spanne an wien_matrix an.\n\n\n# dein Code",
+    "crumbs": [
+      "Einheiten",
+      "2 · Datenstrukturen & Daten einlesen"
     ]
   },
   {
     "objectID": "einheit-2.html#listen",
     "href": "einheit-2.html#listen",
-    "title": "Einheit 2: Daten einlesen & aufräumen",
+    "title": "Einheit 2: Datenstrukturen & Daten einlesen",
     "section": "Listen",
-    "text": "Listen\nVektoren und Matrizen enthalten nur einen Datentyp. Eine Liste kann dagegen beliebige Objekte unterschiedlichen Typs und unterschiedlicher Länge sammeln:\n\nwien_info &lt;- list(stadt           = \"Wien\",\n                  einwohner       = 2000000,\n                  bezirke         = c(\"Innere Stadt\", \"Leopoldstadt\", \"Landstraße\"),\n                  temperatur_juli = c(TMax = 26.0, TMin = 16.4))\nstr(wien_info)\n\nList of 4\n $ stadt          : chr \"Wien\"\n $ einwohner      : num 2e+06\n $ bezirke        : chr [1:3] \"Innere Stadt\" \"Leopoldstadt\" \"Landstraße\"\n $ temperatur_juli: Named num [1:2] 26 16.4\n  ..- attr(*, \"names\")= chr [1:2] \"TMax\" \"TMin\"\n\n\nEin einzelnes Element holt man mit $ oder doppelten eckigen Klammern [[ ]]:\n\nwien_info$stadt\n\n[1] \"Wien\"\n\nwien_info[[\"bezirke\"]]\n\n[1] \"Innere Stadt\" \"Leopoldstadt\" \"Landstraße\"  \n\n\nListen begegnen dir vor allem indirekt: Viele Funktionen geben ihr Ergebnis als Liste zurück, und ein Data Frame (Teil 2) ist eine Liste gleich langer Vektoren.",
+    "text": "Listen\nVektoren und Matrizen enthalten nur einen Datentyp. Eine Liste kann dagegen beliebige Objekte unterschiedlichen Typs und unterschiedlicher Länge sammeln:\n\nwien_info &lt;- list(stadt           = \"Wien\",\n                  einwohner       = 2000000,\n                  bezirke         = c(\"Innere Stadt\", \"Leopoldstadt\", \"Landstraße\"),\n                  temperatur_juli = c(TMax = 26.0, TMin = 16.4))\nstr(wien_info)\n\nList of 4\n $ stadt          : chr \"Wien\"\n $ einwohner      : num 2e+06\n $ bezirke        : chr [1:3] \"Innere Stadt\" \"Leopoldstadt\" \"Landstraße\"\n $ temperatur_juli: Named num [1:2] 26 16.4\n  ..- attr(*, \"names\")= chr [1:2] \"TMax\" \"TMin\"\n\n\nEin einzelnes Element holt man mit $ oder doppelten eckigen Klammern [[ ]]:\n\nwien_info$stadt\n\n[1] \"Wien\"\n\nwien_info[[\"bezirke\"]]\n\n[1] \"Innere Stadt\" \"Leopoldstadt\" \"Landstraße\"  \n\n\nListen begegnen dir vor allem indirekt: Viele Funktionen geben ihr Ergebnis als Liste zurück. Auch ein Data Frame ist eine Liste — eine Liste gleich langer Vektoren, einer pro Spalte.",
     "crumbs": [
       "Einheiten",
-      "2 · Daten einlesen & aufräumen"
-    ]
-  },
-  {
-    "objectID": "einheit-2.html#faktoren",
-    "href": "einheit-2.html#faktoren",
-    "title": "Einheit 2: Daten einlesen & aufräumen",
-    "section": "Faktoren",
-    "text": "Faktoren\nEin Faktor ist der Datentyp für kategoriale Variablen — Werte aus einer begrenzten Menge an Kategorien (z. B. Land, Bewertungsstufe). Zwei Arten:\n\nnominal — ohne Reihenfolge, z. B. \"Katze\", \"Hund\", \"Pferd\"\nordinal — mit Reihenfolge, z. B. \"niedrig\" &lt; \"mittel\" &lt; \"hoch\"\n\nMit factor() wird ein Text-Vektor zu einem Faktor; die vorkommenden Werte werden zu Levels. summary() zählt die Häufigkeit pro Level:\n\ntiere &lt;- factor(c(\"h\", \"k\", \"h\", \"p\", \"k\", \"h\"))\ntiere\n\n[1] h k h p k h\nLevels: h k p\n\nsummary(tiere)\n\nh k p \n3 2 1 \n\n\n\nLevels umbenennen\nDaten enthalten oft Kürzel statt lesbarer Bezeichnungen. R sortiert die Levels alphabetisch (\"h\", \"k\", \"p\") — in genau dieser Reihenfolge lassen sie sich mit levels() umbenennen:\n\nlevels(tiere) &lt;- c(\"Hund\", \"Katze\", \"Pferd\")\ntiere\n\n[1] Hund  Katze Hund  Pferd Katze Hund \nLevels: Hund Katze Pferd\n\n\n\n\nNominal vs. ordinal\nBei einem nominalen Faktor ergibt ein Größenvergleich keinen Sinn — R gibt eine Warnung und NA zurück:\n\ntiere[1] &gt; tiere[2]\n\nWarning in Ops.factor(tiere[1], tiere[2]): '&gt;' ist nicht sinnvoll für Faktoren\n\n\n[1] NA\n\n\nFür einen geordneten Faktor gibt man ordered = TRUE und die levels in der richtigen Reihenfolge an — dann funktionieren Vergleiche:\n\ntempo &lt;- factor(c(\"mittel\", \"langsam\", \"schnell\", \"mittel\"),\n                ordered = TRUE, levels = c(\"langsam\", \"mittel\", \"schnell\"))\ntempo\n\n[1] mittel  langsam schnell mittel \nLevels: langsam &lt; mittel &lt; schnell\n\ntempo[1] &gt; tempo[2]   # ist \"mittel\" schneller als \"langsam\"?\n\n[1] TRUE\n\n\n\n\nÜbung\n\nLege eine Liste kurs an mit den Elementen titel (\"R-Einführung\"), teilnehmende (eine Zahl) und themen (ein Vektor mit mindestens drei Themen). Gib das zweite Thema aus (Tipp: erst das Element holen, dann [ ]).\nKursbewertungen liegen als Text vor: bewertungen &lt;- c(\"gut\", \"sehr gut\", \"mittel\", \"gut\", \"schlecht\", \"sehr gut\", \"gut\")\n\nMache daraus einen geordneten Faktor von \"schlecht\" bis \"sehr gut\".\nZähle mit table(), wie oft jede Bewertung vorkommt. In welcher Reihenfolge stehen die Levels — und warum?\nWie viele Bewertungen sind besser als \"mittel\"? (Tipp: sum())\n\n\n\n# dein Code",
-    "crumbs": [
-      "Einheiten",
-      "2 · Daten einlesen & aufräumen"
+      "2 · Datenstrukturen & Daten einlesen"
     ]
   },
   {
     "objectID": "einheit-2.html#was-ist-ein-data-frame",
     "href": "einheit-2.html#was-ist-ein-data-frame",
-    "title": "Einheit 2: Daten einlesen & aufräumen",
+    "title": "Einheit 2: Datenstrukturen & Daten einlesen",
     "section": "Was ist ein Data Frame?",
     "text": "Was ist ein Data Frame?\nIn einer Matrix haben alle Elemente denselben Datentyp. Reale Datensätze mischen aber fast immer Typen: ein Name (character), ein Alter (numeric), eine Ja/Nein-Angabe (logical) …\nEin Data Frame speichert genau das: Variablen als Spalten, Beobachtungen als Zeilen — jede Spalte mit ihrem eigenen Datentyp. Das entspricht einer Tabelle, wie man sie aus Excel kennt.\nR bringt einige Datensätze mit, z. B. mtcars (Kenndaten von 32 Automodellen, 1974):\n\nhead(mtcars)\n\n                   mpg cyl disp  hp drat    wt  qsec vs am gear carb\nMazda RX4         21.0   6  160 110 3.90 2.620 16.46  0  1    4    4\nMazda RX4 Wag     21.0   6  160 110 3.90 2.875 17.02  0  1    4    4\nDatsun 710        22.8   4  108  93 3.85 2.320 18.61  1  1    4    1\nHornet 4 Drive    21.4   6  258 110 3.08 3.215 19.44  1  0    3    1\nHornet Sportabout 18.7   8  360 175 3.15 3.440 17.02  0  0    3    2\nValiant           18.1   6  225 105 2.76 3.460 20.22  1  0    3    1",
     "crumbs": [
       "Einheiten",
-      "2 · Daten einlesen & aufräumen"
+      "2 · Datenstrukturen & Daten einlesen"
     ]
   },
   {
     "objectID": "einheit-2.html#erste-einblicke-in-einen-datensatz",
     "href": "einheit-2.html#erste-einblicke-in-einen-datensatz",
-    "title": "Einheit 2: Daten einlesen & aufräumen",
+    "title": "Einheit 2: Datenstrukturen & Daten einlesen",
     "section": "Erste Einblicke in einen Datensatz",
     "text": "Erste Einblicke in einen Datensatz\n\nhead() / tail() — die ersten bzw. letzten Zeilen\nstr() — Anzahl Zeilen und Spalten, Datentypen, Beispielwerte\nsummary() — Kennzahlen pro Spalte (Minimum, Mittelwert, Maximum …)\nnrow() / ncol() — Anzahl Zeilen bzw. Spalten\n\nstr() ist meist der erste Befehl bei einem unbekannten Datensatz:\n\nstr(mtcars)\n\n'data.frame':   32 obs. of  11 variables:\n $ mpg : num  21 21 22.8 21.4 18.7 18.1 14.3 24.4 22.8 19.2 ...\n $ cyl : num  6 6 4 6 8 6 8 4 4 6 ...\n $ disp: num  160 160 108 258 360 ...\n $ hp  : num  110 110 93 110 175 105 245 62 95 123 ...\n $ drat: num  3.9 3.9 3.85 3.08 3.15 2.76 3.21 3.69 3.92 3.92 ...\n $ wt  : num  2.62 2.88 2.32 3.21 3.44 ...\n $ qsec: num  16.5 17 18.6 19.4 17 ...\n $ vs  : num  0 0 1 1 0 1 0 1 1 1 ...\n $ am  : num  1 1 1 0 0 0 0 0 0 0 ...\n $ gear: num  4 4 4 3 3 3 3 4 4 4 ...\n $ carb: num  4 4 1 1 2 1 4 2 2 4 ...\n\nsummary(mtcars)\n\n      mpg             cyl             disp             hp       \n Min.   :10.40   Min.   :4.000   Min.   : 71.1   Min.   : 52.0  \n 1st Qu.:15.43   1st Qu.:4.000   1st Qu.:120.8   1st Qu.: 96.5  \n Median :19.20   Median :6.000   Median :196.3   Median :123.0  \n Mean   :20.09   Mean   :6.188   Mean   :230.7   Mean   :146.7  \n 3rd Qu.:22.80   3rd Qu.:8.000   3rd Qu.:326.0   3rd Qu.:180.0  \n Max.   :33.90   Max.   :8.000   Max.   :472.0   Max.   :335.0  \n      drat             wt             qsec             vs        \n Min.   :2.760   Min.   :1.513   Min.   :14.50   Min.   :0.0000  \n 1st Qu.:3.080   1st Qu.:2.581   1st Qu.:16.89   1st Qu.:0.0000  \n Median :3.695   Median :3.325   Median :17.71   Median :0.0000  \n Mean   :3.597   Mean   :3.217   Mean   :17.85   Mean   :0.4375  \n 3rd Qu.:3.920   3rd Qu.:3.610   3rd Qu.:18.90   3rd Qu.:1.0000  \n Max.   :4.930   Max.   :5.424   Max.   :22.90   Max.   :1.0000  \n       am              gear            carb      \n Min.   :0.0000   Min.   :3.000   Min.   :1.000  \n 1st Qu.:0.0000   1st Qu.:3.000   1st Qu.:2.000  \n Median :0.0000   Median :4.000   Median :2.000  \n Mean   :0.4062   Mean   :3.688   Mean   :2.812  \n 3rd Qu.:1.0000   3rd Qu.:4.000   3rd Qu.:4.000  \n Max.   :1.0000   Max.   :5.000   Max.   :8.000",
     "crumbs": [
       "Einheiten",
-      "2 · Daten einlesen & aufräumen"
+      "2 · Datenstrukturen & Daten einlesen"
     ]
   },
   {
     "objectID": "einheit-2.html#einen-eigenen-data-frame-erstellen",
     "href": "einheit-2.html#einen-eigenen-data-frame-erstellen",
-    "title": "Einheit 2: Daten einlesen & aufräumen",
+    "title": "Einheit 2: Datenstrukturen & Daten einlesen",
     "section": "Einen eigenen Data Frame erstellen",
     "text": "Einen eigenen Data Frame erstellen\nWir bauen einen Data Frame mit den acht Planeten unseres Sonnensystems: Typ, Durchmesser (relativ zur Erde), Rotationsdauer (in Erdtagen; negativ = dreht sich rückwärts) und ob der Planet Ringe hat:\n\nname        &lt;- c(\"Merkur\", \"Venus\", \"Erde\", \"Mars\", \"Jupiter\", \"Saturn\", \"Uranus\", \"Neptun\")\ntyp         &lt;- c(\"Gesteinsplanet\", \"Gesteinsplanet\", \"Gesteinsplanet\", \"Gesteinsplanet\",\n                 \"Gasriese\", \"Gasriese\", \"Eisriese\", \"Eisriese\")\ndurchmesser &lt;- c(0.382, 0.949, 1, 0.532, 11.209, 9.449, 4.007, 3.883)\nrotation    &lt;- c(58.64, -243.02, 1, 1.03, 0.41, 0.43, -0.72, 0.67)\nhat_ringe   &lt;- c(FALSE, FALSE, FALSE, FALSE, TRUE, TRUE, TRUE, TRUE)\n\ndata.frame() fügt gleich lange Vektoren zu einem Data Frame zusammen — jeder Vektor wird eine Spalte:\n\nplaneten &lt;- data.frame(name, typ, durchmesser, rotation, hat_ringe)\nplaneten\n\n     name            typ durchmesser rotation hat_ringe\n1  Merkur Gesteinsplanet       0.382    58.64     FALSE\n2   Venus Gesteinsplanet       0.949  -243.02     FALSE\n3    Erde Gesteinsplanet       1.000     1.00     FALSE\n4    Mars Gesteinsplanet       0.532     1.03     FALSE\n5 Jupiter       Gasriese      11.209     0.41      TRUE\n6  Saturn       Gasriese       9.449     0.43      TRUE\n7  Uranus       Eisriese       4.007    -0.72      TRUE\n8  Neptun       Eisriese       3.883     0.67      TRUE\n\nstr(planeten)\n\n'data.frame':   8 obs. of  5 variables:\n $ name       : chr  \"Merkur\" \"Venus\" \"Erde\" \"Mars\" ...\n $ typ        : chr  \"Gesteinsplanet\" \"Gesteinsplanet\" \"Gesteinsplanet\" \"Gesteinsplanet\" ...\n $ durchmesser: num  0.382 0.949 1 0.532 11.209 ...\n $ rotation   : num  58.64 -243.02 1 1.03 0.41 ...\n $ hat_ringe  : logi  FALSE FALSE FALSE FALSE TRUE TRUE ...",
     "crumbs": [
       "Einheiten",
-      "2 · Daten einlesen & aufräumen"
+      "2 · Datenstrukturen & Daten einlesen"
     ]
   },
   {
     "objectID": "einheit-2.html#elemente-und-spalten-auswählen",
     "href": "einheit-2.html#elemente-und-spalten-auswählen",
-    "title": "Einheit 2: Daten einlesen & aufräumen",
+    "title": "Einheit 2: Datenstrukturen & Daten einlesen",
     "section": "Elemente und Spalten auswählen",
     "text": "Elemente und Spalten auswählen\nWie bei Matrizen: [Zeile, Spalte]. Statt Nummern lassen sich Spaltennamen verwenden — das ist besser lesbar:\n\nplaneten[1, 3]          # Zeile 1, Spalte 3: Durchmesser von Merkur\n\n[1] 0.382\n\nplaneten[4, ]           # ganze Zeile 4: alle Daten zu Mars\n\n  name            typ durchmesser rotation hat_ringe\n4 Mars Gesteinsplanet       0.532     1.03     FALSE\n\nplaneten[1:3, \"typ\"]    # Zeilen 1-3 der Spalte \"typ\"\n\n[1] \"Gesteinsplanet\" \"Gesteinsplanet\" \"Gesteinsplanet\"\n\n\nEine ganze Spalte bekommt man kürzer mit dem Dollarzeichen $ — das Ergebnis ist ein Vektor:\n\nplaneten$durchmesser\n\n[1]  0.382  0.949  1.000  0.532 11.209  9.449  4.007  3.883\n\n\nEin Minuszeichen vor der Nummer bedeutet „alles außer”:\n\nplaneten[, -1]        # alle Spalten außer der ersten\n\n             typ durchmesser rotation hat_ringe\n1 Gesteinsplanet       0.382    58.64     FALSE\n2 Gesteinsplanet       0.949  -243.02     FALSE\n3 Gesteinsplanet       1.000     1.00     FALSE\n4 Gesteinsplanet       0.532     1.03     FALSE\n5       Gasriese      11.209     0.41      TRUE\n6       Gasriese       9.449     0.43      TRUE\n7       Eisriese       4.007    -0.72      TRUE\n8       Eisriese       3.883     0.67      TRUE\n\nplaneten[-(1:4), ]    # alle Zeilen außer 1–4\n\n     name      typ durchmesser rotation hat_ringe\n5 Jupiter Gasriese      11.209     0.41      TRUE\n6  Saturn Gasriese       9.449     0.43      TRUE\n7  Uranus Eisriese       4.007    -0.72      TRUE\n8  Neptun Eisriese       3.883     0.67      TRUE",
     "crumbs": [
       "Einheiten",
-      "2 · Daten einlesen & aufräumen"
+      "2 · Datenstrukturen & Daten einlesen"
     ]
   },
   {
     "objectID": "einheit-2.html#kategorien-ansehen-und-zählen-unique-table",
     "href": "einheit-2.html#kategorien-ansehen-und-zählen-unique-table",
-    "title": "Einheit 2: Daten einlesen & aufräumen",
+    "title": "Einheit 2: Datenstrukturen & Daten einlesen",
     "section": "Kategorien ansehen und zählen: unique(), table()",
-    "text": "Kategorien ansehen und zählen: unique(), table()\nunique() zeigt, welche verschiedenen Werte in einer Spalte vorkommen, table() zählt sie:\n\nunique(planeten$typ)\n\n[1] \"Gesteinsplanet\" \"Gasriese\"       \"Eisriese\"      \n\ntable(planeten$typ)\n\n\n      Eisriese       Gasriese Gesteinsplanet \n             2              2              4 \n\n\nSoll die Spalte als Kategorie behandelt werden, macht man sie zum Faktor (Teil 1) — z. B. um eine sinnvolle Reihenfolge festzulegen statt der alphabetischen:\n\nplaneten$typ &lt;- factor(planeten$typ,\n                       levels = c(\"Gesteinsplanet\", \"Gasriese\", \"Eisriese\"))\ntable(planeten$typ)\n\n\nGesteinsplanet       Gasriese       Eisriese \n             4              2              2",
+    "text": "Kategorien ansehen und zählen: unique(), table()\nunique() zeigt, welche verschiedenen Werte in einer Spalte vorkommen, table() zählt sie:\n\nunique(planeten$typ)\n\n[1] \"Gesteinsplanet\" \"Gasriese\"       \"Eisriese\"      \n\ntable(planeten$typ)\n\n\n      Eisriese       Gasriese Gesteinsplanet \n             2              2              4 \n\n\nSpalten mit Kategorien wie typ behandelt man in R am besten als Faktor — mehr dazu in Teil 3.",
     "crumbs": [
       "Einheiten",
-      "2 · Daten einlesen & aufräumen"
+      "2 · Datenstrukturen & Daten einlesen"
     ]
   },
   {
     "objectID": "einheit-2.html#zeilen-filtern",
     "href": "einheit-2.html#zeilen-filtern",
-    "title": "Einheit 2: Daten einlesen & aufräumen",
+    "title": "Einheit 2: Datenstrukturen & Daten einlesen",
     "section": "Zeilen filtern",
     "text": "Zeilen filtern\nEin logischer Vektor in der Zeilenposition wählt die Zeilen aus, bei denen TRUE steht:\n\nplaneten[planeten$hat_ringe, ]           # nur Planeten mit Ringen\n\n     name      typ durchmesser rotation hat_ringe\n5 Jupiter Gasriese      11.209     0.41      TRUE\n6  Saturn Gasriese       9.449     0.43      TRUE\n7  Uranus Eisriese       4.007    -0.72      TRUE\n8  Neptun Eisriese       3.883     0.67      TRUE\n\nplaneten[planeten$durchmesser &lt; 1, ]     # nur Planeten kleiner als die Erde\n\n    name            typ durchmesser rotation hat_ringe\n1 Merkur Gesteinsplanet       0.382    58.64     FALSE\n2  Venus Gesteinsplanet       0.949  -243.02     FALSE\n4   Mars Gesteinsplanet       0.532     1.03     FALSE\n\n\nsubset() ist die kürzere Schreibweise — man kann die Spaltennamen direkt verwenden:\n\nsubset(planeten, durchmesser &lt; 1)\n\n    name            typ durchmesser rotation hat_ringe\n1 Merkur Gesteinsplanet       0.382    58.64     FALSE\n2  Venus Gesteinsplanet       0.949  -243.02     FALSE\n4   Mars Gesteinsplanet       0.532     1.03     FALSE",
     "crumbs": [
       "Einheiten",
-      "2 · Daten einlesen & aufräumen"
+      "2 · Datenstrukturen & Daten einlesen"
     ]
   },
   {
     "objectID": "einheit-2.html#sortieren-mit-order",
     "href": "einheit-2.html#sortieren-mit-order",
-    "title": "Einheit 2: Daten einlesen & aufräumen",
+    "title": "Einheit 2: Datenstrukturen & Daten einlesen",
     "section": "Sortieren mit order()",
-    "text": "Sortieren mit order()\nsort() sortiert einen Vektor. Um einen Data Frame zu sortieren, braucht man order(): Es liefert nicht die Werte, sondern die Positionen in sortierter Reihenfolge.\n\npreise &lt;- c(100, 10, 1000)\nsort(preise)    # die sortierten Werte\n\n[1]   10  100 1000\n\norder(preise)   # 10 steht an Position 2, 100 an Position 1, 1000 an Position 3\n\n[1] 2 1 3\n\n\nDiese Positionen als Zeilenindex sortieren den ganzen Data Frame:\n\nplaneten[order(planeten$durchmesser), ]                    # aufsteigend\n\n     name            typ durchmesser rotation hat_ringe\n1  Merkur Gesteinsplanet       0.382    58.64     FALSE\n4    Mars Gesteinsplanet       0.532     1.03     FALSE\n2   Venus Gesteinsplanet       0.949  -243.02     FALSE\n3    Erde Gesteinsplanet       1.000     1.00     FALSE\n8  Neptun       Eisriese       3.883     0.67      TRUE\n7  Uranus       Eisriese       4.007    -0.72      TRUE\n6  Saturn       Gasriese       9.449     0.43      TRUE\n5 Jupiter       Gasriese      11.209     0.41      TRUE\n\nplaneten[order(planeten$durchmesser, decreasing = TRUE), ] # absteigend\n\n     name            typ durchmesser rotation hat_ringe\n5 Jupiter       Gasriese      11.209     0.41      TRUE\n6  Saturn       Gasriese       9.449     0.43      TRUE\n7  Uranus       Eisriese       4.007    -0.72      TRUE\n8  Neptun       Eisriese       3.883     0.67      TRUE\n3    Erde Gesteinsplanet       1.000     1.00     FALSE\n2   Venus Gesteinsplanet       0.949  -243.02     FALSE\n4    Mars Gesteinsplanet       0.532     1.03     FALSE\n1  Merkur Gesteinsplanet       0.382    58.64     FALSE\n\n\n\nÜbung\n\nWie viele Planeten haben einen größeren Durchmesser als die Erde? (Tipp: sum())\nZeige nur name und rotation der Planeten, die sich rückwärts drehen.\n\n\n# dein Code",
+    "text": "Sortieren mit order()\nsort() sortiert einen Vektor. Um einen Data Frame zu sortieren, braucht man order(): Es liefert nicht die Werte, sondern die Positionen in sortierter Reihenfolge.\n\npreise &lt;- c(100, 10, 1000)\nsort(preise)    # die sortierten Werte\n\n[1]   10  100 1000\n\norder(preise)   # 10 steht an Position 2, 100 an Position 1, 1000 an Position 3\n\n[1] 2 1 3\n\n\nDiese Positionen als Zeilenindex sortieren den ganzen Data Frame:\n\nplaneten[order(planeten$durchmesser), ]                    # aufsteigend\n\n     name            typ durchmesser rotation hat_ringe\n1  Merkur Gesteinsplanet       0.382    58.64     FALSE\n4    Mars Gesteinsplanet       0.532     1.03     FALSE\n2   Venus Gesteinsplanet       0.949  -243.02     FALSE\n3    Erde Gesteinsplanet       1.000     1.00     FALSE\n8  Neptun       Eisriese       3.883     0.67      TRUE\n7  Uranus       Eisriese       4.007    -0.72      TRUE\n6  Saturn       Gasriese       9.449     0.43      TRUE\n5 Jupiter       Gasriese      11.209     0.41      TRUE\n\nplaneten[order(planeten$durchmesser, decreasing = TRUE), ] # absteigend\n\n     name            typ durchmesser rotation hat_ringe\n5 Jupiter       Gasriese      11.209     0.41      TRUE\n6  Saturn       Gasriese       9.449     0.43      TRUE\n7  Uranus       Eisriese       4.007    -0.72      TRUE\n8  Neptun       Eisriese       3.883     0.67      TRUE\n3    Erde Gesteinsplanet       1.000     1.00     FALSE\n2   Venus Gesteinsplanet       0.949  -243.02     FALSE\n4    Mars Gesteinsplanet       0.532     1.03     FALSE\n1  Merkur Gesteinsplanet       0.382    58.64     FALSE\n\n\n\nÜbung\n\nLege eine Liste kurs an mit den Elementen titel (\"R-Einführung\"), teilnehmende (eine Zahl) und themen (ein Vektor mit mindestens drei Themen). Gib das zweite Thema aus (Tipp: erst das Element holen, dann [ ]).\nWie viele Planeten haben einen größeren Durchmesser als die Erde? (Tipp: sum())\nZeige nur name und rotation der Planeten, die sich rückwärts drehen.\n\n\n# dein Code",
     "crumbs": [
       "Einheiten",
-      "2 · Daten einlesen & aufräumen"
+      "2 · Datenstrukturen & Daten einlesen"
+    ]
+  },
+  {
+    "objectID": "einheit-2.html#levels-umbenennen",
+    "href": "einheit-2.html#levels-umbenennen",
+    "title": "Einheit 2: Datenstrukturen & Daten einlesen",
+    "section": "Levels umbenennen",
+    "text": "Levels umbenennen\nDaten enthalten oft Kürzel statt lesbarer Bezeichnungen. R sortiert die Levels alphabetisch (\"h\", \"k\", \"p\") — in genau dieser Reihenfolge lassen sie sich mit levels() umbenennen:\n\nlevels(tiere) &lt;- c(\"Hund\", \"Katze\", \"Pferd\")\ntiere\n\n[1] Hund  Katze Hund  Pferd Katze Hund \nLevels: Hund Katze Pferd",
+    "crumbs": [
+      "Einheiten",
+      "2 · Datenstrukturen & Daten einlesen"
+    ]
+  },
+  {
+    "objectID": "einheit-2.html#nominal-vs.-ordinal",
+    "href": "einheit-2.html#nominal-vs.-ordinal",
+    "title": "Einheit 2: Datenstrukturen & Daten einlesen",
+    "section": "Nominal vs. ordinal",
+    "text": "Nominal vs. ordinal\nBei einem nominalen Faktor ergibt ein Größenvergleich keinen Sinn — R gibt eine Warnung und NA zurück:\n\ntiere[1] &gt; tiere[2]\n\nWarning in Ops.factor(tiere[1], tiere[2]): '&gt;' ist nicht sinnvoll für Faktoren\n\n\n[1] NA\n\n\nFür einen geordneten Faktor gibt man ordered = TRUE und die levels in der richtigen Reihenfolge an — dann funktionieren Vergleiche:\n\ntempo &lt;- factor(c(\"mittel\", \"langsam\", \"schnell\", \"mittel\"),\n                ordered = TRUE, levels = c(\"langsam\", \"mittel\", \"schnell\"))\ntempo\n\n[1] mittel  langsam schnell mittel \nLevels: langsam &lt; mittel &lt; schnell\n\ntempo[1] &gt; tempo[2]   # ist \"mittel\" schneller als \"langsam\"?\n\n[1] TRUE",
+    "crumbs": [
+      "Einheiten",
+      "2 · Datenstrukturen & Daten einlesen"
+    ]
+  },
+  {
+    "objectID": "einheit-2.html#faktoren-in-einem-data-frame",
+    "href": "einheit-2.html#faktoren-in-einem-data-frame",
+    "title": "Einheit 2: Datenstrukturen & Daten einlesen",
+    "section": "Faktoren in einem Data Frame",
+    "text": "Faktoren in einem Data Frame\nIn Tabellen sind Faktoren vor allem für Spalten mit Kategorien nützlich. table() sortiert Text alphabetisch — mit einem Faktor legt man stattdessen eine sinnvolle Reihenfolge fest:\n\nplaneten$typ &lt;- factor(planeten$typ,\n                       levels = c(\"Gesteinsplanet\", \"Gasriese\", \"Eisriese\"))\ntable(planeten$typ)\n\n\nGesteinsplanet       Gasriese       Eisriese \n             4              2              2 \n\n\n\nÜbung\nKursbewertungen liegen als Text vor: bewertungen &lt;- c(\"gut\", \"sehr gut\", \"mittel\", \"gut\", \"schlecht\", \"sehr gut\", \"gut\")\n\nMache daraus einen geordneten Faktor von \"schlecht\" bis \"sehr gut\".\nZähle mit table(), wie oft jede Bewertung vorkommt. In welcher Reihenfolge stehen die Levels — und warum?\nWie viele Bewertungen sind besser als \"mittel\"? (Tipp: sum())\n\n\n# dein Code",
+    "crumbs": [
+      "Einheiten",
+      "2 · Datenstrukturen & Daten einlesen"
     ]
   },
   {
     "objectID": "einheit-2.html#csv-einlesen-mit-read.csv",
     "href": "einheit-2.html#csv-einlesen-mit-read.csv",
-    "title": "Einheit 2: Daten einlesen & aufräumen",
+    "title": "Einheit 2: Datenstrukturen & Daten einlesen",
     "section": "CSV einlesen mit read.csv()",
     "text": "CSV einlesen mit read.csv()\nread.csv() liest eine CSV-Datei und gibt einen Data Frame zurück:\n\nmitarbeitende &lt;- read.csv(\"data/raw/mitarbeitende.csv\")\nteams         &lt;- read.csv(\"data/raw/teams.csv\")\n\nNach dem Einlesen immer prüfen, ob Spaltenzahl und Datentypen stimmen:\n\nstr(mitarbeitende)\n\n'data.frame':   22 obs. of  7 variables:\n $ id         : chr  \"M001\" \"M002\" \"M003\" \"M004\" ...\n $ name       : chr  \"Anna\" \"Bertram\" \"Charlotte\" \"Dennis\" ...\n $ team       : chr  \"Team_C\" \"Team_A\" \"Team_A\" \"Team_A\" ...\n $ land       : chr  \"AT\" \"FR\" \"FR\" \"FR\" ...\n $ geschlecht : chr  \"w\" \"m\" \"w\" \"m\" ...\n $ plusstunden: num  16.5 44.4 1.8 33.7 13.2 9.6 57.4 21.5 43.8 17.6 ...\n $ projekte   : int  4 9 4 12 10 7 6 6 9 11 ...\n\nteams\n\n    team region\n1 Team_A   Nord\n2 Team_B   Sued\n3 Team_C    Ost\n4 Team_D   West\n\n\nLeere Felder in einer Zahlenspalte werden automatisch zu NA — bei Vera fehlen die Plusstunden:\n\nmitarbeitende[is.na(mitarbeitende$plusstunden), ]\n\n     id name   team land geschlecht plusstunden projekte\n22 M022 Vera Team_B   DE          w          NA        4",
     "crumbs": [
       "Einheiten",
-      "2 · Daten einlesen & aufräumen"
+      "2 · Datenstrukturen & Daten einlesen"
     ]
   },
   {
     "objectID": "einheit-2.html#deutsche-csv-dateien-read.csv2",
     "href": "einheit-2.html#deutsche-csv-dateien-read.csv2",
-    "title": "Einheit 2: Daten einlesen & aufräumen",
+    "title": "Einheit 2: Datenstrukturen & Daten einlesen",
     "section": "Deutsche CSV-Dateien: read.csv2()",
     "text": "Deutsche CSV-Dateien: read.csv2()\nread.csv() erwartet , als Trennzeichen und . als Dezimalzeichen. Excel im deutschsprachigen Raum speichert CSV dagegen oft mit ; als Trennzeichen und , als Dezimalzeichen. Dafür gibt es read.csv2():\n\nread.csv2(\"data/raw/datei.csv\")                       # ; als Trenner, , als Dezimalzeichen\nread.csv(\"data/raw/datei.csv\", sep = \";\", dec = \",\")  # gleichwertig, explizit\n\nWeitere nützliche Argumente:\n\nskip = 3 — die ersten 3 Zeilen überspringen (z. B. Info-Zeilen über der Tabelle)\nheader = FALSE — wenn die erste Zeile keine Spaltennamen enthält\nna.strings = c(\"\", \"NA\", \"-\") — welche Einträge als fehlend (NA) gelten sollen\nfileEncoding = \"UTF-8\" (oder \"latin1\") — bei falsch dargestellten Umlauten",
     "crumbs": [
       "Einheiten",
-      "2 · Daten einlesen & aufräumen"
+      "2 · Datenstrukturen & Daten einlesen"
     ]
   },
   {
     "objectID": "einheit-2.html#andere-dateiformate",
     "href": "einheit-2.html#andere-dateiformate",
-    "title": "Einheit 2: Daten einlesen & aufräumen",
+    "title": "Einheit 2: Datenstrukturen & Daten einlesen",
     "section": "Andere Dateiformate",
     "text": "Andere Dateiformate\n\n\n\nFormat\nFunktion\nPaket\n\n\n\n\nExcel (.xlsx, .xls)\nread_excel(\"datei.xlsx\")\nreadxl\n\n\nCSV, schneller & strenger\nread_csv(\"datei.csv\")\nreadr\n\n\nR-eigenes Format (.rds)\nreadRDS(\"datei.rds\")\nBasis-R",
     "crumbs": [
       "Einheiten",
-      "2 · Daten einlesen & aufräumen"
+      "2 · Datenstrukturen & Daten einlesen"
     ]
   },
   {
     "objectID": "einheit-2.html#die-rohdatei-ansehen",
     "href": "einheit-2.html#die-rohdatei-ansehen",
-    "title": "Einheit 2: Daten einlesen & aufräumen",
+    "title": "Einheit 2: Datenstrukturen & Daten einlesen",
     "section": "Die Rohdatei ansehen",
     "text": "Die Rohdatei ansehen\nWir lesen zunächst ohne Kopfzeile ein (header = FALSE), um zu sehen, was in der Datei steht. Weil in jeder Spalte auch Text vorkommt, sind alle Spalten character:\n\nroh &lt;- read.csv2(\"data/raw/bezirke_roh.csv\", header = FALSE)\nroh\n\n                               V1           V2        V3                  V4\n1             Export Bezirksdaten                                           \n2  Quelle: Beispielstatistik Wien                                           \n3               Stand: Maerz 2026                                           \n4                                                                           \n5                   Bezirk Nummer  Bezirk Name Haushalte Mittleres Einkommen\n6                               1 Innere Stadt      9800               52000\n7                               2 Leopoldstadt     54000               38500\n8                               3  Landstrasse     46000               41200\n9                               4       Wieden     16000               49800\n10                              5   Margareten     30000               36400\n11                              6    Mariahilf     15000               44700\n12                              7       Neubau     16000               47300\n13                              8   Josefstadt     12000               50100",
     "crumbs": [
       "Einheiten",
-      "2 · Daten einlesen & aufräumen"
+      "2 · Datenstrukturen & Daten einlesen"
     ]
   },
   {
     "objectID": "einheit-2.html#kopfzeile-setzen-und-info-zeilen-entfernen",
     "href": "einheit-2.html#kopfzeile-setzen-und-info-zeilen-entfernen",
-    "title": "Einheit 2: Daten einlesen & aufräumen",
+    "title": "Einheit 2: Datenstrukturen & Daten einlesen",
     "section": "Kopfzeile setzen und Info-Zeilen entfernen",
     "text": "Kopfzeile setzen und Info-Zeilen entfernen\nDie echten Spaltennamen stehen in Zeile 5. Wir machen sie zu Spaltennamen und entfernen dann die ersten fünf Zeilen. Das Ergebnis speichern wir unter einem sprechenden Namen:\n\nnames(roh) &lt;- as.character(roh[5, ])   # Zeile 5 wird zur Kopfzeile\nbezirke &lt;- roh[-(1:5), ]               # Zeilen 1–5 entfernen\nrownames(bezirke) &lt;- NULL              # Zeilennummerierung zurücksetzen\nbezirke\n\n  Bezirk Nummer  Bezirk Name Haushalte Mittleres Einkommen\n1             1 Innere Stadt      9800               52000\n2             2 Leopoldstadt     54000               38500\n3             3  Landstrasse     46000               41200\n4             4       Wieden     16000               49800\n5             5   Margareten     30000               36400\n6             6    Mariahilf     15000               44700\n7             7       Neubau     16000               47300\n8             8   Josefstadt     12000               50100",
     "crumbs": [
       "Einheiten",
-      "2 · Daten einlesen & aufräumen"
+      "2 · Datenstrukturen & Daten einlesen"
     ]
   },
   {
     "objectID": "einheit-2.html#spaltennamen-säubern-gsub-und-tolower",
     "href": "einheit-2.html#spaltennamen-säubern-gsub-und-tolower",
-    "title": "Einheit 2: Daten einlesen & aufräumen",
+    "title": "Einheit 2: Datenstrukturen & Daten einlesen",
     "section": "Spaltennamen säubern: gsub() und tolower()",
     "text": "Spaltennamen säubern: gsub() und tolower()\nRohdaten halten sich selten an die Namensregeln aus Einheit 1. gsub(muster, ersatz, text) ist Suchen-und-Ersetzen: Wir tauschen Leerzeichen gegen Unterstriche — dann funktioniert $ ohne Backticks. tolower() macht alles klein, damit die Namen snake_case sind:\n\nnames(bezirke)\n\n[1] \"Bezirk Nummer\"       \"Bezirk Name\"         \"Haushalte\"          \n[4] \"Mittleres Einkommen\"\n\nnames(bezirke) &lt;- tolower(gsub(\" \", \"_\", names(bezirke)))\nnames(bezirke)\n\n[1] \"bezirk_nummer\"       \"bezirk_name\"         \"haushalte\"          \n[4] \"mittleres_einkommen\"",
     "crumbs": [
       "Einheiten",
-      "2 · Daten einlesen & aufräumen"
+      "2 · Datenstrukturen & Daten einlesen"
     ]
   },
   {
     "objectID": "einheit-2.html#datentypen-reparieren-as.numeric-lapply",
     "href": "einheit-2.html#datentypen-reparieren-as.numeric-lapply",
-    "title": "Einheit 2: Daten einlesen & aufräumen",
+    "title": "Einheit 2: Datenstrukturen & Daten einlesen",
     "section": "Datentypen reparieren: as.numeric() & lapply()",
     "text": "Datentypen reparieren: as.numeric() & lapply()\nDie Zahlenspalten sind noch Text (chr). Für eine Spalte ginge das mit bezirke$haushalte &lt;- as.numeric(bezirke$haushalte). Für mehrere Spalten auf einmal nimmt man lapply(): Es wendet eine Funktion auf jede Spalte an und gibt die Ergebnisse als Liste zurück, die wir direkt in die Spalten zurückschreiben:\n\nzahl_spalten &lt;- c(\"bezirk_nummer\", \"haushalte\", \"mittleres_einkommen\")\nbezirke[zahl_spalten] &lt;- lapply(bezirke[zahl_spalten], as.numeric)\n\nstr(bezirke)\n\n'data.frame':   8 obs. of  4 variables:\n $ bezirk_nummer      : num  1 2 3 4 5 6 7 8\n $ bezirk_name        : chr  \"Innere Stadt\" \"Leopoldstadt\" \"Landstrasse\" \"Wieden\" ...\n $ haushalte          : num  9800 54000 46000 16000 30000 15000 16000 12000\n $ mittleres_einkommen: num  52000 38500 41200 49800 36400 44700 47300 50100",
     "crumbs": [
       "Einheiten",
-      "2 · Daten einlesen & aufräumen"
+      "2 · Datenstrukturen & Daten einlesen"
     ]
   },
   {
     "objectID": "einheit-2.html#der-kurze-weg-skip-4",
     "href": "einheit-2.html#der-kurze-weg-skip-4",
-    "title": "Einheit 2: Daten einlesen & aufräumen",
+    "title": "Einheit 2: Datenstrukturen & Daten einlesen",
     "section": "Der kurze Weg: skip = 4",
     "text": "Der kurze Weg: skip = 4\nDer Weg oben zeigt, was beim Aufräumen passiert. In der Praxis erledigt skip = 4 Kopfzeile und Datentypen in einem Schritt: Die ersten vier Zeilen werden übersprungen, Zeile 5 wird Kopfzeile, und R erkennt die Zahlenspalten selbst. Leerzeichen in Spaltennamen ersetzt R dabei durch Punkte:\n\nstr(read.csv2(\"data/raw/bezirke_roh.csv\", skip = 4))\n\n'data.frame':   8 obs. of  4 variables:\n $ Bezirk.Nummer      : int  1 2 3 4 5 6 7 8\n $ Bezirk.Name        : chr  \"Innere Stadt\" \"Leopoldstadt\" \"Landstrasse\" \"Wieden\" ...\n $ Haushalte          : int  9800 54000 46000 16000 30000 15000 16000 12000\n $ Mittleres.Einkommen: int  52000 38500 41200 49800 36400 44700 47300 50100",
     "crumbs": [
       "Einheiten",
-      "2 · Daten einlesen & aufräumen"
+      "2 · Datenstrukturen & Daten einlesen"
     ]
   },
   {
     "objectID": "einheit-2.html#text-zusammensetzen-und-zerlegen-paste-substr-trimws",
     "href": "einheit-2.html#text-zusammensetzen-und-zerlegen-paste-substr-trimws",
-    "title": "Einheit 2: Daten einlesen & aufräumen",
+    "title": "Einheit 2: Datenstrukturen & Daten einlesen",
     "section": "Text zusammensetzen und zerlegen: paste(), substr(), trimws()",
     "text": "Text zusammensetzen und zerlegen: paste(), substr(), trimws()\npaste() verbindet Textstücke mit einem Leerzeichen, paste0() ohne Trennzeichen:\n\npaste(\"AT\", \"13\", \"01\")     # \"AT 13 01\"\n\n[1] \"AT 13 01\"\n\npaste0(\"AT\", \"13\", \"01\")    # \"AT1301\"\n\n[1] \"AT1301\"\n\nbezirke$label &lt;- paste0(bezirke$bezirk_nummer, \". \", bezirke$bezirk_name)\nhead(bezirke$label)\n\n[1] \"1. Innere Stadt\" \"2. Leopoldstadt\" \"3. Landstrasse\"  \"4. Wieden\"      \n[5] \"5. Margareten\"   \"6. Mariahilf\"   \n\n\nsubstr(text, start, stop) schneidet Zeichen nach Position heraus — nützlich, um kombinierte Codes zu trennen:\n\ncodes &lt;- c(\"AT130\", \"AT127\", \"AT111\")\nsubstr(codes, 1, 2)   # Land\n\n[1] \"AT\" \"AT\" \"AT\"\n\nsubstr(codes, 3, 5)   # Regionscode\n\n[1] \"130\" \"127\" \"111\"\n\n\ntrimws() entfernt überflüssige Leerzeichen am Anfang und Ende — ein häufiges Problem bei Daten aus Excel:\n\ntrimws(\"   Wien   \")\n\n[1] \"Wien\"",
     "crumbs": [
       "Einheiten",
-      "2 · Daten einlesen & aufräumen"
+      "2 · Datenstrukturen & Daten einlesen"
     ]
   },
   {
     "objectID": "einheit-2.html#zahlen-in-kategorien-einteilen-cut",
     "href": "einheit-2.html#zahlen-in-kategorien-einteilen-cut",
-    "title": "Einheit 2: Daten einlesen & aufräumen",
+    "title": "Einheit 2: Datenstrukturen & Daten einlesen",
     "section": "Zahlen in Kategorien einteilen: cut()",
-    "text": "Zahlen in Kategorien einteilen: cut()\ncut() teilt eine Zahlenspalte anhand von Grenzen (breaks) in Kategorien ein und liefert einen Faktor zurück (siehe Teil 1, Faktoren):\n\nbezirke$groesse &lt;- cut(bezirke$haushalte,\n                       breaks = c(0, 15000, 40000, Inf),\n                       labels = c(\"klein\", \"mittel\", \"groß\"))\n\nbezirke[, c(\"bezirk_name\", \"haushalte\", \"groesse\")]\n\n   bezirk_name haushalte groesse\n1 Innere Stadt      9800   klein\n2 Leopoldstadt     54000    groß\n3  Landstrasse     46000    groß\n4       Wieden     16000  mittel\n5   Margareten     30000  mittel\n6    Mariahilf     15000   klein\n7       Neubau     16000  mittel\n8   Josefstadt     12000   klein\n\ntable(bezirke$groesse)\n\n\n klein mittel   groß \n     3      3      2 \n\n\n\nÜbung\n\nBerechne das mittlere Einkommen über alle Bezirke und zeige die Bezirke, die darüber liegen.\nZeichne mit barplot() die Haushalte pro Bezirk; beschrifte die Balken mit names.arg = bezirke$bezirk_name (Tipp: las = 2 dreht die Beschriftung).\n\n\n# dein Code",
+    "text": "Zahlen in Kategorien einteilen: cut()\ncut() teilt eine Zahlenspalte anhand von Grenzen (breaks) in Kategorien ein und liefert einen Faktor zurück (siehe Teil 3):\n\nbezirke$groesse &lt;- cut(bezirke$haushalte,\n                       breaks = c(0, 15000, 40000, Inf),\n                       labels = c(\"klein\", \"mittel\", \"groß\"))\n\nbezirke[, c(\"bezirk_name\", \"haushalte\", \"groesse\")]\n\n   bezirk_name haushalte groesse\n1 Innere Stadt      9800   klein\n2 Leopoldstadt     54000    groß\n3  Landstrasse     46000    groß\n4       Wieden     16000  mittel\n5   Margareten     30000  mittel\n6    Mariahilf     15000   klein\n7       Neubau     16000  mittel\n8   Josefstadt     12000   klein\n\ntable(bezirke$groesse)\n\n\n klein mittel   groß \n     3      3      2 \n\n\n\nÜbung\n\nBerechne das mittlere Einkommen über alle Bezirke und zeige die Bezirke, die darüber liegen.\nZeichne mit barplot() die Haushalte pro Bezirk; beschrifte die Balken mit names.arg = bezirke$bezirk_name (Tipp: las = 2 dreht die Beschriftung).\n\n\n# dein Code",
     "crumbs": [
       "Einheiten",
-      "2 · Daten einlesen & aufräumen"
+      "2 · Datenstrukturen & Daten einlesen"
     ]
   },
   {
     "objectID": "einheit-2.html#als-csv-write.csv-und-write.csv2",
     "href": "einheit-2.html#als-csv-write.csv-und-write.csv2",
-    "title": "Einheit 2: Daten einlesen & aufräumen",
+    "title": "Einheit 2: Datenstrukturen & Daten einlesen",
     "section": "Als CSV: write.csv() und write.csv2()",
     "text": "Als CSV: write.csv() und write.csv2()\nGut zum Weitergeben, auch an Excel. row.names = FALSE verhindert eine zusätzliche Spalte mit Zeilennummern:\n\nwrite.csv(bezirke, \"data/processed/bezirke_clean.csv\", row.names = FALSE)    # , und .\nwrite.csv2(bezirke, \"data/processed/bezirke_clean.csv\", row.names = FALSE)   # ; und ,\n\nwrite.csv2() schreibt mit ; und Dezimalkomma — so öffnet ein deutschsprachiges Excel die Datei direkt richtig. Nachteil von CSV: Faktor-Stufen gehen verloren, und beim erneuten Einlesen muss R die Datentypen neu erkennen.",
     "crumbs": [
       "Einheiten",
-      "2 · Daten einlesen & aufräumen"
+      "2 · Datenstrukturen & Daten einlesen"
     ]
   },
   {
     "objectID": "einheit-2.html#im-r-format-saverds-und-save",
     "href": "einheit-2.html#im-r-format-saverds-und-save",
-    "title": "Einheit 2: Daten einlesen & aufräumen",
+    "title": "Einheit 2: Datenstrukturen & Daten einlesen",
     "section": "Im R-Format: saveRDS() und save()",
     "text": "Im R-Format: saveRDS() und save()\n\n# RDS — ein Objekt, behält Datentypen und Faktor-Stufen exakt\nsaveRDS(bezirke, \"data/processed/bezirke.rds\")\nbezirke &lt;- readRDS(\"data/processed/bezirke.rds\")\n\n# RData — mehrere Objekte in einer Datei\nsave(bezirke, roh, file = \"data/processed/bezirke.RData\")\nload(\"data/processed/bezirke.RData\")   # holt sie unter denselben Namen zurück\n\nFaustregel: CSV zum Weitergeben, RDS als Zwischenstand für die eigene Weiterarbeit in R.",
     "crumbs": [
       "Einheiten",
-      "2 · Daten einlesen & aufräumen"
+      "2 · Datenstrukturen & Daten einlesen"
     ]
   },
   {
-    "objectID": "einheit-0.html",
-    "href": "einheit-0.html",
-    "title": "Einheit 0: RStudio, Projekte & Pakete",
+    "objectID": "vorbereitung.html",
+    "href": "vorbereitung.html",
+    "title": "Vorbereitung",
     "section": "",
-    "text": "Diese Einheit klärt, womit man in R arbeitet (R, RStudio, Projekte, R Markdown), wie Pakete installiert werden und wo man Hilfe findet. Am Ende stehen die wichtigsten Grundregeln und eine erste Übung.",
+    "text": "Diese Vorbereitung klärt, womit man in R arbeitet (R, RStudio, Projekte, R Markdown), wie Pakete installiert werden und wo man Hilfe findet.",
     "crumbs": [
       "Einheiten",
-      "0 · RStudio, Projekte & Pakete"
+      "Vorbereitung"
     ]
   },
   {
-    "objectID": "einheit-0.html#die-kursmaterialien",
-    "href": "einheit-0.html#die-kursmaterialien",
-    "title": "Einheit 0: RStudio, Projekte & Pakete",
+    "objectID": "vorbereitung.html#die-kursmaterialien",
+    "href": "vorbereitung.html#die-kursmaterialien",
+    "title": "Vorbereitung",
     "section": "Die Kursmaterialien",
     "text": "Die Kursmaterialien\nDer Kurs ist selbst ein RStudio-Projekt:\n\nKursmaterialien als ZIP herunterladen und entpacken.\nr-einfuehrung.Rproj per Doppelklick öffnen.\nDie Notebooks der Reihe nach bearbeiten: 00_…, 01_…, … — die Nummer entspricht der Einheit. Die Kursdaten liegen in data/raw/.\n\nDer Kursordner ist etwas vereinfacht: Die Notebooks liegen direkt im Projektordner statt in scripts/.",
     "crumbs": [
       "Einheiten",
-      "0 · RStudio, Projekte & Pakete"
+      "Vorbereitung"
     ]
   },
   {
@@ -637,7 +736,7 @@
     "href": "index.html",
     "title": "R-Einführung",
     "section": "",
-    "text": "Alle Materialien der R-Einführung zum Nachlesen — auch ohne RStudio.",
+    "text": "Einheit\nInhalt\n\n\n\n\nVorbereitung\nInstallation, Projekte, R Markdown, Pakete, Hilfe\n\n\n1 · Grundlagen\nRechnen, Variablen, Funktionen verwenden, Datentypen, Vektoren\n\n\n2 · Datenstrukturen & Daten einlesen\nMatrizen, Listen, Data Frames, Faktoren, CSV einlesen, Daten bereinigen, speichern\n\n\n3 · Daten auswerten & visualisieren\nDatenbearbeitung mit dplyr, Grafiken mit ggplot2\n\n\n4 · Bedingungen, Schleifen & Funktionen\nif/else, for, while, eigene Funktionen, sapply()\n\n\nÜbungsaufgabe 1\n\n\n\nCheatsheet",
     "crumbs": [
       "Start"
     ]
@@ -647,17 +746,17 @@
     "href": "index.html#selbst-ausprobieren",
     "title": "R-Einführung",
     "section": "Selbst ausprobieren",
-    "text": "Selbst ausprobieren\n\nR und RStudio installieren (siehe Einheit 0).\nKursmaterialien als ZIP herunterladen und entpacken.\nr-einfuehrung.Rproj per Doppelklick öffnen und die Notebooks (01_grundlagen.Rmd, …) Block für Block ausführen.",
+    "text": "Selbst ausprobieren\n\nR und RStudio installieren (siehe Vorbereitung).\nKursmaterialien als ZIP herunterladen und entpacken.\nr-einfuehrung.Rproj per Doppelklick öffnen und die Notebooks (01_grundlagen.Rmd, …) Block für Block ausführen.",
     "crumbs": [
       "Start"
     ]
   },
   {
-    "objectID": "index.html#über-diese-materialien",
-    "href": "index.html#über-diese-materialien",
+    "objectID": "index.html#impressum",
+    "href": "index.html#impressum",
     "title": "R-Einführung",
-    "section": "Über diese Materialien",
-    "text": "Über diese Materialien\nAutorin: Bella Mironova, TU Wien, SRF\nDie Materialien wurden mit Unterstützung von Claude (Anthropic) überarbeitet und von der Autorin geprüft.\nLizenz: CC BY 4.0 — die Materialien dürfen unter Nennung der Autorin weiterverwendet und angepasst werden.",
+    "section": "Impressum",
+    "text": "Impressum\nAutorin: Bella Mironova, TU Wien, SRF Überarbeitung: mit Unterstützung von Claude (Anthropic) Lizenz: CC BY 4.0",
     "crumbs": [
       "Start"
     ]
@@ -667,7 +766,7 @@
     "href": "einheit-1.html",
     "title": "Einheit 1: Grundlagen",
     "section": "",
-    "text": "In dieser Einheit lernst du die grundlegenden Operationen in R kennen:\nWie man mit RStudio, Projekten und Paketen arbeitet, steht in Einheit 0 (00_rstudio_projekte.Rmd).\nFühre die Code-Blöcke der Reihe nach aus (grüner Pfeil oben rechts im Block oder Strg/Cmd + Enter) — spätere Blöcke bauen auf den Variablen früherer Blöcke auf.",
+    "text": "In dieser Einheit lernst du die grundlegenden Operationen in R kennen:\nWie man mit RStudio, Projekten und Paketen arbeitet, steht in der Vorbereitung (00_vorbereitung.Rmd).\nFühre die Code-Blöcke der Reihe nach aus (grüner Pfeil oben rechts im Block oder Strg/Cmd + Enter) — spätere Blöcke bauen auf den Variablen früherer Blöcke auf.",
     "crumbs": [
       "Einheiten",
       "1 · Grundlagen"
@@ -766,7 +865,7 @@
     "href": "einheit-1.html#ein-erster-plot-barplot",
     "title": "Einheit 1: Grundlagen",
     "section": "Ein erster Plot: barplot()",
-    "text": "Ein erster Plot: barplot()\nAus einem benannten Vektor macht barplot() mit einem Befehl eine beschriftete Grafik — die Namen werden zu Achsenbeschriftungen:\n\nbarplot(tmax_wien,\n        main = \"Höchsttemperaturen in Wien\",\n        ylab = \"°C\",\n        col  = \"tomato\")\n\n\n\n\n\n\n\n\n\nHinweis: Weitere Grafiken folgen in Teil 4 dieser Einheit und in Einheit 3.",
+    "text": "Ein erster Plot: barplot()\nAus einem benannten Vektor macht barplot() mit einem Befehl eine beschriftete Grafik — die Namen werden zu Achsenbeschriftungen:\n\nbarplot(tmax_wien,\n        main = \"Höchsttemperaturen in Wien\",\n        ylab = \"°C\",\n        col  = \"tomato\")\n\n\n\n\n\n\n\n\n\nHinweis: Weitere Grafiken folgen in Teil 3 dieser Einheit und in Einheit 3.",
     "crumbs": [
       "Einheiten",
       "1 · Grundlagen"
@@ -822,83 +921,6 @@
     "title": "Einheit 1: Grundlagen",
     "section": "Fehlende Werte: NA",
     "text": "Fehlende Werte: NA\nNA („not available”) steht für einen fehlenden Wert. Jede Rechnung mit NA ergibt wieder NA — deshalb liefern mean(), sum() & Co. NA, sobald ein einziger Wert fehlt. na.rm = TRUE lässt fehlende Werte weg:\n\nmean(temperaturen)\n\n[1] NA\n\nmean(temperaturen, na.rm = TRUE)\n\n[1] 25.76667\n\n\nis.na() prüft elementweise auf fehlende Werte, ! kehrt das um:\n\nis.na(temperaturen)\n\n      Mai      Juni      Juli    August September \n     TRUE     FALSE     FALSE     FALSE      TRUE \n\nsum(is.na(temperaturen))             # wie viele fehlen?\n\n[1] 2\n\ntemperaturen[!is.na(temperaturen)]   # nur die vorhandenen Werte\n\n  Juni   Juli August \n  24.1   27.5   25.7 \n\n\n\nÜbung\n\nIn welchen Monaten liegt die Tiefsttemperatur über 15 °C? Gib die Monatsnamen aus (Tipp: names()).\nBerechne die Differenz zwischen Höchst- und Tiefsttemperatur pro Monat. In welchem Monat ist sie am größten? (Tipp: which.max())\n\n\n# dein Code",
-    "crumbs": [
-      "Einheiten",
-      "1 · Grundlagen"
-    ]
-  },
-  {
-    "objectID": "einheit-1.html#was-ist-eine-matrix",
-    "href": "einheit-1.html#was-ist-eine-matrix",
-    "title": "Einheit 1: Grundlagen",
-    "section": "Was ist eine Matrix?",
-    "text": "Was ist eine Matrix?\nEine Matrix ist eine Sammlung von Elementen desselben Datentyps, angeordnet in Zeilen und Spalten — also zweidimensional, im Gegensatz zum eindimensionalen Vektor. Erzeugt wird sie mit matrix():\n\nmatrix(1:6, nrow = 2)                 # Standard: spaltenweise gefüllt\n\n     [,1] [,2] [,3]\n[1,]    1    3    5\n[2,]    2    4    6\n\nmatrix(1:6, nrow = 2, byrow = TRUE)   # zeilenweise gefüllt\n\n     [,1] [,2] [,3]\n[1,]    1    2    3\n[2,]    4    5    6\n\n\n\nDas erste Argument sind die Elemente.\nnrow (oder ncol) legt die Anzahl der Zeilen (Spalten) fest.\nbyrow = TRUE füllt zeilenweise; Standard ist spaltenweise.",
-    "crumbs": [
-      "Einheiten",
-      "1 · Grundlagen"
-    ]
-  },
-  {
-    "objectID": "einheit-1.html#eine-matrix-aus-vektoren-bauen",
-    "href": "einheit-1.html#eine-matrix-aus-vektoren-bauen",
-    "title": "Einheit 1: Grundlagen",
-    "section": "Eine Matrix aus Vektoren bauen",
-    "text": "Eine Matrix aus Vektoren bauen\nDie Temperaturvektoren aus Teil 2 lassen sich direkt zu einer Matrix zusammenfügen: erst alle Höchstwerte, dann alle Tiefstwerte — spaltenweise gefüllt, ergibt das genau eine Spalte pro Messwert:\n\nwien_matrix &lt;- matrix(c(tmax_wien, tmin_wien), ncol = 2)\nwien_matrix\n\n     [,1] [,2]\n[1,] 20.1 10.4\n[2,] 24.1 14.3\n[3,] 26.0 16.4\n[4,] 25.7 16.0\n[5,] 20.5 11.9",
-    "crumbs": [
-      "Einheiten",
-      "1 · Grundlagen"
-    ]
-  },
-  {
-    "objectID": "einheit-1.html#matrizen-benennen",
-    "href": "einheit-1.html#matrizen-benennen",
-    "title": "Einheit 1: Grundlagen",
-    "section": "Matrizen benennen",
-    "text": "Matrizen benennen\nWie names() bei Vektoren — nur getrennt für Zeilen und Spalten:\n\ncolnames(wien_matrix) &lt;- c(\"TMax\", \"TMin\")\nrownames(wien_matrix) &lt;- monate\nwien_matrix\n\n          TMax TMin\nMai       20.1 10.4\nJuni      24.1 14.3\nJuli      26.0 16.4\nAugust    25.7 16.0\nSeptember 20.5 11.9\n\n\nAlternativ setzt man beides direkt beim Erstellen mit dimnames = list(zeilen, spalten):\n\nwien_matrix &lt;- matrix(c(tmax_wien, tmin_wien), ncol = 2,\n                      dimnames = list(monate, c(\"TMax\", \"TMin\")))",
-    "crumbs": [
-      "Einheiten",
-      "1 · Grundlagen"
-    ]
-  },
-  {
-    "objectID": "einheit-1.html#matrixelemente-auswählen",
-    "href": "einheit-1.html#matrixelemente-auswählen",
-    "title": "Einheit 1: Grundlagen",
-    "section": "Matrixelemente auswählen",
-    "text": "Matrixelemente auswählen\nWie bei Vektoren mit [ ] — aber mit zwei Angaben: [Zeile, Spalte].\n\nm[1, 2] → Element in Zeile 1, Spalte 2\nm[, 1] → alle Zeilen der 1. Spalte\nm[1, ] → alle Spalten der 1. Zeile\nstatt Nummern gehen auch Namen: m[\"Juli\", \"TMax\"]\n\n\nwien_matrix[\"Juli\", \"TMax\"]\n\n[1] 26\n\nmean(wien_matrix[, \"TMin\"])           # Ø Tiefsttemperatur, alle Monate\n\n[1] 13.8\n\nmean(wien_matrix[1:2, \"TMin\"])        # nur Mai und Juni\n\n[1] 12.35",
-    "crumbs": [
-      "Einheiten",
-      "1 · Grundlagen"
-    ]
-  },
-  {
-    "objectID": "einheit-1.html#zeilen--und-spaltenmittelwerte",
-    "href": "einheit-1.html#zeilen--und-spaltenmittelwerte",
-    "title": "Einheit 1: Grundlagen",
-    "section": "Zeilen- und Spaltenmittelwerte",
-    "text": "Zeilen- und Spaltenmittelwerte\nrowMeans() berechnet den Mittelwert jeder Zeile — hier also die Durchschnittstemperatur pro Monat. Es ist dasselbe Ergebnis wie tmittel_wien aus Teil 2, nur in einem Schritt:\n\ndurchschnitt &lt;- rowMeans(wien_matrix)\ndurchschnitt\n\n      Mai      Juni      Juli    August September \n    15.25     19.20     21.20     20.85     16.20 \n\n\ncolMeans() rechnet pro Spalte — die mittlere Höchst- bzw. Tiefsttemperatur über den ganzen Zeitraum:\n\ncolMeans(wien_matrix)\n\n TMax  TMin \n23.28 13.80",
-    "crumbs": [
-      "Einheiten",
-      "1 · Grundlagen"
-    ]
-  },
-  {
-    "objectID": "einheit-1.html#spalten-und-zeilen-anhängen-cbind-und-rbind",
-    "href": "einheit-1.html#spalten-und-zeilen-anhängen-cbind-und-rbind",
-    "title": "Einheit 1: Grundlagen",
-    "section": "Spalten und Zeilen anhängen: cbind() und rbind()",
-    "text": "Spalten und Zeilen anhängen: cbind() und rbind()\ncbind() fügt spaltenweise zusammen (column bind), rbind() zeilenweise (row bind). Wir hängen die Durchschnittstemperatur als Spalte an und die Spaltenmittelwerte als Zeile:\n\nwien_erweitert &lt;- cbind(wien_matrix, Mittel = durchschnitt)\nwien_erweitert &lt;- rbind(wien_erweitert, Gesamt = colMeans(wien_erweitert))\nround(wien_erweitert, 1)\n\n          TMax TMin Mittel\nMai       20.1 10.4   15.2\nJuni      24.1 14.3   19.2\nJuli      26.0 16.4   21.2\nAugust    25.7 16.0   20.9\nSeptember 20.5 11.9   16.2\nGesamt    23.3 13.8   18.5",
-    "crumbs": [
-      "Einheiten",
-      "1 · Grundlagen"
-    ]
-  },
-  {
-    "objectID": "einheit-1.html#die-matrix-als-balkendiagramm",
-    "href": "einheit-1.html#die-matrix-als-balkendiagramm",
-    "title": "Einheit 1: Grundlagen",
-    "section": "Die Matrix als Balkendiagramm",
-    "text": "Die Matrix als Balkendiagramm\nbarplot() funktioniert auch mit einer Matrix. t() dreht sie (Zeilen ↔︎ Spalten), damit die Monate auf der x-Achse landen; beside = TRUE stellt TMax und TMin nebeneinander:\n\nbarplot(t(wien_matrix), beside = TRUE,\n        legend.text = TRUE,\n        main = \"Höchst- und Tiefsttemperaturen in Wien, Mai–September\",\n        ylab = \"°C\",\n        col  = c(\"tomato\", \"steelblue\"))\n\n\n\n\n\n\n\n\n\nÜbung\n\nWähle aus wien_matrix die Werte für Juli und August (beide Spalten) aus.\nBerechne für jeden Monat die Spanne TMax - TMin und hänge sie mit cbind() als Spalte Spanne an wien_matrix an.\n\n\n# dein Code",
     "crumbs": [
       "Einheiten",
       "1 · Grundlagen"
@@ -1147,33 +1169,33 @@
     ]
   },
   {
-    "objectID": "abschlussprojekt.html",
-    "href": "abschlussprojekt.html",
-    "title": "Abschlussprojekt",
+    "objectID": "uebungsaufgabe-1.html",
+    "href": "uebungsaufgabe-1.html",
+    "title": "Übungsaufgabe 1",
     "section": "",
-    "text": "Als Abschluss entsteht euer erstes eigenständiges Portfolio-Stück. Alles, was dafür nötig ist, steht in Einheit 1–3.",
+    "text": "In dieser Übungsaufgabe entsteht eure erste eigenständige Auswertung. Alles, was dafür nötig ist, steht in Einheit 1–3.",
     "crumbs": [
-      "Abschlussprojekt"
+      "Übungsaufgabe 1"
     ]
   },
   {
-    "objectID": "abschlussprojekt.html#aufgabe",
-    "href": "abschlussprojekt.html#aufgabe",
-    "title": "Abschlussprojekt",
+    "objectID": "uebungsaufgabe-1.html#aufgabe",
+    "href": "uebungsaufgabe-1.html#aufgabe",
+    "title": "Übungsaufgabe 1",
     "section": "Aufgabe",
-    "text": "Aufgabe\n\n\n\n\n\n\n\nSchritt\nNachschlagen in\n\n\n\n\n1. Neues .Rmd im Projektordner anlegen (File → New File → R Markdown).\nEinheit 0\n\n\n2. data/raw/mitarbeitende.csv und data/raw/teams.csv über relative Pfade einlesen und mit str() prüfen.\nEinheit 2, Teil 3\n\n\n3. Die beiden Datensätze mit einem Join verbinden und begründen, welchen Join ihr wählt.\nEinheit 3, Joins\n\n\n4. Mindestens einen filter()- und einen mutate()-Schritt anwenden.\nEinheit 3, Teil 1\n\n\n5. Eine Zusammenfassungstabelle mit group_by() + summarise() erstellen (fehlende Werte beachten).\nEinheit 3, Teil 1\n\n\n6. Eine ggplot2-Grafik bauen, die diese Tabelle sichtbar macht, und mit ggsave() nach output/ speichern.\nEinheit 3, Teil 2\n\n\n7. Das Dokument zu HTML knitten.\nEinheit 0\n\n\n\nAbgabe: die .Rmd-Datei und die geknittete .html-Datei.",
+    "text": "Aufgabe\n\n\n\n\n\n\n\nSchritt\nNachschlagen in\n\n\n\n\n1. Neues .Rmd im Projektordner anlegen (File → New File → R Markdown).\nVorbereitung\n\n\n2. data/raw/mitarbeitende.csv und data/raw/teams.csv über relative Pfade einlesen und mit str() prüfen.\nEinheit 2, Teil 4\n\n\n3. Die beiden Datensätze mit einem Join verbinden und begründen, welchen Join ihr wählt.\nEinheit 3, Joins\n\n\n4. Mindestens einen filter()- und einen mutate()-Schritt anwenden.\nEinheit 3, Teil 1\n\n\n5. Eine Zusammenfassungstabelle mit group_by() + summarise() erstellen (fehlende Werte beachten).\nEinheit 3, Teil 1\n\n\n6. Eine ggplot2-Grafik bauen, die diese Tabelle sichtbar macht, und mit ggsave() nach output/ speichern.\nEinheit 3, Teil 2\n\n\n7. Das Dokument zu HTML knitten.\nVorbereitung\n\n\n\nAbgabe: die .Rmd-Datei und die geknittete .html-Datei.",
     "crumbs": [
-      "Abschlussprojekt"
+      "Übungsaufgabe 1"
     ]
   },
   {
-    "objectID": "abschlussprojekt.html#checkliste-vor-der-abgabe",
-    "href": "abschlussprojekt.html#checkliste-vor-der-abgabe",
-    "title": "Abschlussprojekt",
+    "objectID": "uebungsaufgabe-1.html#checkliste-vor-der-abgabe",
+    "href": "uebungsaufgabe-1.html#checkliste-vor-der-abgabe",
+    "title": "Übungsaufgabe 1",
     "section": "Checkliste vor der Abgabe",
     "text": "Checkliste vor der Abgabe\n\nDas Dokument läuft nach einem Neustart von R (Strg + Shift + F10) fehlerfrei durch.\nKeine absoluten Pfade und kein setwd(); kein install.packages() im Dokument.\nAlle Pakete werden oben im Dokument mit library() geladen.\nJeder Arbeitsschritt hat 1–2 Sätze Text: was wird gemacht und warum.\nFehlende Werte (Vera, Uwe) sind bemerkt und bewusst behandelt.\nDie Grafik hat Titel, Achsenbeschriftungen und ggf. eine Legende.\nDie Grafik liegt als Datei in output/.",
     "crumbs": [
-      "Abschlussprojekt"
+      "Übungsaufgabe 1"
     ]
   }
 ]

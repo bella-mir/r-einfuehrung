@@ -1,11 +1,10 @@
 ---
-title: "R-Einführung — Einheit 0: RStudio, Projekte & Pakete"
+title: "R-Einführung — Vorbereitung"
 output: html_document
 ---
 
-Diese Einheit klärt, womit man in R arbeitet (R, RStudio, Projekte, R Markdown), wie Pakete
-installiert werden und wo man Hilfe findet. Am Ende stehen die wichtigsten Grundregeln und eine
-erste Übung.
+Diese Vorbereitung klärt, womit man in R arbeitet (R, RStudio, Projekte, R Markdown), wie Pakete
+installiert werden und wo man Hilfe findet.
 
 
 # Installation

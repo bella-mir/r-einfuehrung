@@ -1,22 +1,22 @@
 ---
-title: "R-Einführung — Abschlussprojekt"
+title: "R-Einführung — Übungsaufgabe 1"
 output: html_document
 ---
 
-Als Abschluss entsteht euer erstes eigenständiges Portfolio-Stück. Alles, was dafür nötig ist,
-steht in Einheit 1–3.
+In dieser Übungsaufgabe entsteht eure erste eigenständige Auswertung. Alles, was dafür nötig
+ist, steht in Einheit 1–3.
 
 ## Aufgabe
 
 | Schritt | Nachschlagen in |
 |---|---|
-| 1. Neues `.Rmd` im Projektordner anlegen (*File → New File → R Markdown*). | Einheit 0 |
-| 2. `data/raw/mitarbeitende.csv` und `data/raw/teams.csv` über relative Pfade einlesen und mit `str()` prüfen. | Einheit 2, Teil 3 |
+| 1. Neues `.Rmd` im Projektordner anlegen (*File → New File → R Markdown*). | Vorbereitung |
+| 2. `data/raw/mitarbeitende.csv` und `data/raw/teams.csv` über relative Pfade einlesen und mit `str()` prüfen. | Einheit 2, Teil 4 |
 | 3. Die beiden Datensätze mit einem Join verbinden und begründen, welchen Join ihr wählt. | Einheit 3, *Joins* |
 | 4. Mindestens einen `filter()`- und einen `mutate()`-Schritt anwenden. | Einheit 3, Teil 1 |
 | 5. Eine Zusammenfassungstabelle mit `group_by()` + `summarise()` erstellen (fehlende Werte beachten). | Einheit 3, Teil 1 |
 | 6. Eine `ggplot2`-Grafik bauen, die diese Tabelle sichtbar macht, und mit `ggsave()` nach `output/` speichern. | Einheit 3, Teil 2 |
-| 7. Das Dokument zu HTML knitten. | Einheit 0 |
+| 7. Das Dokument zu HTML knitten. | Vorbereitung |
 
 **Abgabe:** die `.Rmd`-Datei **und** die geknittete `.html`-Datei.
 

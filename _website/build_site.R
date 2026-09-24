@@ -18,12 +18,12 @@ if (quarto == "") {
 
 # Source file -> file name inside _website/ (becomes the page name on the website)
 seiten <- c(
-  "00_rstudio_projekte.Rmd"              = "einheit-0.Rmd",
+  "00_vorbereitung.Rmd"                  = "vorbereitung.Rmd",
   "01_grundlagen.Rmd"                    = "einheit-1.Rmd",
-  "02_daten_einlesen_aufraeumen.Rmd"     = "einheit-2.Rmd",
+  "02_datenstrukturen_einlesen.Rmd"      = "einheit-2.Rmd",
   "03_daten_auswerten_visualisieren.Rmd" = "einheit-3.Rmd",
   "04_funktionen_schleifen.Rmd"          = "einheit-4.Rmd",
-  "05_abschlussprojekt.Rmd"              = "abschlussprojekt.Rmd"
+  "05_uebungsaufgabe_1.Rmd"              = "uebungsaufgabe-1.Rmd"
 )
 
 for (quelle in names(seiten)) {

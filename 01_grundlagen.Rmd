@@ -5,12 +5,12 @@ output: html_notebook
 
 In dieser Einheit lernst du die grundlegenden Operationen in R kennen:
 
-1. **Grundlagen** — Arithmetik, Variablen, Funktionen und Datentypen
+1. **Rechnen, Variablen & Datentypen** — Arithmetik, Variablen, Funktionen verwenden,
+   Datentypen, Vergleiche
 2. **Vektoren** — mehrere Werte desselben Typs speichern und damit rechnen
-3. **Matrizen** — zweidimensionale Daten aufbauen, benennen und auswerten
-4. **Schnelle Grafiken mit Base-R** — `plot()`, `hist()`, `boxplot()`
+3. **Schnelle Grafiken mit Base-R** — `plot()`, `hist()`, `boxplot()`
 
-Wie man mit RStudio, Projekten und Paketen arbeitet, steht in Einheit 0 (`00_rstudio_projekte.Rmd`).
+Wie man mit RStudio, Projekten und Paketen arbeitet, steht in der Vorbereitung (`00_vorbereitung.Rmd`).
 
 Führe die Code-Blöcke der Reihe nach aus (grüner Pfeil oben rechts im Block oder
 *Strg/Cmd + Enter*) — spätere Blöcke bauen auf den Variablen früherer Blöcke auf.
@@ -265,7 +265,7 @@ barplot(tmax_wien,
         col  = "tomato")
 ```
 
-> **Hinweis:** Weitere Grafiken folgen in Teil 4 dieser Einheit und in Einheit 3.
+> **Hinweis:** Weitere Grafiken folgen in Teil 3 dieser Einheit und in Einheit 3.
 
 ## Mit Vektoren rechnen
 
@@ -368,122 +368,7 @@ temperaturen[!is.na(temperaturen)]   # nur die vorhandenen Werte
 ```
 
 
-# Teil 3: Matrizen
-
-## Was ist eine Matrix?
-
-Eine **Matrix** ist eine Sammlung von Elementen desselben Datentyps, angeordnet in Zeilen und
-Spalten — also zweidimensional, im Gegensatz zum eindimensionalen Vektor. Erzeugt wird sie mit
-`matrix()`:
-
-```{r}
-matrix(1:6, nrow = 2)                 # Standard: spaltenweise gefüllt
-matrix(1:6, nrow = 2, byrow = TRUE)   # zeilenweise gefüllt
-```
-
-- Das erste Argument sind die Elemente.
-- `nrow` (oder `ncol`) legt die Anzahl der Zeilen (Spalten) fest.
-- `byrow = TRUE` füllt zeilenweise; Standard ist spaltenweise.
-
-## Eine Matrix aus Vektoren bauen
-
-Die Temperaturvektoren aus Teil 2 lassen sich direkt zu einer Matrix zusammenfügen: erst alle
-Höchstwerte, dann alle Tiefstwerte — spaltenweise gefüllt, ergibt das genau eine Spalte pro
-Messwert:
-
-```{r}
-wien_matrix <- matrix(c(tmax_wien, tmin_wien), ncol = 2)
-wien_matrix
-```
-
-## Matrizen benennen
-
-Wie `names()` bei Vektoren — nur getrennt für Zeilen und Spalten:
-
-```{r}
-colnames(wien_matrix) <- c("TMax", "TMin")
-rownames(wien_matrix) <- monate
-wien_matrix
-```
-
-Alternativ setzt man beides direkt beim Erstellen mit `dimnames = list(zeilen, spalten)`:
-
-```{r}
-wien_matrix <- matrix(c(tmax_wien, tmin_wien), ncol = 2,
-                      dimnames = list(monate, c("TMax", "TMin")))
-```
-
-## Matrixelemente auswählen
-
-Wie bei Vektoren mit `[ ]` — aber mit **zwei** Angaben: `[Zeile, Spalte]`.
-
-- `m[1, 2]` → Element in Zeile 1, Spalte 2
-- `m[, 1]` → alle Zeilen der 1. Spalte
-- `m[1, ]` → alle Spalten der 1. Zeile
-- statt Nummern gehen auch Namen: `m["Juli", "TMax"]`
-
-```{r}
-wien_matrix["Juli", "TMax"]
-
-mean(wien_matrix[, "TMin"])           # Ø Tiefsttemperatur, alle Monate
-mean(wien_matrix[1:2, "TMin"])        # nur Mai und Juni
-```
-
-## Zeilen- und Spaltenmittelwerte
-
-`rowMeans()` berechnet den Mittelwert jeder Zeile — hier also die Durchschnittstemperatur pro
-Monat. Es ist dasselbe Ergebnis wie `tmittel_wien` aus Teil 2, nur in einem Schritt:
-
-```{r}
-durchschnitt <- rowMeans(wien_matrix)
-durchschnitt
-```
-
-`colMeans()` rechnet pro Spalte — die mittlere Höchst- bzw. Tiefsttemperatur über den ganzen
-Zeitraum:
-
-```{r}
-colMeans(wien_matrix)
-```
-
-## Spalten und Zeilen anhängen: cbind() und rbind()
-
-`cbind()` fügt spaltenweise zusammen (*column bind*), `rbind()` zeilenweise (*row bind*).
-Wir hängen die Durchschnittstemperatur als Spalte an und die Spaltenmittelwerte als Zeile:
-
-```{r}
-wien_erweitert <- cbind(wien_matrix, Mittel = durchschnitt)
-wien_erweitert <- rbind(wien_erweitert, Gesamt = colMeans(wien_erweitert))
-round(wien_erweitert, 1)
-```
-
-## Die Matrix als Balkendiagramm
-
-`barplot()` funktioniert auch mit einer Matrix. `t()` dreht sie (Zeilen ↔ Spalten), damit die
-Monate auf der x-Achse landen; `beside = TRUE` stellt TMax und TMin nebeneinander:
-
-```{r}
-barplot(t(wien_matrix), beside = TRUE,
-        legend.text = TRUE,
-        main = "Höchst- und Tiefsttemperaturen in Wien, Mai–September",
-        ylab = "°C",
-        col  = c("tomato", "steelblue"))
-```
-
-### Übung
-
-1. Wähle aus `wien_matrix` die Werte für Juli und August (beide Spalten) aus.
-2. Berechne für jeden Monat die Spanne `TMax - TMin` und hänge sie mit `cbind()` als Spalte
-   `Spanne` an `wien_matrix` an.
-
-```{r}
-# dein Code
-
-```
-
-
-
-# Teil 4: Schnelle Grafiken mit Base-R
+# Teil 3: Schnelle Grafiken mit Base-R
 
 `barplot()` hast du schon kennengelernt. Base-R hat noch einige weitere Grafikfunktionen, die
 mit einem einzigen Befehl ein Bild liefern — ideal, um sich beim Arbeiten schnell einen
@@ -574,8 +459,6 @@ immer zurücksetzen. In einem Notebook gilt sie nur innerhalb des Chunks.
 - **Vektoren:** `c()`, `:`, `seq()` · `names()` · elementweise rechnen · `mean()`, `sum()`,
   `max()` · auswählen mit `[ ]` (Index ab 1, Name, Bedingung) · `%in%` · `NA` und
   `na.rm = TRUE`
-- **Matrizen:** `matrix()` · `rownames()` / `colnames()` · `[Zeile, Spalte]` · `rowMeans()` /
-  `colMeans()` · `cbind()` / `rbind()`
 - **Base-Grafik:** `barplot()`, `plot()`, `hist()`, `boxplot()` · `par(mfrow = …)` und
   zurücksetzen
 

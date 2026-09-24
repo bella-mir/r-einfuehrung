@@ -1,4 +1,4 @@
-# R-Cheatsheet — Einheit 0–4
+# R-Cheatsheet
 
 Die wichtigsten Funktionen dieser Einführung, in der Reihenfolge der Einheiten.
 Platzhalter: `x` = Vektor · `df` = Data Frame · `m` = Matrix · `l` = Liste · `f` = Faktor ·
@@ -6,7 +6,7 @@ Platzhalter: `x` = Vektor · `df` = Data Frame · `m` = Matrix · `l` = Liste ·
 
 ---
 
-# Einheit 0 — RStudio, Projekte & Pakete
+# Vorbereitung — RStudio, Projekte & Pakete
 
 ## Pakete & Hilfe
 
@@ -86,18 +86,6 @@ Auf dem Mac: `Cmd` statt `Strg`, `Option` statt `Alt`.
 | `is.na(x)` · `sum(is.na(x))` | fehlt der Wert? · wie viele fehlen? |
 | `round(x, 1)` · `sort(x)` · `which.max(x)` | runden · sortieren · Position des Maximums |
 
-## Matrizen
-
-| Code | Bedeutung |
-|---|---|
-| `matrix(1:6, nrow = 2)` | Matrix bauen (spaltenweise; `byrow = TRUE` zeilenweise) |
-| `matrix(..., dimnames = list(zeilen, spalten))` | direkt benennen |
-| `rownames(m) <- ...` · `colnames(m) <- ...` | Namen setzen |
-| `m[i, j]` · `m[, j]` · `m[i, ]` · `m["Juli", "TMax"]` | auswählen |
-| `rowMeans(m)` · `colMeans(m)` | Mittelwert je Zeile · je Spalte |
-| `cbind(m, neu = x)` · `rbind(m, neu = x)` | Spalte · Zeile anhängen |
-| `t(m)` | Zeilen und Spalten tauschen |
-
 ## Base-R-Grafik
 
 | Code | Bedeutung |
@@ -111,7 +99,19 @@ Auf dem Mac: `Cmd` statt `Strg`, `Option` statt `Alt`.
 
 ---
 
-# Einheit 2 — Daten einlesen & aufräumen
+# Einheit 2 — Datenstrukturen & Daten einlesen
+
+## Matrizen
+
+| Code | Bedeutung |
+|---|---|
+| `matrix(1:6, nrow = 2)` | Matrix bauen (spaltenweise; `byrow = TRUE` zeilenweise) |
+| `matrix(..., dimnames = list(zeilen, spalten))` | direkt benennen |
+| `rownames(m) <- ...` · `colnames(m) <- ...` | Namen setzen |
+| `m[i, j]` · `m[, j]` · `m[i, ]` · `m["Juli", "TMax"]` | auswählen |
+| `rowMeans(m)` · `colMeans(m)` | Mittelwert je Zeile · je Spalte |
+| `cbind(m, neu = x)` · `rbind(m, neu = x)` | Spalte · Zeile anhängen |
+| `t(m)` | Zeilen und Spalten tauschen |
 
 ## Listen & Faktoren
 

@@ -3,12 +3,12 @@ project:
   output-dir: ../docs
   render:
     - index.qmd
-    - einheit-0.Rmd
+    - vorbereitung.Rmd
     - einheit-1.Rmd
     - einheit-2.Rmd
     - einheit-3.Rmd
     - einheit-4.Rmd
-    - abschlussprojekt.Rmd
+    - uebungsaufgabe-1.Rmd
     - cheatsheet.md
 
 lang: de
@@ -29,18 +29,18 @@ website:
         text: Start
       - section: Einheiten
         contents:
-          - href: einheit-0.Rmd
-            text: "0 · RStudio, Projekte & Pakete"
+          - href: vorbereitung.Rmd
+            text: "Vorbereitung"
           - href: einheit-1.Rmd
             text: "1 · Grundlagen"
           - href: einheit-2.Rmd
-            text: "2 · Daten einlesen & aufräumen"
+            text: "2 · Datenstrukturen & Daten einlesen"
           - href: einheit-3.Rmd
             text: "3 · Daten auswerten & visualisieren"
           - href: einheit-4.Rmd
             text: "4 · Bedingungen, Schleifen & Funktionen"
-      - href: abschlussprojekt.Rmd
-        text: Abschlussprojekt
+      - href: uebungsaufgabe-1.Rmd
+        text: Übungsaufgabe 1
       - href: cheatsheet.md
         text: Cheatsheet
 

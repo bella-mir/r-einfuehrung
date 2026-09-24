@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Einheit 2: Daten einlesen &amp; aufräumen – R-Einführung</title>
+<title>Einheit 2: Datenstrukturen &amp; Daten einlesen – R-Einführung</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -121,7 +121,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Seitenleiste umschalten" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./einheit-0.html">Einheiten</a></li><li class="breadcrumb-item"><a href="./einheit-2.html">2 · Daten einlesen &amp; aufräumen</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./vorbereitung.html">Einheiten</a></li><li class="breadcrumb-item"><a href="./einheit-2.html">2 · Datenstrukturen &amp; Daten einlesen</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Seitenleiste umschalten" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Suchen" onclick="window.quartoOpenSearch();">
@@ -166,8 +166,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./einheit-0.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">0 · RStudio, Projekte &amp; Pakete</span></a>
+  <a href="./vorbereitung.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Vorbereitung</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -179,7 +179,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./einheit-2.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">2 · Daten einlesen &amp; aufräumen</span></a>
+ <span class="menu-text">2 · Datenstrukturen &amp; Daten einlesen</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -198,8 +198,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./abschlussprojekt.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Abschlussprojekt</span></a>
+  <a href="./uebungsaufgabe-1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Übungsaufgabe 1</span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -218,13 +218,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Auf dieser Seite</h2>
    
   <ul class="collapse">
-  <li><a href="#teil-1-listen-und-faktoren" id="toc-teil-1-listen-und-faktoren" class="nav-link active" data-scroll-target="#teil-1-listen-und-faktoren">Teil 1: Listen und Faktoren</a>
+  <li><a href="#teil-1-matrizen" id="toc-teil-1-matrizen" class="nav-link active" data-scroll-target="#teil-1-matrizen">Teil 1: Matrizen</a>
+  <ul class="collapse">
+  <li><a href="#was-ist-eine-matrix" id="toc-was-ist-eine-matrix" class="nav-link" data-scroll-target="#was-ist-eine-matrix">Was ist eine Matrix?</a></li>
+  <li><a href="#eine-matrix-aus-vektoren-bauen" id="toc-eine-matrix-aus-vektoren-bauen" class="nav-link" data-scroll-target="#eine-matrix-aus-vektoren-bauen">Eine Matrix aus Vektoren bauen</a></li>
+  <li><a href="#matrizen-benennen" id="toc-matrizen-benennen" class="nav-link" data-scroll-target="#matrizen-benennen">Matrizen benennen</a></li>
+  <li><a href="#matrixelemente-auswählen" id="toc-matrixelemente-auswählen" class="nav-link" data-scroll-target="#matrixelemente-auswählen">Matrixelemente auswählen</a></li>
+  <li><a href="#zeilen--und-spaltenmittelwerte" id="toc-zeilen--und-spaltenmittelwerte" class="nav-link" data-scroll-target="#zeilen--und-spaltenmittelwerte">Zeilen- und Spaltenmittelwerte</a></li>
+  <li><a href="#spalten-und-zeilen-anhängen-cbind-und-rbind" id="toc-spalten-und-zeilen-anhängen-cbind-und-rbind" class="nav-link" data-scroll-target="#spalten-und-zeilen-anhängen-cbind-und-rbind">Spalten und Zeilen anhängen: cbind() und rbind()</a></li>
+  <li><a href="#die-matrix-als-balkendiagramm" id="toc-die-matrix-als-balkendiagramm" class="nav-link" data-scroll-target="#die-matrix-als-balkendiagramm">Die Matrix als Balkendiagramm</a></li>
+  </ul></li>
+  <li><a href="#teil-2-listen-und-data-frames" id="toc-teil-2-listen-und-data-frames" class="nav-link" data-scroll-target="#teil-2-listen-und-data-frames">Teil 2: Listen und Data Frames</a>
   <ul class="collapse">
   <li><a href="#listen" id="toc-listen" class="nav-link" data-scroll-target="#listen">Listen</a></li>
-  <li><a href="#faktoren" id="toc-faktoren" class="nav-link" data-scroll-target="#faktoren">Faktoren</a></li>
-  </ul></li>
-  <li><a href="#teil-2-data-frames" id="toc-teil-2-data-frames" class="nav-link" data-scroll-target="#teil-2-data-frames">Teil 2: Data Frames</a>
-  <ul class="collapse">
   <li><a href="#was-ist-ein-data-frame" id="toc-was-ist-ein-data-frame" class="nav-link" data-scroll-target="#was-ist-ein-data-frame">Was ist ein Data Frame?</a></li>
   <li><a href="#erste-einblicke-in-einen-datensatz" id="toc-erste-einblicke-in-einen-datensatz" class="nav-link" data-scroll-target="#erste-einblicke-in-einen-datensatz">Erste Einblicke in einen Datensatz</a></li>
   <li><a href="#einen-eigenen-data-frame-erstellen" id="toc-einen-eigenen-data-frame-erstellen" class="nav-link" data-scroll-target="#einen-eigenen-data-frame-erstellen">Einen eigenen Data Frame erstellen</a></li>
@@ -233,13 +239,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#zeilen-filtern" id="toc-zeilen-filtern" class="nav-link" data-scroll-target="#zeilen-filtern">Zeilen filtern</a></li>
   <li><a href="#sortieren-mit-order" id="toc-sortieren-mit-order" class="nav-link" data-scroll-target="#sortieren-mit-order">Sortieren mit order()</a></li>
   </ul></li>
-  <li><a href="#teil-3-daten-einlesen" id="toc-teil-3-daten-einlesen" class="nav-link" data-scroll-target="#teil-3-daten-einlesen">Teil 3: Daten einlesen</a>
+  <li><a href="#teil-3-faktoren" id="toc-teil-3-faktoren" class="nav-link" data-scroll-target="#teil-3-faktoren">Teil 3: Faktoren</a>
+  <ul class="collapse">
+  <li><a href="#levels-umbenennen" id="toc-levels-umbenennen" class="nav-link" data-scroll-target="#levels-umbenennen">Levels umbenennen</a></li>
+  <li><a href="#nominal-vs.-ordinal" id="toc-nominal-vs.-ordinal" class="nav-link" data-scroll-target="#nominal-vs.-ordinal">Nominal vs.&nbsp;ordinal</a></li>
+  <li><a href="#faktoren-in-einem-data-frame" id="toc-faktoren-in-einem-data-frame" class="nav-link" data-scroll-target="#faktoren-in-einem-data-frame">Faktoren in einem Data Frame</a></li>
+  </ul></li>
+  <li><a href="#teil-4-daten-einlesen" id="toc-teil-4-daten-einlesen" class="nav-link" data-scroll-target="#teil-4-daten-einlesen">Teil 4: Daten einlesen</a>
   <ul class="collapse">
   <li><a href="#csv-einlesen-mit-read.csv" id="toc-csv-einlesen-mit-read.csv" class="nav-link" data-scroll-target="#csv-einlesen-mit-read.csv">CSV einlesen mit read.csv()</a></li>
   <li><a href="#deutsche-csv-dateien-read.csv2" id="toc-deutsche-csv-dateien-read.csv2" class="nav-link" data-scroll-target="#deutsche-csv-dateien-read.csv2">Deutsche CSV-Dateien: read.csv2()</a></li>
   <li><a href="#andere-dateiformate" id="toc-andere-dateiformate" class="nav-link" data-scroll-target="#andere-dateiformate">Andere Dateiformate</a></li>
   </ul></li>
-  <li><a href="#teil-4-daten-aufräumen" id="toc-teil-4-daten-aufräumen" class="nav-link" data-scroll-target="#teil-4-daten-aufräumen">Teil 4: Daten aufräumen</a>
+  <li><a href="#teil-5-daten-aufräumen" id="toc-teil-5-daten-aufräumen" class="nav-link" data-scroll-target="#teil-5-daten-aufräumen">Teil 5: Daten aufräumen</a>
   <ul class="collapse">
   <li><a href="#die-rohdatei-ansehen" id="toc-die-rohdatei-ansehen" class="nav-link" data-scroll-target="#die-rohdatei-ansehen">Die Rohdatei ansehen</a></li>
   <li><a href="#kopfzeile-setzen-und-info-zeilen-entfernen" id="toc-kopfzeile-setzen-und-info-zeilen-entfernen" class="nav-link" data-scroll-target="#kopfzeile-setzen-und-info-zeilen-entfernen">Kopfzeile setzen und Info-Zeilen entfernen</a></li>
@@ -249,7 +261,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#text-zusammensetzen-und-zerlegen-paste-substr-trimws" id="toc-text-zusammensetzen-und-zerlegen-paste-substr-trimws" class="nav-link" data-scroll-target="#text-zusammensetzen-und-zerlegen-paste-substr-trimws">Text zusammensetzen und zerlegen: paste(), substr(), trimws()</a></li>
   <li><a href="#zahlen-in-kategorien-einteilen-cut" id="toc-zahlen-in-kategorien-einteilen-cut" class="nav-link" data-scroll-target="#zahlen-in-kategorien-einteilen-cut">Zahlen in Kategorien einteilen: cut()</a></li>
   </ul></li>
-  <li><a href="#teil-5-ergebnisse-speichern" id="toc-teil-5-ergebnisse-speichern" class="nav-link" data-scroll-target="#teil-5-ergebnisse-speichern">Teil 5: Ergebnisse speichern</a>
+  <li><a href="#teil-6-ergebnisse-speichern" id="toc-teil-6-ergebnisse-speichern" class="nav-link" data-scroll-target="#teil-6-ergebnisse-speichern">Teil 6: Ergebnisse speichern</a>
   <ul class="collapse">
   <li><a href="#als-csv-write.csv-und-write.csv2" id="toc-als-csv-write.csv-und-write.csv2" class="nav-link" data-scroll-target="#als-csv-write.csv-und-write.csv2">Als CSV: write.csv() und write.csv2()</a></li>
   <li><a href="#im-r-format-saverds-und-save" id="toc-im-r-format-saverds-und-save" class="nav-link" data-scroll-target="#im-r-format-saverds-und-save">Im R-Format: saveRDS() und save()</a></li>
@@ -261,9 +273,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./einheit-0.html">Einheiten</a></li><li class="breadcrumb-item"><a href="./einheit-2.html">2 · Daten einlesen &amp; aufräumen</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./vorbereitung.html">Einheiten</a></li><li class="breadcrumb-item"><a href="./einheit-2.html">2 · Datenstrukturen &amp; Daten einlesen</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Einheit 2: Daten einlesen &amp; aufräumen</h1>
+<h1 class="title">Einheit 2: Datenstrukturen &amp; Daten einlesen</h1>
 </div>
 
 
@@ -282,24 +294,187 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <p>In dieser Einheit geht es vom einzelnen Vektor zur ganzen Tabelle — und von der Datei zu sauberen Daten:</p>
 <ol type="1">
-<li><strong>Listen und Faktoren</strong> — zwei weitere Datenstrukturen, die in Tabellen ständig vorkommen</li>
-<li><strong>Data Frames</strong> — die zentrale Struktur für tabellarische Daten in R</li>
+<li><strong>Matrizen</strong> — Tabellen aus Werten desselben Typs</li>
+<li><strong>Listen und Data Frames</strong> — Tabellen mit Spalten unterschiedlichen Typs</li>
+<li><strong>Faktoren</strong> — Spalten mit Kategorien</li>
 <li><strong>Daten einlesen</strong> — CSV &amp; Co.&nbsp;in R laden</li>
-<li><strong>Unordentliche Daten aufräumen</strong> — Kopfzeilen, falsche Datentypen und Spaltennamen in Ordnung bringen</li>
+<li><strong>Daten aufräumen</strong> — Kopfzeilen, falsche Datentypen und Spaltennamen in Ordnung bringen</li>
 <li><strong>Ergebnisse speichern</strong> — CSV, RDS und RData</li>
 </ol>
 <p>In dieser Einheit arbeiten wir nur mit Basis-R, es werden keine Zusatzpakete gebraucht.</p>
-<section id="teil-1-listen-und-faktoren" class="level1">
-<h1>Teil 1: Listen und Faktoren</h1>
+<section id="teil-1-matrizen" class="level1">
+<h1>Teil 1: Matrizen</h1>
+<p>Wir verwenden wieder die Temperaturen aus Einheit 1:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>monate    <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Mai"</span>, <span class="st">"Juni"</span>, <span class="st">"Juli"</span>, <span class="st">"August"</span>, <span class="st">"September"</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>tmax_wien <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">20.1</span>, <span class="fl">24.1</span>, <span class="fl">26.0</span>, <span class="fl">25.7</span>, <span class="fl">20.5</span>)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>tmin_wien <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">10.4</span>, <span class="fl">14.3</span>, <span class="fl">16.4</span>, <span class="fl">16.0</span>, <span class="fl">11.9</span>)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(tmax_wien) <span class="ot">&lt;-</span> monate</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(tmin_wien) <span class="ot">&lt;-</span> monate</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<section id="was-ist-eine-matrix" class="level2">
+<h2 class="anchored" data-anchor-id="was-ist-eine-matrix">Was ist eine Matrix?</h2>
+<p>Eine <strong>Matrix</strong> ist eine Sammlung von Elementen desselben Datentyps, angeordnet in Zeilen und Spalten — also zweidimensional, im Gegensatz zum eindimensionalen Vektor. Erzeugt wird sie mit <code>matrix()</code>:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">matrix</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>, <span class="at">nrow =</span> <span class="dv">2</span>)                 <span class="co"># Standard: spaltenweise gefüllt</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     [,1] [,2] [,3]
+[1,]    1    3    5
+[2,]    2    4    6</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">matrix</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>, <span class="at">nrow =</span> <span class="dv">2</span>, <span class="at">byrow =</span> <span class="cn">TRUE</span>)   <span class="co"># zeilenweise gefüllt</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     [,1] [,2] [,3]
+[1,]    1    2    3
+[2,]    4    5    6</code></pre>
+</div>
+</div>
+<ul>
+<li>Das erste Argument sind die Elemente.</li>
+<li><code>nrow</code> (oder <code>ncol</code>) legt die Anzahl der Zeilen (Spalten) fest.</li>
+<li><code>byrow = TRUE</code> füllt zeilenweise; Standard ist spaltenweise.</li>
+</ul>
+</section>
+<section id="eine-matrix-aus-vektoren-bauen" class="level2">
+<h2 class="anchored" data-anchor-id="eine-matrix-aus-vektoren-bauen">Eine Matrix aus Vektoren bauen</h2>
+<p>Die beiden Temperaturvektoren lassen sich direkt zu einer Matrix zusammenfügen: erst alle Höchstwerte, dann alle Tiefstwerte — spaltenweise gefüllt, ergibt das genau eine Spalte pro Messwert:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>wien_matrix <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(tmax_wien, tmin_wien), <span class="at">ncol =</span> <span class="dv">2</span>)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>wien_matrix</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     [,1] [,2]
+[1,] 20.1 10.4
+[2,] 24.1 14.3
+[3,] 26.0 16.4
+[4,] 25.7 16.0
+[5,] 20.5 11.9</code></pre>
+</div>
+</div>
+</section>
+<section id="matrizen-benennen" class="level2">
+<h2 class="anchored" data-anchor-id="matrizen-benennen">Matrizen benennen</h2>
+<p>Wie <code>names()</code> bei Vektoren — nur getrennt für Zeilen und Spalten:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(wien_matrix) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"TMax"</span>, <span class="st">"TMin"</span>)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(wien_matrix) <span class="ot">&lt;-</span> monate</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>wien_matrix</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>          TMax TMin
+Mai       20.1 10.4
+Juni      24.1 14.3
+Juli      26.0 16.4
+August    25.7 16.0
+September 20.5 11.9</code></pre>
+</div>
+</div>
+<p>Alternativ setzt man beides direkt beim Erstellen mit <code>dimnames = list(zeilen, spalten)</code>:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>wien_matrix <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(tmax_wien, tmin_wien), <span class="at">ncol =</span> <span class="dv">2</span>,</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>                      <span class="at">dimnames =</span> <span class="fu">list</span>(monate, <span class="fu">c</span>(<span class="st">"TMax"</span>, <span class="st">"TMin"</span>)))</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="matrixelemente-auswählen" class="level2">
+<h2 class="anchored" data-anchor-id="matrixelemente-auswählen">Matrixelemente auswählen</h2>
+<p>Wie bei Vektoren mit <code>[ ]</code> — aber mit <strong>zwei</strong> Angaben: <code>[Zeile, Spalte]</code>.</p>
+<ul>
+<li><code>m[1, 2]</code> → Element in Zeile 1, Spalte 2</li>
+<li><code>m[, 1]</code> → alle Zeilen der 1. Spalte</li>
+<li><code>m[1, ]</code> → alle Spalten der 1. Zeile</li>
+<li>statt Nummern gehen auch Namen: <code>m["Juli", "TMax"]</code></li>
+</ul>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>wien_matrix[<span class="st">"Juli"</span>, <span class="st">"TMax"</span>]</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 26</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(wien_matrix[, <span class="st">"TMin"</span>])           <span class="co"># Ø Tiefsttemperatur, alle Monate</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 13.8</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(wien_matrix[<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>, <span class="st">"TMin"</span>])        <span class="co"># nur Mai und Juni</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 12.35</code></pre>
+</div>
+</div>
+</section>
+<section id="zeilen--und-spaltenmittelwerte" class="level2">
+<h2 class="anchored" data-anchor-id="zeilen--und-spaltenmittelwerte">Zeilen- und Spaltenmittelwerte</h2>
+<p><code>rowMeans()</code> berechnet den Mittelwert jeder Zeile — hier also die Durchschnittstemperatur pro Monat (in Einheit 1 haben wir sie als <code>tmittel_wien</code> noch von Hand berechnet):</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>durchschnitt <span class="ot">&lt;-</span> <span class="fu">rowMeans</span>(wien_matrix)</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>durchschnitt</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>      Mai      Juni      Juli    August September 
+    15.25     19.20     21.20     20.85     16.20 </code></pre>
+</div>
+</div>
+<p><code>colMeans()</code> rechnet pro Spalte — die mittlere Höchst- bzw. Tiefsttemperatur über den ganzen Zeitraum:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">colMeans</span>(wien_matrix)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> TMax  TMin 
+23.28 13.80 </code></pre>
+</div>
+</div>
+</section>
+<section id="spalten-und-zeilen-anhängen-cbind-und-rbind" class="level2">
+<h2 class="anchored" data-anchor-id="spalten-und-zeilen-anhängen-cbind-und-rbind">Spalten und Zeilen anhängen: cbind() und rbind()</h2>
+<p><code>cbind()</code> fügt spaltenweise zusammen (<em>column bind</em>), <code>rbind()</code> zeilenweise (<em>row bind</em>). Wir hängen die Durchschnittstemperatur als Spalte an und die Spaltenmittelwerte als Zeile:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>wien_erweitert <span class="ot">&lt;-</span> <span class="fu">cbind</span>(wien_matrix, <span class="at">Mittel =</span> durchschnitt)</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>wien_erweitert <span class="ot">&lt;-</span> <span class="fu">rbind</span>(wien_erweitert, <span class="at">Gesamt =</span> <span class="fu">colMeans</span>(wien_erweitert))</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(wien_erweitert, <span class="dv">1</span>)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>          TMax TMin Mittel
+Mai       20.1 10.4   15.2
+Juni      24.1 14.3   19.2
+Juli      26.0 16.4   21.2
+August    25.7 16.0   20.9
+September 20.5 11.9   16.2
+Gesamt    23.3 13.8   18.5</code></pre>
+</div>
+</div>
+</section>
+<section id="die-matrix-als-balkendiagramm" class="level2">
+<h2 class="anchored" data-anchor-id="die-matrix-als-balkendiagramm">Die Matrix als Balkendiagramm</h2>
+<p><code>barplot()</code> funktioniert auch mit einer Matrix. <code>t()</code> dreht sie (Zeilen ↔︎ Spalten), damit die Monate auf der x-Achse landen; <code>beside = TRUE</code> stellt TMax und TMin nebeneinander:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">barplot</span>(<span class="fu">t</span>(wien_matrix), <span class="at">beside =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.text =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>        <span class="at">main =</span> <span class="st">"Höchst- und Tiefsttemperaturen in Wien, Mai–September"</span>,</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>        <span class="at">ylab =</span> <span class="st">"°C"</span>,</span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">col  =</span> <span class="fu">c</span>(<span class="st">"tomato"</span>, <span class="st">"steelblue"</span>))</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="einheit-2_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<section id="übung" class="level3">
+<h3 class="anchored" data-anchor-id="übung">Übung</h3>
+<ol type="1">
+<li>Wähle aus <code>wien_matrix</code> die Werte für Juli und August (beide Spalten) aus.</li>
+<li>Berechne für jeden Monat die Spanne <code>TMax - TMin</code> und hänge sie mit <code>cbind()</code> als Spalte <code>Spanne</code> an <code>wien_matrix</code> an.</li>
+</ol>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># dein Code</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+</section>
+</section>
+<section id="teil-2-listen-und-data-frames" class="level1">
+<h1>Teil 2: Listen und Data Frames</h1>
 <section id="listen" class="level2">
 <h2 class="anchored" data-anchor-id="listen">Listen</h2>
 <p>Vektoren und Matrizen enthalten nur <strong>einen</strong> Datentyp. Eine <strong>Liste</strong> kann dagegen beliebige Objekte unterschiedlichen Typs und unterschiedlicher Länge sammeln:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>wien_info <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">stadt           =</span> <span class="st">"Wien"</span>,</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>                  <span class="at">einwohner       =</span> <span class="dv">2000000</span>,</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>                  <span class="at">bezirke         =</span> <span class="fu">c</span>(<span class="st">"Innere Stadt"</span>, <span class="st">"Leopoldstadt"</span>, <span class="st">"Landstraße"</span>),</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>                  <span class="at">temperatur_juli =</span> <span class="fu">c</span>(<span class="at">TMax =</span> <span class="fl">26.0</span>, <span class="at">TMin =</span> <span class="fl">16.4</span>))</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(wien_info)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>wien_info <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">stadt           =</span> <span class="st">"Wien"</span>,</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>                  <span class="at">einwohner       =</span> <span class="dv">2000000</span>,</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>                  <span class="at">bezirke         =</span> <span class="fu">c</span>(<span class="st">"Innere Stadt"</span>, <span class="st">"Leopoldstadt"</span>, <span class="st">"Landstraße"</span>),</span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>                  <span class="at">temperatur_juli =</span> <span class="fu">c</span>(<span class="at">TMax =</span> <span class="fl">26.0</span>, <span class="at">TMin =</span> <span class="fl">16.4</span>))</span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(wien_info)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>List of 4
  $ stadt          : chr "Wien"
@@ -311,103 +486,24 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>Ein einzelnes Element holt man mit <code>$</code> oder doppelten eckigen Klammern <code>[[ ]]</code>:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>wien_info<span class="sc">$</span>stadt</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>wien_info<span class="sc">$</span>stadt</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "Wien"</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>wien_info[[<span class="st">"bezirke"</span>]]</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>wien_info[[<span class="st">"bezirke"</span>]]</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "Innere Stadt" "Leopoldstadt" "Landstraße"  </code></pre>
 </div>
 </div>
-<p>Listen begegnen dir vor allem indirekt: Viele Funktionen geben ihr Ergebnis als Liste zurück, und ein <strong>Data Frame</strong> (Teil 2) ist eine Liste gleich langer Vektoren.</p>
+<p>Listen begegnen dir vor allem indirekt: Viele Funktionen geben ihr Ergebnis als Liste zurück. Auch ein <strong>Data Frame</strong> ist eine Liste — eine Liste gleich langer Vektoren, einer pro Spalte.</p>
 </section>
-<section id="faktoren" class="level2">
-<h2 class="anchored" data-anchor-id="faktoren">Faktoren</h2>
-<p>Ein <strong>Faktor</strong> ist der Datentyp für <strong>kategoriale Variablen</strong> — Werte aus einer begrenzten Menge an Kategorien (z. B. Land, Bewertungsstufe). Zwei Arten:</p>
-<ul>
-<li><strong>nominal</strong> — ohne Reihenfolge, z. B. <code>"Katze"</code>, <code>"Hund"</code>, <code>"Pferd"</code></li>
-<li><strong>ordinal</strong> — mit Reihenfolge, z. B. <code>"niedrig"</code> &lt; <code>"mittel"</code> &lt; <code>"hoch"</code></li>
-</ul>
-<p>Mit <code>factor()</code> wird ein Text-Vektor zu einem Faktor; die vorkommenden Werte werden zu <strong>Levels</strong>. <code>summary()</code> zählt die Häufigkeit pro Level:</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>tiere <span class="ot">&lt;-</span> <span class="fu">factor</span>(<span class="fu">c</span>(<span class="st">"h"</span>, <span class="st">"k"</span>, <span class="st">"h"</span>, <span class="st">"p"</span>, <span class="st">"k"</span>, <span class="st">"h"</span>))</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>tiere</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] h k h p k h
-Levels: h k p</code></pre>
-</div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(tiere)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>h k p 
-3 2 1 </code></pre>
-</div>
-</div>
-<section id="levels-umbenennen" class="level3">
-<h3 class="anchored" data-anchor-id="levels-umbenennen">Levels umbenennen</h3>
-<p>Daten enthalten oft Kürzel statt lesbarer Bezeichnungen. R sortiert die Levels alphabetisch (<code>"h"</code>, <code>"k"</code>, <code>"p"</code>) — in genau dieser Reihenfolge lassen sie sich mit <code>levels()</code> umbenennen:</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">levels</span>(tiere) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Hund"</span>, <span class="st">"Katze"</span>, <span class="st">"Pferd"</span>)</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>tiere</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] Hund  Katze Hund  Pferd Katze Hund 
-Levels: Hund Katze Pferd</code></pre>
-</div>
-</div>
-</section>
-<section id="nominal-vs.-ordinal" class="level3">
-<h3 class="anchored" data-anchor-id="nominal-vs.-ordinal">Nominal vs.&nbsp;ordinal</h3>
-<p>Bei einem <strong>nominalen</strong> Faktor ergibt ein Größenvergleich keinen Sinn — R gibt eine Warnung und <code>NA</code> zurück:</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>tiere[<span class="dv">1</span>] <span class="sc">&gt;</span> tiere[<span class="dv">2</span>]</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning in Ops.factor(tiere[1], tiere[2]): '&gt;' ist nicht sinnvoll für Faktoren</code></pre>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] NA</code></pre>
-</div>
-</div>
-<p>Für einen <strong>geordneten</strong> Faktor gibt man <code>ordered = TRUE</code> und die <code>levels</code> in der richtigen Reihenfolge an — dann funktionieren Vergleiche:</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>tempo <span class="ot">&lt;-</span> <span class="fu">factor</span>(<span class="fu">c</span>(<span class="st">"mittel"</span>, <span class="st">"langsam"</span>, <span class="st">"schnell"</span>, <span class="st">"mittel"</span>),</span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>                <span class="at">ordered =</span> <span class="cn">TRUE</span>, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"langsam"</span>, <span class="st">"mittel"</span>, <span class="st">"schnell"</span>))</span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>tempo</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] mittel  langsam schnell mittel 
-Levels: langsam &lt; mittel &lt; schnell</code></pre>
-</div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>tempo[<span class="dv">1</span>] <span class="sc">&gt;</span> tempo[<span class="dv">2</span>]   <span class="co"># ist "mittel" schneller als "langsam"?</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] TRUE</code></pre>
-</div>
-</div>
-</section>
-<section id="übung" class="level3">
-<h3 class="anchored" data-anchor-id="übung">Übung</h3>
-<ol type="1">
-<li>Lege eine Liste <code>kurs</code> an mit den Elementen <code>titel</code> (<code>"R-Einführung"</code>), <code>teilnehmende</code> (eine Zahl) und <code>themen</code> (ein Vektor mit mindestens drei Themen). Gib das zweite Thema aus (Tipp: erst das Element holen, dann <code>[ ]</code>).</li>
-<li>Kursbewertungen liegen als Text vor: <code>bewertungen &lt;- c("gut", "sehr gut", "mittel", "gut", "schlecht", "sehr gut", "gut")</code>
-<ul>
-<li>Mache daraus einen <strong>geordneten</strong> Faktor von <code>"schlecht"</code> bis <code>"sehr gut"</code>.</li>
-<li>Zähle mit <code>table()</code>, wie oft jede Bewertung vorkommt. In welcher Reihenfolge stehen die Levels — und warum?</li>
-<li>Wie viele Bewertungen sind besser als <code>"mittel"</code>? (Tipp: <code>sum()</code>)</li>
-</ul></li>
-</ol>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># dein Code</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-</section>
-</section>
-</section>
-<section id="teil-2-data-frames" class="level1">
-<h1>Teil 2: Data Frames</h1>
 <section id="was-ist-ein-data-frame" class="level2">
 <h2 class="anchored" data-anchor-id="was-ist-ein-data-frame">Was ist ein Data Frame?</h2>
 <p>In einer Matrix haben alle Elemente denselben Datentyp. Reale Datensätze mischen aber fast immer Typen: ein Name (<code>character</code>), ein Alter (<code>numeric</code>), eine Ja/Nein-Angabe (<code>logical</code>) …</p>
 <p>Ein <strong>Data Frame</strong> speichert genau das: <strong>Variablen als Spalten, Beobachtungen als Zeilen</strong> — jede Spalte mit ihrem eigenen Datentyp. Das entspricht einer Tabelle, wie man sie aus Excel kennt.</p>
 <p>R bringt einige Datensätze mit, z. B. <code>mtcars</code> (Kenndaten von 32 Automodellen, 1974):</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(mtcars)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(mtcars)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>                   mpg cyl disp  hp drat    wt  qsec vs am gear carb
 Mazda RX4         21.0   6  160 110 3.90 2.620 16.46  0  1    4    4
@@ -429,7 +525,7 @@ Valiant           18.1   6  225 105 2.76 3.460 20.22  1  0    3    1</code></pre
 </ul>
 <p><code>str()</code> ist meist der erste Befehl bei einem unbekannten Datensatz:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(mtcars)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(mtcars)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>'data.frame':   32 obs. of  11 variables:
  $ mpg : num  21 21 22.8 21.4 18.7 18.1 14.3 24.4 22.8 19.2 ...
@@ -444,7 +540,7 @@ Valiant           18.1   6  225 105 2.76 3.460 20.22  1  0    3    1</code></pre
  $ gear: num  4 4 4 3 3 3 3 4 4 4 ...
  $ carb: num  4 4 1 1 2 1 4 2 2 4 ...</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mtcars)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mtcars)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>      mpg             cyl             disp             hp       
  Min.   :10.40   Min.   :4.000   Min.   : 71.1   Min.   : 52.0  
@@ -474,17 +570,17 @@ Valiant           18.1   6  225 105 2.76 3.460 20.22  1  0    3    1</code></pre
 <h2 class="anchored" data-anchor-id="einen-eigenen-data-frame-erstellen">Einen eigenen Data Frame erstellen</h2>
 <p>Wir bauen einen Data Frame mit den acht Planeten unseres Sonnensystems: Typ, Durchmesser (relativ zur Erde), Rotationsdauer (in Erdtagen; negativ = dreht sich rückwärts) und ob der Planet Ringe hat:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>name        <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Merkur"</span>, <span class="st">"Venus"</span>, <span class="st">"Erde"</span>, <span class="st">"Mars"</span>, <span class="st">"Jupiter"</span>, <span class="st">"Saturn"</span>, <span class="st">"Uranus"</span>, <span class="st">"Neptun"</span>)</span>
-<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>typ         <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Gesteinsplanet"</span>, <span class="st">"Gesteinsplanet"</span>, <span class="st">"Gesteinsplanet"</span>, <span class="st">"Gesteinsplanet"</span>,</span>
-<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>                 <span class="st">"Gasriese"</span>, <span class="st">"Gasriese"</span>, <span class="st">"Eisriese"</span>, <span class="st">"Eisriese"</span>)</span>
-<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>durchmesser <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">0.382</span>, <span class="fl">0.949</span>, <span class="dv">1</span>, <span class="fl">0.532</span>, <span class="fl">11.209</span>, <span class="fl">9.449</span>, <span class="fl">4.007</span>, <span class="fl">3.883</span>)</span>
-<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>rotation    <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">58.64</span>, <span class="sc">-</span><span class="fl">243.02</span>, <span class="dv">1</span>, <span class="fl">1.03</span>, <span class="fl">0.41</span>, <span class="fl">0.43</span>, <span class="sc">-</span><span class="fl">0.72</span>, <span class="fl">0.67</span>)</span>
-<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>hat_ringe   <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="cn">FALSE</span>, <span class="cn">FALSE</span>, <span class="cn">FALSE</span>, <span class="cn">FALSE</span>, <span class="cn">TRUE</span>, <span class="cn">TRUE</span>, <span class="cn">TRUE</span>, <span class="cn">TRUE</span>)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>name        <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Merkur"</span>, <span class="st">"Venus"</span>, <span class="st">"Erde"</span>, <span class="st">"Mars"</span>, <span class="st">"Jupiter"</span>, <span class="st">"Saturn"</span>, <span class="st">"Uranus"</span>, <span class="st">"Neptun"</span>)</span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>typ         <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Gesteinsplanet"</span>, <span class="st">"Gesteinsplanet"</span>, <span class="st">"Gesteinsplanet"</span>, <span class="st">"Gesteinsplanet"</span>,</span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>                 <span class="st">"Gasriese"</span>, <span class="st">"Gasriese"</span>, <span class="st">"Eisriese"</span>, <span class="st">"Eisriese"</span>)</span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a>durchmesser <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">0.382</span>, <span class="fl">0.949</span>, <span class="dv">1</span>, <span class="fl">0.532</span>, <span class="fl">11.209</span>, <span class="fl">9.449</span>, <span class="fl">4.007</span>, <span class="fl">3.883</span>)</span>
+<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a>rotation    <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">58.64</span>, <span class="sc">-</span><span class="fl">243.02</span>, <span class="dv">1</span>, <span class="fl">1.03</span>, <span class="fl">0.41</span>, <span class="fl">0.43</span>, <span class="sc">-</span><span class="fl">0.72</span>, <span class="fl">0.67</span>)</span>
+<span id="cb37-6"><a href="#cb37-6" aria-hidden="true" tabindex="-1"></a>hat_ringe   <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="cn">FALSE</span>, <span class="cn">FALSE</span>, <span class="cn">FALSE</span>, <span class="cn">FALSE</span>, <span class="cn">TRUE</span>, <span class="cn">TRUE</span>, <span class="cn">TRUE</span>, <span class="cn">TRUE</span>)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p><code>data.frame()</code> fügt gleich lange Vektoren zu einem Data Frame zusammen — jeder Vektor wird eine Spalte:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>planeten <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(name, typ, durchmesser, rotation, hat_ringe)</span>
-<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>planeten</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>planeten <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(name, typ, durchmesser, rotation, hat_ringe)</span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>planeten</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>     name            typ durchmesser rotation hat_ringe
 1  Merkur Gesteinsplanet       0.382    58.64     FALSE
@@ -496,7 +592,7 @@ Valiant           18.1   6  225 105 2.76 3.460 20.22  1  0    3    1</code></pre
 7  Uranus       Eisriese       4.007    -0.72      TRUE
 8  Neptun       Eisriese       3.883     0.67      TRUE</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(planeten)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(planeten)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>'data.frame':   8 obs. of  5 variables:
  $ name       : chr  "Merkur" "Venus" "Erde" "Mars" ...
@@ -511,30 +607,30 @@ Valiant           18.1   6  225 105 2.76 3.460 20.22  1  0    3    1</code></pre
 <h2 class="anchored" data-anchor-id="elemente-und-spalten-auswählen">Elemente und Spalten auswählen</h2>
 <p>Wie bei Matrizen: <code>[Zeile, Spalte]</code>. Statt Nummern lassen sich Spaltennamen verwenden — das ist besser lesbar:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>planeten[<span class="dv">1</span>, <span class="dv">3</span>]          <span class="co"># Zeile 1, Spalte 3: Durchmesser von Merkur</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>planeten[<span class="dv">1</span>, <span class="dv">3</span>]          <span class="co"># Zeile 1, Spalte 3: Durchmesser von Merkur</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.382</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>planeten[<span class="dv">4</span>, ]           <span class="co"># ganze Zeile 4: alle Daten zu Mars</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>planeten[<span class="dv">4</span>, ]           <span class="co"># ganze Zeile 4: alle Daten zu Mars</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  name            typ durchmesser rotation hat_ringe
 4 Mars Gesteinsplanet       0.532     1.03     FALSE</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>planeten[<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>, <span class="st">"typ"</span>]    <span class="co"># Zeilen 1-3 der Spalte "typ"</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>planeten[<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>, <span class="st">"typ"</span>]    <span class="co"># Zeilen 1-3 der Spalte "typ"</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "Gesteinsplanet" "Gesteinsplanet" "Gesteinsplanet"</code></pre>
 </div>
 </div>
 <p>Eine ganze Spalte bekommt man kürzer mit dem Dollarzeichen <code>$</code> — das Ergebnis ist ein Vektor:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>planeten<span class="sc">$</span>durchmesser</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a>planeten<span class="sc">$</span>durchmesser</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1]  0.382  0.949  1.000  0.532 11.209  9.449  4.007  3.883</code></pre>
 </div>
 </div>
 <p>Ein <strong>Minuszeichen</strong> vor der Nummer bedeutet „alles außer”:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>planeten[, <span class="sc">-</span><span class="dv">1</span>]        <span class="co"># alle Spalten außer der ersten</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a>planeten[, <span class="sc">-</span><span class="dv">1</span>]        <span class="co"># alle Spalten außer der ersten</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>             typ durchmesser rotation hat_ringe
 1 Gesteinsplanet       0.382    58.64     FALSE
@@ -546,7 +642,7 @@ Valiant           18.1   6  225 105 2.76 3.460 20.22  1  0    3    1</code></pre
 7       Eisriese       4.007    -0.72      TRUE
 8       Eisriese       3.883     0.67      TRUE</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>planeten[<span class="sc">-</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>), ]    <span class="co"># alle Zeilen außer 1–4</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a>planeten[<span class="sc">-</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>), ]    <span class="co"># alle Zeilen außer 1–4</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>     name      typ durchmesser rotation hat_ringe
 5 Jupiter Gasriese      11.209     0.41      TRUE
@@ -560,34 +656,24 @@ Valiant           18.1   6  225 105 2.76 3.460 20.22  1  0    3    1</code></pre
 <h2 class="anchored" data-anchor-id="kategorien-ansehen-und-zählen-unique-table">Kategorien ansehen und zählen: unique(), table()</h2>
 <p><code>unique()</code> zeigt, welche verschiedenen Werte in einer Spalte vorkommen, <code>table()</code> zählt sie:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="fu">unique</span>(planeten<span class="sc">$</span>typ)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="fu">unique</span>(planeten<span class="sc">$</span>typ)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "Gesteinsplanet" "Gasriese"       "Eisriese"      </code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(planeten<span class="sc">$</span>typ)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(planeten<span class="sc">$</span>typ)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
       Eisriese       Gasriese Gesteinsplanet 
              2              2              4 </code></pre>
 </div>
 </div>
-<p>Soll die Spalte als Kategorie behandelt werden, macht man sie zum Faktor (Teil 1) — z. B. um eine sinnvolle Reihenfolge festzulegen statt der alphabetischen:</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a>planeten<span class="sc">$</span>typ <span class="ot">&lt;-</span> <span class="fu">factor</span>(planeten<span class="sc">$</span>typ,</span>
-<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a>                       <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"Gesteinsplanet"</span>, <span class="st">"Gasriese"</span>, <span class="st">"Eisriese"</span>))</span>
-<span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(planeten<span class="sc">$</span>typ)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-Gesteinsplanet       Gasriese       Eisriese 
-             4              2              2 </code></pre>
-</div>
-</div>
+<p>Spalten mit Kategorien wie <code>typ</code> behandelt man in R am besten als <strong>Faktor</strong> — mehr dazu in Teil 3.</p>
 </section>
 <section id="zeilen-filtern" class="level2">
 <h2 class="anchored" data-anchor-id="zeilen-filtern">Zeilen filtern</h2>
 <p>Ein logischer Vektor in der Zeilenposition wählt die Zeilen aus, bei denen <code>TRUE</code> steht:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a>planeten[planeten<span class="sc">$</span>hat_ringe, ]           <span class="co"># nur Planeten mit Ringen</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb58"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a>planeten[planeten<span class="sc">$</span>hat_ringe, ]           <span class="co"># nur Planeten mit Ringen</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>     name      typ durchmesser rotation hat_ringe
 5 Jupiter Gasriese      11.209     0.41      TRUE
@@ -595,7 +681,7 @@ Gesteinsplanet       Gasriese       Eisriese
 7  Uranus Eisriese       4.007    -0.72      TRUE
 8  Neptun Eisriese       3.883     0.67      TRUE</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a>planeten[planeten<span class="sc">$</span>durchmesser <span class="sc">&lt;</span> <span class="dv">1</span>, ]     <span class="co"># nur Planeten kleiner als die Erde</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb60"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a>planeten[planeten<span class="sc">$</span>durchmesser <span class="sc">&lt;</span> <span class="dv">1</span>, ]     <span class="co"># nur Planeten kleiner als die Erde</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>    name            typ durchmesser rotation hat_ringe
 1 Merkur Gesteinsplanet       0.382    58.64     FALSE
@@ -605,7 +691,7 @@ Gesteinsplanet       Gasriese       Eisriese
 </div>
 <p><code>subset()</code> ist die kürzere Schreibweise — man kann die Spaltennamen direkt verwenden:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="fu">subset</span>(planeten, durchmesser <span class="sc">&lt;</span> <span class="dv">1</span>)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb62"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a><span class="fu">subset</span>(planeten, durchmesser <span class="sc">&lt;</span> <span class="dv">1</span>)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>    name            typ durchmesser rotation hat_ringe
 1 Merkur Gesteinsplanet       0.382    58.64     FALSE
@@ -618,19 +704,19 @@ Gesteinsplanet       Gasriese       Eisriese
 <h2 class="anchored" data-anchor-id="sortieren-mit-order">Sortieren mit order()</h2>
 <p><code>sort()</code> sortiert einen Vektor. Um einen <strong>Data Frame</strong> zu sortieren, braucht man <code>order()</code>: Es liefert nicht die Werte, sondern die <strong>Positionen</strong> in sortierter Reihenfolge.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a>preise <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">100</span>, <span class="dv">10</span>, <span class="dv">1000</span>)</span>
-<span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sort</span>(preise)    <span class="co"># die sortierten Werte</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb64"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a>preise <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">100</span>, <span class="dv">10</span>, <span class="dv">1000</span>)</span>
+<span id="cb64-2"><a href="#cb64-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sort</span>(preise)    <span class="co"># die sortierten Werte</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1]   10  100 1000</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb58"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a><span class="fu">order</span>(preise)   <span class="co"># 10 steht an Position 2, 100 an Position 1, 1000 an Position 3</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb66"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a><span class="fu">order</span>(preise)   <span class="co"># 10 steht an Position 2, 100 an Position 1, 1000 an Position 3</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 2 1 3</code></pre>
 </div>
 </div>
 <p>Diese Positionen als Zeilenindex sortieren den ganzen Data Frame:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb60"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a>planeten[<span class="fu">order</span>(planeten<span class="sc">$</span>durchmesser), ]                    <span class="co"># aufsteigend</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb68"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a>planeten[<span class="fu">order</span>(planeten<span class="sc">$</span>durchmesser), ]                    <span class="co"># aufsteigend</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>     name            typ durchmesser rotation hat_ringe
 1  Merkur Gesteinsplanet       0.382    58.64     FALSE
@@ -642,7 +728,7 @@ Gesteinsplanet       Gasriese       Eisriese
 6  Saturn       Gasriese       9.449     0.43      TRUE
 5 Jupiter       Gasriese      11.209     0.41      TRUE</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb62"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a>planeten[<span class="fu">order</span>(planeten<span class="sc">$</span>durchmesser, <span class="at">decreasing =</span> <span class="cn">TRUE</span>), ] <span class="co"># absteigend</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb70"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb70-1"><a href="#cb70-1" aria-hidden="true" tabindex="-1"></a>planeten[<span class="fu">order</span>(planeten<span class="sc">$</span>durchmesser, <span class="at">decreasing =</span> <span class="cn">TRUE</span>), ] <span class="co"># absteigend</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>     name            typ durchmesser rotation hat_ringe
 5 Jupiter       Gasriese      11.209     0.41      TRUE
@@ -658,21 +744,109 @@ Gesteinsplanet       Gasriese       Eisriese
 <section id="übung-1" class="level3">
 <h3 class="anchored" data-anchor-id="übung-1">Übung</h3>
 <ol type="1">
+<li>Lege eine Liste <code>kurs</code> an mit den Elementen <code>titel</code> (<code>"R-Einführung"</code>), <code>teilnehmende</code> (eine Zahl) und <code>themen</code> (ein Vektor mit mindestens drei Themen). Gib das zweite Thema aus (Tipp: erst das Element holen, dann <code>[ ]</code>).</li>
 <li>Wie viele Planeten haben einen größeren Durchmesser als die Erde? (Tipp: <code>sum()</code>)</li>
 <li>Zeige nur <code>name</code> und <code>rotation</code> der Planeten, die sich rückwärts drehen.</li>
 </ol>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb64"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a><span class="co"># dein Code</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb72"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb72-1"><a href="#cb72-1" aria-hidden="true" tabindex="-1"></a><span class="co"># dein Code</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 </section>
 </section>
-<section id="teil-3-daten-einlesen" class="level1">
-<h1>Teil 3: Daten einlesen</h1>
-<p>In der Praxis liegen Daten fast immer als <strong>Datei</strong> vor — meistens als CSV (<em>comma-separated values</em>): eine Textdatei mit einer Beobachtung pro Zeile und einem Trennzeichen zwischen den Spalten.</p>
-<p>R sucht Dateien relativ zum <strong>Arbeitsverzeichnis</strong>. Wird das Projekt über <code>r-einfuehrung.Rproj</code> geöffnet, ist das der Projektordner (siehe Einheit 0):</p>
+<section id="teil-3-faktoren" class="level1">
+<h1>Teil 3: Faktoren</h1>
+<p>Ein <strong>Faktor</strong> ist der Datentyp für <strong>kategoriale Variablen</strong> — Werte aus einer begrenzten Menge an Kategorien (z. B. Land, Bewertungsstufe). Zwei Arten:</p>
+<ul>
+<li><strong>nominal</strong> — ohne Reihenfolge, z. B. <code>"Katze"</code>, <code>"Hund"</code>, <code>"Pferd"</code></li>
+<li><strong>ordinal</strong> — mit Reihenfolge, z. B. <code>"niedrig"</code> &lt; <code>"mittel"</code> &lt; <code>"hoch"</code></li>
+</ul>
+<p>Mit <code>factor()</code> wird ein Text-Vektor zu einem Faktor; die vorkommenden Werte werden zu <strong>Levels</strong>. <code>summary()</code> zählt die Häufigkeit pro Level:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb65"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a><span class="fu">getwd</span>()</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb73"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb73-1"><a href="#cb73-1" aria-hidden="true" tabindex="-1"></a>tiere <span class="ot">&lt;-</span> <span class="fu">factor</span>(<span class="fu">c</span>(<span class="st">"h"</span>, <span class="st">"k"</span>, <span class="st">"h"</span>, <span class="st">"p"</span>, <span class="st">"k"</span>, <span class="st">"h"</span>))</span>
+<span id="cb73-2"><a href="#cb73-2" aria-hidden="true" tabindex="-1"></a>tiere</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] h k h p k h
+Levels: h k p</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb75"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb75-1"><a href="#cb75-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(tiere)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>h k p 
+3 2 1 </code></pre>
+</div>
+</div>
+<section id="levels-umbenennen" class="level2">
+<h2 class="anchored" data-anchor-id="levels-umbenennen">Levels umbenennen</h2>
+<p>Daten enthalten oft Kürzel statt lesbarer Bezeichnungen. R sortiert die Levels alphabetisch (<code>"h"</code>, <code>"k"</code>, <code>"p"</code>) — in genau dieser Reihenfolge lassen sie sich mit <code>levels()</code> umbenennen:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb77"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb77-1"><a href="#cb77-1" aria-hidden="true" tabindex="-1"></a><span class="fu">levels</span>(tiere) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Hund"</span>, <span class="st">"Katze"</span>, <span class="st">"Pferd"</span>)</span>
+<span id="cb77-2"><a href="#cb77-2" aria-hidden="true" tabindex="-1"></a>tiere</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] Hund  Katze Hund  Pferd Katze Hund 
+Levels: Hund Katze Pferd</code></pre>
+</div>
+</div>
+</section>
+<section id="nominal-vs.-ordinal" class="level2">
+<h2 class="anchored" data-anchor-id="nominal-vs.-ordinal">Nominal vs.&nbsp;ordinal</h2>
+<p>Bei einem <strong>nominalen</strong> Faktor ergibt ein Größenvergleich keinen Sinn — R gibt eine Warnung und <code>NA</code> zurück:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb79"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb79-1"><a href="#cb79-1" aria-hidden="true" tabindex="-1"></a>tiere[<span class="dv">1</span>] <span class="sc">&gt;</span> tiere[<span class="dv">2</span>]</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in Ops.factor(tiere[1], tiere[2]): '&gt;' ist nicht sinnvoll für Faktoren</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] NA</code></pre>
+</div>
+</div>
+<p>Für einen <strong>geordneten</strong> Faktor gibt man <code>ordered = TRUE</code> und die <code>levels</code> in der richtigen Reihenfolge an — dann funktionieren Vergleiche:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb82"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb82-1"><a href="#cb82-1" aria-hidden="true" tabindex="-1"></a>tempo <span class="ot">&lt;-</span> <span class="fu">factor</span>(<span class="fu">c</span>(<span class="st">"mittel"</span>, <span class="st">"langsam"</span>, <span class="st">"schnell"</span>, <span class="st">"mittel"</span>),</span>
+<span id="cb82-2"><a href="#cb82-2" aria-hidden="true" tabindex="-1"></a>                <span class="at">ordered =</span> <span class="cn">TRUE</span>, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"langsam"</span>, <span class="st">"mittel"</span>, <span class="st">"schnell"</span>))</span>
+<span id="cb82-3"><a href="#cb82-3" aria-hidden="true" tabindex="-1"></a>tempo</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] mittel  langsam schnell mittel 
+Levels: langsam &lt; mittel &lt; schnell</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb84"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb84-1"><a href="#cb84-1" aria-hidden="true" tabindex="-1"></a>tempo[<span class="dv">1</span>] <span class="sc">&gt;</span> tempo[<span class="dv">2</span>]   <span class="co"># ist "mittel" schneller als "langsam"?</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] TRUE</code></pre>
+</div>
+</div>
+</section>
+<section id="faktoren-in-einem-data-frame" class="level2">
+<h2 class="anchored" data-anchor-id="faktoren-in-einem-data-frame">Faktoren in einem Data Frame</h2>
+<p>In Tabellen sind Faktoren vor allem für Spalten mit Kategorien nützlich. <code>table()</code> sortiert Text alphabetisch — mit einem Faktor legt man stattdessen eine sinnvolle Reihenfolge fest:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb86"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb86-1"><a href="#cb86-1" aria-hidden="true" tabindex="-1"></a>planeten<span class="sc">$</span>typ <span class="ot">&lt;-</span> <span class="fu">factor</span>(planeten<span class="sc">$</span>typ,</span>
+<span id="cb86-2"><a href="#cb86-2" aria-hidden="true" tabindex="-1"></a>                       <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"Gesteinsplanet"</span>, <span class="st">"Gasriese"</span>, <span class="st">"Eisriese"</span>))</span>
+<span id="cb86-3"><a href="#cb86-3" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(planeten<span class="sc">$</span>typ)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Gesteinsplanet       Gasriese       Eisriese 
+             4              2              2 </code></pre>
+</div>
+</div>
+<section id="übung-2" class="level3">
+<h3 class="anchored" data-anchor-id="übung-2">Übung</h3>
+<p>Kursbewertungen liegen als Text vor: <code>bewertungen &lt;- c("gut", "sehr gut", "mittel", "gut", "schlecht", "sehr gut", "gut")</code></p>
+<ol type="1">
+<li>Mache daraus einen <strong>geordneten</strong> Faktor von <code>"schlecht"</code> bis <code>"sehr gut"</code>.</li>
+<li>Zähle mit <code>table()</code>, wie oft jede Bewertung vorkommt. In welcher Reihenfolge stehen die Levels — und warum?</li>
+<li>Wie viele Bewertungen sind besser als <code>"mittel"</code>? (Tipp: <code>sum()</code>)</li>
+</ol>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb88"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb88-1"><a href="#cb88-1" aria-hidden="true" tabindex="-1"></a><span class="co"># dein Code</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+</section>
+</section>
+<section id="teil-4-daten-einlesen" class="level1">
+<h1>Teil 4: Daten einlesen</h1>
+<p>In der Praxis liegen Daten fast immer als <strong>Datei</strong> vor — meistens als CSV (<em>comma-separated values</em>): eine Textdatei mit einer Beobachtung pro Zeile und einem Trennzeichen zwischen den Spalten.</p>
+<p>R sucht Dateien relativ zum <strong>Arbeitsverzeichnis</strong>. Wird das Projekt über <code>r-einfuehrung.Rproj</code> geöffnet, ist das der Projektordner (siehe Vorbereitung):</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb89"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb89-1"><a href="#cb89-1" aria-hidden="true" tabindex="-1"></a><span class="fu">getwd</span>()</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "C:/Users/mironova/OneDrive - TU Wien/Dokumente/Teaching/R_course/RIntroduction/_website"</code></pre>
 </div>
@@ -681,12 +855,12 @@ Gesteinsplanet       Gasriese       Eisriese
 <h2 class="anchored" data-anchor-id="csv-einlesen-mit-read.csv">CSV einlesen mit read.csv()</h2>
 <p><code>read.csv()</code> liest eine CSV-Datei und gibt einen Data Frame zurück:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb67"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a>mitarbeitende <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"data/raw/mitarbeitende.csv"</span>)</span>
-<span id="cb67-2"><a href="#cb67-2" aria-hidden="true" tabindex="-1"></a>teams         <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"data/raw/teams.csv"</span>)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb91"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb91-1"><a href="#cb91-1" aria-hidden="true" tabindex="-1"></a>mitarbeitende <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"data/raw/mitarbeitende.csv"</span>)</span>
+<span id="cb91-2"><a href="#cb91-2" aria-hidden="true" tabindex="-1"></a>teams         <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"data/raw/teams.csv"</span>)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Nach dem Einlesen <strong>immer</strong> prüfen, ob Spaltenzahl und Datentypen stimmen:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb68"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(mitarbeitende)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb92"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb92-1"><a href="#cb92-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(mitarbeitende)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>'data.frame':   22 obs. of  7 variables:
  $ id         : chr  "M001" "M002" "M003" "M004" ...
@@ -697,7 +871,7 @@ Gesteinsplanet       Gasriese       Eisriese
  $ plusstunden: num  16.5 44.4 1.8 33.7 13.2 9.6 57.4 21.5 43.8 17.6 ...
  $ projekte   : int  4 9 4 12 10 7 6 6 9 11 ...</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb70"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb70-1"><a href="#cb70-1" aria-hidden="true" tabindex="-1"></a>teams</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb94"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb94-1"><a href="#cb94-1" aria-hidden="true" tabindex="-1"></a>teams</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>    team region
 1 Team_A   Nord
@@ -708,7 +882,7 @@ Gesteinsplanet       Gasriese       Eisriese
 </div>
 <p>Leere Felder in einer Zahlenspalte werden automatisch zu <code>NA</code> — bei Vera fehlen die Plusstunden:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb72"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb72-1"><a href="#cb72-1" aria-hidden="true" tabindex="-1"></a>mitarbeitende[<span class="fu">is.na</span>(mitarbeitende<span class="sc">$</span>plusstunden), ]</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb96"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb96-1"><a href="#cb96-1" aria-hidden="true" tabindex="-1"></a>mitarbeitende[<span class="fu">is.na</span>(mitarbeitende<span class="sc">$</span>plusstunden), ]</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>     id name   team land geschlecht plusstunden projekte
 22 M022 Vera Team_B   DE          w          NA        4</code></pre>
@@ -719,8 +893,8 @@ Gesteinsplanet       Gasriese       Eisriese
 <h2 class="anchored" data-anchor-id="deutsche-csv-dateien-read.csv2">Deutsche CSV-Dateien: read.csv2()</h2>
 <p><code>read.csv()</code> erwartet <code>,</code> als Trennzeichen und <code>.</code> als Dezimalzeichen. Excel im deutschsprachigen Raum speichert CSV dagegen oft mit <code>;</code> als Trennzeichen und <code>,</code> als Dezimalzeichen. Dafür gibt es <code>read.csv2()</code>:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb74"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb74-1"><a href="#cb74-1" aria-hidden="true" tabindex="-1"></a><span class="fu">read.csv2</span>(<span class="st">"data/raw/datei.csv"</span>)                       <span class="co"># ; als Trenner, , als Dezimalzeichen</span></span>
-<span id="cb74-2"><a href="#cb74-2" aria-hidden="true" tabindex="-1"></a><span class="fu">read.csv</span>(<span class="st">"data/raw/datei.csv"</span>, <span class="at">sep =</span> <span class="st">";"</span>, <span class="at">dec =</span> <span class="st">","</span>)  <span class="co"># gleichwertig, explizit</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb98"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb98-1"><a href="#cb98-1" aria-hidden="true" tabindex="-1"></a><span class="fu">read.csv2</span>(<span class="st">"data/raw/datei.csv"</span>)                       <span class="co"># ; als Trenner, , als Dezimalzeichen</span></span>
+<span id="cb98-2"><a href="#cb98-2" aria-hidden="true" tabindex="-1"></a><span class="fu">read.csv</span>(<span class="st">"data/raw/datei.csv"</span>, <span class="at">sep =</span> <span class="st">";"</span>, <span class="at">dec =</span> <span class="st">","</span>)  <span class="co"># gleichwertig, explizit</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Weitere nützliche Argumente:</p>
 <ul>
@@ -761,15 +935,15 @@ Gesteinsplanet       Gasriese       Eisriese
 <!-- TODO: Übung „Daten einlesen" — Datensatz folgt (Trennzeichen, skip, na.strings, str()). -->
 </section>
 </section>
-<section id="teil-4-daten-aufräumen" class="level1">
-<h1>Teil 4: Daten aufräumen</h1>
+<section id="teil-5-daten-aufräumen" class="level1">
+<h1>Teil 5: Daten aufräumen</h1>
 <p>Echte Dateien sind selten sofort verwendbar: oben stehen Info-Zeilen, Zahlen kommen als Text an, Spaltennamen enthalten Leerzeichen. Die Datei <code>data/raw/bezirke_roh.csv</code> ist so ein Fall — Semikolon-getrennt, mit vier Info-Zeilen vor der eigentlichen Kopfzeile.</p>
 <section id="die-rohdatei-ansehen" class="level2">
 <h2 class="anchored" data-anchor-id="die-rohdatei-ansehen">Die Rohdatei ansehen</h2>
 <p>Wir lesen zunächst <strong>ohne</strong> Kopfzeile ein (<code>header = FALSE</code>), um zu sehen, was in der Datei steht. Weil in jeder Spalte auch Text vorkommt, sind alle Spalten <code>character</code>:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb75"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb75-1"><a href="#cb75-1" aria-hidden="true" tabindex="-1"></a>roh <span class="ot">&lt;-</span> <span class="fu">read.csv2</span>(<span class="st">"data/raw/bezirke_roh.csv"</span>, <span class="at">header =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb75-2"><a href="#cb75-2" aria-hidden="true" tabindex="-1"></a>roh</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb99"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb99-1"><a href="#cb99-1" aria-hidden="true" tabindex="-1"></a>roh <span class="ot">&lt;-</span> <span class="fu">read.csv2</span>(<span class="st">"data/raw/bezirke_roh.csv"</span>, <span class="at">header =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb99-2"><a href="#cb99-2" aria-hidden="true" tabindex="-1"></a>roh</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>                               V1           V2        V3                  V4
 1             Export Bezirksdaten                                           
@@ -792,10 +966,10 @@ Gesteinsplanet       Gasriese       Eisriese
 <h2 class="anchored" data-anchor-id="kopfzeile-setzen-und-info-zeilen-entfernen">Kopfzeile setzen und Info-Zeilen entfernen</h2>
 <p>Die echten Spaltennamen stehen in Zeile 5. Wir machen sie zu Spaltennamen und entfernen dann die ersten fünf Zeilen. Das Ergebnis speichern wir unter einem sprechenden Namen:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb77"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb77-1"><a href="#cb77-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(roh) <span class="ot">&lt;-</span> <span class="fu">as.character</span>(roh[<span class="dv">5</span>, ])   <span class="co"># Zeile 5 wird zur Kopfzeile</span></span>
-<span id="cb77-2"><a href="#cb77-2" aria-hidden="true" tabindex="-1"></a>bezirke <span class="ot">&lt;-</span> roh[<span class="sc">-</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>), ]               <span class="co"># Zeilen 1–5 entfernen</span></span>
-<span id="cb77-3"><a href="#cb77-3" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(bezirke) <span class="ot">&lt;-</span> <span class="cn">NULL</span>              <span class="co"># Zeilennummerierung zurücksetzen</span></span>
-<span id="cb77-4"><a href="#cb77-4" aria-hidden="true" tabindex="-1"></a>bezirke</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb101"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb101-1"><a href="#cb101-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(roh) <span class="ot">&lt;-</span> <span class="fu">as.character</span>(roh[<span class="dv">5</span>, ])   <span class="co"># Zeile 5 wird zur Kopfzeile</span></span>
+<span id="cb101-2"><a href="#cb101-2" aria-hidden="true" tabindex="-1"></a>bezirke <span class="ot">&lt;-</span> roh[<span class="sc">-</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>), ]               <span class="co"># Zeilen 1–5 entfernen</span></span>
+<span id="cb101-3"><a href="#cb101-3" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(bezirke) <span class="ot">&lt;-</span> <span class="cn">NULL</span>              <span class="co"># Zeilennummerierung zurücksetzen</span></span>
+<span id="cb101-4"><a href="#cb101-4" aria-hidden="true" tabindex="-1"></a>bezirke</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  Bezirk Nummer  Bezirk Name Haushalte Mittleres Einkommen
 1             1 Innere Stadt      9800               52000
@@ -813,13 +987,13 @@ Gesteinsplanet       Gasriese       Eisriese
 <h2 class="anchored" data-anchor-id="spaltennamen-säubern-gsub-und-tolower">Spaltennamen säubern: gsub() und tolower()</h2>
 <p>Rohdaten halten sich selten an die Namensregeln aus Einheit 1. <code>gsub(muster, ersatz, text)</code> ist Suchen-und-Ersetzen: Wir tauschen Leerzeichen gegen Unterstriche — dann funktioniert <code>$</code> ohne Backticks. <code>tolower()</code> macht alles klein, damit die Namen snake_case sind:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb79"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb79-1"><a href="#cb79-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(bezirke)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb103"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb103-1"><a href="#cb103-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(bezirke)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "Bezirk Nummer"       "Bezirk Name"         "Haushalte"          
 [4] "Mittleres Einkommen"</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb81"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb81-1"><a href="#cb81-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(bezirke) <span class="ot">&lt;-</span> <span class="fu">tolower</span>(<span class="fu">gsub</span>(<span class="st">" "</span>, <span class="st">"_"</span>, <span class="fu">names</span>(bezirke)))</span>
-<span id="cb81-2"><a href="#cb81-2" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(bezirke)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb105"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb105-1"><a href="#cb105-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(bezirke) <span class="ot">&lt;-</span> <span class="fu">tolower</span>(<span class="fu">gsub</span>(<span class="st">" "</span>, <span class="st">"_"</span>, <span class="fu">names</span>(bezirke)))</span>
+<span id="cb105-2"><a href="#cb105-2" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(bezirke)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "bezirk_nummer"       "bezirk_name"         "haushalte"          
 [4] "mittleres_einkommen"</code></pre>
@@ -830,10 +1004,10 @@ Gesteinsplanet       Gasriese       Eisriese
 <h2 class="anchored" data-anchor-id="datentypen-reparieren-as.numeric-lapply">Datentypen reparieren: as.numeric() &amp; lapply()</h2>
 <p>Die Zahlenspalten sind noch Text (<code>chr</code>). Für eine Spalte ginge das mit <code>bezirke$haushalte &lt;- as.numeric(bezirke$haushalte)</code>. Für mehrere Spalten auf einmal nimmt man <code>lapply()</code>: Es wendet eine Funktion auf jede Spalte an und gibt die Ergebnisse als Liste zurück, die wir direkt in die Spalten zurückschreiben:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb83"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb83-1"><a href="#cb83-1" aria-hidden="true" tabindex="-1"></a>zahl_spalten <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"bezirk_nummer"</span>, <span class="st">"haushalte"</span>, <span class="st">"mittleres_einkommen"</span>)</span>
-<span id="cb83-2"><a href="#cb83-2" aria-hidden="true" tabindex="-1"></a>bezirke[zahl_spalten] <span class="ot">&lt;-</span> <span class="fu">lapply</span>(bezirke[zahl_spalten], as.numeric)</span>
-<span id="cb83-3"><a href="#cb83-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb83-4"><a href="#cb83-4" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(bezirke)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb107"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb107-1"><a href="#cb107-1" aria-hidden="true" tabindex="-1"></a>zahl_spalten <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"bezirk_nummer"</span>, <span class="st">"haushalte"</span>, <span class="st">"mittleres_einkommen"</span>)</span>
+<span id="cb107-2"><a href="#cb107-2" aria-hidden="true" tabindex="-1"></a>bezirke[zahl_spalten] <span class="ot">&lt;-</span> <span class="fu">lapply</span>(bezirke[zahl_spalten], as.numeric)</span>
+<span id="cb107-3"><a href="#cb107-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb107-4"><a href="#cb107-4" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(bezirke)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>'data.frame':   8 obs. of  4 variables:
  $ bezirk_nummer      : num  1 2 3 4 5 6 7 8
@@ -847,7 +1021,7 @@ Gesteinsplanet       Gasriese       Eisriese
 <h2 class="anchored" data-anchor-id="der-kurze-weg-skip-4">Der kurze Weg: skip = 4</h2>
 <p>Der Weg oben zeigt, was beim Aufräumen passiert. In der Praxis erledigt <code>skip = 4</code> Kopfzeile <strong>und</strong> Datentypen in einem Schritt: Die ersten vier Zeilen werden übersprungen, Zeile 5 wird Kopfzeile, und R erkennt die Zahlenspalten selbst. Leerzeichen in Spaltennamen ersetzt R dabei durch Punkte:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb85"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb85-1"><a href="#cb85-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(<span class="fu">read.csv2</span>(<span class="st">"data/raw/bezirke_roh.csv"</span>, <span class="at">skip =</span> <span class="dv">4</span>))</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb109"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb109-1"><a href="#cb109-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(<span class="fu">read.csv2</span>(<span class="st">"data/raw/bezirke_roh.csv"</span>, <span class="at">skip =</span> <span class="dv">4</span>))</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>'data.frame':   8 obs. of  4 variables:
  $ Bezirk.Nummer      : int  1 2 3 4 5 6 7 8
@@ -861,16 +1035,16 @@ Gesteinsplanet       Gasriese       Eisriese
 <h2 class="anchored" data-anchor-id="text-zusammensetzen-und-zerlegen-paste-substr-trimws">Text zusammensetzen und zerlegen: paste(), substr(), trimws()</h2>
 <p><code>paste()</code> verbindet Textstücke mit einem Leerzeichen, <code>paste0()</code> ohne Trennzeichen:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb87"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb87-1"><a href="#cb87-1" aria-hidden="true" tabindex="-1"></a><span class="fu">paste</span>(<span class="st">"AT"</span>, <span class="st">"13"</span>, <span class="st">"01"</span>)     <span class="co"># "AT 13 01"</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb111"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb111-1"><a href="#cb111-1" aria-hidden="true" tabindex="-1"></a><span class="fu">paste</span>(<span class="st">"AT"</span>, <span class="st">"13"</span>, <span class="st">"01"</span>)     <span class="co"># "AT 13 01"</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "AT 13 01"</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb89"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb89-1"><a href="#cb89-1" aria-hidden="true" tabindex="-1"></a><span class="fu">paste0</span>(<span class="st">"AT"</span>, <span class="st">"13"</span>, <span class="st">"01"</span>)    <span class="co"># "AT1301"</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb113"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb113-1"><a href="#cb113-1" aria-hidden="true" tabindex="-1"></a><span class="fu">paste0</span>(<span class="st">"AT"</span>, <span class="st">"13"</span>, <span class="st">"01"</span>)    <span class="co"># "AT1301"</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "AT1301"</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb91"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb91-1"><a href="#cb91-1" aria-hidden="true" tabindex="-1"></a>bezirke<span class="sc">$</span>label <span class="ot">&lt;-</span> <span class="fu">paste0</span>(bezirke<span class="sc">$</span>bezirk_nummer, <span class="st">". "</span>, bezirke<span class="sc">$</span>bezirk_name)</span>
-<span id="cb91-2"><a href="#cb91-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(bezirke<span class="sc">$</span>label)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb115"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb115-1"><a href="#cb115-1" aria-hidden="true" tabindex="-1"></a>bezirke<span class="sc">$</span>label <span class="ot">&lt;-</span> <span class="fu">paste0</span>(bezirke<span class="sc">$</span>bezirk_nummer, <span class="st">". "</span>, bezirke<span class="sc">$</span>bezirk_name)</span>
+<span id="cb115-2"><a href="#cb115-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(bezirke<span class="sc">$</span>label)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "1. Innere Stadt" "2. Leopoldstadt" "3. Landstrasse"  "4. Wieden"      
 [5] "5. Margareten"   "6. Mariahilf"   </code></pre>
@@ -878,19 +1052,19 @@ Gesteinsplanet       Gasriese       Eisriese
 </div>
 <p><code>substr(text, start, stop)</code> schneidet Zeichen nach Position heraus — nützlich, um kombinierte Codes zu trennen:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb93"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb93-1"><a href="#cb93-1" aria-hidden="true" tabindex="-1"></a>codes <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"AT130"</span>, <span class="st">"AT127"</span>, <span class="st">"AT111"</span>)</span>
-<span id="cb93-2"><a href="#cb93-2" aria-hidden="true" tabindex="-1"></a><span class="fu">substr</span>(codes, <span class="dv">1</span>, <span class="dv">2</span>)   <span class="co"># Land</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb117"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb117-1"><a href="#cb117-1" aria-hidden="true" tabindex="-1"></a>codes <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"AT130"</span>, <span class="st">"AT127"</span>, <span class="st">"AT111"</span>)</span>
+<span id="cb117-2"><a href="#cb117-2" aria-hidden="true" tabindex="-1"></a><span class="fu">substr</span>(codes, <span class="dv">1</span>, <span class="dv">2</span>)   <span class="co"># Land</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "AT" "AT" "AT"</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb95"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb95-1"><a href="#cb95-1" aria-hidden="true" tabindex="-1"></a><span class="fu">substr</span>(codes, <span class="dv">3</span>, <span class="dv">5</span>)   <span class="co"># Regionscode</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb119"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb119-1"><a href="#cb119-1" aria-hidden="true" tabindex="-1"></a><span class="fu">substr</span>(codes, <span class="dv">3</span>, <span class="dv">5</span>)   <span class="co"># Regionscode</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "130" "127" "111"</code></pre>
 </div>
 </div>
 <p><code>trimws()</code> entfernt überflüssige Leerzeichen am Anfang und Ende — ein häufiges Problem bei Daten aus Excel:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb97"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb97-1"><a href="#cb97-1" aria-hidden="true" tabindex="-1"></a><span class="fu">trimws</span>(<span class="st">"   Wien   "</span>)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb121"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb121-1"><a href="#cb121-1" aria-hidden="true" tabindex="-1"></a><span class="fu">trimws</span>(<span class="st">"   Wien   "</span>)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "Wien"</code></pre>
 </div>
@@ -898,13 +1072,13 @@ Gesteinsplanet       Gasriese       Eisriese
 </section>
 <section id="zahlen-in-kategorien-einteilen-cut" class="level2">
 <h2 class="anchored" data-anchor-id="zahlen-in-kategorien-einteilen-cut">Zahlen in Kategorien einteilen: cut()</h2>
-<p><code>cut()</code> teilt eine Zahlenspalte anhand von Grenzen (<code>breaks</code>) in Kategorien ein und liefert einen <strong>Faktor</strong> zurück (siehe Teil 1, <em>Faktoren</em>):</p>
+<p><code>cut()</code> teilt eine Zahlenspalte anhand von Grenzen (<code>breaks</code>) in Kategorien ein und liefert einen <strong>Faktor</strong> zurück (siehe Teil 3):</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb99"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb99-1"><a href="#cb99-1" aria-hidden="true" tabindex="-1"></a>bezirke<span class="sc">$</span>groesse <span class="ot">&lt;-</span> <span class="fu">cut</span>(bezirke<span class="sc">$</span>haushalte,</span>
-<span id="cb99-2"><a href="#cb99-2" aria-hidden="true" tabindex="-1"></a>                       <span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">15000</span>, <span class="dv">40000</span>, <span class="cn">Inf</span>),</span>
-<span id="cb99-3"><a href="#cb99-3" aria-hidden="true" tabindex="-1"></a>                       <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"klein"</span>, <span class="st">"mittel"</span>, <span class="st">"groß"</span>))</span>
-<span id="cb99-4"><a href="#cb99-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb99-5"><a href="#cb99-5" aria-hidden="true" tabindex="-1"></a>bezirke[, <span class="fu">c</span>(<span class="st">"bezirk_name"</span>, <span class="st">"haushalte"</span>, <span class="st">"groesse"</span>)]</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb123"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb123-1"><a href="#cb123-1" aria-hidden="true" tabindex="-1"></a>bezirke<span class="sc">$</span>groesse <span class="ot">&lt;-</span> <span class="fu">cut</span>(bezirke<span class="sc">$</span>haushalte,</span>
+<span id="cb123-2"><a href="#cb123-2" aria-hidden="true" tabindex="-1"></a>                       <span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">15000</span>, <span class="dv">40000</span>, <span class="cn">Inf</span>),</span>
+<span id="cb123-3"><a href="#cb123-3" aria-hidden="true" tabindex="-1"></a>                       <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"klein"</span>, <span class="st">"mittel"</span>, <span class="st">"groß"</span>))</span>
+<span id="cb123-4"><a href="#cb123-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb123-5"><a href="#cb123-5" aria-hidden="true" tabindex="-1"></a>bezirke[, <span class="fu">c</span>(<span class="st">"bezirk_name"</span>, <span class="st">"haushalte"</span>, <span class="st">"groesse"</span>)]</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   bezirk_name haushalte groesse
 1 Innere Stadt      9800   klein
@@ -916,47 +1090,47 @@ Gesteinsplanet       Gasriese       Eisriese
 7       Neubau     16000  mittel
 8   Josefstadt     12000   klein</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb101"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb101-1"><a href="#cb101-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(bezirke<span class="sc">$</span>groesse)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb125"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb125-1"><a href="#cb125-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(bezirke<span class="sc">$</span>groesse)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
  klein mittel   groß 
      3      3      2 </code></pre>
 </div>
 </div>
-<section id="übung-2" class="level3">
-<h3 class="anchored" data-anchor-id="übung-2">Übung</h3>
+<section id="übung-3" class="level3">
+<h3 class="anchored" data-anchor-id="übung-3">Übung</h3>
 <ol type="1">
 <li>Berechne das mittlere Einkommen über alle Bezirke und zeige die Bezirke, die darüber liegen.</li>
 <li>Zeichne mit <code>barplot()</code> die Haushalte pro Bezirk; beschrifte die Balken mit <code>names.arg = bezirke$bezirk_name</code> (Tipp: <code>las = 2</code> dreht die Beschriftung).</li>
 </ol>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb103"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb103-1"><a href="#cb103-1" aria-hidden="true" tabindex="-1"></a><span class="co"># dein Code</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb127"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb127-1"><a href="#cb127-1" aria-hidden="true" tabindex="-1"></a><span class="co"># dein Code</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 </section>
 </section>
-<section id="teil-5-ergebnisse-speichern" class="level1">
-<h1>Teil 5: Ergebnisse speichern</h1>
+<section id="teil-6-ergebnisse-speichern" class="level1">
+<h1>Teil 6: Ergebnisse speichern</h1>
 <p>Bereinigte Daten speichert man nach <code>data/processed/</code> — <code>data/raw/</code> bleibt unverändert.</p>
 <section id="als-csv-write.csv-und-write.csv2" class="level2">
 <h2 class="anchored" data-anchor-id="als-csv-write.csv-und-write.csv2">Als CSV: write.csv() und write.csv2()</h2>
 <p>Gut zum Weitergeben, auch an Excel. <code>row.names = FALSE</code> verhindert eine zusätzliche Spalte mit Zeilennummern:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb104"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb104-1"><a href="#cb104-1" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(bezirke, <span class="st">"data/processed/bezirke_clean.csv"</span>, <span class="at">row.names =</span> <span class="cn">FALSE</span>)    <span class="co"># , und .</span></span>
-<span id="cb104-2"><a href="#cb104-2" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv2</span>(bezirke, <span class="st">"data/processed/bezirke_clean.csv"</span>, <span class="at">row.names =</span> <span class="cn">FALSE</span>)   <span class="co"># ; und ,</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb128"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb128-1"><a href="#cb128-1" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(bezirke, <span class="st">"data/processed/bezirke_clean.csv"</span>, <span class="at">row.names =</span> <span class="cn">FALSE</span>)    <span class="co"># , und .</span></span>
+<span id="cb128-2"><a href="#cb128-2" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv2</span>(bezirke, <span class="st">"data/processed/bezirke_clean.csv"</span>, <span class="at">row.names =</span> <span class="cn">FALSE</span>)   <span class="co"># ; und ,</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p><code>write.csv2()</code> schreibt mit <code>;</code> und Dezimalkomma — so öffnet ein deutschsprachiges Excel die Datei direkt richtig. Nachteil von CSV: Faktor-Stufen gehen verloren, und beim erneuten Einlesen muss R die Datentypen neu erkennen.</p>
 </section>
 <section id="im-r-format-saverds-und-save" class="level2">
 <h2 class="anchored" data-anchor-id="im-r-format-saverds-und-save">Im R-Format: saveRDS() und save()</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb105"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb105-1"><a href="#cb105-1" aria-hidden="true" tabindex="-1"></a><span class="co"># RDS — ein Objekt, behält Datentypen und Faktor-Stufen exakt</span></span>
-<span id="cb105-2"><a href="#cb105-2" aria-hidden="true" tabindex="-1"></a><span class="fu">saveRDS</span>(bezirke, <span class="st">"data/processed/bezirke.rds"</span>)</span>
-<span id="cb105-3"><a href="#cb105-3" aria-hidden="true" tabindex="-1"></a>bezirke <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">"data/processed/bezirke.rds"</span>)</span>
-<span id="cb105-4"><a href="#cb105-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb105-5"><a href="#cb105-5" aria-hidden="true" tabindex="-1"></a><span class="co"># RData — mehrere Objekte in einer Datei</span></span>
-<span id="cb105-6"><a href="#cb105-6" aria-hidden="true" tabindex="-1"></a><span class="fu">save</span>(bezirke, roh, <span class="at">file =</span> <span class="st">"data/processed/bezirke.RData"</span>)</span>
-<span id="cb105-7"><a href="#cb105-7" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="st">"data/processed/bezirke.RData"</span>)   <span class="co"># holt sie unter denselben Namen zurück</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb129"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb129-1"><a href="#cb129-1" aria-hidden="true" tabindex="-1"></a><span class="co"># RDS — ein Objekt, behält Datentypen und Faktor-Stufen exakt</span></span>
+<span id="cb129-2"><a href="#cb129-2" aria-hidden="true" tabindex="-1"></a><span class="fu">saveRDS</span>(bezirke, <span class="st">"data/processed/bezirke.rds"</span>)</span>
+<span id="cb129-3"><a href="#cb129-3" aria-hidden="true" tabindex="-1"></a>bezirke <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">"data/processed/bezirke.rds"</span>)</span>
+<span id="cb129-4"><a href="#cb129-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb129-5"><a href="#cb129-5" aria-hidden="true" tabindex="-1"></a><span class="co"># RData — mehrere Objekte in einer Datei</span></span>
+<span id="cb129-6"><a href="#cb129-6" aria-hidden="true" tabindex="-1"></a><span class="fu">save</span>(bezirke, roh, <span class="at">file =</span> <span class="st">"data/processed/bezirke.RData"</span>)</span>
+<span id="cb129-7"><a href="#cb129-7" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="st">"data/processed/bezirke.RData"</span>)   <span class="co"># holt sie unter denselben Namen zurück</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Faustregel: <strong>CSV</strong> zum Weitergeben, <strong>RDS</strong> als Zwischenstand für die eigene Weiterarbeit in R.</p>
 </section>
@@ -964,8 +1138,9 @@ Gesteinsplanet       Gasriese       Eisriese
 <section id="zusammenfassung" class="level1">
 <h1>Zusammenfassung</h1>
 <ul>
-<li><strong>Listen &amp; Faktoren:</strong> <code>list()</code> · <code>l$a</code> / <code>l[["a"]]</code> · <code>factor()</code> · <code>levels()</code> · <code>ordered = TRUE</code></li>
-<li><strong>Data Frames:</strong> <code>str()</code> / <code>head()</code> / <code>summary()</code> · Auswahl mit <code>[Zeile, Spalte]</code> und <code>$</code> · negativer Index · <code>unique()</code> / <code>table()</code> · filtern mit logischem Vektor oder <code>subset()</code> · sortieren mit <code>order()</code></li>
+<li><strong>Matrizen:</strong> <code>matrix()</code> · <code>rownames()</code> / <code>colnames()</code> · <code>[Zeile, Spalte]</code> · <code>rowMeans()</code> / <code>colMeans()</code> · <code>cbind()</code> / <code>rbind()</code></li>
+<li><strong>Listen &amp; Data Frames:</strong> <code>list()</code> · <code>l$a</code> / <code>l[["a"]]</code> · <code>data.frame()</code> · <code>str()</code> / <code>head()</code> / <code>summary()</code> · Auswahl mit <code>[Zeile, Spalte]</code> und <code>$</code> · negativer Index · <code>unique()</code> / <code>table()</code> · filtern mit logischem Vektor oder <code>subset()</code> · sortieren mit <code>order()</code></li>
+<li><strong>Faktoren:</strong> <code>factor()</code> · <code>levels()</code> · <code>ordered = TRUE</code></li>
 <li><strong>Einlesen:</strong> relative Pfade im RStudio-Projekt · <code>read.csv()</code> / <code>read.csv2()</code> · danach mit <code>str()</code> prüfen</li>
 <li><strong>Aufräumen:</strong> <code>header = FALSE</code> zum Ansehen · <code>skip = n</code> für Info-Zeilen · <code>tolower(gsub(" ", "_", names(df)))</code> · Typen mit <code>as.numeric()</code> bzw. <code>lapply(df[cols], as.numeric)</code> · <code>paste()</code> / <code>paste0()</code> / <code>substr()</code> / <code>trimws()</code> · <code>cut()</code></li>
 <li><strong>Speichern:</strong> <code>write.csv()</code> / <code>write.csv2()</code> · <code>saveRDS()</code> / <code>readRDS()</code> · <code>save()</code> / <code>load()</code></li>
