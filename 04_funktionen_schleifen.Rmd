@@ -477,30 +477,3 @@ for (t in unique(mitarbeitende$team)) {
 
 Ohne Funktion stünde der ganze Grafik-Code in der Schleife; mit Funktion lässt er sich einzeln
 testen und auch an anderer Stelle wiederverwenden.
-
-### Übung
-
-Schreibe eine Funktion `team_bericht(daten, team_name)`, die mit `cat()` einen Satz ausgibt wie
-`"Team_A: 9 Personen, im Schnitt 26.7 Plusstunden"`. Rufe sie in einer Schleife für alle Teams
-auf.
-
-```{r}
-# dein Code
-
-```
-
-
-# Zusammenfassung
-
-- **Bedingungen:** `if (bedingung) { } else if { } else { }` für **einen** Wert · `ifelse()`
-  für Vektoren · `case_when()` in `mutate()`, fehlende Werte zuerst abfangen
-- **Schleifen:** `for (x in vektor) { }` · Ergebnisse in vorher angelegtem Vektor sammeln ·
-  `seq_along()` · `while` mit Abbruchbedingung · `next` / `break` · in Schleifen `print()` ·
-  erst nach einer vektorisierten Lösung suchen
-- **Funktionen:** `name <- function(arg, arg2 = standard) { … }` · letzter Ausdruck ist das
-  Ergebnis · mehrere Werte als benannter Vektor oder Liste · Eingaben mit `stop()` prüfen ·
-  Variablen innerhalb bleiben lokal
-- **Anwenden:** `sapply(X, FUN, ...)` wendet `FUN` auf jedes Element an (Data Frame: jede
-  Spalte) · Funktion ohne Klammern übergeben · weitere Argumente wie `na.rm = TRUE` dahinter ·
-  Ergebnis Vektor, Matrix oder Liste · `lapply()` gibt immer eine Liste · anonyme Funktion
-  `function(x) …`

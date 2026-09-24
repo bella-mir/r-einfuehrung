@@ -438,29 +438,3 @@ par(mfrow = c(1, 1))   # wieder zurückstellen
 In einem `.R`-Skript bleibt die Einstellung für die **restliche Sitzung** aktiv — deshalb
 immer zurücksetzen. In einem Notebook gilt sie nur innerhalb des Chunks.
 
-### Übung
-
-1. Zeichne `tmin_wien` als Linie mit Punkten in `"steelblue"`.
-2. Zeichne ein Histogramm der PS-Zahlen (`mtcars$hp`) mit 10 Balken und sinnvoller
-   Beschriftung.
-
-```{r}
-# dein Code
-
-```
-
-
-# Zusammenfassung
-
-- **Rechnen & Variablen:** `+ - * / ^ %/% %%` · Zuweisung mit `<-` · Funktionen mit
-  Argumenten, z. B. `round(x, digits = 1)` · Datentypen `numeric`, `character`, `logical` ·
-  `class()` · umwandeln mit `as.numeric()` & Co.
-- **Vergleiche:** `> >= < <= == !=` · verknüpfen mit `&`, `|`, `!` · `=` ist kein Vergleich
-- **Vektoren:** `c()`, `:`, `seq()` · `names()` · elementweise rechnen · `mean()`, `sum()`,
-  `max()` · auswählen mit `[ ]` (Index ab 1, Name, Bedingung) · `%in%` · `NA` und
-  `na.rm = TRUE`
-- **Base-Grafik:** `barplot()`, `plot()`, `hist()`, `boxplot()` · `par(mfrow = …)` und
-  zurücksetzen
-
-**Wie es weitergeht:** In Einheit 2 geht es von Vektoren zu ganzen Tabellen — und zu Daten aus
-Dateien.

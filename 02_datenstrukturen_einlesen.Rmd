@@ -596,23 +596,3 @@ load("data/processed/bezirke.RData")   # holt sie unter denselben Namen zurück
 Faustregel: **CSV** zum Weitergeben, **RDS** als Zwischenstand für die eigene Weiterarbeit
 in R.
 
-
-# Zusammenfassung
-
-- **Matrizen:** `matrix()` · `rownames()` / `colnames()` · `[Zeile, Spalte]` · `rowMeans()` /
-  `colMeans()` · `cbind()` / `rbind()`
-- **Listen & Data Frames:** `list()` · `l$a` / `l[["a"]]` · `data.frame()` · `str()` /
-  `head()` / `summary()` · Auswahl mit `[Zeile, Spalte]` und `$` · negativer Index ·
-  `unique()` / `table()` · filtern mit logischem Vektor oder `subset()` · sortieren mit
-  `order()`
-- **Faktoren:** `factor()` · `levels()` · `ordered = TRUE`
-- **Einlesen:** relative Pfade im RStudio-Projekt · `read.csv()` / `read.csv2()` · danach mit
-  `str()` prüfen
-- **Aufräumen:** `header = FALSE` zum Ansehen · `skip = n` für Info-Zeilen ·
-  `tolower(gsub(" ", "_", names(df)))` · Typen mit `as.numeric()` bzw.
-  `lapply(df[cols], as.numeric)` · `paste()` / `paste0()` / `substr()` / `trimws()` · `cut()`
-- **Speichern:** `write.csv()` / `write.csv2()` · `saveRDS()` / `readRDS()` · `save()` /
-  `load()`
-
-**Wie es weitergeht:** In Einheit 3 werden Daten mit `dplyr` bearbeitet und mit `ggplot2`
-visualisiert.

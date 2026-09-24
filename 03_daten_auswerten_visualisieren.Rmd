@@ -359,30 +359,3 @@ ggplot(mitarbeitende_plot, aes(x = projekte, y = plusstunden)) +
 ```{r, eval=FALSE}
 ggsave("output/plusstunden_team.png", width = 8, height = 5)
 ```
-
-### Übung
-
-1. Zeichne ein Streudiagramm von `projekte` gegen `plusstunden`, eingefärbt nach
-   `geschlecht`.
-2. Erstelle ein Balkendiagramm mit der Anzahl Personen pro `land` (Tipp: erst `count()`, dann
-   `geom_col()`).
-
-```{r}
-# dein Code
-
-```
-
-
-# Zusammenfassung
-
-- **dplyr:** `filter` / `select` / `arrange` / `mutate` / `count` · Pipe `%>%` („und dann"),
-  in neuerem Code `|>` · `group_by` + `summarise` (`na.rm = TRUE`) · `left_join` & Co.
-- **ggplot2:** `ggplot(daten, aes(...)) + geom_...()` · `geom_point`, `geom_col`,
-  `geom_boxplot`, `geom_histogram` · `color` / `fill` in oder außerhalb von `aes()` ·
-  `facet_wrap` · `ggsave`
-
-**Wie es weitergeht:** Mit Einheit 1–3 hast du alles für
-Übungsaufgabe 1 (`05_uebungsaufgabe_1.Rmd`). Einheit 4 zeigt, wie man mit Bedingungen,
-Schleifen und eigenen Funktionen wiederkehrende Arbeitsschritte automatisiert. Hilfe gibt es
-über `?funktionsname`, die RStudio Cheat Sheets (*Help → Cheat Sheets*) und das frei verfügbare
-Buch *R for Data Science* (r4ds.hadley.nz).
