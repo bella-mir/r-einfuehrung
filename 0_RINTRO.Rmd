@@ -1,0 +1,236 @@
+---
+title: "R-Einführung — Einheit 0: RStudio, Projekte & Pakete"
+output: html_document
+---
+
+Diese Einführung klärt, womit man in R arbeitet (R, RStudio, Projekte, R Markdown), wie
+Pakete installiert werden und wo man Hilfe findet — und fasst am Ende die Grundregeln
+zusammen, die den Einstieg leichter machen.
+
+
+# Installation
+
+1. **R** installieren: <https://cran.r-project.org> (*Download R for Windows / macOS*).
+2. **Danach RStudio** installieren: <https://posit.co/download/rstudio-desktop/>.
+
+R ist die Programmiersprache, RStudio die Oberfläche dazu. RStudio findet R automatisch — man
+öffnet danach nur noch RStudio.
+
+**Einmalig einstellen** unter *Tools → Global Options → General*:
+
+- Haken bei *Restore .RData into workspace at startup* **entfernen**
+- *Save workspace to .RData on exit* auf **Never** setzen
+
+So startet jede Sitzung mit einer leeren Umgebung, und das Skript muss alles selbst erzeugen —
+genau das macht es reproduzierbar.
+
+
+# RStudio: die vier Bereiche
+
+| Bereich | Wofür |
+|---|---|
+| **Editor** (oben links) | Dateien schreiben: `.R`-Skripte, `.Rmd`-Dokumente |
+| **Console** (unten links) | Befehle sofort ausführen — zum Ausprobieren, **nichts wird gespeichert** |
+| **Environment** (oben rechts) | alle Objekte, die R gerade kennt (Variablen, Datensätze, Funktionen) |
+| **Files / Plots / Packages / Help** (unten rechts) | Dateien, Grafiken, installierte Pakete, Hilfeseiten |
+
+Nur was in einer **Datei** steht, ist reproduzierbar — die Console ist ein Notizzettel.
+
+```{r}
+1 + 2
+```
+
+Ein Befehl darf über mehrere Zeilen gehen. Solange eine Klammer offen ist oder die Zeile mit
+einem Operator endet, liest R in der nächsten Zeile weiter:
+
+```{r}
+(1 + 2 + 3 +
+   4 + 5) / 3
+```
+
+Kommentare beginnen mit `#` und werden von R ignoriert — sie sind nur für Menschen da.
+
+
+# Projekte und Arbeitsverzeichnis
+
+Ein **RStudio-Projekt** ist ein Ordner mit einer `.Rproj`-Datei. Öffnet man es per Doppelklick
+auf die `.Rproj`-Datei (oder *File → Open Project*), setzt RStudio das **Arbeitsverzeichnis**
+(working directory) automatisch auf diesen Ordner.
+
+Dadurch funktionieren **relative Pfade** wie `"data/raw/daten.csv"` auf jedem Rechner — niemand
+muss seinen eigenen Pfad eintragen, und `setwd("C:/Users/…")` wird nie gebraucht. Das aktuelle
+Arbeitsverzeichnis zeigt `getwd()`.
+
+Neues Projekt anlegen: **File → New Project → New Directory → New Project.**
+
+Empfohlene Ordnerstruktur:
+
+```
+mein-projekt/
+├── mein-projekt.Rproj
+├── data/
+│   ├── raw/          # Originaldaten – nie überschreiben
+│   └── processed/    # bereinigte / gespeicherte Zwischenstände
+├── scripts/          # eigene .R / .Rmd Dateien
+└── output/           # Grafiken, gerenderte Reports
+```
+
+**Achtung bei `.Rmd`-Dateien in Unterordnern:** Beim Knitten verwendet R den Ordner der
+`.Rmd`-Datei als Arbeitsverzeichnis — liegt sie in `scripts/`, findet `"data/raw/…"` nichts
+mehr. Abhilfe: Im Menü neben dem Knit-Button *Knit Directory → Project Directory* wählen, oder
+Pfade mit dem Paket `here` bauen: `here::here("data", "raw", "daten.csv")` beginnt immer beim
+Projektordner.
+
+**Pfade unter Windows:** Im Explorer steht `C:\Users\...` mit Backslash. In R ist `\` aber ein
+Sonderzeichen — Pfade immer mit **Schrägstrich** `/` schreiben (oder doppeltem `\\`):
+
+```{r, eval=FALSE}
+read.csv("data/raw/daten.csv")     # richtig
+read.csv("data\raw\daten.csv")     # Fehler
+```
+
+
+# R Markdown
+
+Ein `.Rmd`-Dokument besteht aus drei Bestandteilen:
+
+1. **YAML-Header** — der Block zwischen `---` ganz oben, mit Titel und Ausgabeformat.
+2. **Text/Markdown** — Fließtext mit einfacher Formatierung: `# Überschrift`,
+   `## Unterüberschrift`, `**fett**`, `*kursiv*`, `` `code` ``, Listen mit `-` oder `1.`.
+3. **Code-Chunks** — grau hinterlegte Blöcke, die R ausführt. Neuer Chunk: `Strg + Alt + I`.
+
+Der **Knit-Button** (`Strg + Shift + K`) führt das ganze Dokument in einer **frischen
+R-Sitzung** von oben nach unten aus und erzeugt daraus HTML (oder PDF/Word) — Code, Ausgabe
+und Text zusammen. Läuft ein Dokument beim Knitten nicht durch, fehlt meist ein Schritt, der
+nur in der eigenen Sitzung passiert ist.
+
+Zwei Ausgabeformate begegnen einem häufig:
+
+- `output: html_document` — beim Knitten entsteht ein fertiger HTML-Report.
+- `output: html_notebook` — beim **Speichern** entsteht eine `.nb.html`-Datei mit den Ergebnissen
+  der Chunks, die man bisher ausgeführt hat. Praktisch zum interaktiven Arbeiten.
+
+Nützliche **Chunk-Optionen** (in den geschweiften Klammern nach `r`, z. B. `{r, eval=FALSE}`):
+
+| Option | Wirkung |
+|---|---|
+| `echo=FALSE` | Code wird ausgeführt, aber im Report nicht gezeigt |
+| `eval=FALSE` | Code wird nur gezeigt, nicht ausgeführt |
+| `message=FALSE` | unterdrückt Paket-Meldungen |
+| `warning=FALSE` | unterdrückt Warnungen |
+| `error=TRUE` | Fehler anzeigen, statt das Rendern abzubrechen |
+
+> **Hinweis:** *Quarto* (`.qmd`) ist der Nachfolger von R Markdown und funktioniert fast
+> identisch. Alles hier Gezeigte lässt sich direkt übertragen.
+
+
+# Wichtige Tastenkürzel
+
+RStudio, Standardbelegung:
+
+| Aktion | Windows / Linux | macOS |
+|---|---|---|
+| Aktuelle Zeile / Auswahl ausführen | `Strg + Enter` | `Cmd + Enter` |
+| Aktuellen Chunk ausführen | `Strg + Shift + Enter` | `Cmd + Shift + Enter` |
+| Alle Chunks davor ausführen | `Strg + Alt + P` | `Cmd + Option + P` |
+| Neuen Chunk einfügen | `Strg + Alt + I` | `Cmd + Option + I` |
+| Dokument rendern (Knit) | `Strg + Shift + K` | `Cmd + Shift + K` |
+| Zuweisungspfeil `<-` | `Alt + -` | `Option + -` |
+| Pipe `%>%` / `\|>` | `Strg + Shift + M` | `Cmd + Shift + M` |
+| Zeile(n) aus-/einkommentieren | `Strg + Shift + C` | `Cmd + Shift + C` |
+| Code neu einrücken | `Strg + I` | `Cmd + I` |
+| In allen Dateien suchen | `Strg + Shift + F` | `Cmd + Shift + F` |
+| Console leeren | `Strg + L` | `Ctrl + L` |
+| R-Session neu starten | `Strg + Shift + F10` | `Cmd + Shift + F10` |
+| Autovervollständigung | `Tab` | `Tab` |
+| Alle Tastenkürzel anzeigen | `Alt + Shift + K` | `Option + Shift + K` |
+
+
+# Pakete installieren und laden
+
+R bringt viele Funktionen mit (`base`). Alles Weitere steckt in **Paketen**, die andere
+geschrieben und auf **CRAN** bereitgestellt haben.
+
+**Einmal pro Rechner** installieren — am besten direkt **in der Console**, nicht im Skript
+(sonst wird bei jedem Durchlauf neu installiert):
+
+```{r, eval=FALSE}
+install.packages("dplyr")
+install.packages(c("dplyr", "ggplot2", "readxl"))   # mehrere auf einmal
+```
+
+**In jeder Sitzung** laden — das gehört ganz oben ins Skript:
+
+```{r, eval=FALSE}
+library(dplyr)
+```
+
+Eine einzelne Funktion lässt sich auch ohne `library()` über `paket::funktion()` aufrufen,
+z. B. `dplyr::filter(...)`.
+
+Typische Fehlermeldungen:
+
+- *„there is no package called 'x'"* → Paket ist nicht installiert.
+- *„could not find function 'y'"* → Paket nicht geladen (`library()` vergessen) oder Tippfehler.
+
+Aktualisieren: `update.packages()` oder im *Packages*-Bereich (dort zeigt ein Häkchen auch,
+welche Pakete gerade geladen sind).
+
+
+# Hilfe finden
+
+- `?mean` oder `help(mean)` öffnet die Hilfeseite einer Funktion im *Help*-Bereich. Am
+  nützlichsten sind meist die Abschnitte **Arguments** und ganz unten **Examples**.
+- `??regression` durchsucht alle Hilfeseiten nach einem Begriff.
+- *Help → Cheat Sheets* in RStudio: kompakte Übersichten zu `dplyr`, `ggplot2` u. a.
+- Fehlermeldungen **lesen**: Sie nennen meist die Funktion und das Problem. Die Meldung zu
+  kopieren und zu suchen (Stack Overflow, Suchmaschine) ist normal und erwünscht.
+
+```{r, error=TRUE}
+mean(c(1, 2, "drei"))   # Warnung: das Argument ist nicht numerisch
+sqrt("vier")            # Fehler: nicht-numerisches Argument
+```
+
+Eine kompakte Übersicht aller Funktionen dieser Einführung steht in `R_Cheatsheet.md`.
+
+
+# Grundregeln für den Anfang
+
+1. **In Dateien arbeiten, nicht in der Console.** Die Console ist ein Notizzettel; das Skript
+   ist das Ergebnis.
+2. **Ein Skript läuft von oben bis unten durch** — ohne dass man vorher von Hand etwas
+   vorbereiten muss. Reihenfolge: Pakete laden → Daten einlesen → aufbereiten → auswerten →
+   visualisieren.
+3. **Regelmäßig R neu starten** (`Strg + Shift + F10`) und das Skript komplett durchlaufen
+   lassen — so merkt man früh, wenn etwas nur „zufällig" noch funktioniert.
+4. **Immer über die `.Rproj`-Datei öffnen** und **relative Pfade** verwenden. Kein
+   `setwd("C:/…")`.
+5. **Rohdaten sind heilig** — `data/raw/` nie überschreiben, Ergebnisse nach
+   `data/processed/` bzw. `output/` schreiben.
+6. **`<-` zum Zuweisen, `==` zum Vergleichen.**
+7. **Sprechende Namen in `snake_case`**, keine Basisfunktionen überschreiben (`mean`, `c`, …).
+8. **R unterscheidet Groß-/Kleinschreibung** — `Daten` und `daten` sind verschieden.
+9. **Nach dem Einlesen prüfen:** `str()`, `head()`, `summary()`.
+10. **Kommentieren**, was nicht offensichtlich ist.
+11. **Fehlermeldungen lesen** und mit `?funktion` nachschlagen.
+
+
+# Übung: dein erstes eigenes Projekt
+
+Zum Abschluss richtest du ein eigenes Projekt so ein, wie du es im restlichen Kurs verwendest:
+
+1. **Projekt anlegen:** *File → New Project → New Directory → New Project*. Name z. B.
+   `mein-r-projekt`, Speicherort frei wählbar. RStudio öffnet das Projekt danach automatisch —
+   der Projektname steht oben rechts.
+2. **Ordner anlegen:** Im *Files*-Bereich mit *New Folder* die Ordner `data/raw`,
+   `data/processed`, `scripts` und `output` erstellen (wie in der Ordnerstruktur oben).
+3. **Arbeitsverzeichnis prüfen:** In der Console `getwd()` ausführen. Es muss der
+   Projektordner sein.
+4. **R-Markdown-Dokument anlegen:** *File → New File → R Markdown*, Titel eintragen, als
+   `scripts/erste_schritte.Rmd` speichern. Die Beispielinhalte unter dem YAML-Header löschen.
+   Neben dem Knit-Button *Knit Directory → Project Directory* einstellen (siehe oben).
+5. **Inhalt schreiben:** eine Überschrift, ein Satz Text über dich und ein Code-Chunk
+   (`Strg + Alt + I`), in dem du etwas berechnest, z. B. dein Alter in Tagen.
+6. **Knitten** (`Strg + Shift + K`) und prüfen, dass die HTML-Datei neben dem `.Rmd` entsteht.
+7. **Test:** RStudio schließen, das Projekt per Doppelklick auf die `.Rproj`-Datei wieder
+   öffnen — die zuletzt geöffneten Dateien sind wieder da.

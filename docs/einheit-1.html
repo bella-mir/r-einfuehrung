@@ -1,0 +1,1504 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="de" xml:lang="de"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.38">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Einheit 1: Grundlagen, Vektoren, Matrizen &amp; erste Grafiken – R-Einführung</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./einheit-2.html" rel="next">
+<link href="./einheit-0.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-fe13366c3d06eb92bc1322efad7ca90e.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "Keine Treffer",
+    "search-matching-documents-text": "Treffer",
+    "search-copy-link-title": "Link in die Suche kopieren",
+    "search-hide-matches-text": "Zusätzliche Treffer verbergen",
+    "search-more-match-text": "weitere Treffer in diesem Dokument",
+    "search-more-matches-text": "weitere Treffer in diesem Dokument",
+    "search-clear-button-title": "Zurücksetzen",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Abbrechen",
+    "search-submit-button-title": "Abschicken",
+    "search-label": "Suchen"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="nav-sidebar docked quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Seitenleiste umschalten" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./einheit-0.html">Einheiten</a></li><li class="breadcrumb-item"><a href="./einheit-1.html">1 · Grundlagen</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Seitenleiste umschalten" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Suchen" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">R-Einführung</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/bella-mir/r-einfuehrung" title="" class="quarto-navigation-tool px-1" aria-label=""><i class="bi bi-github"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Suchen"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Start</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Einheiten</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Abschnitt umschalten">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./einheit-0.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">0 · RStudio, Projekte &amp; Pakete</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./einheit-1.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">1 · Grundlagen</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./einheit-2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">2 · Data Frames &amp; dplyr</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./einheit-3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">3 · ggplot2 &amp; Daten aufräumen</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./einheit-4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">4 · Funktionen &amp; Schleifen</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./cheatsheet.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Cheatsheet</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Auf dieser Seite</h2>
+   
+  <ul class="collapse">
+  <li><a href="#teil-1-grundlagen" id="toc-teil-1-grundlagen" class="nav-link active" data-scroll-target="#teil-1-grundlagen">Teil 1: Grundlagen</a>
+  <ul class="collapse">
+  <li><a href="#rechnen" id="toc-rechnen" class="nav-link" data-scroll-target="#rechnen">Rechnen</a></li>
+  <li><a href="#variablen" id="toc-variablen" class="nav-link" data-scroll-target="#variablen">Variablen</a></li>
+  <li><a href="#funktionen-aufrufen" id="toc-funktionen-aufrufen" class="nav-link" data-scroll-target="#funktionen-aufrufen">Funktionen aufrufen</a></li>
+  <li><a href="#grundlegende-datentypen" id="toc-grundlegende-datentypen" class="nav-link" data-scroll-target="#grundlegende-datentypen">Grundlegende Datentypen</a></li>
+  <li><a href="#vergleichen-und-logische-abfragen" id="toc-vergleichen-und-logische-abfragen" class="nav-link" data-scroll-target="#vergleichen-und-logische-abfragen">Vergleichen und logische Abfragen</a></li>
+  </ul></li>
+  <li><a href="#teil-2-vektoren" id="toc-teil-2-vektoren" class="nav-link" data-scroll-target="#teil-2-vektoren">Teil 2: Vektoren</a>
+  <ul class="collapse">
+  <li><a href="#vektoren-erstellen" id="toc-vektoren-erstellen" class="nav-link" data-scroll-target="#vektoren-erstellen">Vektoren erstellen</a></li>
+  <li><a href="#beispieldaten-temperaturen-in-wien" id="toc-beispieldaten-temperaturen-in-wien" class="nav-link" data-scroll-target="#beispieldaten-temperaturen-in-wien">Beispieldaten: Temperaturen in Wien</a></li>
+  <li><a href="#vektoren-benennen" id="toc-vektoren-benennen" class="nav-link" data-scroll-target="#vektoren-benennen">Vektoren benennen</a></li>
+  <li><a href="#ein-erster-plot-barplot" id="toc-ein-erster-plot-barplot" class="nav-link" data-scroll-target="#ein-erster-plot-barplot">Ein erster Plot: barplot()</a></li>
+  <li><a href="#mit-vektoren-rechnen" id="toc-mit-vektoren-rechnen" class="nav-link" data-scroll-target="#mit-vektoren-rechnen">Mit Vektoren rechnen</a></li>
+  <li><a href="#vektorelemente-auswählen" id="toc-vektorelemente-auswählen" class="nav-link" data-scroll-target="#vektorelemente-auswählen">Vektorelemente auswählen</a></li>
+  <li><a href="#logische-abfragen-auf-vektoren" id="toc-logische-abfragen-auf-vektoren" class="nav-link" data-scroll-target="#logische-abfragen-auf-vektoren">Logische Abfragen auf Vektoren</a></li>
+  <li><a href="#elemente-verändern" id="toc-elemente-verändern" class="nav-link" data-scroll-target="#elemente-verändern">Elemente verändern</a></li>
+  <li><a href="#fehlende-werte-na" id="toc-fehlende-werte-na" class="nav-link" data-scroll-target="#fehlende-werte-na">Fehlende Werte: NA</a></li>
+  </ul></li>
+  <li><a href="#teil-3-matrizen" id="toc-teil-3-matrizen" class="nav-link" data-scroll-target="#teil-3-matrizen">Teil 3: Matrizen</a>
+  <ul class="collapse">
+  <li><a href="#was-ist-eine-matrix" id="toc-was-ist-eine-matrix" class="nav-link" data-scroll-target="#was-ist-eine-matrix">Was ist eine Matrix?</a></li>
+  <li><a href="#eine-matrix-aus-vektoren-bauen" id="toc-eine-matrix-aus-vektoren-bauen" class="nav-link" data-scroll-target="#eine-matrix-aus-vektoren-bauen">Eine Matrix aus Vektoren bauen</a></li>
+  <li><a href="#matrizen-benennen" id="toc-matrizen-benennen" class="nav-link" data-scroll-target="#matrizen-benennen">Matrizen benennen</a></li>
+  <li><a href="#matrixelemente-auswählen" id="toc-matrixelemente-auswählen" class="nav-link" data-scroll-target="#matrixelemente-auswählen">Matrixelemente auswählen</a></li>
+  <li><a href="#zeilen--und-spaltenmittelwerte" id="toc-zeilen--und-spaltenmittelwerte" class="nav-link" data-scroll-target="#zeilen--und-spaltenmittelwerte">Zeilen- und Spaltenmittelwerte</a></li>
+  <li><a href="#spalten-und-zeilen-anhängen-cbind-und-rbind" id="toc-spalten-und-zeilen-anhängen-cbind-und-rbind" class="nav-link" data-scroll-target="#spalten-und-zeilen-anhängen-cbind-und-rbind">Spalten und Zeilen anhängen: cbind() und rbind()</a></li>
+  <li><a href="#die-matrix-als-balkendiagramm" id="toc-die-matrix-als-balkendiagramm" class="nav-link" data-scroll-target="#die-matrix-als-balkendiagramm">Die Matrix als Balkendiagramm</a></li>
+  </ul></li>
+  <li><a href="#teil-4-schnelle-grafiken-mit-base-r" id="toc-teil-4-schnelle-grafiken-mit-base-r" class="nav-link" data-scroll-target="#teil-4-schnelle-grafiken-mit-base-r">Teil 4: Schnelle Grafiken mit Base-R</a>
+  <ul class="collapse">
+  <li><a href="#punkte-und-linien-plot" id="toc-punkte-und-linien-plot" class="nav-link" data-scroll-target="#punkte-und-linien-plot">Punkte und Linien: plot()</a></li>
+  <li><a href="#verteilung-hist" id="toc-verteilung-hist" class="nav-link" data-scroll-target="#verteilung-hist">Verteilung: hist()</a></li>
+  <li><a href="#gruppenvergleich-boxplot" id="toc-gruppenvergleich-boxplot" class="nav-link" data-scroll-target="#gruppenvergleich-boxplot">Gruppenvergleich: boxplot()</a></li>
+  <li><a href="#mehrere-grafiken-nebeneinander-parmfrow" id="toc-mehrere-grafiken-nebeneinander-parmfrow" class="nav-link" data-scroll-target="#mehrere-grafiken-nebeneinander-parmfrow">Mehrere Grafiken nebeneinander: par(mfrow)</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./einheit-0.html">Einheiten</a></li><li class="breadcrumb-item"><a href="./einheit-1.html">1 · Grundlagen</a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title">Einheit 1: Grundlagen, Vektoren, Matrizen &amp; erste Grafiken</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>In dieser Einheit lernst du die grundlegenden Operationen in R kennen:</p>
+<ol type="1">
+<li><strong>Grundlagen</strong> — Arithmetik, Variablen, Funktionen und Datentypen</li>
+<li><strong>Vektoren</strong> — mehrere Werte desselben Typs speichern und damit rechnen</li>
+<li><strong>Matrizen</strong> — zweidimensionale Daten aufbauen, benennen und auswerten</li>
+<li><strong>Schnelle Grafiken mit Base-R</strong> — <code>plot()</code>, <code>hist()</code>, <code>boxplot()</code></li>
+</ol>
+<p>Wie man mit RStudio, Projekten und Paketen arbeitet, steht in Einheit 0 (<code>0_RINTRO.Rmd</code>).</p>
+<p>Führe die Code-Blöcke der Reihe nach aus (grüner Pfeil oben rechts im Block oder <em>Strg/Cmd + Enter</em>) — spätere Blöcke bauen auf den Variablen früherer Blöcke auf.</p>
+<section id="teil-1-grundlagen" class="level1">
+<h1>Teil 1: Grundlagen</h1>
+<section id="rechnen" class="level2">
+<h2 class="anchored" data-anchor-id="rechnen">Rechnen</h2>
+<p>R lässt sich zunächst wie ein Taschenrechner nutzen:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Operator</th>
+<th>Bedeutung</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>+</code></td>
+<td>Addition</td>
+</tr>
+<tr class="even">
+<td><code>-</code></td>
+<td>Subtraktion</td>
+</tr>
+<tr class="odd">
+<td><code>*</code></td>
+<td>Multiplikation</td>
+</tr>
+<tr class="even">
+<td><code>/</code></td>
+<td>Division</td>
+</tr>
+<tr class="odd">
+<td><code>^</code></td>
+<td>Potenzierung: <code>3^2</code> ergibt 9</td>
+</tr>
+<tr class="even">
+<td><code>%/%</code></td>
+<td>ganzzahlige Division: <code>5 %/% 3</code> ergibt 1</td>
+</tr>
+<tr class="odd">
+<td><code>%%</code></td>
+<td>Modulo (Rest der Division): <code>5 %% 3</code> ergibt 2</td>
+</tr>
+</tbody>
+</table>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="dv">5</span> <span class="sc">+</span> <span class="dv">5</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 10</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="dv">5</span> <span class="sc">-</span> <span class="dv">5</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="dv">3</span> <span class="sc">*</span> <span class="dv">5</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 15</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>(<span class="dv">5</span> <span class="sc">+</span> <span class="dv">5</span>) <span class="sc">/</span> <span class="dv">2</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 5</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span><span class="sc">^</span><span class="dv">5</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 32</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="dv">28</span> <span class="sc">%/%</span> <span class="dv">6</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 4</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="dv">28</span> <span class="sc">%%</span> <span class="dv">6</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 4</code></pre>
+</div>
+</div>
+</section>
+<section id="variablen" class="level2">
+<h2 class="anchored" data-anchor-id="variablen">Variablen</h2>
+<p>Mit einer <strong>Variable</strong> speicherst du einen Wert unter einem Namen, um später darauf zuzugreifen. Zugewiesen wird mit dem Pfeil <code>&lt;-</code>:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>meine_zahl <span class="ot">&lt;-</span> <span class="dv">4</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>meine_zahl</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 4</code></pre>
+</div>
+</div>
+<p><strong>Tipp:</strong> <code>Alt</code> + <code>-</code> fügt <code>&lt;-</code> samt Leerzeichen ein.</p>
+<p>Aussagekräftige Namen machen Code lesbar — auch für dich selbst in drei Monaten:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>einwohner   <span class="ot">&lt;-</span> <span class="dv">48000</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>flaeche_km2 <span class="ot">&lt;-</span> <span class="fl">12.5</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>bevoelkerungsdichte <span class="ot">&lt;-</span> einwohner <span class="sc">/</span> flaeche_km2</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>bevoelkerungsdichte</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 3840</code></pre>
+</div>
+</div>
+<section id="regeln-für-variablennamen" class="level3">
+<h3 class="anchored" data-anchor-id="regeln-für-variablennamen">Regeln für Variablennamen</h3>
+<ol type="1">
+<li><strong>Beschreibend, nicht kryptisch</strong> — <code>wohneinheiten_gesamt</code> statt <code>x</code></li>
+<li><strong>snake_case verwenden</strong> — <code>anzahl_aepfel</code>, nicht <code>anzahlAepfel</code> oder <code>anzahl.aepfel</code></li>
+<li><strong>Keine Basisfunktionen überschreiben</strong> — <code>mean</code>, <code>data</code>, <code>c</code>, <code>sum</code> vermeiden</li>
+<li><strong>Logische Werte als Frage benennen</strong> — <code>hat_ringe</code>, <code>ist_student</code></li>
+<li><strong>Kurz, aber eindeutig</strong> — so kurz wie möglich, so lang wie nötig</li>
+<li><strong>Keine Umlaute, Leerzeichen oder Sonderzeichen</strong> — <code>flaeche_km2</code> statt <code>Fläche km²</code></li>
+</ol>
+</section>
+</section>
+<section id="funktionen-aufrufen" class="level2">
+<h2 class="anchored" data-anchor-id="funktionen-aufrufen">Funktionen aufrufen</h2>
+<p>Eine <strong>Funktion</strong> nimmt Eingaben entgegen und gibt ein Ergebnis zurück. Man ruft sie mit ihrem Namen und runden Klammern auf; die Eingaben in der Klammer heißen <strong>Argumente</strong>:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sqrt</span>(<span class="dv">16</span>)                     <span class="co"># Quadratwurzel, ein Argument</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 4</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fl">3.14159</span>, <span class="at">digits =</span> <span class="dv">2</span>)   <span class="co"># zwei Argumente: Zahl und Anzahl Nachkommastellen</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 3.14</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fl">3.14159</span>)               <span class="co"># digits weggelassen → Standardwert 0</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 3</code></pre>
+</div>
+</div>
+<ul>
+<li>Argumente werden durch Kommas getrennt.</li>
+<li>Mit <code>name = wert</code> gibt man ein Argument <strong>beim Namen</strong> an. Innerhalb einer Funktionsklammer ist <code>=</code> also <strong>keine</strong> Zuweisung, sondern benennt ein Argument.</li>
+<li>Viele Argumente haben einen <strong>Standardwert</strong> und können weggelassen werden.</li>
+<li>Welche Argumente eine Funktion hat, zeigt die Hilfe: <code>?round</code></li>
+</ul>
+</section>
+<section id="grundlegende-datentypen" class="level2">
+<h2 class="anchored" data-anchor-id="grundlegende-datentypen">Grundlegende Datentypen</h2>
+<ul>
+<li><code>numeric</code> — Zahlen, auch mit Nachkommastellen, z. B. <code>4.5</code></li>
+<li><code>integer</code> — ganze Zahlen, geschrieben mit <code>L</code>: <code>4L</code> (zählen ebenfalls als Zahl)</li>
+<li><code>logical</code> — <code>TRUE</code> oder <code>FALSE</code></li>
+<li><code>character</code> — Text, immer in Anführungszeichen: <code>"Wien"</code></li>
+</ul>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>gewicht     <span class="ot">&lt;-</span> <span class="fl">42.5</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>stadt       <span class="ot">&lt;-</span> <span class="st">"Wien"</span></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>ist_student <span class="ot">&lt;-</span> <span class="cn">TRUE</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p><code>class()</code> zeigt den Datentyp einer Variable:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(gewicht)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "numeric"</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(stadt)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "character"</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(ist_student)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "logical"</code></pre>
+</div>
+</div>
+<section id="datentypen-umwandeln" class="level3">
+<h3 class="anchored" data-anchor-id="datentypen-umwandeln">Datentypen umwandeln</h3>
+<p>Rechnen geht nur mit Zahlen. Ist eine Zahl versehentlich als Text gespeichert, gibt es einen Fehler:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>kaltmiete   <span class="ot">&lt;-</span> <span class="dv">550</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>nebenkosten <span class="ot">&lt;-</span> <span class="st">"350"</span>   <span class="co"># in Anführungszeichen → Text, nicht Zahl</span></span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>kaltmiete <span class="sc">+</span> nebenkosten</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-error">
+<pre><code>Error in `kaltmiete + nebenkosten`:
+! nicht-numerisches Argument für binären Operator</code></pre>
+</div>
+</div>
+<p><code>class()</code> zeigt, wo das Problem liegt:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(nebenkosten)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "character"</code></pre>
+</div>
+</div>
+<p>Mit <code>as.numeric()</code> wird der Text in eine Zahl umgewandelt:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>warmmiete <span class="ot">&lt;-</span> kaltmiete <span class="sc">+</span> <span class="fu">as.numeric</span>(nebenkosten)</span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>warmmiete</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 900</code></pre>
+</div>
+</div>
+<p>Für jeden Datentyp gibt es eine solche <code>as.*()</code>-Funktion. Was sich nicht umwandeln lässt, wird zu <code>NA</code> (fehlender Wert), mit Warnung:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="fu">as.character</span>(<span class="dv">42</span>)      <span class="co"># Zahl  -&gt; Text</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "42"</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="fu">as.numeric</span>(<span class="cn">TRUE</span>)      <span class="co"># TRUE  -&gt; 1 (FALSE -&gt; 0)</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="fu">as.numeric</span>(<span class="st">"drei"</span>)    <span class="co"># nicht umwandelbar -&gt; NA</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: NAs durch Umwandlung erzeugt</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] NA</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="vergleichen-und-logische-abfragen" class="level2">
+<h2 class="anchored" data-anchor-id="vergleichen-und-logische-abfragen">Vergleichen und logische Abfragen</h2>
+<p>Auf eine Vergleichsfrage antwortet R mit <code>TRUE</code> oder <code>FALSE</code>:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Operator</th>
+<th>Frage</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>&gt;</code> / <code>&gt;=</code></td>
+<td>größer / größer-gleich</td>
+</tr>
+<tr class="even">
+<td><code>&lt;</code> / <code>&lt;=</code></td>
+<td>kleiner / kleiner-gleich</td>
+</tr>
+<tr class="odd">
+<td><code>==</code></td>
+<td><strong>gleich?</strong> (zwei Gleichheitszeichen!)</td>
+</tr>
+<tr class="even">
+<td><code>!=</code></td>
+<td>ungleich?</td>
+</tr>
+</tbody>
+</table>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="dv">3</span> <span class="sc">&gt;</span> <span class="dv">4</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] FALSE</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="dv">7</span> <span class="sc">&gt;=</span> <span class="dv">3</span> <span class="sc">+</span> <span class="dv">4</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] TRUE</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="dv">7</span> <span class="sc">==</span> <span class="dv">0</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] FALSE</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="dv">7</span> <span class="sc">!=</span> <span class="dv">0</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] TRUE</code></pre>
+</div>
+</div>
+<p><strong>Häufige Falle:</strong> Ein einzelnes <code>=</code> ist ein Zuweisungszeichen (bzw. benennt ein Argument), kein Vergleich. Für „ist gleich?” braucht es immer <code>==</code>:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="dv">7</span> <span class="ot">=</span> <span class="dv">0</span>     <span class="co"># Fehler: R versucht, der Zahl 7 etwas zuzuweisen</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-error">
+<pre><code>Error in `7 = 0`:
+! ungültige (do_set) linke Seite in Zuweisung</code></pre>
+</div>
+</div>
+<p>Bei Text wird <strong>Groß-/Kleinschreibung unterschieden</strong>:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a>alter <span class="ot">&lt;-</span> <span class="dv">20</span></span>
+<span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a>alter <span class="sc">&gt;=</span> <span class="dv">18</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] TRUE</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb57"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a><span class="st">"R"</span> <span class="sc">==</span> <span class="st">"r"</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] FALSE</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb59"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="st">"Wien"</span> <span class="sc">!=</span> <span class="st">"Graz"</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] TRUE</code></pre>
+</div>
+</div>
+<p>Mehrere Bedingungen verknüpft man mit <code>&amp;</code> (und), <code>|</code> (oder), <code>!</code> (nicht):</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb61"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a>(alter <span class="sc">&gt;=</span> <span class="dv">18</span>) <span class="sc">&amp;</span> (alter <span class="sc">&lt;</span> <span class="dv">65</span>)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] TRUE</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb63"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a><span class="sc">!</span>(alter <span class="sc">==</span> <span class="dv">20</span>)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] FALSE</code></pre>
+</div>
+</div>
+<section id="übung" class="level3">
+<h3 class="anchored" data-anchor-id="übung">Übung</h3>
+<ol type="1">
+<li>Berechne, wie viele volle Wochen 100 Tage haben und wie viele Tage übrig bleiben (Tipp: <code>%/%</code> und <code>%%</code>).</li>
+<li>Speichere deine Körpergröße in Metern und dein Gewicht in kg in zwei Variablen und berechne den BMI (Gewicht / Größe²), gerundet auf eine Nachkommastelle.</li>
+</ol>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb65"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a><span class="co"># dein Code</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+</section>
+</section>
+<section id="teil-2-vektoren" class="level1">
+<h1>Teil 2: Vektoren</h1>
+<section id="vektoren-erstellen" class="level2">
+<h2 class="anchored" data-anchor-id="vektoren-erstellen">Vektoren erstellen</h2>
+<p>Ein <strong>Vektor</strong> speichert mehrere Werte desselben Typs — z. B. mehrere Messwerte oder Namen. Mit <code>c()</code> (<em>combine</em>) werden Werte zu einem Vektor zusammengefasst:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb66"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a>zahlen     <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">10</span>, <span class="dv">49</span>)</span>
+<span id="cb66-2"><a href="#cb66-2" aria-hidden="true" tabindex="-1"></a>buchstaben <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"a"</span>, <span class="st">"b"</span>, <span class="st">"c"</span>)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Alle Elemente eines Vektors haben denselben Datentyp. Mischt man Typen, wandelt R ohne Warnung alles in den allgemeinsten Typ um (hier: Text):</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb67"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a>gemischt <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="st">"a"</span>, <span class="cn">TRUE</span>)</span>
+<span id="cb67-2"><a href="#cb67-2" aria-hidden="true" tabindex="-1"></a>gemischt</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "1"    "a"    "TRUE"</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb69"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb69-1"><a href="#cb69-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(gemischt)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "character"</code></pre>
+</div>
+</div>
+<p><code>:</code> erzeugt eine Folge in Einerschritten, <code>seq()</code> mit frei wählbarer Schrittweite; <code>length()</code> gibt die Anzahl der Elemente:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb71"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb71-1"><a href="#cb71-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span><span class="sc">:</span><span class="dv">10</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1]  1  2  3  4  5  6  7  8  9 10</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb73"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb73-1"><a href="#cb73-1" aria-hidden="true" tabindex="-1"></a><span class="fu">seq</span>(<span class="at">from =</span> <span class="dv">0</span>, <span class="at">to =</span> <span class="dv">100</span>, <span class="at">by =</span> <span class="dv">25</span>)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1]   0  25  50  75 100</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb75"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb75-1"><a href="#cb75-1" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(zahlen)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 3</code></pre>
+</div>
+</div>
+</section>
+<section id="beispieldaten-temperaturen-in-wien" class="level2">
+<h2 class="anchored" data-anchor-id="beispieldaten-temperaturen-in-wien">Beispieldaten: Temperaturen in Wien</h2>
+<p>Langjährige Durchschnittswerte der Höchst- und Tiefsttemperatur pro Monat in °C (Quelle: climate-data.org):</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb77"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb77-1"><a href="#cb77-1" aria-hidden="true" tabindex="-1"></a><span class="co">#             Mai   Juni  Juli  Aug   Sep</span></span>
+<span id="cb77-2"><a href="#cb77-2" aria-hidden="true" tabindex="-1"></a>tmax_wien <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">20.1</span>, <span class="fl">24.1</span>, <span class="fl">26.0</span>, <span class="fl">25.7</span>, <span class="fl">20.5</span>)</span>
+<span id="cb77-3"><a href="#cb77-3" aria-hidden="true" tabindex="-1"></a>tmin_wien <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">10.4</span>, <span class="fl">14.3</span>, <span class="fl">16.4</span>, <span class="fl">16.0</span>, <span class="fl">11.9</span>)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="vektoren-benennen" class="level2">
+<h2 class="anchored" data-anchor-id="vektoren-benennen">Vektoren benennen</h2>
+<p>Mit <code>names()</code> bekommt jedes Element einen Namen — so ist klar, welcher Wert zu welchem Monat gehört. Den Vektor der Monate speichern wir einmal als Variable und verwenden ihn zweimal:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb78"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb78-1"><a href="#cb78-1" aria-hidden="true" tabindex="-1"></a>monate <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Mai"</span>, <span class="st">"Juni"</span>, <span class="st">"Juli"</span>, <span class="st">"August"</span>, <span class="st">"September"</span>)</span>
+<span id="cb78-2"><a href="#cb78-2" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(tmax_wien) <span class="ot">&lt;-</span> monate</span>
+<span id="cb78-3"><a href="#cb78-3" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(tmin_wien) <span class="ot">&lt;-</span> monate</span>
+<span id="cb78-4"><a href="#cb78-4" aria-hidden="true" tabindex="-1"></a>tmax_wien</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>      Mai      Juni      Juli    August September 
+     20.1      24.1      26.0      25.7      20.5 </code></pre>
+</div>
+</div>
+</section>
+<section id="ein-erster-plot-barplot" class="level2">
+<h2 class="anchored" data-anchor-id="ein-erster-plot-barplot">Ein erster Plot: barplot()</h2>
+<p>Aus einem benannten Vektor macht <code>barplot()</code> mit einem Befehl eine beschriftete Grafik — die Namen werden zu Achsenbeschriftungen:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb80"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb80-1"><a href="#cb80-1" aria-hidden="true" tabindex="-1"></a><span class="fu">barplot</span>(tmax_wien,</span>
+<span id="cb80-2"><a href="#cb80-2" aria-hidden="true" tabindex="-1"></a>        <span class="at">main =</span> <span class="st">"Höchsttemperaturen in Wien"</span>,</span>
+<span id="cb80-3"><a href="#cb80-3" aria-hidden="true" tabindex="-1"></a>        <span class="at">ylab =</span> <span class="st">"°C"</span>,</span>
+<span id="cb80-4"><a href="#cb80-4" aria-hidden="true" tabindex="-1"></a>        <span class="at">col  =</span> <span class="st">"tomato"</span>)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="einheit-1_files/figure-html/unnamed-chunk-21-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<blockquote class="blockquote">
+<p><strong>Hinweis:</strong> Weitere Grafiken folgen in Teil 4 dieser Einheit und in Einheit 3.</p>
+</blockquote>
+</section>
+<section id="mit-vektoren-rechnen" class="level2">
+<h2 class="anchored" data-anchor-id="mit-vektoren-rechnen">Mit Vektoren rechnen</h2>
+<p>Rechenoperationen zwischen zwei Vektoren erfolgen <strong>elementweise</strong>:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb81"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb81-1"><a href="#cb81-1" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>) <span class="sc">+</span> <span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>)   <span class="co"># entspricht c(1+4, 2+5, 3+6)</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 5 7 9</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb83"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb83-1"><a href="#cb83-1" aria-hidden="true" tabindex="-1"></a>tmittel_wien <span class="ot">&lt;-</span> (tmax_wien <span class="sc">+</span> tmin_wien) <span class="sc">/</span> <span class="dv">2</span></span>
+<span id="cb83-2"><a href="#cb83-2" aria-hidden="true" tabindex="-1"></a>tmittel_wien</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>      Mai      Juni      Juli    August September 
+    15.25     19.20     21.20     20.85     16.20 </code></pre>
+</div>
+</div>
+<p>Andere Funktionen fassen einen ganzen Vektor zu <strong>einer</strong> Zahl zusammen:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb85"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb85-1"><a href="#cb85-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(tmax_wien)            <span class="co"># Mittelwert</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 23.28</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb87"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb87-1"><a href="#cb87-1" aria-hidden="true" tabindex="-1"></a><span class="fu">max</span>(tmax_wien)             <span class="co"># Maximum (min() für das Minimum)</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 26</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb89"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb89-1"><a href="#cb89-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(tmax_wien)             <span class="co"># Summe</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 116.4</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb91"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb91-1"><a href="#cb91-1" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">mean</span>(tmax_wien), <span class="dv">1</span>)  <span class="co"># Funktionen lassen sich ineinander schachteln</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 23.3</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb93"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb93-1"><a href="#cb93-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sort</span>(tmax_wien)            <span class="co"># sortiert (decreasing = TRUE für absteigend)</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>      Mai September      Juni    August      Juli 
+     20.1      20.5      24.1      25.7      26.0 </code></pre>
+</div>
+</div>
+</section>
+<section id="vektorelemente-auswählen" class="level2">
+<h2 class="anchored" data-anchor-id="vektorelemente-auswählen">Vektorelemente auswählen</h2>
+<p>Mit eckigen Klammern <code>[ ]</code> wählst du Elemente aus. Achtung: <strong>das erste Element hat den Index 1</strong>, nicht 0.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb95"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb95-1"><a href="#cb95-1" aria-hidden="true" tabindex="-1"></a>tmax_wien[<span class="dv">1</span>]          <span class="co"># erstes Element (Mai)</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> Mai 
+20.1 </code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb97"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb97-1"><a href="#cb97-1" aria-hidden="true" tabindex="-1"></a>tmax_wien[<span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">4</span>)]    <span class="co"># mehrere Elemente über einen Indexvektor</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  Juni August 
+  24.1   25.7 </code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb99"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb99-1"><a href="#cb99-1" aria-hidden="true" tabindex="-1"></a>tmax_wien[<span class="dv">2</span><span class="sc">:</span><span class="dv">4</span>]        <span class="co"># ein Bereich</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  Juni   Juli August 
+  24.1   26.0   25.7 </code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb101"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb101-1"><a href="#cb101-1" aria-hidden="true" tabindex="-1"></a>tmax_wien[<span class="st">"Juli"</span>]     <span class="co"># über den Namen</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Juli 
+  26 </code></pre>
+</div>
+</div>
+</section>
+<section id="logische-abfragen-auf-vektoren" class="level2">
+<h2 class="anchored" data-anchor-id="logische-abfragen-auf-vektoren">Logische Abfragen auf Vektoren</h2>
+<p>Ein Vergleich auf einem Vektor wird <strong>elementweise</strong> ausgewertet:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb103"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb103-1"><a href="#cb103-1" aria-hidden="true" tabindex="-1"></a>tmax_wien <span class="sc">&gt;</span> <span class="dv">24</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>      Mai      Juni      Juli    August September 
+    FALSE      TRUE      TRUE      TRUE     FALSE </code></pre>
+</div>
+</div>
+<p>Damit lässt sich zählen, die Positionen finden oder filtern:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb105"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb105-1"><a href="#cb105-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(tmax_wien <span class="sc">&gt;</span> <span class="dv">24</span>)        <span class="co"># wie viele TRUE? (TRUE zählt als 1, FALSE als 0)</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 3</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb107"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb107-1"><a href="#cb107-1" aria-hidden="true" tabindex="-1"></a><span class="fu">which</span>(tmax_wien <span class="sc">&gt;</span> <span class="dv">24</span>)      <span class="co"># an welchen Positionen steht TRUE?</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  Juni   Juli August 
+     2      3      4 </code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb109"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb109-1"><a href="#cb109-1" aria-hidden="true" tabindex="-1"></a>tmax_wien[tmax_wien <span class="sc">&gt;</span> <span class="dv">24</span>]  <span class="co"># nur die Werte, für die die Bedingung zutrifft</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  Juni   Juli August 
+  24.1   26.0   25.7 </code></pre>
+</div>
+</div>
+<p><code>%in%</code> prüft, ob ein Wert in einer Menge vorkommt — viel kürzer als mehrere <code>==</code> mit <code>|</code>:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb111"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb111-1"><a href="#cb111-1" aria-hidden="true" tabindex="-1"></a>sommer <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Juni"</span>, <span class="st">"Juli"</span>, <span class="st">"August"</span>)</span>
+<span id="cb111-2"><a href="#cb111-2" aria-hidden="true" tabindex="-1"></a>monate <span class="sc">%in%</span> sommer</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] FALSE  TRUE  TRUE  TRUE FALSE</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb113"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb113-1"><a href="#cb113-1" aria-hidden="true" tabindex="-1"></a>tmax_wien[monate <span class="sc">%in%</span> sommer]</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  Juni   Juli August 
+  24.1   26.0   25.7 </code></pre>
+</div>
+</div>
+</section>
+<section id="elemente-verändern" class="level2">
+<h2 class="anchored" data-anchor-id="elemente-verändern">Elemente verändern</h2>
+<p>Weist man einer ausgewählten Stelle einen Wert zu, wird der Vektor <strong>dort überschrieben</strong> — per Position, Name oder Bedingung:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb115"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb115-1"><a href="#cb115-1" aria-hidden="true" tabindex="-1"></a>temperaturen <span class="ot">&lt;-</span> tmax_wien               <span class="co"># Kopie, damit tmax_wien unverändert bleibt</span></span>
+<span id="cb115-2"><a href="#cb115-2" aria-hidden="true" tabindex="-1"></a>temperaturen[<span class="st">"Juli"</span>] <span class="ot">&lt;-</span> <span class="fl">27.5</span>            <span class="co"># einen einzelnen Wert korrigieren</span></span>
+<span id="cb115-3"><a href="#cb115-3" aria-hidden="true" tabindex="-1"></a>temperaturen[temperaturen <span class="sc">&lt;</span> <span class="dv">21</span>] <span class="ot">&lt;-</span> <span class="cn">NA</span>   <span class="co"># alle kühlen Monate auf NA setzen</span></span>
+<span id="cb115-4"><a href="#cb115-4" aria-hidden="true" tabindex="-1"></a>temperaturen</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>      Mai      Juni      Juli    August September 
+       NA      24.1      27.5      25.7        NA </code></pre>
+</div>
+</div>
+</section>
+<section id="fehlende-werte-na" class="level2">
+<h2 class="anchored" data-anchor-id="fehlende-werte-na">Fehlende Werte: NA</h2>
+<p><code>NA</code> („not available”) steht für einen fehlenden Wert. Jede Rechnung mit <code>NA</code> ergibt wieder <code>NA</code> — deshalb liefern <code>mean()</code>, <code>sum()</code> &amp; Co.&nbsp;<code>NA</code>, sobald ein einziger Wert fehlt. <code>na.rm = TRUE</code> lässt fehlende Werte weg:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb117"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb117-1"><a href="#cb117-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(temperaturen)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] NA</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb119"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb119-1"><a href="#cb119-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(temperaturen, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 25.76667</code></pre>
+</div>
+</div>
+<p><code>is.na()</code> prüft elementweise auf fehlende Werte, <code>!</code> kehrt das um:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb121"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb121-1"><a href="#cb121-1" aria-hidden="true" tabindex="-1"></a><span class="fu">is.na</span>(temperaturen)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>      Mai      Juni      Juli    August September 
+     TRUE     FALSE     FALSE     FALSE      TRUE </code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb123"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb123-1"><a href="#cb123-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">is.na</span>(temperaturen))             <span class="co"># wie viele fehlen?</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 2</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb125"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb125-1"><a href="#cb125-1" aria-hidden="true" tabindex="-1"></a>temperaturen[<span class="sc">!</span><span class="fu">is.na</span>(temperaturen)]   <span class="co"># nur die vorhandenen Werte</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  Juni   Juli August 
+  24.1   27.5   25.7 </code></pre>
+</div>
+</div>
+<section id="übung-1" class="level3">
+<h3 class="anchored" data-anchor-id="übung-1">Übung</h3>
+<ol type="1">
+<li>In welchen Monaten liegt die <strong>Tiefst</strong>temperatur über 15 °C? Gib die Monatsnamen aus (Tipp: <code>names()</code>).</li>
+<li>Berechne die Differenz zwischen Höchst- und Tiefsttemperatur pro Monat. In welchem Monat ist sie am größten? (Tipp: <code>which.max()</code>)</li>
+</ol>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb127"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb127-1"><a href="#cb127-1" aria-hidden="true" tabindex="-1"></a><span class="co"># dein Code</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+</section>
+</section>
+<section id="teil-3-matrizen" class="level1">
+<h1>Teil 3: Matrizen</h1>
+<section id="was-ist-eine-matrix" class="level2">
+<h2 class="anchored" data-anchor-id="was-ist-eine-matrix">Was ist eine Matrix?</h2>
+<p>Eine <strong>Matrix</strong> ist eine Sammlung von Elementen desselben Datentyps, angeordnet in Zeilen und Spalten — also zweidimensional, im Gegensatz zum eindimensionalen Vektor. Erzeugt wird sie mit <code>matrix()</code>:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb128"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb128-1"><a href="#cb128-1" aria-hidden="true" tabindex="-1"></a><span class="fu">matrix</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>, <span class="at">nrow =</span> <span class="dv">2</span>)                 <span class="co"># Standard: spaltenweise gefüllt</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     [,1] [,2] [,3]
+[1,]    1    3    5
+[2,]    2    4    6</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb130"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb130-1"><a href="#cb130-1" aria-hidden="true" tabindex="-1"></a><span class="fu">matrix</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>, <span class="at">nrow =</span> <span class="dv">2</span>, <span class="at">byrow =</span> <span class="cn">TRUE</span>)   <span class="co"># zeilenweise gefüllt</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     [,1] [,2] [,3]
+[1,]    1    2    3
+[2,]    4    5    6</code></pre>
+</div>
+</div>
+<ul>
+<li>Das erste Argument sind die Elemente.</li>
+<li><code>nrow</code> (oder <code>ncol</code>) legt die Anzahl der Zeilen (Spalten) fest.</li>
+<li><code>byrow = TRUE</code> füllt zeilenweise; Standard ist spaltenweise.</li>
+</ul>
+</section>
+<section id="eine-matrix-aus-vektoren-bauen" class="level2">
+<h2 class="anchored" data-anchor-id="eine-matrix-aus-vektoren-bauen">Eine Matrix aus Vektoren bauen</h2>
+<p>Die Temperaturvektoren aus Teil 2 lassen sich direkt zu einer Matrix zusammenfügen: erst alle Höchstwerte, dann alle Tiefstwerte — spaltenweise gefüllt, ergibt das genau eine Spalte pro Messwert:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb132"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb132-1"><a href="#cb132-1" aria-hidden="true" tabindex="-1"></a>wien_matrix <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(tmax_wien, tmin_wien), <span class="at">ncol =</span> <span class="dv">2</span>)</span>
+<span id="cb132-2"><a href="#cb132-2" aria-hidden="true" tabindex="-1"></a>wien_matrix</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     [,1] [,2]
+[1,] 20.1 10.4
+[2,] 24.1 14.3
+[3,] 26.0 16.4
+[4,] 25.7 16.0
+[5,] 20.5 11.9</code></pre>
+</div>
+</div>
+</section>
+<section id="matrizen-benennen" class="level2">
+<h2 class="anchored" data-anchor-id="matrizen-benennen">Matrizen benennen</h2>
+<p>Wie <code>names()</code> bei Vektoren — nur getrennt für Zeilen und Spalten:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb134"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb134-1"><a href="#cb134-1" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(wien_matrix) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"TMax"</span>, <span class="st">"TMin"</span>)</span>
+<span id="cb134-2"><a href="#cb134-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(wien_matrix) <span class="ot">&lt;-</span> monate</span>
+<span id="cb134-3"><a href="#cb134-3" aria-hidden="true" tabindex="-1"></a>wien_matrix</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>          TMax TMin
+Mai       20.1 10.4
+Juni      24.1 14.3
+Juli      26.0 16.4
+August    25.7 16.0
+September 20.5 11.9</code></pre>
+</div>
+</div>
+<p>Alternativ setzt man beides direkt beim Erstellen mit <code>dimnames = list(zeilen, spalten)</code>:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb136"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb136-1"><a href="#cb136-1" aria-hidden="true" tabindex="-1"></a>wien_matrix <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(tmax_wien, tmin_wien), <span class="at">ncol =</span> <span class="dv">2</span>,</span>
+<span id="cb136-2"><a href="#cb136-2" aria-hidden="true" tabindex="-1"></a>                      <span class="at">dimnames =</span> <span class="fu">list</span>(monate, <span class="fu">c</span>(<span class="st">"TMax"</span>, <span class="st">"TMin"</span>)))</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="matrixelemente-auswählen" class="level2">
+<h2 class="anchored" data-anchor-id="matrixelemente-auswählen">Matrixelemente auswählen</h2>
+<p>Wie bei Vektoren mit <code>[ ]</code> — aber mit <strong>zwei</strong> Angaben: <code>[Zeile, Spalte]</code>.</p>
+<ul>
+<li><code>m[1, 2]</code> → Element in Zeile 1, Spalte 2</li>
+<li><code>m[, 1]</code> → alle Zeilen der 1. Spalte</li>
+<li><code>m[1, ]</code> → alle Spalten der 1. Zeile</li>
+<li>statt Nummern gehen auch Namen: <code>m["Juli", "TMax"]</code></li>
+</ul>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb137"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb137-1"><a href="#cb137-1" aria-hidden="true" tabindex="-1"></a>wien_matrix[<span class="st">"Juli"</span>, <span class="st">"TMax"</span>]</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 26</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb139"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb139-1"><a href="#cb139-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(wien_matrix[, <span class="st">"TMin"</span>])           <span class="co"># Ø Tiefsttemperatur, alle Monate</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 13.8</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb141"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb141-1"><a href="#cb141-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(wien_matrix[<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>, <span class="st">"TMin"</span>])        <span class="co"># nur Mai und Juni</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 12.35</code></pre>
+</div>
+</div>
+</section>
+<section id="zeilen--und-spaltenmittelwerte" class="level2">
+<h2 class="anchored" data-anchor-id="zeilen--und-spaltenmittelwerte">Zeilen- und Spaltenmittelwerte</h2>
+<p><code>rowMeans()</code> berechnet den Mittelwert jeder Zeile — hier also die Durchschnittstemperatur pro Monat. Es ist dasselbe Ergebnis wie <code>tmittel_wien</code> aus Teil 2, nur in einem Schritt:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb143"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb143-1"><a href="#cb143-1" aria-hidden="true" tabindex="-1"></a>durchschnitt <span class="ot">&lt;-</span> <span class="fu">rowMeans</span>(wien_matrix)</span>
+<span id="cb143-2"><a href="#cb143-2" aria-hidden="true" tabindex="-1"></a>durchschnitt</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>      Mai      Juni      Juli    August September 
+    15.25     19.20     21.20     20.85     16.20 </code></pre>
+</div>
+</div>
+<p><code>colMeans()</code> rechnet pro Spalte — die mittlere Höchst- bzw. Tiefsttemperatur über den ganzen Zeitraum:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb145"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb145-1"><a href="#cb145-1" aria-hidden="true" tabindex="-1"></a><span class="fu">colMeans</span>(wien_matrix)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> TMax  TMin 
+23.28 13.80 </code></pre>
+</div>
+</div>
+</section>
+<section id="spalten-und-zeilen-anhängen-cbind-und-rbind" class="level2">
+<h2 class="anchored" data-anchor-id="spalten-und-zeilen-anhängen-cbind-und-rbind">Spalten und Zeilen anhängen: cbind() und rbind()</h2>
+<p><code>cbind()</code> fügt spaltenweise zusammen (<em>column bind</em>), <code>rbind()</code> zeilenweise (<em>row bind</em>). Wir hängen die Durchschnittstemperatur als Spalte an und die Spaltenmittelwerte als Zeile:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb147"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb147-1"><a href="#cb147-1" aria-hidden="true" tabindex="-1"></a>wien_erweitert <span class="ot">&lt;-</span> <span class="fu">cbind</span>(wien_matrix, <span class="at">Mittel =</span> durchschnitt)</span>
+<span id="cb147-2"><a href="#cb147-2" aria-hidden="true" tabindex="-1"></a>wien_erweitert <span class="ot">&lt;-</span> <span class="fu">rbind</span>(wien_erweitert, <span class="at">Gesamt =</span> <span class="fu">colMeans</span>(wien_erweitert))</span>
+<span id="cb147-3"><a href="#cb147-3" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(wien_erweitert, <span class="dv">1</span>)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>          TMax TMin Mittel
+Mai       20.1 10.4   15.2
+Juni      24.1 14.3   19.2
+Juli      26.0 16.4   21.2
+August    25.7 16.0   20.9
+September 20.5 11.9   16.2
+Gesamt    23.3 13.8   18.5</code></pre>
+</div>
+</div>
+</section>
+<section id="die-matrix-als-balkendiagramm" class="level2">
+<h2 class="anchored" data-anchor-id="die-matrix-als-balkendiagramm">Die Matrix als Balkendiagramm</h2>
+<p><code>barplot()</code> funktioniert auch mit einer Matrix. <code>t()</code> dreht sie (Zeilen ↔︎ Spalten), damit die Monate auf der x-Achse landen; <code>beside = TRUE</code> stellt TMax und TMin nebeneinander:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb149"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb149-1"><a href="#cb149-1" aria-hidden="true" tabindex="-1"></a><span class="fu">barplot</span>(<span class="fu">t</span>(wien_matrix), <span class="at">beside =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb149-2"><a href="#cb149-2" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.text =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb149-3"><a href="#cb149-3" aria-hidden="true" tabindex="-1"></a>        <span class="at">main =</span> <span class="st">"Höchst- und Tiefsttemperaturen in Wien, Mai–September"</span>,</span>
+<span id="cb149-4"><a href="#cb149-4" aria-hidden="true" tabindex="-1"></a>        <span class="at">ylab =</span> <span class="st">"°C"</span>,</span>
+<span id="cb149-5"><a href="#cb149-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">col  =</span> <span class="fu">c</span>(<span class="st">"tomato"</span>, <span class="st">"steelblue"</span>))</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="einheit-1_files/figure-html/unnamed-chunk-40-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<section id="übung-2" class="level3">
+<h3 class="anchored" data-anchor-id="übung-2">Übung</h3>
+<ol type="1">
+<li>Wähle aus <code>wien_matrix</code> die Werte für Juli und August (beide Spalten) aus.</li>
+<li>Berechne für jeden Monat die Spanne <code>TMax - TMin</code> und hänge sie mit <code>cbind()</code> als Spalte <code>Spanne</code> an <code>wien_matrix</code> an.</li>
+</ol>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb150"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb150-1"><a href="#cb150-1" aria-hidden="true" tabindex="-1"></a><span class="co"># dein Code</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+</section>
+</section>
+<section id="teil-4-schnelle-grafiken-mit-base-r" class="level1">
+<h1>Teil 4: Schnelle Grafiken mit Base-R</h1>
+<p><code>barplot()</code> hast du schon kennengelernt. Base-R hat noch einige weitere Grafikfunktionen, die mit einem einzigen Befehl ein Bild liefern — ideal, um sich beim Arbeiten schnell einen Eindruck zu verschaffen. Für <strong>vorzeigbare</strong> Grafiken nimmt man später <code>ggplot2</code> (Einheit 3).</p>
+<p>Neben unseren Temperaturen nutzen wir den eingebauten Datensatz <code>mtcars</code> (32 Automodelle). <code>mtcars$mpg</code> holt daraus eine Spalte als Vektor — mehr zu solchen Tabellen in Einheit 2.</p>
+<section id="punkte-und-linien-plot" class="level2">
+<h2 class="anchored" data-anchor-id="punkte-und-linien-plot">Punkte und Linien: plot()</h2>
+<p>Mit einem Vektor zeichnet <code>plot()</code> die Werte in ihrer Reihenfolge. Für einen Verlauf über die Zeit passt <code>type = "b"</code> (Punkte und Linie):</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb151"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb151-1"><a href="#cb151-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(tmax_wien, <span class="at">type =</span> <span class="st">"b"</span>,</span>
+<span id="cb151-2"><a href="#cb151-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">"Höchsttemperaturen in Wien, Mai–September"</span>,</span>
+<span id="cb151-3"><a href="#cb151-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"Monat (Mai = 1)"</span>, <span class="at">ylab =</span> <span class="st">"°C"</span>,</span>
+<span id="cb151-4"><a href="#cb151-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">pch =</span> <span class="dv">19</span>, <span class="at">col =</span> <span class="st">"tomato"</span>)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="einheit-1_files/figure-html/unnamed-chunk-42-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Mit zwei Vektoren wird daraus ein Streudiagramm. <code>main</code>, <code>xlab</code>, <code>ylab</code> beschriften, <code>pch</code> wählt das Punktsymbol, <code>col</code> die Farbe:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb152"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb152-1"><a href="#cb152-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(mtcars<span class="sc">$</span>hp, mtcars<span class="sc">$</span>mpg,</span>
+<span id="cb152-2"><a href="#cb152-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">"Verbrauch nach Leistung"</span>,</span>
+<span id="cb152-3"><a href="#cb152-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"PS"</span>, <span class="at">ylab =</span> <span class="st">"Meilen pro Gallone"</span>,</span>
+<span id="cb152-4"><a href="#cb152-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">pch =</span> <span class="dv">19</span>, <span class="at">col =</span> <span class="st">"steelblue"</span>)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="einheit-1_files/figure-html/unnamed-chunk-43-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="verteilung-hist" class="level2">
+<h2 class="anchored" data-anchor-id="verteilung-hist">Verteilung: hist()</h2>
+<p><code>hist()</code> zeigt, wie sich die Werte eines Zahlenvektors verteilen; <code>breaks</code> steuert die Anzahl der Balken:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb153"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb153-1"><a href="#cb153-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(mtcars<span class="sc">$</span>mpg, <span class="at">breaks =</span> <span class="dv">8</span>,</span>
+<span id="cb153-2"><a href="#cb153-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">"Verteilung des Verbrauchs"</span>,</span>
+<span id="cb153-3"><a href="#cb153-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"Meilen pro Gallone"</span>, <span class="at">col =</span> <span class="st">"lightblue"</span>)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="einheit-1_files/figure-html/unnamed-chunk-44-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="gruppenvergleich-boxplot" class="level2">
+<h2 class="anchored" data-anchor-id="gruppenvergleich-boxplot">Gruppenvergleich: boxplot()</h2>
+<p>Die Schreibweise <code>y ~ gruppe</code> heißt „<code>y</code> aufgeschlüsselt nach <code>gruppe</code>“. Hier: Verbrauch je Zylinderzahl:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb154"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb154-1"><a href="#cb154-1" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(mpg <span class="sc">~</span> cyl, <span class="at">data =</span> mtcars,</span>
+<span id="cb154-2"><a href="#cb154-2" aria-hidden="true" tabindex="-1"></a>        <span class="at">main =</span> <span class="st">"Verbrauch nach Zylinderzahl"</span>,</span>
+<span id="cb154-3"><a href="#cb154-3" aria-hidden="true" tabindex="-1"></a>        <span class="at">xlab =</span> <span class="st">"Zylinder"</span>, <span class="at">ylab =</span> <span class="st">"Meilen pro Gallone"</span>,</span>
+<span id="cb154-4"><a href="#cb154-4" aria-hidden="true" tabindex="-1"></a>        <span class="at">col =</span> <span class="st">"lightgreen"</span>)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="einheit-1_files/figure-html/unnamed-chunk-45-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="mehrere-grafiken-nebeneinander-parmfrow" class="level2">
+<h2 class="anchored" data-anchor-id="mehrere-grafiken-nebeneinander-parmfrow">Mehrere Grafiken nebeneinander: par(mfrow)</h2>
+<p><code>par(mfrow = c(1, 2))</code> ordnet die folgenden Grafiken in einem Raster an (1 Zeile, 2 Spalten):</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb155"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb155-1"><a href="#cb155-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))</span>
+<span id="cb155-2"><a href="#cb155-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb155-3"><a href="#cb155-3" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(mtcars<span class="sc">$</span>mpg,    <span class="at">main =</span> <span class="st">"Histogramm"</span>, <span class="at">xlab =</span> <span class="st">"mpg"</span>)</span>
+<span id="cb155-4"><a href="#cb155-4" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(mtcars<span class="sc">$</span>mpg, <span class="at">main =</span> <span class="st">"Boxplot"</span>,   <span class="at">ylab =</span> <span class="st">"mpg"</span>)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="einheit-1_files/figure-html/unnamed-chunk-46-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb156"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb156-1"><a href="#cb156-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>))   <span class="co"># wieder zurückstellen</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>In einem <code>.R</code>-Skript bleibt die Einstellung für die <strong>restliche Sitzung</strong> aktiv — deshalb immer zurücksetzen. In einem Notebook gilt sie nur innerhalb des Chunks.</p>
+<section id="übung-3" class="level3">
+<h3 class="anchored" data-anchor-id="übung-3">Übung</h3>
+<ol type="1">
+<li>Zeichne <code>tmin_wien</code> als Linie mit Punkten in <code>"steelblue"</code>.</li>
+<li>Zeichne ein Histogramm der PS-Zahlen (<code>mtcars$hp</code>) mit 10 Balken und sinnvoller Beschriftung.</li>
+</ol>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb157"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb157-1"><a href="#cb157-1" aria-hidden="true" tabindex="-1"></a><span class="co"># dein Code</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+
+
+</section>
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Kopiert");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Kopiert");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./einheit-0.html" class="pagination-link" aria-label="0 · RStudio, Projekte &amp; Pakete">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">0 · RStudio, Projekte &amp; Pakete</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./einheit-2.html" class="pagination-link" aria-label="2 · Data Frames &amp; dplyr">
+        <span class="nav-page-text">2 · Data Frames &amp; dplyr</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

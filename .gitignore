@@ -1,0 +1,27 @@
+# Nicht veröffentlichen
+Loesungen.Rmd
+drafts/
+last_year/
+
+# Alte bzw. lokal erzeugte HTML-Dateien (die Website liegt in docs/)
+/*.html
+*.nb.html
+
+# Von Studierenden erzeugte Dateien
+data/processed/*
+!data/processed/.gitkeep
+output/*
+!output/.gitkeep
+
+# RStudio / R
+.Rproj.user/
+.Rhistory
+.RData
+.Ruserdata
+
+# Website: Arbeitskopien, die build_site.R erzeugt
+_website/einheit-*.Rmd
+_website/cheatsheet.md
+_website/data/
+_website/.quarto/
+_website/*_files/

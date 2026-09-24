@@ -1,0 +1,1118 @@
+[
+  {
+    "objectID": "cheatsheet.html",
+    "href": "cheatsheet.html",
+    "title": "Cheatsheet",
+    "section": "",
+    "text": "Die wichtigsten Funktionen dieser Einführung, in der Reihenfolge der Einheiten. Platzhalter: x = Vektor · df = Data Frame · m = Matrix · l = Liste · f = Faktor · g = Gruppenspalte.",
+    "crumbs": [
+      "Cheatsheet"
+    ]
+  },
+  {
+    "objectID": "cheatsheet.html#pakete-hilfe",
+    "href": "cheatsheet.html#pakete-hilfe",
+    "title": "Cheatsheet",
+    "section": "Pakete & Hilfe",
+    "text": "Pakete & Hilfe\n\n\n\n\n\n\n\nCode\nBedeutung\n\n\n\n\ninstall.packages(\"pkg\")\nPaket installieren — einmal pro Rechner, in der Console\n\n\nlibrary(pkg)\nPaket laden — in jeder Sitzung, oben im Skript\n\n\npkg::fun()\neine Funktion nutzen, ohne das Paket zu laden\n\n\n?fun\nHilfeseite öffnen (Arguments, Examples)\n\n\ngetwd()\naktuelles Arbeitsverzeichnis anzeigen",
+    "crumbs": [
+      "Cheatsheet"
+    ]
+  },
+  {
+    "objectID": "cheatsheet.html#rstudio-r-markdown",
+    "href": "cheatsheet.html#rstudio-r-markdown",
+    "title": "Cheatsheet",
+    "section": "RStudio & R Markdown",
+    "text": "RStudio & R Markdown\n\n\n\n\n\n\n\nTastenkürzel (Windows)\nWirkung\n\n\n\n\nStrg + Enter\nZeile / Auswahl ausführen\n\n\nStrg + Shift + Enter\nChunk ausführen\n\n\nStrg + Alt + I\nneuen Chunk einfügen\n\n\nStrg + Shift + K\nDokument knitten\n\n\nAlt + -\n&lt;- einfügen\n\n\nStrg + Shift + M\nPipe einfügen\n\n\nStrg + Shift + F10\nR neu starten (leert Environment, entlädt Pakete)\n\n\n\nAuf dem Mac: Cmd statt Strg, Option statt Alt.\n\n\n\nChunk-Option\nWirkung\n\n\n\n\necho=FALSE\nCode ausführen, aber nicht zeigen\n\n\neval=FALSE\nCode zeigen, aber nicht ausführen\n\n\nmessage=FALSE · warning=FALSE\nMeldungen · Warnungen ausblenden\n\n\nerror=TRUE\nFehler anzeigen statt abbrechen",
+    "crumbs": [
+      "Cheatsheet"
+    ]
+  },
+  {
+    "objectID": "cheatsheet.html#rechnen-zuweisen-vergleichen",
+    "href": "cheatsheet.html#rechnen-zuweisen-vergleichen",
+    "title": "Cheatsheet",
+    "section": "Rechnen, Zuweisen, Vergleichen",
+    "text": "Rechnen, Zuweisen, Vergleichen\n\n\n\nCode\nBedeutung\n\n\n\n\n+ - * / ^\nGrundrechenarten, Potenz\n\n\n%/% · %%\nganzzahlige Division · Rest\n\n\nx &lt;- 5\nzuweisen\n\n\n&gt; &gt;= &lt; &lt;= · == · !=\nvergleichen · gleich? · ungleich?\n\n\n& · \\| · !\nund · oder · nicht\n\n\nround(3.14159, digits = 2)\nFunktion mit benanntem Argument",
+    "crumbs": [
+      "Cheatsheet"
+    ]
+  },
+  {
+    "objectID": "cheatsheet.html#datentypen",
+    "href": "cheatsheet.html#datentypen",
+    "title": "Cheatsheet",
+    "section": "Datentypen",
+    "text": "Datentypen\n\n\n\n\n\n\n\nCode\nBedeutung\n\n\n\n\n42.5 · 4L · \"Text\" · TRUE / FALSE · NA\nZahl · Ganzzahl · Text · logisch · fehlend\n\n\nclass(x)\nDatentyp anzeigen\n\n\nas.numeric(x) · as.character(x)\nTyp umwandeln (nicht umwandelbar → NA)",
+    "crumbs": [
+      "Cheatsheet"
+    ]
+  },
+  {
+    "objectID": "cheatsheet.html#vektoren",
+    "href": "cheatsheet.html#vektoren",
+    "title": "Cheatsheet",
+    "section": "Vektoren",
+    "text": "Vektoren\n\n\n\n\n\n\n\nCode\nBedeutung\n\n\n\n\nc(1, 2, 3)\nVektor bauen\n\n\n1:10 · seq(0, 100, by = 25)\nFolge in Einerschritten · mit Schrittweite\n\n\nlength(x)\nAnzahl Elemente\n\n\nnames(x) &lt;- c(...)\nElemente benennen\n\n\nx[1] · x[c(1, 3)] · x[2:4] · x[\"Juli\"]\nauswählen (Index beginnt bei 1)\n\n\nx[-1]\nalles außer Position 1\n\n\nx[x &gt; 5] · which(x &gt; 5) · sum(x &gt; 5)\nfiltern · Positionen · Anzahl\n\n\nx %in% c(\"a\", \"b\")\nkommt der Wert in der Menge vor?\n\n\nx[2] &lt;- 99 · x[x &lt; 0] &lt;- NA\nElemente überschreiben\n\n\nx + y\nelementweise rechnen",
+    "crumbs": [
+      "Cheatsheet"
+    ]
+  },
+  {
+    "objectID": "cheatsheet.html#kennzahlen-fehlende-werte",
+    "href": "cheatsheet.html#kennzahlen-fehlende-werte",
+    "title": "Cheatsheet",
+    "section": "Kennzahlen & fehlende Werte",
+    "text": "Kennzahlen & fehlende Werte\n\n\n\n\n\n\n\nCode\nBedeutung\n\n\n\n\nmean(x) · median(x) · sum(x) · min(x) · max(x) · sd(x)\nGrundfunktionen\n\n\nmean(x, na.rm = TRUE)\nfehlende Werte auslassen\n\n\nis.na(x) · sum(is.na(x))\nfehlt der Wert? · wie viele fehlen?\n\n\nround(x, 1) · sort(x) · which.max(x)\nrunden · sortieren · Position des Maximums",
+    "crumbs": [
+      "Cheatsheet"
+    ]
+  },
+  {
+    "objectID": "cheatsheet.html#matrizen",
+    "href": "cheatsheet.html#matrizen",
+    "title": "Cheatsheet",
+    "section": "Matrizen",
+    "text": "Matrizen\n\n\n\n\n\n\n\nCode\nBedeutung\n\n\n\n\nmatrix(1:6, nrow = 2)\nMatrix bauen (spaltenweise; byrow = TRUE zeilenweise)\n\n\nmatrix(..., dimnames = list(zeilen, spalten))\ndirekt benennen\n\n\nrownames(m) &lt;- ... · colnames(m) &lt;- ...\nNamen setzen\n\n\nm[i, j] · m[, j] · m[i, ] · m[\"Juli\", \"TMax\"]\nauswählen\n\n\nrowMeans(m) · colMeans(m)\nMittelwert je Zeile · je Spalte\n\n\ncbind(m, neu = x) · rbind(m, neu = x)\nSpalte · Zeile anhängen\n\n\nt(m)\nZeilen und Spalten tauschen",
+    "crumbs": [
+      "Cheatsheet"
+    ]
+  },
+  {
+    "objectID": "cheatsheet.html#base-r-grafik",
+    "href": "cheatsheet.html#base-r-grafik",
+    "title": "Cheatsheet",
+    "section": "Base-R-Grafik",
+    "text": "Base-R-Grafik\n\n\n\n\n\n\n\nCode\nBedeutung\n\n\n\n\nbarplot(x)\nBalken (Namen → Achsenbeschriftung)\n\n\nplot(x, type = \"b\") · plot(x, y)\nVerlauf · Streudiagramm\n\n\nhist(x, breaks = 8)\nHistogramm\n\n\nboxplot(y ~ g, data = df)\nBoxplot je Gruppe\n\n\nmain = · xlab = · ylab = · col = · pch = 19\nTitel · Achsen · Farbe · Punktsymbol\n\n\npar(mfrow = c(1, 2)) … par(mfrow = c(1, 1))\nGrafiken nebeneinander — danach zurücksetzen",
+    "crumbs": [
+      "Cheatsheet"
+    ]
+  },
+  {
+    "objectID": "cheatsheet.html#listen-faktoren",
+    "href": "cheatsheet.html#listen-faktoren",
+    "title": "Cheatsheet",
+    "section": "Listen & Faktoren",
+    "text": "Listen & Faktoren\n\n\n\n\n\n\n\nCode\nBedeutung\n\n\n\n\nlist(a = x, b = df)\nListe mit beliebigen Objekten\n\n\nl$a · l[[\"a\"]]\nein Element holen\n\n\nfactor(x) · levels(f)\nFaktor bauen · Levels anzeigen\n\n\nlevels(f) &lt;- c(...)\nLevels umbenennen (in alphabetischer Reihenfolge)\n\n\nfactor(x, levels = c(...), ordered = TRUE)\ngeordneter Faktor",
+    "crumbs": [
+      "Cheatsheet"
+    ]
+  },
+  {
+    "objectID": "cheatsheet.html#data-frames",
+    "href": "cheatsheet.html#data-frames",
+    "title": "Cheatsheet",
+    "section": "Data Frames",
+    "text": "Data Frames\n\n\n\n\n\n\n\nCode\nBedeutung\n\n\n\n\ndata.frame(a = x, b = y)\nData Frame bauen\n\n\nstr(df) · head(df) · summary(df)\nStruktur · erste Zeilen · Kennzahlen\n\n\nnrow(df) · ncol(df)\nAnzahl Zeilen · Spalten\n\n\ndf[i, j] · df[, \"spalte\"] · df$spalte\nauswählen\n\n\ndf[df$x &gt; 5, ] · subset(df, x &gt; 5)\nZeilen nach Bedingung\n\n\nunique(df$x) · table(df$x)\nvorkommende Werte · Häufigkeiten\n\n\ndf$neu &lt;- df$a / df$b\nneue Spalte\n\n\ndf[order(df$x), ] · order(df$x, decreasing = TRUE)\nsortieren · absteigend",
+    "crumbs": [
+      "Cheatsheet"
+    ]
+  },
+  {
+    "objectID": "cheatsheet.html#einlesen-speichern",
+    "href": "cheatsheet.html#einlesen-speichern",
+    "title": "Cheatsheet",
+    "section": "Einlesen & Speichern",
+    "text": "Einlesen & Speichern\n\n\n\n\n\n\n\nCode\nBedeutung\n\n\n\n\nread.csv(\"data/raw/f.csv\")\nCSV mit , als Trenner und . als Dezimalzeichen\n\n\nread.csv2(\"data/raw/f.csv\")\nCSV mit ; und , (deutsches Excel)\n\n\nskip = 4 · header = FALSE · na.strings = c(\"\", \"-\")\nZeilen überspringen · keine Kopfzeile · was als NA gilt\n\n\nreadxl::read_excel(\"f.xlsx\")\nExcel-Datei\n\n\nwrite.csv(df, \"data/processed/f.csv\", row.names = FALSE)\nals CSV speichern",
+    "crumbs": [
+      "Cheatsheet"
+    ]
+  },
+  {
+    "objectID": "cheatsheet.html#dplyr",
+    "href": "cheatsheet.html#dplyr",
+    "title": "Cheatsheet",
+    "section": "dplyr",
+    "text": "dplyr\n\n\n\n\n\n\n\nCode\nBedeutung\n\n\n\n\ndf %&gt;% f() · df \\|&gt; f()\nPipe „und dann”: Ergebnis links → erstes Argument rechts\n\n\ndata = . (bei %&gt;%) · data = _ (bei \\|&gt;)\nPlatzhalter, wenn die Daten nicht an erster Stelle stehen\n\n\nfilter(df, x &gt; 5, g %in% c(\"a\", \"b\"))\nZeilen auswählen (Komma = und)\n\n\nselect(df, a, b)\nSpalten auswählen\n\n\narrange(df, desc(x))\nsortieren (absteigend)\n\n\nmutate(df, neu = a / b)\nneue Spalte berechnen\n\n\ncount(df, g)\nHäufigkeiten zählen\n\n\ndf %&gt;% group_by(g) %&gt;% summarise(n = n(), m = mean(x, na.rm = TRUE))\nKennzahlen je Gruppe\n\n\nleft_join(df1, df2, by = \"id\")\nverbinden, alle Zeilen von df1 behalten\n\n\ninner_join() · right_join() · full_join()\nnur gemeinsame · alle von df2 · alle",
+    "crumbs": [
+      "Cheatsheet"
+    ]
+  },
+  {
+    "objectID": "cheatsheet.html#ggplot2",
+    "href": "cheatsheet.html#ggplot2",
+    "title": "Cheatsheet",
+    "section": "ggplot2",
+    "text": "ggplot2\n\n\n\n\n\n\n\nCode\nBedeutung\n\n\n\n\nggplot(df, aes(x = a, y = b)) + geom_point()\nGrundgerüst: Daten, Achsen, Form\n\n\ngeom_point() · geom_col() · geom_line()\nPunkte · Balken · Linien\n\n\ngeom_boxplot() · geom_histogram(bins = 8)\nVerteilungen\n\n\naes(color = g) · color = \"steelblue\"\nFarbe nach Spalte · feste Farbe\n\n\nlabs(title =, x =, y =)\nBeschriftung\n\n\nfacet_wrap(~ g)\neine Teilgrafik pro Gruppe\n\n\ntheme_minimal() · theme_bw()\nErscheinungsbild\n\n\nggsave(\"output/grafik.png\", width = 8, height = 5)\nletzte Grafik speichern",
+    "crumbs": [
+      "Cheatsheet"
+    ]
+  },
+  {
+    "objectID": "cheatsheet.html#daten-aufräumen",
+    "href": "cheatsheet.html#daten-aufräumen",
+    "title": "Cheatsheet",
+    "section": "Daten aufräumen",
+    "text": "Daten aufräumen\n\n\n\n\n\n\n\nCode\nBedeutung\n\n\n\n\nnames(df) &lt;- as.character(df[5, ])\nZeile 5 zur Kopfzeile machen\n\n\ndf[-(1:5), ] · rownames(df) &lt;- NULL\nZeilen entfernen · neu nummerieren\n\n\ntolower(gsub(\" \", \"_\", names(df)))\nSpaltennamen in snake_case\n\n\ndf[cols] &lt;- lapply(df[cols], as.numeric)\nmehrere Spalten umwandeln\n\n\npaste(\"a\", \"b\") · paste0(\"a\", \"b\")\nText verbinden mit / ohne Leerzeichen\n\n\nsubstr(x, 1, 2) · trimws(x)\nZeichen ausschneiden · Randleerzeichen entfernen\n\n\ncut(x, breaks = c(0, 10, Inf), labels = c(\"klein\", \"groß\"))\nZahlen → Kategorien\n\n\nsaveRDS(df, \"f.rds\") · readRDS(\"f.rds\")\nim R-Format speichern · laden (behält Typen)",
+    "crumbs": [
+      "Cheatsheet"
+    ]
+  },
+  {
+    "objectID": "einheit-3.html",
+    "href": "einheit-3.html",
+    "title": "Einheit 3: Visualisierung mit ggplot2 & Daten aufräumen",
+    "section": "",
+    "text": "In dieser Einheit geht es um zwei Dinge, die beim echten Arbeiten sofort gebraucht werden:\nAm Ende steht das Abschlussprojekt zu allen Einheiten.\nFür Teil 1 wird zusätzlich das Paket ggplot2 gebraucht. Falls noch nicht geschehen, einmalig in der Console installieren:\ninstall.packages(\"ggplot2\")",
+    "crumbs": [
+      "Einheiten",
+      "3 · ggplot2 & Daten aufräumen"
+    ]
+  },
+  {
+    "objectID": "einheit-3.html#die-daten-vorbereiten",
+    "href": "einheit-3.html#die-daten-vorbereiten",
+    "title": "Einheit 3: Visualisierung mit ggplot2 & Daten aufräumen",
+    "section": "Die Daten vorbereiten",
+    "text": "Die Daten vorbereiten\nWir arbeiten mit den Mitarbeitenden-Daten aus Einheit 2 — eingelesen und mit der Region verbunden:\n\nlibrary(dplyr)\nlibrary(ggplot2)\n\nmitarbeitende_join &lt;- read.csv(\"data/raw/mitarbeitende.csv\") %&gt;%\n  left_join(read.csv(\"data/raw/teams.csv\"), by = \"team\")\n\nBei Vera fehlen die Plusstunden. Ohne y-Wert kann ggplot keinen Punkt zeichnen und würde bei jeder Grafik warnen („Removed 1 row containing missing values”). Deshalb entfernen wir diese Zeile einmal vorab:\n\nmitarbeitende_plot &lt;- mitarbeitende_join %&gt;%\n  filter(!is.na(plusstunden))",
+    "crumbs": [
+      "Einheiten",
+      "3 · ggplot2 & Daten aufräumen"
+    ]
+  },
+  {
+    "objectID": "einheit-3.html#der-grundaufbau",
+    "href": "einheit-3.html#der-grundaufbau",
+    "title": "Einheit 3: Visualisierung mit ggplot2 & Daten aufräumen",
+    "section": "Der Grundaufbau",
+    "text": "Der Grundaufbau\nggplot2 baut Grafiken schichtweise mit + auf. Der Grundaufbau ist immer gleich:\nggplot(daten, aes(x = ..., y = ...)) +   # Daten + welche Spalte auf welche Achse\n  geom_...()                             # welche Form: Punkte, Balken, Linien …",
+    "crumbs": [
+      "Einheiten",
+      "3 · ggplot2 & Daten aufräumen"
+    ]
+  },
+  {
+    "objectID": "einheit-3.html#streudiagramm-geom_point",
+    "href": "einheit-3.html#streudiagramm-geom_point",
+    "title": "Einheit 3: Visualisierung mit ggplot2 & Daten aufräumen",
+    "section": "Streudiagramm: geom_point()",
+    "text": "Streudiagramm: geom_point()\n\nggplot(mitarbeitende_plot, aes(x = projekte, y = plusstunden)) +\n  geom_point(color = \"steelblue\", size = 2) +\n  labs(title = \"Plusstunden nach Anzahl Projekte\",\n       x = \"Anzahl Projekte\", y = \"Plusstunden\") +\n  theme_minimal()",
+    "crumbs": [
+      "Einheiten",
+      "3 · ggplot2 & Daten aufräumen"
+    ]
+  },
+  {
+    "objectID": "einheit-3.html#nach-gruppe-einfärben",
+    "href": "einheit-3.html#nach-gruppe-einfärben",
+    "title": "Einheit 3: Visualisierung mit ggplot2 & Daten aufräumen",
+    "section": "Nach Gruppe einfärben",
+    "text": "Nach Gruppe einfärben\nEine weitere Spalte in aes() auf color legen — ggplot vergibt automatisch Farben und eine Legende:\n\nggplot(mitarbeitende_plot, aes(x = projekte, y = plusstunden, color = team)) +\n  geom_point(size = 2) +\n  labs(title = \"Plusstunden nach Projekten, eingefärbt nach Team\") +\n  theme_minimal()\n\n\n\n\n\n\n\n\ncolor = \"steelblue\" außerhalb von aes() setzt eine feste Farbe; color = team innerhalb von aes() färbt nach den Werten einer Spalte.",
+    "crumbs": [
+      "Einheiten",
+      "3 · ggplot2 & Daten aufräumen"
+    ]
+  },
+  {
+    "objectID": "einheit-3.html#balkendiagramm-einer-kennzahl-geom_col",
+    "href": "einheit-3.html#balkendiagramm-einer-kennzahl-geom_col",
+    "title": "Einheit 3: Visualisierung mit ggplot2 & Daten aufräumen",
+    "section": "Balkendiagramm einer Kennzahl: geom_col()",
+    "text": "Balkendiagramm einer Kennzahl: geom_col()\ndplyr und ggplot2 greifen ineinander: erst die Kennzahl berechnen, dann direkt an ggplot() weiterreichen. Personen ohne Region (Uwe) filtern wir vorher heraus. Die Farbe dient hier nur der Optik — die Regionen stehen schon auf der x-Achse, deshalb blenden wir die Legende mit show.legend = FALSE aus:\n\nmitarbeitende_plot %&gt;%\n  filter(!is.na(region)) %&gt;%\n  group_by(region) %&gt;%\n  summarise(plusstunden_mean = mean(plusstunden)) %&gt;%\n  ggplot(aes(x = region, y = plusstunden_mean, fill = region)) +\n  geom_col(show.legend = FALSE) +\n  labs(title = \"Durchschnittliche Plusstunden pro Region\",\n       x = \"Region\", y = \"Ø Plusstunden\") +\n  theme_minimal()",
+    "crumbs": [
+      "Einheiten",
+      "3 · ggplot2 & Daten aufräumen"
+    ]
+  },
+  {
+    "objectID": "einheit-3.html#verteilungen-geom_boxplot-und-geom_histogram",
+    "href": "einheit-3.html#verteilungen-geom_boxplot-und-geom_histogram",
+    "title": "Einheit 3: Visualisierung mit ggplot2 & Daten aufräumen",
+    "section": "Verteilungen: geom_boxplot() und geom_histogram()",
+    "text": "Verteilungen: geom_boxplot() und geom_histogram()\n\nggplot(mitarbeitende_plot, aes(x = team, y = plusstunden)) +\n  geom_boxplot(fill = \"lightgrey\") +\n  labs(title = \"Plusstunden je Team\") +\n  theme_minimal()\n\n\n\n\n\n\n\n\ngeom_histogram() zeigt die Verteilung einer einzelnen Zahlenspalte:\n\nggplot(mitarbeitende_plot, aes(x = plusstunden)) +\n  geom_histogram(bins = 8, fill = \"steelblue\", color = \"white\") +\n  theme_minimal()",
+    "crumbs": [
+      "Einheiten",
+      "3 · ggplot2 & Daten aufräumen"
+    ]
+  },
+  {
+    "objectID": "einheit-3.html#teilgrafiken-facet_wrap",
+    "href": "einheit-3.html#teilgrafiken-facet_wrap",
+    "title": "Einheit 3: Visualisierung mit ggplot2 & Daten aufräumen",
+    "section": "Teilgrafiken: facet_wrap()",
+    "text": "Teilgrafiken: facet_wrap()\nfacet_wrap(~spalte) zerlegt eine Grafik in ein Raster — eine Teilgrafik pro Ausprägung:\n\nggplot(mitarbeitende_plot, aes(x = projekte, y = plusstunden)) +\n  geom_point(color = \"darkred\") +\n  facet_wrap(~team) +\n  labs(title = \"Plusstunden nach Projekten, aufgeteilt nach Team\") +\n  theme_bw()",
+    "crumbs": [
+      "Einheiten",
+      "3 · ggplot2 & Daten aufräumen"
+    ]
+  },
+  {
+    "objectID": "einheit-3.html#grafik-speichern-ggsave",
+    "href": "einheit-3.html#grafik-speichern-ggsave",
+    "title": "Einheit 3: Visualisierung mit ggplot2 & Daten aufräumen",
+    "section": "Grafik speichern: ggsave()",
+    "text": "Grafik speichern: ggsave()\nggsave() speichert die zuletzt erzeugte Grafik:\n\nggsave(\"output/plusstunden_team.png\", width = 8, height = 5)\n\n\nÜbung\n\nZeichne ein Streudiagramm von projekte gegen plusstunden, eingefärbt nach geschlecht.\nErstelle ein Balkendiagramm mit der Anzahl Personen pro land (Tipp: erst count(), dann geom_col()).\n\n\n# dein Code",
+    "crumbs": [
+      "Einheiten",
+      "3 · ggplot2 & Daten aufräumen"
+    ]
+  },
+  {
+    "objectID": "einheit-3.html#die-rohdatei-ansehen",
+    "href": "einheit-3.html#die-rohdatei-ansehen",
+    "title": "Einheit 3: Visualisierung mit ggplot2 & Daten aufräumen",
+    "section": "Die Rohdatei ansehen",
+    "text": "Die Rohdatei ansehen\nWir lesen zunächst ohne Kopfzeile ein (header = FALSE), um zu sehen, was in der Datei steht. Weil in jeder Spalte auch Text vorkommt, sind alle Spalten character:\n\nroh &lt;- read.csv2(\"data/raw/bezirke_roh.csv\", header = FALSE)\nroh\n\n                               V1           V2        V3                  V4\n1             Export Bezirksdaten                                           \n2  Quelle: Beispielstatistik Wien                                           \n3               Stand: Maerz 2026                                           \n4                                                                           \n5                   Bezirk Nummer  Bezirk Name Haushalte Mittleres Einkommen\n6                               1 Innere Stadt      9800               52000\n7                               2 Leopoldstadt     54000               38500\n8                               3  Landstrasse     46000               41200\n9                               4       Wieden     16000               49800\n10                              5   Margareten     30000               36400\n11                              6    Mariahilf     15000               44700\n12                              7       Neubau     16000               47300\n13                              8   Josefstadt     12000               50100",
+    "crumbs": [
+      "Einheiten",
+      "3 · ggplot2 & Daten aufräumen"
+    ]
+  },
+  {
+    "objectID": "einheit-3.html#kopfzeile-setzen-und-info-zeilen-entfernen",
+    "href": "einheit-3.html#kopfzeile-setzen-und-info-zeilen-entfernen",
+    "title": "Einheit 3: Visualisierung mit ggplot2 & Daten aufräumen",
+    "section": "Kopfzeile setzen und Info-Zeilen entfernen",
+    "text": "Kopfzeile setzen und Info-Zeilen entfernen\nDie echten Spaltennamen stehen in Zeile 5. Wir machen sie zu Spaltennamen und entfernen dann die ersten fünf Zeilen. Das Ergebnis speichern wir unter einem sprechenden Namen:\n\nnames(roh) &lt;- as.character(roh[5, ])   # Zeile 5 wird zur Kopfzeile\nbezirke &lt;- roh[-(1:5), ]               # Zeilen 1–5 entfernen\nrownames(bezirke) &lt;- NULL              # Zeilennummerierung zurücksetzen\nbezirke\n\n  Bezirk Nummer  Bezirk Name Haushalte Mittleres Einkommen\n1             1 Innere Stadt      9800               52000\n2             2 Leopoldstadt     54000               38500\n3             3  Landstrasse     46000               41200\n4             4       Wieden     16000               49800\n5             5   Margareten     30000               36400\n6             6    Mariahilf     15000               44700\n7             7       Neubau     16000               47300\n8             8   Josefstadt     12000               50100",
+    "crumbs": [
+      "Einheiten",
+      "3 · ggplot2 & Daten aufräumen"
+    ]
+  },
+  {
+    "objectID": "einheit-3.html#spaltennamen-säubern-gsub-und-tolower",
+    "href": "einheit-3.html#spaltennamen-säubern-gsub-und-tolower",
+    "title": "Einheit 3: Visualisierung mit ggplot2 & Daten aufräumen",
+    "section": "Spaltennamen säubern: gsub() und tolower()",
+    "text": "Spaltennamen säubern: gsub() und tolower()\nRohdaten halten sich selten an die Namensregeln aus Einheit 1. gsub(muster, ersatz, text) ist Suchen-und-Ersetzen: Wir tauschen Leerzeichen gegen Unterstriche — dann funktioniert $ ohne Backticks. tolower() macht alles klein, damit die Namen snake_case sind:\n\nnames(bezirke)\n\n[1] \"Bezirk Nummer\"       \"Bezirk Name\"         \"Haushalte\"          \n[4] \"Mittleres Einkommen\"\n\nnames(bezirke) &lt;- tolower(gsub(\" \", \"_\", names(bezirke)))\nnames(bezirke)\n\n[1] \"bezirk_nummer\"       \"bezirk_name\"         \"haushalte\"          \n[4] \"mittleres_einkommen\"",
+    "crumbs": [
+      "Einheiten",
+      "3 · ggplot2 & Daten aufräumen"
+    ]
+  },
+  {
+    "objectID": "einheit-3.html#datentypen-reparieren-as.numeric-lapply",
+    "href": "einheit-3.html#datentypen-reparieren-as.numeric-lapply",
+    "title": "Einheit 3: Visualisierung mit ggplot2 & Daten aufräumen",
+    "section": "Datentypen reparieren: as.numeric() & lapply()",
+    "text": "Datentypen reparieren: as.numeric() & lapply()\nDie Zahlenspalten sind noch Text (chr). Für eine Spalte ginge das mit bezirke$haushalte &lt;- as.numeric(bezirke$haushalte). Für mehrere Spalten auf einmal nimmt man lapply(): Es wendet eine Funktion auf jede Spalte an und gibt die Ergebnisse als Liste zurück, die wir direkt in die Spalten zurückschreiben:\n\nzahl_spalten &lt;- c(\"bezirk_nummer\", \"haushalte\", \"mittleres_einkommen\")\nbezirke[zahl_spalten] &lt;- lapply(bezirke[zahl_spalten], as.numeric)\n\nstr(bezirke)\n\n'data.frame':   8 obs. of  4 variables:\n $ bezirk_nummer      : num  1 2 3 4 5 6 7 8\n $ bezirk_name        : chr  \"Innere Stadt\" \"Leopoldstadt\" \"Landstrasse\" \"Wieden\" ...\n $ haushalte          : num  9800 54000 46000 16000 30000 15000 16000 12000\n $ mittleres_einkommen: num  52000 38500 41200 49800 36400 44700 47300 50100",
+    "crumbs": [
+      "Einheiten",
+      "3 · ggplot2 & Daten aufräumen"
+    ]
+  },
+  {
+    "objectID": "einheit-3.html#der-kurze-weg-skip-4",
+    "href": "einheit-3.html#der-kurze-weg-skip-4",
+    "title": "Einheit 3: Visualisierung mit ggplot2 & Daten aufräumen",
+    "section": "Der kurze Weg: skip = 4",
+    "text": "Der kurze Weg: skip = 4\nDer Weg oben zeigt, was beim Aufräumen passiert. In der Praxis erledigt skip = 4 Kopfzeile und Datentypen in einem Schritt: Die ersten vier Zeilen werden übersprungen, Zeile 5 wird Kopfzeile, und R erkennt die Zahlenspalten selbst. Leerzeichen in Spaltennamen ersetzt R dabei durch Punkte:\n\nstr(read.csv2(\"data/raw/bezirke_roh.csv\", skip = 4))\n\n'data.frame':   8 obs. of  4 variables:\n $ Bezirk.Nummer      : int  1 2 3 4 5 6 7 8\n $ Bezirk.Name        : chr  \"Innere Stadt\" \"Leopoldstadt\" \"Landstrasse\" \"Wieden\" ...\n $ Haushalte          : int  9800 54000 46000 16000 30000 15000 16000 12000\n $ Mittleres.Einkommen: int  52000 38500 41200 49800 36400 44700 47300 50100",
+    "crumbs": [
+      "Einheiten",
+      "3 · ggplot2 & Daten aufräumen"
+    ]
+  },
+  {
+    "objectID": "einheit-3.html#text-zusammensetzen-und-zerlegen-paste-substr-trimws",
+    "href": "einheit-3.html#text-zusammensetzen-und-zerlegen-paste-substr-trimws",
+    "title": "Einheit 3: Visualisierung mit ggplot2 & Daten aufräumen",
+    "section": "Text zusammensetzen und zerlegen: paste(), substr(), trimws()",
+    "text": "Text zusammensetzen und zerlegen: paste(), substr(), trimws()\npaste() verbindet Textstücke mit einem Leerzeichen, paste0() ohne Trennzeichen:\n\npaste(\"AT\", \"13\", \"01\")     # \"AT 13 01\"\n\n[1] \"AT 13 01\"\n\npaste0(\"AT\", \"13\", \"01\")    # \"AT1301\"\n\n[1] \"AT1301\"\n\nbezirke$label &lt;- paste0(bezirke$bezirk_nummer, \". \", bezirke$bezirk_name)\nhead(bezirke$label)\n\n[1] \"1. Innere Stadt\" \"2. Leopoldstadt\" \"3. Landstrasse\"  \"4. Wieden\"      \n[5] \"5. Margareten\"   \"6. Mariahilf\"   \n\n\nsubstr(text, start, stop) schneidet Zeichen nach Position heraus — nützlich, um kombinierte Codes zu trennen:\n\ncodes &lt;- c(\"AT130\", \"AT127\", \"AT111\")\nsubstr(codes, 1, 2)   # Land\n\n[1] \"AT\" \"AT\" \"AT\"\n\nsubstr(codes, 3, 5)   # Regionscode\n\n[1] \"130\" \"127\" \"111\"\n\n\ntrimws() entfernt überflüssige Leerzeichen am Anfang und Ende — ein häufiges Problem bei Daten aus Excel:\n\ntrimws(\"   Wien   \")\n\n[1] \"Wien\"",
+    "crumbs": [
+      "Einheiten",
+      "3 · ggplot2 & Daten aufräumen"
+    ]
+  },
+  {
+    "objectID": "einheit-3.html#zahlen-in-kategorien-einteilen-cut",
+    "href": "einheit-3.html#zahlen-in-kategorien-einteilen-cut",
+    "title": "Einheit 3: Visualisierung mit ggplot2 & Daten aufräumen",
+    "section": "Zahlen in Kategorien einteilen: cut()",
+    "text": "Zahlen in Kategorien einteilen: cut()\ncut() teilt eine Zahlenspalte anhand von Grenzen (breaks) in Kategorien ein und liefert einen Faktor zurück (siehe Einheit 2, Faktoren):\n\nbezirke$groesse &lt;- cut(bezirke$haushalte,\n                       breaks = c(0, 15000, 40000, Inf),\n                       labels = c(\"klein\", \"mittel\", \"groß\"))\n\nbezirke[, c(\"bezirk_name\", \"haushalte\", \"groesse\")]\n\n   bezirk_name haushalte groesse\n1 Innere Stadt      9800   klein\n2 Leopoldstadt     54000    groß\n3  Landstrasse     46000    groß\n4       Wieden     16000  mittel\n5   Margareten     30000  mittel\n6    Mariahilf     15000   klein\n7       Neubau     16000  mittel\n8   Josefstadt     12000   klein\n\ntable(bezirke$groesse)\n\n\n klein mittel   groß \n     3      3      2 \n\n\n\nÜbung\n\nBerechne das mittlere Einkommen über alle Bezirke und zeige die Bezirke, die darüber liegen.\nZeichne mit barplot() die Haushalte pro Bezirk; beschrifte die Balken mit names.arg = bezirke$bezirk_name (Tipp: las = 2 dreht die Beschriftung).\n\n\n# dein Code",
+    "crumbs": [
+      "Einheiten",
+      "3 · ggplot2 & Daten aufräumen"
+    ]
+  },
+  {
+    "objectID": "einheit-3.html#checkliste-vor-der-abgabe",
+    "href": "einheit-3.html#checkliste-vor-der-abgabe",
+    "title": "Einheit 3: Visualisierung mit ggplot2 & Daten aufräumen",
+    "section": "Checkliste vor der Abgabe",
+    "text": "Checkliste vor der Abgabe\n\nDas Dokument läuft nach einem Neustart von R (Strg + Shift + F10) fehlerfrei durch.\nKeine absoluten Pfade und kein setwd(); kein install.packages() im Dokument.\nAlle Pakete werden oben im Dokument mit library() geladen.\nJeder Arbeitsschritt hat 1–2 Sätze Text: was wird gemacht und warum.\nFehlende Werte (Vera, Uwe) sind bemerkt und bewusst behandelt.\nDie Grafik hat Titel, Achsenbeschriftungen und ggf. eine Legende.\nDie Grafik liegt als Datei in output/.",
+    "crumbs": [
+      "Einheiten",
+      "3 · ggplot2 & Daten aufräumen"
+    ]
+  },
+  {
+    "objectID": "einheit-1.html",
+    "href": "einheit-1.html",
+    "title": "Einheit 1: Grundlagen, Vektoren, Matrizen & erste Grafiken",
+    "section": "",
+    "text": "In dieser Einheit lernst du die grundlegenden Operationen in R kennen:\nWie man mit RStudio, Projekten und Paketen arbeitet, steht in Einheit 0 (0_RINTRO.Rmd).\nFühre die Code-Blöcke der Reihe nach aus (grüner Pfeil oben rechts im Block oder Strg/Cmd + Enter) — spätere Blöcke bauen auf den Variablen früherer Blöcke auf.",
+    "crumbs": [
+      "Einheiten",
+      "1 · Grundlagen"
+    ]
+  },
+  {
+    "objectID": "einheit-1.html#rechnen",
+    "href": "einheit-1.html#rechnen",
+    "title": "Einheit 1: Grundlagen, Vektoren, Matrizen & erste Grafiken",
+    "section": "Rechnen",
+    "text": "Rechnen\nR lässt sich zunächst wie ein Taschenrechner nutzen:\n\n\n\nOperator\nBedeutung\n\n\n\n\n+\nAddition\n\n\n-\nSubtraktion\n\n\n*\nMultiplikation\n\n\n/\nDivision\n\n\n^\nPotenzierung: 3^2 ergibt 9\n\n\n%/%\nganzzahlige Division: 5 %/% 3 ergibt 1\n\n\n%%\nModulo (Rest der Division): 5 %% 3 ergibt 2\n\n\n\n\n5 + 5\n\n[1] 10\n\n5 - 5\n\n[1] 0\n\n3 * 5\n\n[1] 15\n\n(5 + 5) / 2\n\n[1] 5\n\n2^5\n\n[1] 32\n\n28 %/% 6\n\n[1] 4\n\n28 %% 6\n\n[1] 4",
+    "crumbs": [
+      "Einheiten",
+      "1 · Grundlagen"
+    ]
+  },
+  {
+    "objectID": "einheit-1.html#variablen",
+    "href": "einheit-1.html#variablen",
+    "title": "Einheit 1: Grundlagen, Vektoren, Matrizen & erste Grafiken",
+    "section": "Variablen",
+    "text": "Variablen\nMit einer Variable speicherst du einen Wert unter einem Namen, um später darauf zuzugreifen. Zugewiesen wird mit dem Pfeil &lt;-:\n\nmeine_zahl &lt;- 4\nmeine_zahl\n\n[1] 4\n\n\nTipp: Alt + - fügt &lt;- samt Leerzeichen ein.\nAussagekräftige Namen machen Code lesbar — auch für dich selbst in drei Monaten:\n\neinwohner   &lt;- 48000\nflaeche_km2 &lt;- 12.5\n\nbevoelkerungsdichte &lt;- einwohner / flaeche_km2\nbevoelkerungsdichte\n\n[1] 3840\n\n\n\nRegeln für Variablennamen\n\nBeschreibend, nicht kryptisch — wohneinheiten_gesamt statt x\nsnake_case verwenden — anzahl_aepfel, nicht anzahlAepfel oder anzahl.aepfel\nKeine Basisfunktionen überschreiben — mean, data, c, sum vermeiden\nLogische Werte als Frage benennen — hat_ringe, ist_student\nKurz, aber eindeutig — so kurz wie möglich, so lang wie nötig\nKeine Umlaute, Leerzeichen oder Sonderzeichen — flaeche_km2 statt Fläche km²",
+    "crumbs": [
+      "Einheiten",
+      "1 · Grundlagen"
+    ]
+  },
+  {
+    "objectID": "einheit-1.html#funktionen-aufrufen",
+    "href": "einheit-1.html#funktionen-aufrufen",
+    "title": "Einheit 1: Grundlagen, Vektoren, Matrizen & erste Grafiken",
+    "section": "Funktionen aufrufen",
+    "text": "Funktionen aufrufen\nEine Funktion nimmt Eingaben entgegen und gibt ein Ergebnis zurück. Man ruft sie mit ihrem Namen und runden Klammern auf; die Eingaben in der Klammer heißen Argumente:\n\nsqrt(16)                     # Quadratwurzel, ein Argument\n\n[1] 4\n\nround(3.14159, digits = 2)   # zwei Argumente: Zahl und Anzahl Nachkommastellen\n\n[1] 3.14\n\nround(3.14159)               # digits weggelassen → Standardwert 0\n\n[1] 3\n\n\n\nArgumente werden durch Kommas getrennt.\nMit name = wert gibt man ein Argument beim Namen an. Innerhalb einer Funktionsklammer ist = also keine Zuweisung, sondern benennt ein Argument.\nViele Argumente haben einen Standardwert und können weggelassen werden.\nWelche Argumente eine Funktion hat, zeigt die Hilfe: ?round",
+    "crumbs": [
+      "Einheiten",
+      "1 · Grundlagen"
+    ]
+  },
+  {
+    "objectID": "einheit-1.html#grundlegende-datentypen",
+    "href": "einheit-1.html#grundlegende-datentypen",
+    "title": "Einheit 1: Grundlagen, Vektoren, Matrizen & erste Grafiken",
+    "section": "Grundlegende Datentypen",
+    "text": "Grundlegende Datentypen\n\nnumeric — Zahlen, auch mit Nachkommastellen, z. B. 4.5\ninteger — ganze Zahlen, geschrieben mit L: 4L (zählen ebenfalls als Zahl)\nlogical — TRUE oder FALSE\ncharacter — Text, immer in Anführungszeichen: \"Wien\"\n\n\ngewicht     &lt;- 42.5\nstadt       &lt;- \"Wien\"\nist_student &lt;- TRUE\n\nclass() zeigt den Datentyp einer Variable:\n\nclass(gewicht)\n\n[1] \"numeric\"\n\nclass(stadt)\n\n[1] \"character\"\n\nclass(ist_student)\n\n[1] \"logical\"\n\n\n\nDatentypen umwandeln\nRechnen geht nur mit Zahlen. Ist eine Zahl versehentlich als Text gespeichert, gibt es einen Fehler:\n\nkaltmiete   &lt;- 550\nnebenkosten &lt;- \"350\"   # in Anführungszeichen → Text, nicht Zahl\n\nkaltmiete + nebenkosten\n\nError in `kaltmiete + nebenkosten`:\n! nicht-numerisches Argument für binären Operator\n\n\nclass() zeigt, wo das Problem liegt:\n\nclass(nebenkosten)\n\n[1] \"character\"\n\n\nMit as.numeric() wird der Text in eine Zahl umgewandelt:\n\nwarmmiete &lt;- kaltmiete + as.numeric(nebenkosten)\nwarmmiete\n\n[1] 900\n\n\nFür jeden Datentyp gibt es eine solche as.*()-Funktion. Was sich nicht umwandeln lässt, wird zu NA (fehlender Wert), mit Warnung:\n\nas.character(42)      # Zahl  -&gt; Text\n\n[1] \"42\"\n\nas.numeric(TRUE)      # TRUE  -&gt; 1 (FALSE -&gt; 0)\n\n[1] 1\n\nas.numeric(\"drei\")    # nicht umwandelbar -&gt; NA\n\nWarning: NAs durch Umwandlung erzeugt\n\n\n[1] NA",
+    "crumbs": [
+      "Einheiten",
+      "1 · Grundlagen"
+    ]
+  },
+  {
+    "objectID": "einheit-1.html#vergleichen-und-logische-abfragen",
+    "href": "einheit-1.html#vergleichen-und-logische-abfragen",
+    "title": "Einheit 1: Grundlagen, Vektoren, Matrizen & erste Grafiken",
+    "section": "Vergleichen und logische Abfragen",
+    "text": "Vergleichen und logische Abfragen\nAuf eine Vergleichsfrage antwortet R mit TRUE oder FALSE:\n\n\n\nOperator\nFrage\n\n\n\n\n&gt; / &gt;=\ngrößer / größer-gleich\n\n\n&lt; / &lt;=\nkleiner / kleiner-gleich\n\n\n==\ngleich? (zwei Gleichheitszeichen!)\n\n\n!=\nungleich?\n\n\n\n\n3 &gt; 4\n\n[1] FALSE\n\n7 &gt;= 3 + 4\n\n[1] TRUE\n\n7 == 0\n\n[1] FALSE\n\n7 != 0\n\n[1] TRUE\n\n\nHäufige Falle: Ein einzelnes = ist ein Zuweisungszeichen (bzw. benennt ein Argument), kein Vergleich. Für „ist gleich?” braucht es immer ==:\n\n7 = 0     # Fehler: R versucht, der Zahl 7 etwas zuzuweisen\n\nError in `7 = 0`:\n! ungültige (do_set) linke Seite in Zuweisung\n\n\nBei Text wird Groß-/Kleinschreibung unterschieden:\n\nalter &lt;- 20\nalter &gt;= 18\n\n[1] TRUE\n\n\"R\" == \"r\"\n\n[1] FALSE\n\n\"Wien\" != \"Graz\"\n\n[1] TRUE\n\n\nMehrere Bedingungen verknüpft man mit & (und), | (oder), ! (nicht):\n\n(alter &gt;= 18) & (alter &lt; 65)\n\n[1] TRUE\n\n!(alter == 20)\n\n[1] FALSE\n\n\n\nÜbung\n\nBerechne, wie viele volle Wochen 100 Tage haben und wie viele Tage übrig bleiben (Tipp: %/% und %%).\nSpeichere deine Körpergröße in Metern und dein Gewicht in kg in zwei Variablen und berechne den BMI (Gewicht / Größe²), gerundet auf eine Nachkommastelle.\n\n\n# dein Code",
+    "crumbs": [
+      "Einheiten",
+      "1 · Grundlagen"
+    ]
+  },
+  {
+    "objectID": "einheit-1.html#vektoren-erstellen",
+    "href": "einheit-1.html#vektoren-erstellen",
+    "title": "Einheit 1: Grundlagen, Vektoren, Matrizen & erste Grafiken",
+    "section": "Vektoren erstellen",
+    "text": "Vektoren erstellen\nEin Vektor speichert mehrere Werte desselben Typs — z. B. mehrere Messwerte oder Namen. Mit c() (combine) werden Werte zu einem Vektor zusammengefasst:\n\nzahlen     &lt;- c(1, 10, 49)\nbuchstaben &lt;- c(\"a\", \"b\", \"c\")\n\nAlle Elemente eines Vektors haben denselben Datentyp. Mischt man Typen, wandelt R ohne Warnung alles in den allgemeinsten Typ um (hier: Text):\n\ngemischt &lt;- c(1, \"a\", TRUE)\ngemischt\n\n[1] \"1\"    \"a\"    \"TRUE\"\n\nclass(gemischt)\n\n[1] \"character\"\n\n\n: erzeugt eine Folge in Einerschritten, seq() mit frei wählbarer Schrittweite; length() gibt die Anzahl der Elemente:\n\n1:10\n\n [1]  1  2  3  4  5  6  7  8  9 10\n\nseq(from = 0, to = 100, by = 25)\n\n[1]   0  25  50  75 100\n\nlength(zahlen)\n\n[1] 3",
+    "crumbs": [
+      "Einheiten",
+      "1 · Grundlagen"
+    ]
+  },
+  {
+    "objectID": "einheit-1.html#beispieldaten-temperaturen-in-wien",
+    "href": "einheit-1.html#beispieldaten-temperaturen-in-wien",
+    "title": "Einheit 1: Grundlagen, Vektoren, Matrizen & erste Grafiken",
+    "section": "Beispieldaten: Temperaturen in Wien",
+    "text": "Beispieldaten: Temperaturen in Wien\nLangjährige Durchschnittswerte der Höchst- und Tiefsttemperatur pro Monat in °C (Quelle: climate-data.org):\n\n#             Mai   Juni  Juli  Aug   Sep\ntmax_wien &lt;- c(20.1, 24.1, 26.0, 25.7, 20.5)\ntmin_wien &lt;- c(10.4, 14.3, 16.4, 16.0, 11.9)",
+    "crumbs": [
+      "Einheiten",
+      "1 · Grundlagen"
+    ]
+  },
+  {
+    "objectID": "einheit-1.html#vektoren-benennen",
+    "href": "einheit-1.html#vektoren-benennen",
+    "title": "Einheit 1: Grundlagen, Vektoren, Matrizen & erste Grafiken",
+    "section": "Vektoren benennen",
+    "text": "Vektoren benennen\nMit names() bekommt jedes Element einen Namen — so ist klar, welcher Wert zu welchem Monat gehört. Den Vektor der Monate speichern wir einmal als Variable und verwenden ihn zweimal:\n\nmonate &lt;- c(\"Mai\", \"Juni\", \"Juli\", \"August\", \"September\")\nnames(tmax_wien) &lt;- monate\nnames(tmin_wien) &lt;- monate\ntmax_wien\n\n      Mai      Juni      Juli    August September \n     20.1      24.1      26.0      25.7      20.5",
+    "crumbs": [
+      "Einheiten",
+      "1 · Grundlagen"
+    ]
+  },
+  {
+    "objectID": "einheit-1.html#ein-erster-plot-barplot",
+    "href": "einheit-1.html#ein-erster-plot-barplot",
+    "title": "Einheit 1: Grundlagen, Vektoren, Matrizen & erste Grafiken",
+    "section": "Ein erster Plot: barplot()",
+    "text": "Ein erster Plot: barplot()\nAus einem benannten Vektor macht barplot() mit einem Befehl eine beschriftete Grafik — die Namen werden zu Achsenbeschriftungen:\n\nbarplot(tmax_wien,\n        main = \"Höchsttemperaturen in Wien\",\n        ylab = \"°C\",\n        col  = \"tomato\")\n\n\n\n\n\n\n\n\n\nHinweis: Weitere Grafiken folgen in Teil 4 dieser Einheit und in Einheit 3.",
+    "crumbs": [
+      "Einheiten",
+      "1 · Grundlagen"
+    ]
+  },
+  {
+    "objectID": "einheit-1.html#mit-vektoren-rechnen",
+    "href": "einheit-1.html#mit-vektoren-rechnen",
+    "title": "Einheit 1: Grundlagen, Vektoren, Matrizen & erste Grafiken",
+    "section": "Mit Vektoren rechnen",
+    "text": "Mit Vektoren rechnen\nRechenoperationen zwischen zwei Vektoren erfolgen elementweise:\n\nc(1, 2, 3) + c(4, 5, 6)   # entspricht c(1+4, 2+5, 3+6)\n\n[1] 5 7 9\n\ntmittel_wien &lt;- (tmax_wien + tmin_wien) / 2\ntmittel_wien\n\n      Mai      Juni      Juli    August September \n    15.25     19.20     21.20     20.85     16.20 \n\n\nAndere Funktionen fassen einen ganzen Vektor zu einer Zahl zusammen:\n\nmean(tmax_wien)            # Mittelwert\n\n[1] 23.28\n\nmax(tmax_wien)             # Maximum (min() für das Minimum)\n\n[1] 26\n\nsum(tmax_wien)             # Summe\n\n[1] 116.4\n\nround(mean(tmax_wien), 1)  # Funktionen lassen sich ineinander schachteln\n\n[1] 23.3\n\nsort(tmax_wien)            # sortiert (decreasing = TRUE für absteigend)\n\n      Mai September      Juni    August      Juli \n     20.1      20.5      24.1      25.7      26.0",
+    "crumbs": [
+      "Einheiten",
+      "1 · Grundlagen"
+    ]
+  },
+  {
+    "objectID": "einheit-1.html#vektorelemente-auswählen",
+    "href": "einheit-1.html#vektorelemente-auswählen",
+    "title": "Einheit 1: Grundlagen, Vektoren, Matrizen & erste Grafiken",
+    "section": "Vektorelemente auswählen",
+    "text": "Vektorelemente auswählen\nMit eckigen Klammern [ ] wählst du Elemente aus. Achtung: das erste Element hat den Index 1, nicht 0.\n\ntmax_wien[1]          # erstes Element (Mai)\n\n Mai \n20.1 \n\ntmax_wien[c(2, 4)]    # mehrere Elemente über einen Indexvektor\n\n  Juni August \n  24.1   25.7 \n\ntmax_wien[2:4]        # ein Bereich\n\n  Juni   Juli August \n  24.1   26.0   25.7 \n\ntmax_wien[\"Juli\"]     # über den Namen\n\nJuli \n  26",
+    "crumbs": [
+      "Einheiten",
+      "1 · Grundlagen"
+    ]
+  },
+  {
+    "objectID": "einheit-1.html#logische-abfragen-auf-vektoren",
+    "href": "einheit-1.html#logische-abfragen-auf-vektoren",
+    "title": "Einheit 1: Grundlagen, Vektoren, Matrizen & erste Grafiken",
+    "section": "Logische Abfragen auf Vektoren",
+    "text": "Logische Abfragen auf Vektoren\nEin Vergleich auf einem Vektor wird elementweise ausgewertet:\n\ntmax_wien &gt; 24\n\n      Mai      Juni      Juli    August September \n    FALSE      TRUE      TRUE      TRUE     FALSE \n\n\nDamit lässt sich zählen, die Positionen finden oder filtern:\n\nsum(tmax_wien &gt; 24)        # wie viele TRUE? (TRUE zählt als 1, FALSE als 0)\n\n[1] 3\n\nwhich(tmax_wien &gt; 24)      # an welchen Positionen steht TRUE?\n\n  Juni   Juli August \n     2      3      4 \n\ntmax_wien[tmax_wien &gt; 24]  # nur die Werte, für die die Bedingung zutrifft\n\n  Juni   Juli August \n  24.1   26.0   25.7 \n\n\n%in% prüft, ob ein Wert in einer Menge vorkommt — viel kürzer als mehrere == mit |:\n\nsommer &lt;- c(\"Juni\", \"Juli\", \"August\")\nmonate %in% sommer\n\n[1] FALSE  TRUE  TRUE  TRUE FALSE\n\ntmax_wien[monate %in% sommer]\n\n  Juni   Juli August \n  24.1   26.0   25.7",
+    "crumbs": [
+      "Einheiten",
+      "1 · Grundlagen"
+    ]
+  },
+  {
+    "objectID": "einheit-1.html#elemente-verändern",
+    "href": "einheit-1.html#elemente-verändern",
+    "title": "Einheit 1: Grundlagen, Vektoren, Matrizen & erste Grafiken",
+    "section": "Elemente verändern",
+    "text": "Elemente verändern\nWeist man einer ausgewählten Stelle einen Wert zu, wird der Vektor dort überschrieben — per Position, Name oder Bedingung:\n\ntemperaturen &lt;- tmax_wien               # Kopie, damit tmax_wien unverändert bleibt\ntemperaturen[\"Juli\"] &lt;- 27.5            # einen einzelnen Wert korrigieren\ntemperaturen[temperaturen &lt; 21] &lt;- NA   # alle kühlen Monate auf NA setzen\ntemperaturen\n\n      Mai      Juni      Juli    August September \n       NA      24.1      27.5      25.7        NA",
+    "crumbs": [
+      "Einheiten",
+      "1 · Grundlagen"
+    ]
+  },
+  {
+    "objectID": "einheit-1.html#fehlende-werte-na",
+    "href": "einheit-1.html#fehlende-werte-na",
+    "title": "Einheit 1: Grundlagen, Vektoren, Matrizen & erste Grafiken",
+    "section": "Fehlende Werte: NA",
+    "text": "Fehlende Werte: NA\nNA („not available”) steht für einen fehlenden Wert. Jede Rechnung mit NA ergibt wieder NA — deshalb liefern mean(), sum() & Co. NA, sobald ein einziger Wert fehlt. na.rm = TRUE lässt fehlende Werte weg:\n\nmean(temperaturen)\n\n[1] NA\n\nmean(temperaturen, na.rm = TRUE)\n\n[1] 25.76667\n\n\nis.na() prüft elementweise auf fehlende Werte, ! kehrt das um:\n\nis.na(temperaturen)\n\n      Mai      Juni      Juli    August September \n     TRUE     FALSE     FALSE     FALSE      TRUE \n\nsum(is.na(temperaturen))             # wie viele fehlen?\n\n[1] 2\n\ntemperaturen[!is.na(temperaturen)]   # nur die vorhandenen Werte\n\n  Juni   Juli August \n  24.1   27.5   25.7 \n\n\n\nÜbung\n\nIn welchen Monaten liegt die Tiefsttemperatur über 15 °C? Gib die Monatsnamen aus (Tipp: names()).\nBerechne die Differenz zwischen Höchst- und Tiefsttemperatur pro Monat. In welchem Monat ist sie am größten? (Tipp: which.max())\n\n\n# dein Code",
+    "crumbs": [
+      "Einheiten",
+      "1 · Grundlagen"
+    ]
+  },
+  {
+    "objectID": "einheit-1.html#was-ist-eine-matrix",
+    "href": "einheit-1.html#was-ist-eine-matrix",
+    "title": "Einheit 1: Grundlagen, Vektoren, Matrizen & erste Grafiken",
+    "section": "Was ist eine Matrix?",
+    "text": "Was ist eine Matrix?\nEine Matrix ist eine Sammlung von Elementen desselben Datentyps, angeordnet in Zeilen und Spalten — also zweidimensional, im Gegensatz zum eindimensionalen Vektor. Erzeugt wird sie mit matrix():\n\nmatrix(1:6, nrow = 2)                 # Standard: spaltenweise gefüllt\n\n     [,1] [,2] [,3]\n[1,]    1    3    5\n[2,]    2    4    6\n\nmatrix(1:6, nrow = 2, byrow = TRUE)   # zeilenweise gefüllt\n\n     [,1] [,2] [,3]\n[1,]    1    2    3\n[2,]    4    5    6\n\n\n\nDas erste Argument sind die Elemente.\nnrow (oder ncol) legt die Anzahl der Zeilen (Spalten) fest.\nbyrow = TRUE füllt zeilenweise; Standard ist spaltenweise.",
+    "crumbs": [
+      "Einheiten",
+      "1 · Grundlagen"
+    ]
+  },
+  {
+    "objectID": "einheit-1.html#eine-matrix-aus-vektoren-bauen",
+    "href": "einheit-1.html#eine-matrix-aus-vektoren-bauen",
+    "title": "Einheit 1: Grundlagen, Vektoren, Matrizen & erste Grafiken",
+    "section": "Eine Matrix aus Vektoren bauen",
+    "text": "Eine Matrix aus Vektoren bauen\nDie Temperaturvektoren aus Teil 2 lassen sich direkt zu einer Matrix zusammenfügen: erst alle Höchstwerte, dann alle Tiefstwerte — spaltenweise gefüllt, ergibt das genau eine Spalte pro Messwert:\n\nwien_matrix &lt;- matrix(c(tmax_wien, tmin_wien), ncol = 2)\nwien_matrix\n\n     [,1] [,2]\n[1,] 20.1 10.4\n[2,] 24.1 14.3\n[3,] 26.0 16.4\n[4,] 25.7 16.0\n[5,] 20.5 11.9",
+    "crumbs": [
+      "Einheiten",
+      "1 · Grundlagen"
+    ]
+  },
+  {
+    "objectID": "einheit-1.html#matrizen-benennen",
+    "href": "einheit-1.html#matrizen-benennen",
+    "title": "Einheit 1: Grundlagen, Vektoren, Matrizen & erste Grafiken",
+    "section": "Matrizen benennen",
+    "text": "Matrizen benennen\nWie names() bei Vektoren — nur getrennt für Zeilen und Spalten:\n\ncolnames(wien_matrix) &lt;- c(\"TMax\", \"TMin\")\nrownames(wien_matrix) &lt;- monate\nwien_matrix\n\n          TMax TMin\nMai       20.1 10.4\nJuni      24.1 14.3\nJuli      26.0 16.4\nAugust    25.7 16.0\nSeptember 20.5 11.9\n\n\nAlternativ setzt man beides direkt beim Erstellen mit dimnames = list(zeilen, spalten):\n\nwien_matrix &lt;- matrix(c(tmax_wien, tmin_wien), ncol = 2,\n                      dimnames = list(monate, c(\"TMax\", \"TMin\")))",
+    "crumbs": [
+      "Einheiten",
+      "1 · Grundlagen"
+    ]
+  },
+  {
+    "objectID": "einheit-1.html#matrixelemente-auswählen",
+    "href": "einheit-1.html#matrixelemente-auswählen",
+    "title": "Einheit 1: Grundlagen, Vektoren, Matrizen & erste Grafiken",
+    "section": "Matrixelemente auswählen",
+    "text": "Matrixelemente auswählen\nWie bei Vektoren mit [ ] — aber mit zwei Angaben: [Zeile, Spalte].\n\nm[1, 2] → Element in Zeile 1, Spalte 2\nm[, 1] → alle Zeilen der 1. Spalte\nm[1, ] → alle Spalten der 1. Zeile\nstatt Nummern gehen auch Namen: m[\"Juli\", \"TMax\"]\n\n\nwien_matrix[\"Juli\", \"TMax\"]\n\n[1] 26\n\nmean(wien_matrix[, \"TMin\"])           # Ø Tiefsttemperatur, alle Monate\n\n[1] 13.8\n\nmean(wien_matrix[1:2, \"TMin\"])        # nur Mai und Juni\n\n[1] 12.35",
+    "crumbs": [
+      "Einheiten",
+      "1 · Grundlagen"
+    ]
+  },
+  {
+    "objectID": "einheit-1.html#zeilen--und-spaltenmittelwerte",
+    "href": "einheit-1.html#zeilen--und-spaltenmittelwerte",
+    "title": "Einheit 1: Grundlagen, Vektoren, Matrizen & erste Grafiken",
+    "section": "Zeilen- und Spaltenmittelwerte",
+    "text": "Zeilen- und Spaltenmittelwerte\nrowMeans() berechnet den Mittelwert jeder Zeile — hier also die Durchschnittstemperatur pro Monat. Es ist dasselbe Ergebnis wie tmittel_wien aus Teil 2, nur in einem Schritt:\n\ndurchschnitt &lt;- rowMeans(wien_matrix)\ndurchschnitt\n\n      Mai      Juni      Juli    August September \n    15.25     19.20     21.20     20.85     16.20 \n\n\ncolMeans() rechnet pro Spalte — die mittlere Höchst- bzw. Tiefsttemperatur über den ganzen Zeitraum:\n\ncolMeans(wien_matrix)\n\n TMax  TMin \n23.28 13.80",
+    "crumbs": [
+      "Einheiten",
+      "1 · Grundlagen"
+    ]
+  },
+  {
+    "objectID": "einheit-1.html#spalten-und-zeilen-anhängen-cbind-und-rbind",
+    "href": "einheit-1.html#spalten-und-zeilen-anhängen-cbind-und-rbind",
+    "title": "Einheit 1: Grundlagen, Vektoren, Matrizen & erste Grafiken",
+    "section": "Spalten und Zeilen anhängen: cbind() und rbind()",
+    "text": "Spalten und Zeilen anhängen: cbind() und rbind()\ncbind() fügt spaltenweise zusammen (column bind), rbind() zeilenweise (row bind). Wir hängen die Durchschnittstemperatur als Spalte an und die Spaltenmittelwerte als Zeile:\n\nwien_erweitert &lt;- cbind(wien_matrix, Mittel = durchschnitt)\nwien_erweitert &lt;- rbind(wien_erweitert, Gesamt = colMeans(wien_erweitert))\nround(wien_erweitert, 1)\n\n          TMax TMin Mittel\nMai       20.1 10.4   15.2\nJuni      24.1 14.3   19.2\nJuli      26.0 16.4   21.2\nAugust    25.7 16.0   20.9\nSeptember 20.5 11.9   16.2\nGesamt    23.3 13.8   18.5",
+    "crumbs": [
+      "Einheiten",
+      "1 · Grundlagen"
+    ]
+  },
+  {
+    "objectID": "einheit-1.html#die-matrix-als-balkendiagramm",
+    "href": "einheit-1.html#die-matrix-als-balkendiagramm",
+    "title": "Einheit 1: Grundlagen, Vektoren, Matrizen & erste Grafiken",
+    "section": "Die Matrix als Balkendiagramm",
+    "text": "Die Matrix als Balkendiagramm\nbarplot() funktioniert auch mit einer Matrix. t() dreht sie (Zeilen ↔︎ Spalten), damit die Monate auf der x-Achse landen; beside = TRUE stellt TMax und TMin nebeneinander:\n\nbarplot(t(wien_matrix), beside = TRUE,\n        legend.text = TRUE,\n        main = \"Höchst- und Tiefsttemperaturen in Wien, Mai–September\",\n        ylab = \"°C\",\n        col  = c(\"tomato\", \"steelblue\"))\n\n\n\n\n\n\n\n\n\nÜbung\n\nWähle aus wien_matrix die Werte für Juli und August (beide Spalten) aus.\nBerechne für jeden Monat die Spanne TMax - TMin und hänge sie mit cbind() als Spalte Spanne an wien_matrix an.\n\n\n# dein Code",
+    "crumbs": [
+      "Einheiten",
+      "1 · Grundlagen"
+    ]
+  },
+  {
+    "objectID": "einheit-1.html#punkte-und-linien-plot",
+    "href": "einheit-1.html#punkte-und-linien-plot",
+    "title": "Einheit 1: Grundlagen, Vektoren, Matrizen & erste Grafiken",
+    "section": "Punkte und Linien: plot()",
+    "text": "Punkte und Linien: plot()\nMit einem Vektor zeichnet plot() die Werte in ihrer Reihenfolge. Für einen Verlauf über die Zeit passt type = \"b\" (Punkte und Linie):\n\nplot(tmax_wien, type = \"b\",\n     main = \"Höchsttemperaturen in Wien, Mai–September\",\n     xlab = \"Monat (Mai = 1)\", ylab = \"°C\",\n     pch = 19, col = \"tomato\")\n\n\n\n\n\n\n\n\nMit zwei Vektoren wird daraus ein Streudiagramm. main, xlab, ylab beschriften, pch wählt das Punktsymbol, col die Farbe:\n\nplot(mtcars$hp, mtcars$mpg,\n     main = \"Verbrauch nach Leistung\",\n     xlab = \"PS\", ylab = \"Meilen pro Gallone\",\n     pch = 19, col = \"steelblue\")",
+    "crumbs": [
+      "Einheiten",
+      "1 · Grundlagen"
+    ]
+  },
+  {
+    "objectID": "einheit-1.html#verteilung-hist",
+    "href": "einheit-1.html#verteilung-hist",
+    "title": "Einheit 1: Grundlagen, Vektoren, Matrizen & erste Grafiken",
+    "section": "Verteilung: hist()",
+    "text": "Verteilung: hist()\nhist() zeigt, wie sich die Werte eines Zahlenvektors verteilen; breaks steuert die Anzahl der Balken:\n\nhist(mtcars$mpg, breaks = 8,\n     main = \"Verteilung des Verbrauchs\",\n     xlab = \"Meilen pro Gallone\", col = \"lightblue\")",
+    "crumbs": [
+      "Einheiten",
+      "1 · Grundlagen"
+    ]
+  },
+  {
+    "objectID": "einheit-1.html#gruppenvergleich-boxplot",
+    "href": "einheit-1.html#gruppenvergleich-boxplot",
+    "title": "Einheit 1: Grundlagen, Vektoren, Matrizen & erste Grafiken",
+    "section": "Gruppenvergleich: boxplot()",
+    "text": "Gruppenvergleich: boxplot()\nDie Schreibweise y ~ gruppe heißt „y aufgeschlüsselt nach gruppe“. Hier: Verbrauch je Zylinderzahl:\n\nboxplot(mpg ~ cyl, data = mtcars,\n        main = \"Verbrauch nach Zylinderzahl\",\n        xlab = \"Zylinder\", ylab = \"Meilen pro Gallone\",\n        col = \"lightgreen\")",
+    "crumbs": [
+      "Einheiten",
+      "1 · Grundlagen"
+    ]
+  },
+  {
+    "objectID": "einheit-1.html#mehrere-grafiken-nebeneinander-parmfrow",
+    "href": "einheit-1.html#mehrere-grafiken-nebeneinander-parmfrow",
+    "title": "Einheit 1: Grundlagen, Vektoren, Matrizen & erste Grafiken",
+    "section": "Mehrere Grafiken nebeneinander: par(mfrow)",
+    "text": "Mehrere Grafiken nebeneinander: par(mfrow)\npar(mfrow = c(1, 2)) ordnet die folgenden Grafiken in einem Raster an (1 Zeile, 2 Spalten):\n\npar(mfrow = c(1, 2))\n\nhist(mtcars$mpg,    main = \"Histogramm\", xlab = \"mpg\")\nboxplot(mtcars$mpg, main = \"Boxplot\",   ylab = \"mpg\")\n\n\n\n\n\n\n\npar(mfrow = c(1, 1))   # wieder zurückstellen\n\nIn einem .R-Skript bleibt die Einstellung für die restliche Sitzung aktiv — deshalb immer zurücksetzen. In einem Notebook gilt sie nur innerhalb des Chunks.\n\nÜbung\n\nZeichne tmin_wien als Linie mit Punkten in \"steelblue\".\nZeichne ein Histogramm der PS-Zahlen (mtcars$hp) mit 10 Balken und sinnvoller Beschriftung.\n\n\n# dein Code",
+    "crumbs": [
+      "Einheiten",
+      "1 · Grundlagen"
+    ]
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "R-Einführung",
+    "section": "",
+    "text": "Alle Materialien der R-Einführung zum Nachlesen — auch ohne RStudio.",
+    "crumbs": [
+      "Start"
+    ]
+  },
+  {
+    "objectID": "index.html#selbst-ausprobieren",
+    "href": "index.html#selbst-ausprobieren",
+    "title": "R-Einführung",
+    "section": "Selbst ausprobieren",
+    "text": "Selbst ausprobieren\n\nR und RStudio installieren (siehe Einheit 0).\nKursmaterialien als ZIP herunterladen und entpacken.\nRIntroduction.Rproj per Doppelklick öffnen und die Notebooks (I_RINTRO.Rmd, …) Block für Block ausführen.",
+    "crumbs": [
+      "Start"
+    ]
+  },
+  {
+    "objectID": "einheit-0.html",
+    "href": "einheit-0.html",
+    "title": "Einheit 0: RStudio, Projekte & Pakete",
+    "section": "",
+    "text": "Diese Einführung klärt, womit man in R arbeitet (R, RStudio, Projekte, R Markdown), wie Pakete installiert werden und wo man Hilfe findet — und fasst am Ende die Grundregeln zusammen, die den Einstieg leichter machen.\n\nInstallation\n\nR installieren: https://cran.r-project.org (Download R for Windows / macOS).\nDanach RStudio installieren: https://posit.co/download/rstudio-desktop/.\n\nR ist die Programmiersprache, RStudio die Oberfläche dazu. RStudio findet R automatisch — man öffnet danach nur noch RStudio.\nEinmalig einstellen unter Tools → Global Options → General:\n\nHaken bei Restore .RData into workspace at startup entfernen\nSave workspace to .RData on exit auf Never setzen\n\nSo startet jede Sitzung mit einer leeren Umgebung, und das Skript muss alles selbst erzeugen — genau das macht es reproduzierbar.\n\n\nRStudio: die vier Bereiche\n\n\n\n\n\n\n\nBereich\nWofür\n\n\n\n\nEditor (oben links)\nDateien schreiben: .R-Skripte, .Rmd-Dokumente\n\n\nConsole (unten links)\nBefehle sofort ausführen — zum Ausprobieren, nichts wird gespeichert\n\n\nEnvironment (oben rechts)\nalle Objekte, die R gerade kennt (Variablen, Datensätze, Funktionen)\n\n\nFiles / Plots / Packages / Help (unten rechts)\nDateien, Grafiken, installierte Pakete, Hilfeseiten\n\n\n\nNur was in einer Datei steht, ist reproduzierbar — die Console ist ein Notizzettel.\n\n1 + 2\n\n[1] 3\n\n\nEin Befehl darf über mehrere Zeilen gehen. Solange eine Klammer offen ist oder die Zeile mit einem Operator endet, liest R in der nächsten Zeile weiter:\n\n(1 + 2 + 3 +\n   4 + 5) / 3\n\n[1] 5\n\n\nKommentare beginnen mit # und werden von R ignoriert — sie sind nur für Menschen da.\n\n\nProjekte und Arbeitsverzeichnis\nEin RStudio-Projekt ist ein Ordner mit einer .Rproj-Datei. Öffnet man es per Doppelklick auf die .Rproj-Datei (oder File → Open Project), setzt RStudio das Arbeitsverzeichnis (working directory) automatisch auf diesen Ordner.\nDadurch funktionieren relative Pfade wie \"data/raw/daten.csv\" auf jedem Rechner — niemand muss seinen eigenen Pfad eintragen, und setwd(\"C:/Users/…\") wird nie gebraucht. Das aktuelle Arbeitsverzeichnis zeigt getwd().\nNeues Projekt anlegen: File → New Project → New Directory → New Project.\nEmpfohlene Ordnerstruktur:\nmein-projekt/\n├── mein-projekt.Rproj\n├── data/\n│   ├── raw/          # Originaldaten – nie überschreiben\n│   └── processed/    # bereinigte / gespeicherte Zwischenstände\n├── scripts/          # eigene .R / .Rmd Dateien\n└── output/           # Grafiken, gerenderte Reports\nAchtung bei .Rmd-Dateien in Unterordnern: Beim Knitten verwendet R den Ordner der .Rmd-Datei als Arbeitsverzeichnis — liegt sie in scripts/, findet \"data/raw/…\" nichts mehr. Abhilfe: Im Menü neben dem Knit-Button Knit Directory → Project Directory wählen, oder Pfade mit dem Paket here bauen: here::here(\"data\", \"raw\", \"daten.csv\") beginnt immer beim Projektordner.\nPfade unter Windows: Im Explorer steht C:\\Users\\... mit Backslash. In R ist \\ aber ein Sonderzeichen — Pfade immer mit Schrägstrich / schreiben (oder doppeltem \\\\):\n\nread.csv(\"data/raw/daten.csv\")     # richtig\nread.csv(\"data\\raw\\daten.csv\")     # Fehler\n\n\n\nR Markdown\nEin .Rmd-Dokument besteht aus drei Bestandteilen:\n\nYAML-Header — der Block zwischen --- ganz oben, mit Titel und Ausgabeformat.\nText/Markdown — Fließtext mit einfacher Formatierung: # Überschrift, ## Unterüberschrift, **fett**, *kursiv*, `code`, Listen mit - oder 1..\nCode-Chunks — grau hinterlegte Blöcke, die R ausführt. Neuer Chunk: Strg + Alt + I.\n\nDer Knit-Button (Strg + Shift + K) führt das ganze Dokument in einer frischen R-Sitzung von oben nach unten aus und erzeugt daraus HTML (oder PDF/Word) — Code, Ausgabe und Text zusammen. Läuft ein Dokument beim Knitten nicht durch, fehlt meist ein Schritt, der nur in der eigenen Sitzung passiert ist.\nZwei Ausgabeformate begegnen einem häufig:\n\noutput: html_document — beim Knitten entsteht ein fertiger HTML-Report.\noutput: html_notebook — beim Speichern entsteht eine .nb.html-Datei mit den Ergebnissen der Chunks, die man bisher ausgeführt hat. Praktisch zum interaktiven Arbeiten.\n\nNützliche Chunk-Optionen (in den geschweiften Klammern nach r, z. B. {r, eval=FALSE}):\n\n\n\nOption\nWirkung\n\n\n\n\necho=FALSE\nCode wird ausgeführt, aber im Report nicht gezeigt\n\n\neval=FALSE\nCode wird nur gezeigt, nicht ausgeführt\n\n\nmessage=FALSE\nunterdrückt Paket-Meldungen\n\n\nwarning=FALSE\nunterdrückt Warnungen\n\n\nerror=TRUE\nFehler anzeigen, statt das Rendern abzubrechen\n\n\n\n\nHinweis: Quarto (.qmd) ist der Nachfolger von R Markdown und funktioniert fast identisch. Alles hier Gezeigte lässt sich direkt übertragen.\n\n\n\nWichtige Tastenkürzel\nRStudio, Standardbelegung:\n\n\n\n\n\n\n\n\nAktion\nWindows / Linux\nmacOS\n\n\n\n\nAktuelle Zeile / Auswahl ausführen\nStrg + Enter\nCmd + Enter\n\n\nAktuellen Chunk ausführen\nStrg + Shift + Enter\nCmd + Shift + Enter\n\n\nAlle Chunks davor ausführen\nStrg + Alt + P\nCmd + Option + P\n\n\nNeuen Chunk einfügen\nStrg + Alt + I\nCmd + Option + I\n\n\nDokument rendern (Knit)\nStrg + Shift + K\nCmd + Shift + K\n\n\nZuweisungspfeil &lt;-\nAlt + -\nOption + -\n\n\nPipe %&gt;% / \\|&gt;\nStrg + Shift + M\nCmd + Shift + M\n\n\nZeile(n) aus-/einkommentieren\nStrg + Shift + C\nCmd + Shift + C\n\n\nCode neu einrücken\nStrg + I\nCmd + I\n\n\nIn allen Dateien suchen\nStrg + Shift + F\nCmd + Shift + F\n\n\nConsole leeren\nStrg + L\nCtrl + L\n\n\nR-Session neu starten\nStrg + Shift + F10\nCmd + Shift + F10\n\n\nAutovervollständigung\nTab\nTab\n\n\nAlle Tastenkürzel anzeigen\nAlt + Shift + K\nOption + Shift + K\n\n\n\n\n\nPakete installieren und laden\nR bringt viele Funktionen mit (base). Alles Weitere steckt in Paketen, die andere geschrieben und auf CRAN bereitgestellt haben.\nEinmal pro Rechner installieren — am besten direkt in der Console, nicht im Skript (sonst wird bei jedem Durchlauf neu installiert):\n\ninstall.packages(\"dplyr\")\ninstall.packages(c(\"dplyr\", \"ggplot2\", \"readxl\"))   # mehrere auf einmal\n\nIn jeder Sitzung laden — das gehört ganz oben ins Skript:\n\nlibrary(dplyr)\n\nEine einzelne Funktion lässt sich auch ohne library() über paket::funktion() aufrufen, z. B. dplyr::filter(...).\nTypische Fehlermeldungen:\n\n„there is no package called ‘x’“ → Paket ist nicht installiert.\n„could not find function ‘y’“ → Paket nicht geladen (library() vergessen) oder Tippfehler.\n\nAktualisieren: update.packages() oder im Packages-Bereich (dort zeigt ein Häkchen auch, welche Pakete gerade geladen sind).\n\n\nHilfe finden\n\n?mean oder help(mean) öffnet die Hilfeseite einer Funktion im Help-Bereich. Am nützlichsten sind meist die Abschnitte Arguments und ganz unten Examples.\n??regression durchsucht alle Hilfeseiten nach einem Begriff.\nHelp → Cheat Sheets in RStudio: kompakte Übersichten zu dplyr, ggplot2 u. a.\nFehlermeldungen lesen: Sie nennen meist die Funktion und das Problem. Die Meldung zu kopieren und zu suchen (Stack Overflow, Suchmaschine) ist normal und erwünscht.\n\n\nmean(c(1, 2, \"drei\"))   # Warnung: das Argument ist nicht numerisch\n\nWarning in mean.default(c(1, 2, \"drei\")): Argument ist weder numerisch noch\nboolesch: gebe NA zurück\n\n\n[1] NA\n\nsqrt(\"vier\")            # Fehler: nicht-numerisches Argument\n\nError in `sqrt()`:\n! Nicht-numerisches Argument für mathematische Funktion\n\n\nEine kompakte Übersicht aller Funktionen dieser Einführung steht in R_Cheatsheet.md.\n\n\nGrundregeln für den Anfang\n\nIn Dateien arbeiten, nicht in der Console. Die Console ist ein Notizzettel; das Skript ist das Ergebnis.\nEin Skript läuft von oben bis unten durch — ohne dass man vorher von Hand etwas vorbereiten muss. Reihenfolge: Pakete laden → Daten einlesen → aufbereiten → auswerten → visualisieren.\nRegelmäßig R neu starten (Strg + Shift + F10) und das Skript komplett durchlaufen lassen — so merkt man früh, wenn etwas nur „zufällig” noch funktioniert.\nImmer über die .Rproj-Datei öffnen und relative Pfade verwenden. Kein setwd(\"C:/…\").\nRohdaten sind heilig — data/raw/ nie überschreiben, Ergebnisse nach data/processed/ bzw. output/ schreiben.\n&lt;- zum Zuweisen, == zum Vergleichen.\nSprechende Namen in snake_case, keine Basisfunktionen überschreiben (mean, c, …).\nR unterscheidet Groß-/Kleinschreibung — Daten und daten sind verschieden.\nNach dem Einlesen prüfen: str(), head(), summary().\nKommentieren, was nicht offensichtlich ist.\nFehlermeldungen lesen und mit ?funktion nachschlagen.\n\n\n\nÜbung: dein erstes eigenes Projekt\nZum Abschluss richtest du ein eigenes Projekt so ein, wie du es im restlichen Kurs verwendest:\n\nProjekt anlegen: File → New Project → New Directory → New Project. Name z. B. mein-r-projekt, Speicherort frei wählbar. RStudio öffnet das Projekt danach automatisch — der Projektname steht oben rechts.\nOrdner anlegen: Im Files-Bereich mit New Folder die Ordner data/raw, data/processed, scripts und output erstellen (wie in der Ordnerstruktur oben).\nArbeitsverzeichnis prüfen: In der Console getwd() ausführen. Es muss der Projektordner sein.\nR-Markdown-Dokument anlegen: File → New File → R Markdown, Titel eintragen, als scripts/erste_schritte.Rmd speichern. Die Beispielinhalte unter dem YAML-Header löschen. Neben dem Knit-Button Knit Directory → Project Directory einstellen (siehe oben).\nInhalt schreiben: eine Überschrift, ein Satz Text über dich und ein Code-Chunk (Strg + Alt + I), in dem du etwas berechnest, z. B. dein Alter in Tagen.\nKnitten (Strg + Shift + K) und prüfen, dass die HTML-Datei neben dem .Rmd entsteht.\nTest: RStudio schließen, das Projekt per Doppelklick auf die .Rproj-Datei wieder öffnen — die zuletzt geöffneten Dateien sind wieder da.",
+    "crumbs": [
+      "Einheiten",
+      "0 · RStudio, Projekte & Pakete"
+    ]
+  },
+  {
+    "objectID": "einheit-2.html",
+    "href": "einheit-2.html",
+    "title": "Einheit 2: Data Frames, Daten einlesen & dplyr",
+    "section": "",
+    "text": "In dieser Einheit geht es vom einzelnen Vektor zur ganzen Tabelle:\nFür Teil 4 wird das Paket dplyr gebraucht. Falls noch nicht geschehen, einmalig in der Console installieren:\ninstall.packages(\"dplyr\")",
+    "crumbs": [
+      "Einheiten",
+      "2 · Data Frames & dplyr"
+    ]
+  },
+  {
+    "objectID": "einheit-2.html#listen",
+    "href": "einheit-2.html#listen",
+    "title": "Einheit 2: Data Frames, Daten einlesen & dplyr",
+    "section": "Listen",
+    "text": "Listen\nVektoren und Matrizen enthalten nur einen Datentyp. Eine Liste kann dagegen beliebige Objekte unterschiedlichen Typs und unterschiedlicher Länge sammeln:\n\nwien_info &lt;- list(stadt           = \"Wien\",\n                  einwohner       = 2000000,\n                  bezirke         = c(\"Innere Stadt\", \"Leopoldstadt\", \"Landstraße\"),\n                  temperatur_juli = c(TMax = 26.0, TMin = 16.4))\nstr(wien_info)\n\nList of 4\n $ stadt          : chr \"Wien\"\n $ einwohner      : num 2e+06\n $ bezirke        : chr [1:3] \"Innere Stadt\" \"Leopoldstadt\" \"Landstraße\"\n $ temperatur_juli: Named num [1:2] 26 16.4\n  ..- attr(*, \"names\")= chr [1:2] \"TMax\" \"TMin\"\n\n\nEin einzelnes Element holt man mit $ oder doppelten eckigen Klammern [[ ]]:\n\nwien_info$stadt\n\n[1] \"Wien\"\n\nwien_info[[\"bezirke\"]]\n\n[1] \"Innere Stadt\" \"Leopoldstadt\" \"Landstraße\"  \n\n\nListen begegnen dir vor allem indirekt: Viele Funktionen geben ihr Ergebnis als Liste zurück, und ein Data Frame (Teil 2) ist eine Liste gleich langer Vektoren.",
+    "crumbs": [
+      "Einheiten",
+      "2 · Data Frames & dplyr"
+    ]
+  },
+  {
+    "objectID": "einheit-2.html#faktoren",
+    "href": "einheit-2.html#faktoren",
+    "title": "Einheit 2: Data Frames, Daten einlesen & dplyr",
+    "section": "Faktoren",
+    "text": "Faktoren\nEin Faktor ist der Datentyp für kategoriale Variablen — Werte aus einer begrenzten Menge an Kategorien (z. B. Land, Bewertungsstufe). Zwei Arten:\n\nnominal — ohne Reihenfolge, z. B. \"Katze\", \"Hund\", \"Pferd\"\nordinal — mit Reihenfolge, z. B. \"niedrig\" &lt; \"mittel\" &lt; \"hoch\"\n\nMit factor() wird ein Text-Vektor zu einem Faktor; die vorkommenden Werte werden zu Levels. summary() zählt die Häufigkeit pro Level:\n\ntiere &lt;- factor(c(\"h\", \"k\", \"h\", \"p\", \"k\", \"h\"))\ntiere\n\n[1] h k h p k h\nLevels: h k p\n\nsummary(tiere)\n\nh k p \n3 2 1 \n\n\n\nLevels umbenennen\nDaten enthalten oft Kürzel statt lesbarer Bezeichnungen. R sortiert die Levels alphabetisch (\"h\", \"k\", \"p\") — in genau dieser Reihenfolge lassen sie sich mit levels() umbenennen:\n\nlevels(tiere) &lt;- c(\"Hund\", \"Katze\", \"Pferd\")\ntiere\n\n[1] Hund  Katze Hund  Pferd Katze Hund \nLevels: Hund Katze Pferd\n\n\n\n\nNominal vs. ordinal\nBei einem nominalen Faktor ergibt ein Größenvergleich keinen Sinn — R gibt eine Warnung und NA zurück:\n\ntiere[1] &gt; tiere[2]\n\nWarning in Ops.factor(tiere[1], tiere[2]): '&gt;' ist nicht sinnvoll für Faktoren\n\n\n[1] NA\n\n\nFür einen geordneten Faktor gibt man ordered = TRUE und die levels in der richtigen Reihenfolge an — dann funktionieren Vergleiche:\n\ntempo &lt;- factor(c(\"mittel\", \"langsam\", \"schnell\", \"mittel\"),\n                ordered = TRUE, levels = c(\"langsam\", \"mittel\", \"schnell\"))\ntempo\n\n[1] mittel  langsam schnell mittel \nLevels: langsam &lt; mittel &lt; schnell\n\ntempo[1] &gt; tempo[2]   # ist \"mittel\" schneller als \"langsam\"?\n\n[1] TRUE\n\n\n\n\nÜbung\n\nLege eine Liste kurs an mit den Elementen titel (\"R-Einführung\"), teilnehmende (eine Zahl) und themen (ein Vektor mit mindestens drei Themen). Gib das zweite Thema aus (Tipp: erst das Element holen, dann [ ]).\nKursbewertungen liegen als Text vor: bewertungen &lt;- c(\"gut\", \"sehr gut\", \"mittel\", \"gut\", \"schlecht\", \"sehr gut\", \"gut\")\n\nMache daraus einen geordneten Faktor von \"schlecht\" bis \"sehr gut\".\nZähle mit table(), wie oft jede Bewertung vorkommt. In welcher Reihenfolge stehen die Levels — und warum?\nWie viele Bewertungen sind besser als \"mittel\"? (Tipp: sum())\n\n\n\n# dein Code",
+    "crumbs": [
+      "Einheiten",
+      "2 · Data Frames & dplyr"
+    ]
+  },
+  {
+    "objectID": "einheit-2.html#was-ist-ein-data-frame",
+    "href": "einheit-2.html#was-ist-ein-data-frame",
+    "title": "Einheit 2: Data Frames, Daten einlesen & dplyr",
+    "section": "Was ist ein Data Frame?",
+    "text": "Was ist ein Data Frame?\nIn einer Matrix haben alle Elemente denselben Datentyp. Reale Datensätze mischen aber fast immer Typen: ein Name (character), ein Alter (numeric), eine Ja/Nein-Angabe (logical) …\nEin Data Frame speichert genau das: Variablen als Spalten, Beobachtungen als Zeilen — jede Spalte mit ihrem eigenen Datentyp. Das entspricht einer Tabelle, wie man sie aus Excel kennt.\nR bringt einige Datensätze mit, z. B. mtcars (Kenndaten von 32 Automodellen, 1974):\n\nhead(mtcars)\n\n                   mpg cyl disp  hp drat    wt  qsec vs am gear carb\nMazda RX4         21.0   6  160 110 3.90 2.620 16.46  0  1    4    4\nMazda RX4 Wag     21.0   6  160 110 3.90 2.875 17.02  0  1    4    4\nDatsun 710        22.8   4  108  93 3.85 2.320 18.61  1  1    4    1\nHornet 4 Drive    21.4   6  258 110 3.08 3.215 19.44  1  0    3    1\nHornet Sportabout 18.7   8  360 175 3.15 3.440 17.02  0  0    3    2\nValiant           18.1   6  225 105 2.76 3.460 20.22  1  0    3    1",
+    "crumbs": [
+      "Einheiten",
+      "2 · Data Frames & dplyr"
+    ]
+  },
+  {
+    "objectID": "einheit-2.html#erste-einblicke-in-einen-datensatz",
+    "href": "einheit-2.html#erste-einblicke-in-einen-datensatz",
+    "title": "Einheit 2: Data Frames, Daten einlesen & dplyr",
+    "section": "Erste Einblicke in einen Datensatz",
+    "text": "Erste Einblicke in einen Datensatz\n\nhead() / tail() — die ersten bzw. letzten Zeilen\nstr() — Anzahl Zeilen und Spalten, Datentypen, Beispielwerte\nsummary() — Kennzahlen pro Spalte (Minimum, Mittelwert, Maximum …)\nnrow() / ncol() — Anzahl Zeilen bzw. Spalten\n\nstr() ist meist der erste Befehl bei einem unbekannten Datensatz:\n\nstr(mtcars)\n\n'data.frame':   32 obs. of  11 variables:\n $ mpg : num  21 21 22.8 21.4 18.7 18.1 14.3 24.4 22.8 19.2 ...\n $ cyl : num  6 6 4 6 8 6 8 4 4 6 ...\n $ disp: num  160 160 108 258 360 ...\n $ hp  : num  110 110 93 110 175 105 245 62 95 123 ...\n $ drat: num  3.9 3.9 3.85 3.08 3.15 2.76 3.21 3.69 3.92 3.92 ...\n $ wt  : num  2.62 2.88 2.32 3.21 3.44 ...\n $ qsec: num  16.5 17 18.6 19.4 17 ...\n $ vs  : num  0 0 1 1 0 1 0 1 1 1 ...\n $ am  : num  1 1 1 0 0 0 0 0 0 0 ...\n $ gear: num  4 4 4 3 3 3 3 4 4 4 ...\n $ carb: num  4 4 1 1 2 1 4 2 2 4 ...\n\nsummary(mtcars)\n\n      mpg             cyl             disp             hp       \n Min.   :10.40   Min.   :4.000   Min.   : 71.1   Min.   : 52.0  \n 1st Qu.:15.43   1st Qu.:4.000   1st Qu.:120.8   1st Qu.: 96.5  \n Median :19.20   Median :6.000   Median :196.3   Median :123.0  \n Mean   :20.09   Mean   :6.188   Mean   :230.7   Mean   :146.7  \n 3rd Qu.:22.80   3rd Qu.:8.000   3rd Qu.:326.0   3rd Qu.:180.0  \n Max.   :33.90   Max.   :8.000   Max.   :472.0   Max.   :335.0  \n      drat             wt             qsec             vs        \n Min.   :2.760   Min.   :1.513   Min.   :14.50   Min.   :0.0000  \n 1st Qu.:3.080   1st Qu.:2.581   1st Qu.:16.89   1st Qu.:0.0000  \n Median :3.695   Median :3.325   Median :17.71   Median :0.0000  \n Mean   :3.597   Mean   :3.217   Mean   :17.85   Mean   :0.4375  \n 3rd Qu.:3.920   3rd Qu.:3.610   3rd Qu.:18.90   3rd Qu.:1.0000  \n Max.   :4.930   Max.   :5.424   Max.   :22.90   Max.   :1.0000  \n       am              gear            carb      \n Min.   :0.0000   Min.   :3.000   Min.   :1.000  \n 1st Qu.:0.0000   1st Qu.:3.000   1st Qu.:2.000  \n Median :0.0000   Median :4.000   Median :2.000  \n Mean   :0.4062   Mean   :3.688   Mean   :2.812  \n 3rd Qu.:1.0000   3rd Qu.:4.000   3rd Qu.:4.000  \n Max.   :1.0000   Max.   :5.000   Max.   :8.000",
+    "crumbs": [
+      "Einheiten",
+      "2 · Data Frames & dplyr"
+    ]
+  },
+  {
+    "objectID": "einheit-2.html#einen-eigenen-data-frame-erstellen",
+    "href": "einheit-2.html#einen-eigenen-data-frame-erstellen",
+    "title": "Einheit 2: Data Frames, Daten einlesen & dplyr",
+    "section": "Einen eigenen Data Frame erstellen",
+    "text": "Einen eigenen Data Frame erstellen\nWir bauen einen Data Frame mit den acht Planeten unseres Sonnensystems: Typ, Durchmesser (relativ zur Erde), Rotationsdauer (in Erdtagen; negativ = dreht sich rückwärts) und ob der Planet Ringe hat:\n\nname        &lt;- c(\"Merkur\", \"Venus\", \"Erde\", \"Mars\", \"Jupiter\", \"Saturn\", \"Uranus\", \"Neptun\")\ntyp         &lt;- c(\"Gesteinsplanet\", \"Gesteinsplanet\", \"Gesteinsplanet\", \"Gesteinsplanet\",\n                 \"Gasriese\", \"Gasriese\", \"Eisriese\", \"Eisriese\")\ndurchmesser &lt;- c(0.382, 0.949, 1, 0.532, 11.209, 9.449, 4.007, 3.883)\nrotation    &lt;- c(58.64, -243.02, 1, 1.03, 0.41, 0.43, -0.72, 0.67)\nhat_ringe   &lt;- c(FALSE, FALSE, FALSE, FALSE, TRUE, TRUE, TRUE, TRUE)\n\ndata.frame() fügt gleich lange Vektoren zu einem Data Frame zusammen — jeder Vektor wird eine Spalte:\n\nplaneten &lt;- data.frame(name, typ, durchmesser, rotation, hat_ringe)\nplaneten\n\n     name            typ durchmesser rotation hat_ringe\n1  Merkur Gesteinsplanet       0.382    58.64     FALSE\n2   Venus Gesteinsplanet       0.949  -243.02     FALSE\n3    Erde Gesteinsplanet       1.000     1.00     FALSE\n4    Mars Gesteinsplanet       0.532     1.03     FALSE\n5 Jupiter       Gasriese      11.209     0.41      TRUE\n6  Saturn       Gasriese       9.449     0.43      TRUE\n7  Uranus       Eisriese       4.007    -0.72      TRUE\n8  Neptun       Eisriese       3.883     0.67      TRUE\n\nstr(planeten)\n\n'data.frame':   8 obs. of  5 variables:\n $ name       : chr  \"Merkur\" \"Venus\" \"Erde\" \"Mars\" ...\n $ typ        : chr  \"Gesteinsplanet\" \"Gesteinsplanet\" \"Gesteinsplanet\" \"Gesteinsplanet\" ...\n $ durchmesser: num  0.382 0.949 1 0.532 11.209 ...\n $ rotation   : num  58.64 -243.02 1 1.03 0.41 ...\n $ hat_ringe  : logi  FALSE FALSE FALSE FALSE TRUE TRUE ...",
+    "crumbs": [
+      "Einheiten",
+      "2 · Data Frames & dplyr"
+    ]
+  },
+  {
+    "objectID": "einheit-2.html#elemente-und-spalten-auswählen",
+    "href": "einheit-2.html#elemente-und-spalten-auswählen",
+    "title": "Einheit 2: Data Frames, Daten einlesen & dplyr",
+    "section": "Elemente und Spalten auswählen",
+    "text": "Elemente und Spalten auswählen\nWie bei Matrizen: [Zeile, Spalte]. Statt Nummern lassen sich Spaltennamen verwenden — das ist besser lesbar:\n\nplaneten[1, 3]          # Zeile 1, Spalte 3: Durchmesser von Merkur\n\n[1] 0.382\n\nplaneten[4, ]           # ganze Zeile 4: alle Daten zu Mars\n\n  name            typ durchmesser rotation hat_ringe\n4 Mars Gesteinsplanet       0.532     1.03     FALSE\n\nplaneten[1:3, \"typ\"]    # Zeilen 1-3 der Spalte \"typ\"\n\n[1] \"Gesteinsplanet\" \"Gesteinsplanet\" \"Gesteinsplanet\"\n\n\nEine ganze Spalte bekommt man kürzer mit dem Dollarzeichen $ — das Ergebnis ist ein Vektor:\n\nplaneten$durchmesser\n\n[1]  0.382  0.949  1.000  0.532 11.209  9.449  4.007  3.883\n\n\nEin Minuszeichen vor der Nummer bedeutet „alles außer”:\n\nplaneten[, -1]        # alle Spalten außer der ersten\n\n             typ durchmesser rotation hat_ringe\n1 Gesteinsplanet       0.382    58.64     FALSE\n2 Gesteinsplanet       0.949  -243.02     FALSE\n3 Gesteinsplanet       1.000     1.00     FALSE\n4 Gesteinsplanet       0.532     1.03     FALSE\n5       Gasriese      11.209     0.41      TRUE\n6       Gasriese       9.449     0.43      TRUE\n7       Eisriese       4.007    -0.72      TRUE\n8       Eisriese       3.883     0.67      TRUE\n\nplaneten[-(1:4), ]    # alle Zeilen außer 1–4\n\n     name      typ durchmesser rotation hat_ringe\n5 Jupiter Gasriese      11.209     0.41      TRUE\n6  Saturn Gasriese       9.449     0.43      TRUE\n7  Uranus Eisriese       4.007    -0.72      TRUE\n8  Neptun Eisriese       3.883     0.67      TRUE",
+    "crumbs": [
+      "Einheiten",
+      "2 · Data Frames & dplyr"
+    ]
+  },
+  {
+    "objectID": "einheit-2.html#kategorien-ansehen-und-zählen-unique-table",
+    "href": "einheit-2.html#kategorien-ansehen-und-zählen-unique-table",
+    "title": "Einheit 2: Data Frames, Daten einlesen & dplyr",
+    "section": "Kategorien ansehen und zählen: unique(), table()",
+    "text": "Kategorien ansehen und zählen: unique(), table()\nunique() zeigt, welche verschiedenen Werte in einer Spalte vorkommen, table() zählt sie:\n\nunique(planeten$typ)\n\n[1] \"Gesteinsplanet\" \"Gasriese\"       \"Eisriese\"      \n\ntable(planeten$typ)\n\n\n      Eisriese       Gasriese Gesteinsplanet \n             2              2              4 \n\n\nSoll die Spalte als Kategorie behandelt werden, macht man sie zum Faktor (Teil 1) — z. B. um eine sinnvolle Reihenfolge festzulegen statt der alphabetischen:\n\nplaneten$typ &lt;- factor(planeten$typ,\n                       levels = c(\"Gesteinsplanet\", \"Gasriese\", \"Eisriese\"))\ntable(planeten$typ)\n\n\nGesteinsplanet       Gasriese       Eisriese \n             4              2              2",
+    "crumbs": [
+      "Einheiten",
+      "2 · Data Frames & dplyr"
+    ]
+  },
+  {
+    "objectID": "einheit-2.html#zeilen-filtern",
+    "href": "einheit-2.html#zeilen-filtern",
+    "title": "Einheit 2: Data Frames, Daten einlesen & dplyr",
+    "section": "Zeilen filtern",
+    "text": "Zeilen filtern\nEin logischer Vektor in der Zeilenposition wählt die Zeilen aus, bei denen TRUE steht:\n\nplaneten[planeten$hat_ringe, ]           # nur Planeten mit Ringen\n\n     name      typ durchmesser rotation hat_ringe\n5 Jupiter Gasriese      11.209     0.41      TRUE\n6  Saturn Gasriese       9.449     0.43      TRUE\n7  Uranus Eisriese       4.007    -0.72      TRUE\n8  Neptun Eisriese       3.883     0.67      TRUE\n\nplaneten[planeten$durchmesser &lt; 1, ]     # nur Planeten kleiner als die Erde\n\n    name            typ durchmesser rotation hat_ringe\n1 Merkur Gesteinsplanet       0.382    58.64     FALSE\n2  Venus Gesteinsplanet       0.949  -243.02     FALSE\n4   Mars Gesteinsplanet       0.532     1.03     FALSE\n\n\nsubset() ist die kürzere Schreibweise — man kann die Spaltennamen direkt verwenden:\n\nsubset(planeten, durchmesser &lt; 1)\n\n    name            typ durchmesser rotation hat_ringe\n1 Merkur Gesteinsplanet       0.382    58.64     FALSE\n2  Venus Gesteinsplanet       0.949  -243.02     FALSE\n4   Mars Gesteinsplanet       0.532     1.03     FALSE",
+    "crumbs": [
+      "Einheiten",
+      "2 · Data Frames & dplyr"
+    ]
+  },
+  {
+    "objectID": "einheit-2.html#sortieren-mit-order",
+    "href": "einheit-2.html#sortieren-mit-order",
+    "title": "Einheit 2: Data Frames, Daten einlesen & dplyr",
+    "section": "Sortieren mit order()",
+    "text": "Sortieren mit order()\nsort() sortiert einen Vektor. Um einen Data Frame zu sortieren, braucht man order(): Es liefert nicht die Werte, sondern die Positionen in sortierter Reihenfolge.\n\npreise &lt;- c(100, 10, 1000)\nsort(preise)    # die sortierten Werte\n\n[1]   10  100 1000\n\norder(preise)   # 10 steht an Position 2, 100 an Position 1, 1000 an Position 3\n\n[1] 2 1 3\n\n\nDiese Positionen als Zeilenindex sortieren den ganzen Data Frame:\n\nplaneten[order(planeten$durchmesser), ]                    # aufsteigend\n\n     name            typ durchmesser rotation hat_ringe\n1  Merkur Gesteinsplanet       0.382    58.64     FALSE\n4    Mars Gesteinsplanet       0.532     1.03     FALSE\n2   Venus Gesteinsplanet       0.949  -243.02     FALSE\n3    Erde Gesteinsplanet       1.000     1.00     FALSE\n8  Neptun       Eisriese       3.883     0.67      TRUE\n7  Uranus       Eisriese       4.007    -0.72      TRUE\n6  Saturn       Gasriese       9.449     0.43      TRUE\n5 Jupiter       Gasriese      11.209     0.41      TRUE\n\nplaneten[order(planeten$durchmesser, decreasing = TRUE), ] # absteigend\n\n     name            typ durchmesser rotation hat_ringe\n5 Jupiter       Gasriese      11.209     0.41      TRUE\n6  Saturn       Gasriese       9.449     0.43      TRUE\n7  Uranus       Eisriese       4.007    -0.72      TRUE\n8  Neptun       Eisriese       3.883     0.67      TRUE\n3    Erde Gesteinsplanet       1.000     1.00     FALSE\n2   Venus Gesteinsplanet       0.949  -243.02     FALSE\n4    Mars Gesteinsplanet       0.532     1.03     FALSE\n1  Merkur Gesteinsplanet       0.382    58.64     FALSE\n\n\n\nÜbung\n\nWie viele Planeten haben einen größeren Durchmesser als die Erde? (Tipp: sum())\nZeige nur name und rotation der Planeten, die sich rückwärts drehen.\n\n\n# dein Code",
+    "crumbs": [
+      "Einheiten",
+      "2 · Data Frames & dplyr"
+    ]
+  },
+  {
+    "objectID": "einheit-2.html#csv-einlesen-mit-read.csv",
+    "href": "einheit-2.html#csv-einlesen-mit-read.csv",
+    "title": "Einheit 2: Data Frames, Daten einlesen & dplyr",
+    "section": "CSV einlesen mit read.csv()",
+    "text": "CSV einlesen mit read.csv()\nread.csv() liest eine CSV-Datei und gibt einen Data Frame zurück:\n\nmitarbeitende &lt;- read.csv(\"data/raw/mitarbeitende.csv\")\nteams         &lt;- read.csv(\"data/raw/teams.csv\")\n\nNach dem Einlesen immer prüfen, ob Spaltenzahl und Datentypen stimmen:\n\nstr(mitarbeitende)\n\n'data.frame':   22 obs. of  7 variables:\n $ id         : chr  \"M001\" \"M002\" \"M003\" \"M004\" ...\n $ name       : chr  \"Anna\" \"Bertram\" \"Charlotte\" \"Dennis\" ...\n $ team       : chr  \"Team_C\" \"Team_A\" \"Team_A\" \"Team_A\" ...\n $ land       : chr  \"AT\" \"FR\" \"FR\" \"FR\" ...\n $ geschlecht : chr  \"w\" \"m\" \"w\" \"m\" ...\n $ plusstunden: num  16.5 44.4 1.8 33.7 13.2 9.6 57.4 21.5 43.8 17.6 ...\n $ projekte   : int  4 9 4 12 10 7 6 6 9 11 ...\n\nteams\n\n    team region\n1 Team_A   Nord\n2 Team_B   Sued\n3 Team_C    Ost\n4 Team_D   West\n\n\nLeere Felder in einer Zahlenspalte werden automatisch zu NA — bei Vera fehlen die Plusstunden:\n\nmitarbeitende[is.na(mitarbeitende$plusstunden), ]\n\n     id name   team land geschlecht plusstunden projekte\n22 M022 Vera Team_B   DE          w          NA        4",
+    "crumbs": [
+      "Einheiten",
+      "2 · Data Frames & dplyr"
+    ]
+  },
+  {
+    "objectID": "einheit-2.html#deutsche-csv-dateien-read.csv2",
+    "href": "einheit-2.html#deutsche-csv-dateien-read.csv2",
+    "title": "Einheit 2: Data Frames, Daten einlesen & dplyr",
+    "section": "Deutsche CSV-Dateien: read.csv2()",
+    "text": "Deutsche CSV-Dateien: read.csv2()\nread.csv() erwartet , als Trennzeichen und . als Dezimalzeichen. Excel im deutschsprachigen Raum speichert CSV dagegen oft mit ; als Trennzeichen und , als Dezimalzeichen. Dafür gibt es read.csv2():\n\nread.csv2(\"data/raw/datei.csv\")                       # ; als Trenner, , als Dezimalzeichen\nread.csv(\"data/raw/datei.csv\", sep = \";\", dec = \",\")  # gleichwertig, explizit\n\nWeitere nützliche Argumente:\n\nskip = 3 — die ersten 3 Zeilen überspringen (z. B. Info-Zeilen über der Tabelle)\nheader = FALSE — wenn die erste Zeile keine Spaltennamen enthält\nna.strings = c(\"\", \"NA\", \"-\") — welche Einträge als fehlend (NA) gelten sollen\nfileEncoding = \"UTF-8\" (oder \"latin1\") — bei falsch dargestellten Umlauten",
+    "crumbs": [
+      "Einheiten",
+      "2 · Data Frames & dplyr"
+    ]
+  },
+  {
+    "objectID": "einheit-2.html#andere-dateiformate",
+    "href": "einheit-2.html#andere-dateiformate",
+    "title": "Einheit 2: Data Frames, Daten einlesen & dplyr",
+    "section": "Andere Dateiformate",
+    "text": "Andere Dateiformate\n\n\n\nFormat\nFunktion\nPaket\n\n\n\n\nExcel (.xlsx, .xls)\nread_excel(\"datei.xlsx\")\nreadxl\n\n\nCSV, schneller & strenger\nread_csv(\"datei.csv\")\nreadr\n\n\nR-eigenes Format (.rds)\nreadRDS(\"datei.rds\")\nBasis-R",
+    "crumbs": [
+      "Einheiten",
+      "2 · Data Frames & dplyr"
+    ]
+  },
+  {
+    "objectID": "einheit-2.html#ergebnisse-speichern",
+    "href": "einheit-2.html#ergebnisse-speichern",
+    "title": "Einheit 2: Data Frames, Daten einlesen & dplyr",
+    "section": "Ergebnisse speichern",
+    "text": "Ergebnisse speichern\nwrite.csv() schreibt einen Data Frame als CSV; row.names = FALSE verhindert eine zusätzliche Spalte mit Zeilennummern. Gespeichert wird nach data/processed/ — data/raw/ bleibt unverändert:\n\nwrite.csv(mitarbeitende, \"data/processed/mitarbeitende_clean.csv\", row.names = FALSE)",
+    "crumbs": [
+      "Einheiten",
+      "2 · Data Frames & dplyr"
+    ]
+  },
+  {
+    "objectID": "einheit-2.html#filter-zeilen-auswählen",
+    "href": "einheit-2.html#filter-zeilen-auswählen",
+    "title": "Einheit 2: Data Frames, Daten einlesen & dplyr",
+    "section": "filter() — Zeilen auswählen",
+    "text": "filter() — Zeilen auswählen\n\nfilter(mitarbeitende, plusstunden &gt; 40)\n\n    id    name   team land geschlecht plusstunden projekte\n1 M002 Bertram Team_A   FR          m        44.4        9\n2 M007   Greta Team_B   DE          w        57.4        6\n3 M009    Ines Team_C   DE          w        43.8        9\n4 M011   Klara Team_C   DE          w        42.3        1\n5 M012   Lukas Team_C   AT          m        59.1        4\n6 M014    Noah Team_A   DE          m        40.2       12\n\nfilter(mitarbeitende, land %in% c(\"AT\", \"DE\"), projekte &gt;= 10)   # Komma = und\n\n    id  name   team land geschlecht plusstunden projekte\n1 M010 Jonas Team_A   DE          m        17.6       11\n2 M014  Noah Team_A   DE          m        40.2       12\n3 M016  Paul Team_C   AT          m        22.8       11\n\n\nZeilen, bei denen die Bedingung NA ergibt (hier: Vera), fallen bei filter() weg.",
+    "crumbs": [
+      "Einheiten",
+      "2 · Data Frames & dplyr"
+    ]
+  },
+  {
+    "objectID": "einheit-2.html#select-spalten-auswählen",
+    "href": "einheit-2.html#select-spalten-auswählen",
+    "title": "Einheit 2: Data Frames, Daten einlesen & dplyr",
+    "section": "select() — Spalten auswählen",
+    "text": "select() — Spalten auswählen\n\nselect(mitarbeitende, name, team, projekte)\n\n        name   team projekte\n1       Anna Team_C        4\n2    Bertram Team_A        9\n3  Charlotte Team_A        4\n4     Dennis Team_A       12\n5      Emily Team_C       10\n6      Farid Team_B        7\n7      Greta Team_B        6\n8     Hannes Team_A        6\n9       Ines Team_C        9\n10     Jonas Team_A       11\n11     Klara Team_C        1\n12     Lukas Team_C        4\n13      Mira Team_A        6\n14      Noah Team_A       12\n15      Olga Team_C        9\n16      Paul Team_C       11\n17   Quentin Team_C        1\n18      Rosa Team_A        2\n19     Simon Team_A       11\n20      Tara Team_B        3\n21       Uwe Team_E        5\n22      Vera Team_B        4",
+    "crumbs": [
+      "Einheiten",
+      "2 · Data Frames & dplyr"
+    ]
+  },
+  {
+    "objectID": "einheit-2.html#arrange-sortieren",
+    "href": "einheit-2.html#arrange-sortieren",
+    "title": "Einheit 2: Data Frames, Daten einlesen & dplyr",
+    "section": "arrange() — sortieren",
+    "text": "arrange() — sortieren\narrange() sortiert nach einer oder mehreren Spalten; desc() dreht die Reihenfolge um:\n\narrange(mitarbeitende, desc(plusstunden))\n\n     id      name   team land geschlecht plusstunden projekte\n1  M012     Lukas Team_C   AT          m        59.1        4\n2  M007     Greta Team_B   DE          w        57.4        6\n3  M002   Bertram Team_A   FR          m        44.4        9\n4  M009      Ines Team_C   DE          w        43.8        9\n5  M011     Klara Team_C   DE          w        42.3        1\n6  M014      Noah Team_A   DE          m        40.2       12\n7  M020      Tara Team_B   DE          w        38.6        3\n8  M013      Mira Team_A   DE          w        38.1        6\n9  M015      Olga Team_C   FR          w        38.1        9\n10 M004    Dennis Team_A   FR          m        33.7       12\n11 M021       Uwe Team_E   AT          m        27.3        5\n12 M018      Rosa Team_A   AT          w        24.1        2\n13 M016      Paul Team_C   AT          m        22.8       11\n14 M008    Hannes Team_A   AT          m        21.5        6\n15 M017   Quentin Team_C   FR          m        19.5        1\n16 M019     Simon Team_A   FR          m        18.9       11\n17 M010     Jonas Team_A   DE          m        17.6       11\n18 M001      Anna Team_C   AT          w        16.5        4\n19 M005     Emily Team_C   FR          w        13.2       10\n20 M006     Farid Team_B   AT          m         9.6        7\n21 M003 Charlotte Team_A   FR          w         1.8        4\n22 M022      Vera Team_B   DE          w          NA        4",
+    "crumbs": [
+      "Einheiten",
+      "2 · Data Frames & dplyr"
+    ]
+  },
+  {
+    "objectID": "einheit-2.html#der-pipe-operator-und",
+    "href": "einheit-2.html#der-pipe-operator-und",
+    "title": "Einheit 2: Data Frames, Daten einlesen & dplyr",
+    "section": "Der Pipe-Operator: %>% und |>",
+    "text": "Der Pipe-Operator: %&gt;% und |&gt;\n\nDas Problem: mehrere Schritte hintereinander\nSollen mehrere Funktionen nacheinander angewendet werden, gibt es ohne Pipe zwei Wege — beide sind unhandlich:\n\n# 1. Verschachteln: muss von innen nach außen gelesen werden\narrange(filter(mitarbeitende, land == \"AT\"), desc(plusstunden))\n\n    id   name   team land geschlecht plusstunden projekte\n1 M012  Lukas Team_C   AT          m        59.1        4\n2 M021    Uwe Team_E   AT          m        27.3        5\n3 M018   Rosa Team_A   AT          w        24.1        2\n4 M016   Paul Team_C   AT          m        22.8       11\n5 M008 Hannes Team_A   AT          m        21.5        6\n6 M001   Anna Team_C   AT          w        16.5        4\n7 M006  Farid Team_B   AT          m         9.6        7\n\n# 2. Zwischenergebnisse speichern: lesbar, aber viele Hilfsvariablen\nnur_at &lt;- filter(mitarbeitende, land == \"AT\")\narrange(nur_at, desc(plusstunden))\n\n    id   name   team land geschlecht plusstunden projekte\n1 M012  Lukas Team_C   AT          m        59.1        4\n2 M021    Uwe Team_E   AT          m        27.3        5\n3 M018   Rosa Team_A   AT          w        24.1        2\n4 M016   Paul Team_C   AT          m        22.8       11\n5 M008 Hannes Team_A   AT          m        21.5        6\n6 M001   Anna Team_C   AT          w        16.5        4\n7 M006  Farid Team_B   AT          m         9.6        7\n\n\n\n\nDie Lösung: die Pipe\nDer Pipe-Operator nimmt das Ergebnis auf seiner linken Seite und setzt es als erstes Argument in die Funktion auf der rechten Seite ein:\nx %&gt;% f(y)      ist dasselbe wie      f(x, y)\nDamit wird aus der Verschachtelung eine Kette, die man von oben nach unten liest. Die Pipe spricht man am besten als „und dann”: Nimm mitarbeitende, und dann filtere nach Österreich, und dann sortiere nach Plusstunden.\n\nmitarbeitende %&gt;%\n  filter(land == \"AT\") %&gt;%\n  arrange(desc(plusstunden))\n\n    id   name   team land geschlecht plusstunden projekte\n1 M012  Lukas Team_C   AT          m        59.1        4\n2 M021    Uwe Team_E   AT          m        27.3        5\n3 M018   Rosa Team_A   AT          w        24.1        2\n4 M016   Paul Team_C   AT          m        22.8       11\n5 M008 Hannes Team_A   AT          m        21.5        6\n6 M001   Anna Team_C   AT          w        16.5        4\n7 M006  Farid Team_B   AT          m         9.6        7\n\n\nBeachte: In der Kette steht in filter() und arrange() kein Data Frame mehr — den liefert die Pipe von oben.\n\n\nZwei Schreibweisen: %&gt;% und |&gt;\nIn R gibt es zwei Pipes. Für alles, was in dieser Einführung vorkommt, verhalten sie sich gleich — dieselbe Kette mit der eingebauten Pipe |&gt;:\n\nmitarbeitende |&gt;\n  filter(land == \"AT\") |&gt;\n  arrange(desc(plusstunden))\n\n    id   name   team land geschlecht plusstunden projekte\n1 M012  Lukas Team_C   AT          m        59.1        4\n2 M021    Uwe Team_E   AT          m        27.3        5\n3 M018   Rosa Team_A   AT          w        24.1        2\n4 M016   Paul Team_C   AT          m        22.8       11\n5 M008 Hannes Team_A   AT          m        21.5        6\n6 M001   Anna Team_C   AT          w        16.5        4\n7 M006  Farid Team_B   AT          m         9.6        7\n\n\n\n\n\n\n\n\n\n\n\n%&gt;%\n\\|&gt;\n\n\n\n\nName\nmagrittr-Pipe\nnative Pipe (eingebaut)\n\n\nHerkunft\nPaket magrittr, wird von dplyr mitgeladen\nfester Bestandteil von R seit Version 4.1 (2021)\n\n\nbraucht ein Paket?\nja — ohne library(dplyr) gibt es einen Fehler\nnein\n\n\nwo man sie sieht\nältere Tutorials, Stack Overflow, viele Kurse — auch in den weiteren Kursmaterialien\naktuelle R-Dokumentation, R for Data Science (2. Auflage), tidyverse-Stilempfehlung\n\n\n\nIn diesem Kurs verwenden wir %&gt;%, weil es in den weiteren Kursmaterialien verwendet wird. Die aktuelle Empfehlung für neuen Code ist |&gt;. Du solltest beide lesen können — wenn du eine der beiden siehst, denk einfach „und dann”.\n\n\nZwei kleine Unterschiede\nFür den Anfang selten wichtig, aber gut zu wissen, wenn Code aus dem Netz nicht funktioniert:\n\nKlammern: Bei |&gt; muss rechts immer ein Funktionsaufruf mit Klammern stehen. mitarbeitende %&gt;% head funktioniert, mitarbeitende |&gt; head nicht — richtig ist mitarbeitende |&gt; head(). Einfachste Regel: immer Klammern schreiben.\nPlatzhalter: Soll das Ergebnis nicht an die erste Stelle, markiert man die Stelle mit einem Platzhalter — bei %&gt;% ein Punkt ., bei |&gt; ein Unterstrich _ (nur mit Argumentnamen). Beispiel: lm() berechnet eine Regression und erwartet die Daten erst im Argument data:\n\n\nmitarbeitende %&gt;% lm(plusstunden ~ projekte, data = .)\n\n\nCall:\nlm(formula = plusstunden ~ projekte, data = .)\n\nCoefficients:\n(Intercept)     projekte  \n    30.7215      -0.1164  \n\nmitarbeitende |&gt;  lm(plusstunden ~ projekte, data = _)\n\n\nCall:\nlm(formula = plusstunden ~ projekte, data = mitarbeitende)\n\nCoefficients:\n(Intercept)     projekte  \n    30.7215      -0.1164  \n\n\nTastenkürzel: Strg/Cmd + Shift + M fügt eine Pipe ein. Welche, stellt man unter Tools → Global Options → Code → „Use native pipe operator, |&gt;“ ein — für diesen Kurs den Haken nicht setzen, dann kommt %&gt;%.",
+    "crumbs": [
+      "Einheiten",
+      "2 · Data Frames & dplyr"
+    ]
+  },
+  {
+    "objectID": "einheit-2.html#mutate-neue-spalten-berechnen",
+    "href": "einheit-2.html#mutate-neue-spalten-berechnen",
+    "title": "Einheit 2: Data Frames, Daten einlesen & dplyr",
+    "section": "mutate() — neue Spalten berechnen",
+    "text": "mutate() — neue Spalten berechnen\nmutate() berechnet eine neue Spalte aus bestehenden — elementweise für jede Zeile. Gleichwertig in Basis-R wäre mitarbeitende$stunden_pro_projekt &lt;- mitarbeitende$plusstunden / mitarbeitende$projekte.\n\nmitarbeitende &lt;- mitarbeitende %&gt;%\n  mutate(stunden_pro_projekt = round(plusstunden / projekte, 1))\n\nhead(mitarbeitende)\n\n    id      name   team land geschlecht plusstunden projekte\n1 M001      Anna Team_C   AT          w        16.5        4\n2 M002   Bertram Team_A   FR          m        44.4        9\n3 M003 Charlotte Team_A   FR          w         1.8        4\n4 M004    Dennis Team_A   FR          m        33.7       12\n5 M005     Emily Team_C   FR          w        13.2       10\n6 M006     Farid Team_B   AT          m         9.6        7\n  stunden_pro_projekt\n1                 4.1\n2                 4.9\n3                 0.4\n4                 2.8\n5                 1.3\n6                 1.4",
+    "crumbs": [
+      "Einheiten",
+      "2 · Data Frames & dplyr"
+    ]
+  },
+  {
+    "objectID": "einheit-2.html#mehrere-schritte-kombinieren",
+    "href": "einheit-2.html#mehrere-schritte-kombinieren",
+    "title": "Einheit 2: Data Frames, Daten einlesen & dplyr",
+    "section": "Mehrere Schritte kombinieren",
+    "text": "Mehrere Schritte kombinieren\n\nmitarbeitende %&gt;%\n  filter(land == \"AT\") %&gt;%\n  select(name, team, plusstunden) %&gt;%\n  arrange(desc(plusstunden))\n\n    name   team plusstunden\n1  Lukas Team_C        59.1\n2    Uwe Team_E        27.3\n3   Rosa Team_A        24.1\n4   Paul Team_C        22.8\n5 Hannes Team_A        21.5\n6   Anna Team_C        16.5\n7  Farid Team_B         9.6",
+    "crumbs": [
+      "Einheiten",
+      "2 · Data Frames & dplyr"
+    ]
+  },
+  {
+    "objectID": "einheit-2.html#count-häufigkeiten-zählen",
+    "href": "einheit-2.html#count-häufigkeiten-zählen",
+    "title": "Einheit 2: Data Frames, Daten einlesen & dplyr",
+    "section": "count() — Häufigkeiten zählen",
+    "text": "count() — Häufigkeiten zählen\ncount() zählt, wie oft jeder Wert vorkommt — das dplyr-Gegenstück zu table():\n\nmitarbeitende %&gt;% count(team)\n\n    team n\n1 Team_A 9\n2 Team_B 4\n3 Team_C 8\n4 Team_E 1",
+    "crumbs": [
+      "Einheiten",
+      "2 · Data Frames & dplyr"
+    ]
+  },
+  {
+    "objectID": "einheit-2.html#group_by-summarise-kennzahlen-pro-gruppe",
+    "href": "einheit-2.html#group_by-summarise-kennzahlen-pro-gruppe",
+    "title": "Einheit 2: Data Frames, Daten einlesen & dplyr",
+    "section": "group_by() + summarise() — Kennzahlen pro Gruppe",
+    "text": "group_by() + summarise() — Kennzahlen pro Gruppe\nEine der häufigsten Aufgaben: eine Kennzahl je Gruppe — z. B. die durchschnittlichen Plusstunden pro Team.\n\nmitarbeitende %&gt;%\n  group_by(team) %&gt;%\n  summarise(\n    anzahl           = n(),\n    plusstunden_mean = mean(plusstunden),\n    projekte_max     = max(projekte)\n  )\n\n# A tibble: 4 × 4\n  team   anzahl plusstunden_mean projekte_max\n  &lt;chr&gt;   &lt;int&gt;            &lt;dbl&gt;        &lt;int&gt;\n1 Team_A      9             26.7           12\n2 Team_B      4             NA              7\n3 Team_C      8             31.9           11\n4 Team_E      1             27.3            5\n\n\nDie Ausgabe beginnt mit # A tibble. Ein Tibble ist die dplyr-Variante eines Data Frames — er zeigt zusätzlich Größe und Spaltentypen an, alles andere funktioniert wie gewohnt.\nBei Team_B steht NA, weil Veras Plusstunden fehlen (siehe Einheit 1, Fehlende Werte: NA). Mit na.rm = TRUE wird der fehlende Wert ausgelassen:\n\nmitarbeitende %&gt;%\n  group_by(team) %&gt;%\n  summarise(anzahl = n(), plusstunden_mean = mean(plusstunden, na.rm = TRUE))\n\n# A tibble: 4 × 3\n  team   anzahl plusstunden_mean\n  &lt;chr&gt;   &lt;int&gt;            &lt;dbl&gt;\n1 Team_A      9             26.7\n2 Team_B      4             35.2\n3 Team_C      8             31.9\n4 Team_E      1             27.3",
+    "crumbs": [
+      "Einheiten",
+      "2 · Data Frames & dplyr"
+    ]
+  },
+  {
+    "objectID": "einheit-2.html#datensätze-verbinden-joins",
+    "href": "einheit-2.html#datensätze-verbinden-joins",
+    "title": "Einheit 2: Data Frames, Daten einlesen & dplyr",
+    "section": "Datensätze verbinden: Joins",
+    "text": "Datensätze verbinden: Joins\nteams enthält zu jedem Team die Region. Mit einem Join wird diese Information über die gemeinsame Spalte team an mitarbeitende angehängt.\nDie Datensätze passen nicht perfekt zusammen — wie so oft in echten Daten:\n\nUwe gehört zu Team_E, das in teams fehlt.\nTeam_D steht in teams, hat aber keine Mitarbeitenden.\n\nDie vier Join-Varianten unterscheiden sich genau darin, was mit solchen Zeilen passiert:\n\n\n\n\n\n\n\nFunktion\nBehält\n\n\n\n\nleft_join(x, y)\nalle Zeilen von x; fehlt die Entsprechung in y → NA\n\n\nright_join(x, y)\nalle Zeilen von y\n\n\ninner_join(x, y)\nnur Zeilen, die in beiden vorkommen\n\n\nfull_join(x, y)\nalle Zeilen aus beiden\n\n\n\n\nnrow(left_join(mitarbeitende, teams, by = \"team\"))    # alle 22 Personen, Uwe mit Region NA\n\n[1] 22\n\nnrow(inner_join(mitarbeitende, teams, by = \"team\"))   # 21 — Uwe fällt weg\n\n[1] 21\n\nnrow(full_join(mitarbeitende, teams, by = \"team\"))    # 23 — alle Personen + Team_D\n\n[1] 23\n\n\nMeist will man keine Personen verlieren, deshalb ist left_join() der Standard:\n\nmitarbeitende_join &lt;- mitarbeitende %&gt;%\n  left_join(teams, by = \"team\")\n\nmitarbeitende_join %&gt;% filter(is.na(region))\n\n    id name   team land geschlecht plusstunden projekte stunden_pro_projekt\n1 M021  Uwe Team_E   AT          m        27.3        5                 5.5\n  region\n1   &lt;NA&gt;\n\n\nÜber mehrere Spalten verbindet man mit by = c(\"spalte1\", \"spalte2\"). In Basis-R heißt die Funktion merge() (merge(x, y, by = \"team\", all.x = TRUE) entspricht left_join).\n\nÜbung\n\nWelche drei Personen haben die meisten Projekte? Zeige nur name und projekte.\nBerechne pro land die Anzahl Personen und die durchschnittlichen Plusstunden, absteigend sortiert nach dem Durchschnitt.\nWie viele Frauen und Männer gibt es pro Team? (Tipp: count() mit zwei Spalten)\nSchreibe deine Lösung zu Aufgabe 2 einmal mit |&gt; statt %&gt;% und prüfe, dass dasselbe herauskommt.\n\n\n# dein Code",
+    "crumbs": [
+      "Einheiten",
+      "2 · Data Frames & dplyr"
+    ]
+  },
+  {
+    "objectID": "einheit-4.html",
+    "href": "einheit-4.html",
+    "title": "Einheit 4: Bedingungen, Schleifen & eigene Funktionen",
+    "section": "",
+    "text": "Bisher lief jeder Code einfach von oben nach unten. In dieser Einheit lernst du, den Ablauf zu steuern und eigene Werkzeuge zu bauen:\nWir verwenden wieder die Temperaturen aus Einheit 1 und die Mitarbeitenden-Daten aus Einheit 2:\nlibrary(dplyr)\nlibrary(ggplot2)\n\ntmax_wien &lt;- c(Mai = 20.1, Juni = 24.1, Juli = 26.0, August = 25.7, September = 20.5)\n\nmitarbeitende &lt;- read.csv(\"data/raw/mitarbeitende.csv\")",
+    "crumbs": [
+      "Einheiten",
+      "4 · Funktionen & Schleifen"
+    ]
+  },
+  {
+    "objectID": "einheit-4.html#if-und-else",
+    "href": "einheit-4.html#if-und-else",
+    "title": "Einheit 4: Bedingungen, Schleifen & eigene Funktionen",
+    "section": "if und else",
+    "text": "if und else\nif führt den Code in den geschweiften Klammern { } nur aus, wenn die Bedingung in den runden Klammern TRUE ist. else gibt an, was sonst passieren soll:\n\ntemperatur &lt;- 26\n\nif (temperatur &gt; 25) {\n  print(\"Sommertag\")\n} else {\n  print(\"kein Sommertag\")\n}\n\n[1] \"Sommertag\"\n\n\nMit else if lassen sich mehrere Fälle nacheinander prüfen — der erste zutreffende gewinnt:\n\ntemperatur &lt;- 18\n\nif (temperatur &gt;= 30) {\n  print(\"heiß\")\n} else if (temperatur &gt;= 20) {\n  print(\"warm\")\n} else {\n  print(\"kühl\")\n}\n\n[1] \"kühl\"",
+    "crumbs": [
+      "Einheiten",
+      "4 · Funktionen & Schleifen"
+    ]
+  },
+  {
+    "objectID": "einheit-4.html#achtung-if-prüft-genau-einen-wert",
+    "href": "einheit-4.html#achtung-if-prüft-genau-einen-wert",
+    "title": "Einheit 4: Bedingungen, Schleifen & eigene Funktionen",
+    "section": "Achtung: if prüft genau einen Wert",
+    "text": "Achtung: if prüft genau einen Wert\nif braucht ein einzelnes TRUE oder FALSE. Bei einem Vektor mit mehreren Werten gibt es einen Fehler:\n\nif (tmax_wien &gt; 25) {\n  print(\"Sommertag\")\n}\n\nError in `if (tmax_wien &gt; 25) ...`:\n! Bedingung hat Länge &gt; 1\n\n\nSoll eine Bedingung für jedes Element eines Vektors geprüft werden, nimmt man ifelse(bedingung, wert_wenn_wahr, wert_wenn_falsch):\n\nifelse(tmax_wien &gt; 25, \"Sommertag\", \"kein Sommertag\")\n\n             Mai             Juni             Juli           August \n\"kein Sommertag\" \"kein Sommertag\"      \"Sommertag\"      \"Sommertag\" \n       September \n\"kein Sommertag\"",
+    "crumbs": [
+      "Einheiten",
+      "4 · Funktionen & Schleifen"
+    ]
+  },
+  {
+    "objectID": "einheit-4.html#mehrere-fälle-in-einem-data-frame-case_when",
+    "href": "einheit-4.html#mehrere-fälle-in-einem-data-frame-case_when",
+    "title": "Einheit 4: Bedingungen, Schleifen & eigene Funktionen",
+    "section": "Mehrere Fälle in einem Data Frame: case_when()",
+    "text": "Mehrere Fälle in einem Data Frame: case_when()\nFür neue Spalten mit mehr als zwei Kategorien ist case_when() aus dplyr übersichtlicher als verschachtelte ifelse(). Jede Zeile hat die Form bedingung ~ ergebnis; die erste zutreffende Bedingung gewinnt, TRUE ~ fängt alles Übrige auf:\n\nmitarbeitende &lt;- mitarbeitende %&gt;%\n  mutate(belastung = case_when(\n    is.na(plusstunden) ~ NA,          # fehlende Werte zuerst abfangen\n    plusstunden &gt; 40   ~ \"hoch\",\n    plusstunden &gt; 20   ~ \"mittel\",\n    TRUE               ~ \"niedrig\"\n  ))\n\nmitarbeitende %&gt;% select(name, plusstunden, belastung) %&gt;% head(8)\n\n       name plusstunden belastung\n1      Anna        16.5   niedrig\n2   Bertram        44.4      hoch\n3 Charlotte         1.8   niedrig\n4    Dennis        33.7    mittel\n5     Emily        13.2   niedrig\n6     Farid         9.6   niedrig\n7     Greta        57.4      hoch\n8    Hannes        21.5    mittel\n\n\nOhne die erste Zeile würde Vera als \"niedrig\" eingestuft: Ihre Vergleiche ergeben NA, und dann greift TRUE ~.\n\nÜbung\n\nSchreibe ein if/else, das für eine Variable projekte_anzahl ausgibt, ob jemand \"viele Projekte\" (mindestens 10) oder \"wenige Projekte\" hat.\nFüge mitarbeitende mit mutate() und ifelse() eine Spalte region_bekannt hinzu, die TRUE ist, wenn das Team in c(\"Team_A\", \"Team_B\", \"Team_C\", \"Team_D\") vorkommt (Tipp: %in% — braucht man hier überhaupt ifelse()?).\n\n\n# dein Code",
+    "crumbs": [
+      "Einheiten",
+      "4 · Funktionen & Schleifen"
+    ]
+  },
+  {
+    "objectID": "einheit-4.html#for-schleifen",
+    "href": "einheit-4.html#for-schleifen",
+    "title": "Einheit 4: Bedingungen, Schleifen & eigene Funktionen",
+    "section": "for-Schleifen",
+    "text": "for-Schleifen\nEine for-Schleife führt denselben Code für jedes Element eines Vektors aus. Die Schleifenvariable (hier monat) nimmt nacheinander jeden Wert an:\n\nfor (monat in names(tmax_wien)) {\n  print(paste(monat, \":\", tmax_wien[monat], \"°C\"))\n}\n\n[1] \"Mai : 20.1 °C\"\n[1] \"Juni : 24.1 °C\"\n[1] \"Juli : 26 °C\"\n[1] \"August : 25.7 °C\"\n[1] \"September : 20.5 °C\"\n\n\nInnerhalb einer Schleife wird nichts automatisch angezeigt — deshalb braucht es print().",
+    "crumbs": [
+      "Einheiten",
+      "4 · Funktionen & Schleifen"
+    ]
+  },
+  {
+    "objectID": "einheit-4.html#ergebnisse-in-einer-schleife-sammeln",
+    "href": "einheit-4.html#ergebnisse-in-einer-schleife-sammeln",
+    "title": "Einheit 4: Bedingungen, Schleifen & eigene Funktionen",
+    "section": "Ergebnisse in einer Schleife sammeln",
+    "text": "Ergebnisse in einer Schleife sammeln\nWill man die Ergebnisse behalten, legt man vorher einen leeren Vektor passender Länge an und füllt ihn Position für Position. seq_along(x) liefert die Positionen 1, 2, …, length(x):\n\nfahrenheit &lt;- numeric(length(tmax_wien))   # Vektor aus Nullen\n\nfor (i in seq_along(tmax_wien)) {\n  fahrenheit[i] &lt;- tmax_wien[i] * 9 / 5 + 32\n}\n\nfahrenheit\n\n[1] 68.18 75.38 78.80 78.26 68.90",
+    "crumbs": [
+      "Einheiten",
+      "4 · Funktionen & Schleifen"
+    ]
+  },
+  {
+    "objectID": "einheit-4.html#wann-braucht-man-eine-schleife-und-wann-nicht",
+    "href": "einheit-4.html#wann-braucht-man-eine-schleife-und-wann-nicht",
+    "title": "Einheit 4: Bedingungen, Schleifen & eigene Funktionen",
+    "section": "Wann braucht man eine Schleife — und wann nicht?",
+    "text": "Wann braucht man eine Schleife — und wann nicht?\nDas Beispiel oben geht in R auch ohne Schleife, weil Rechnungen auf Vektoren elementweise laufen (Einheit 1) — kürzer und schneller:\n\ntmax_wien * 9 / 5 + 32\n\n      Mai      Juni      Juli    August September \n    68.18     75.38     78.80     78.26     68.90 \n\n\nFaustregel: Erst prüfen, ob es eine vektorisierte Lösung gibt (Rechnen mit Vektoren, ifelse(), mutate(), group_by()). Schleifen braucht man vor allem dann, wenn pro Durchlauf etwas passiert: eine Datei einlesen, eine Grafik speichern, eine Meldung ausgeben (siehe Teil 5).",
+    "crumbs": [
+      "Einheiten",
+      "4 · Funktionen & Schleifen"
+    ]
+  },
+  {
+    "objectID": "einheit-4.html#while-schleifen",
+    "href": "einheit-4.html#while-schleifen",
+    "title": "Einheit 4: Bedingungen, Schleifen & eigene Funktionen",
+    "section": "while-Schleifen",
+    "text": "while-Schleifen\nwhile wiederholt, solange eine Bedingung gilt. Die Bedingung muss sich in der Schleife irgendwann ändern — sonst läuft sie endlos (abbrechen mit dem roten Stopp-Knopf oder Esc):\n\nkontostand &lt;- 1000\njahre      &lt;- 0\n\nwhile (kontostand &lt; 1500) {\n  kontostand &lt;- kontostand * 1.05   # 5 % Zinsen pro Jahr\n  jahre      &lt;- jahre + 1\n}\n\njahre\n\n[1] 9\n\nround(kontostand, 2)\n\n[1] 1551.33\n\n\nZwei Befehle steuern Schleifen zusätzlich: next springt zum nächsten Durchlauf, break beendet die Schleife sofort.\n\nÜbung\n\nGib mit einer for-Schleife für jedes Team in unique(mitarbeitende$team) die Anzahl Personen aus, z. B. \"Team_A: 9 Personen\".\nWie viele Jahre dauert es, bis sich 1000 € bei 3 % Zinsen verdoppeln? Löse es mit while.\n\n\n# dein Code",
+    "crumbs": [
+      "Einheiten",
+      "4 · Funktionen & Schleifen"
+    ]
+  },
+  {
+    "objectID": "einheit-4.html#eine-funktion-schreiben",
+    "href": "einheit-4.html#eine-funktion-schreiben",
+    "title": "Einheit 4: Bedingungen, Schleifen & eigene Funktionen",
+    "section": "Eine Funktion schreiben",
+    "text": "Eine Funktion schreiben\nWenn du denselben Code mehrmals kopierst, ist es Zeit für eine eigene Funktion. Aufbau:\nname &lt;- function(argument1, argument2) {\n  # was die Funktion tut\n  ergebnis\n}\nDer letzte Ausdruck im Funktionskörper ist das Ergebnis, das zurückgegeben wird:\n\ncelsius_zu_fahrenheit &lt;- function(celsius) {\n  celsius * 9 / 5 + 32\n}\n\ncelsius_zu_fahrenheit(20)\n\n[1] 68\n\ncelsius_zu_fahrenheit(tmax_wien)   # funktioniert auch mit Vektoren\n\n      Mai      Juni      Juli    August September \n    68.18     75.38     78.80     78.26     68.90",
+    "crumbs": [
+      "Einheiten",
+      "4 · Funktionen & Schleifen"
+    ]
+  },
+  {
+    "objectID": "einheit-4.html#standardwerte-für-argumente",
+    "href": "einheit-4.html#standardwerte-für-argumente",
+    "title": "Einheit 4: Bedingungen, Schleifen & eigene Funktionen",
+    "section": "Standardwerte für Argumente",
+    "text": "Standardwerte für Argumente\nWie bei eingebauten Funktionen können Argumente einen Standardwert haben, der gilt, wenn man sie weglässt:\n\nrunde_prozent &lt;- function(anteil, stellen = 1) {\n  round(anteil * 100, stellen)\n}\n\nrunde_prozent(0.12345)               # stellen = 1\n\n[1] 12.3\n\nrunde_prozent(0.12345, stellen = 3)\n\n[1] 12.345",
+    "crumbs": [
+      "Einheiten",
+      "4 · Funktionen & Schleifen"
+    ]
+  },
+  {
+    "objectID": "einheit-4.html#mehrere-ergebnisse-zurückgeben",
+    "href": "einheit-4.html#mehrere-ergebnisse-zurückgeben",
+    "title": "Einheit 4: Bedingungen, Schleifen & eigene Funktionen",
+    "section": "Mehrere Ergebnisse zurückgeben",
+    "text": "Mehrere Ergebnisse zurückgeben\nEine Funktion gibt genau ein Objekt zurück. Für mehrere Werte packt man sie in einen benannten Vektor (oder eine Liste):\n\nkennzahlen &lt;- function(x) {\n  c(n          = sum(!is.na(x)),\n    mittelwert = round(mean(x, na.rm = TRUE), 1),\n    minimum    = min(x, na.rm = TRUE),\n    maximum    = max(x, na.rm = TRUE))\n}\n\nkennzahlen(mitarbeitende$plusstunden)\n\n         n mittelwert    minimum    maximum \n      21.0       29.9        1.8       59.1",
+    "crumbs": [
+      "Einheiten",
+      "4 · Funktionen & Schleifen"
+    ]
+  },
+  {
+    "objectID": "einheit-4.html#eingaben-prüfen-stop",
+    "href": "einheit-4.html#eingaben-prüfen-stop",
+    "title": "Einheit 4: Bedingungen, Schleifen & eigene Funktionen",
+    "section": "Eingaben prüfen: stop()",
+    "text": "Eingaben prüfen: stop()\nMit if und stop() bricht eine Funktion mit einer verständlichen Fehlermeldung ab, wenn die Eingabe nicht passt — viel hilfreicher als ein kryptischer Fehler weiter hinten:\n\nkennzahlen &lt;- function(x) {\n  if (!is.numeric(x)) {\n    stop(\"x muss ein Zahlenvektor sein.\")\n  }\n  c(n          = sum(!is.na(x)),\n    mittelwert = round(mean(x, na.rm = TRUE), 1),\n    minimum    = min(x, na.rm = TRUE),\n    maximum    = max(x, na.rm = TRUE))\n}\n\nkennzahlen(mitarbeitende$name)\n\nError in `kennzahlen()`:\n! x muss ein Zahlenvektor sein.",
+    "crumbs": [
+      "Einheiten",
+      "4 · Funktionen & Schleifen"
+    ]
+  },
+  {
+    "objectID": "einheit-4.html#variablen-in-funktionen-bleiben-lokal",
+    "href": "einheit-4.html#variablen-in-funktionen-bleiben-lokal",
+    "title": "Einheit 4: Bedingungen, Schleifen & eigene Funktionen",
+    "section": "Variablen in Funktionen bleiben lokal",
+    "text": "Variablen in Funktionen bleiben lokal\nWas innerhalb einer Funktion erzeugt wird, existiert nur dort — es taucht nicht im Environment auf und überschreibt keine gleichnamigen Variablen außerhalb:\n\nverdoppeln &lt;- function(x) {\n  zwischenergebnis &lt;- x * 2\n  zwischenergebnis\n}\n\nverdoppeln(5)\n\n[1] 10\n\nzwischenergebnis   # Fehler: existiert außerhalb der Funktion nicht\n\nError:\n! Objekt 'zwischenergebnis' nicht gefunden\n\n\nEine Funktion sollte deshalb alles, was sie braucht, über ihre Argumente bekommen.\n\nÜbung\n\nSchreibe eine Funktion bmi(gewicht_kg, groesse_m), die den BMI auf eine Nachkommastelle gerundet zurückgibt.\nSchreibe eine Funktion spanne(x), die die Differenz zwischen größtem und kleinstem Wert zurückgibt und fehlende Werte ignoriert. Teste sie mit mitarbeitende$plusstunden.\n\n\n# dein Code",
+    "crumbs": [
+      "Einheiten",
+      "4 · Funktionen & Schleifen"
+    ]
+  },
+  {
+    "objectID": "einheit-4.html#die-idee",
+    "href": "einheit-4.html#die-idee",
+    "title": "Einheit 4: Bedingungen, Schleifen & eigene Funktionen",
+    "section": "Die Idee",
+    "text": "Die Idee\nSehr oft will man dieselbe Funktion auf mehrere Dinge anwenden: den Mittelwert jeder Spalte, die Länge jedes Textes, eine Kennzahl für jedes Team. Mit einer for-Schleife sieht das so aus:\n\nspalten     &lt;- mtcars[, c(\"mpg\", \"hp\", \"wt\")]\nmittelwerte &lt;- numeric(ncol(spalten))\n\nfor (i in seq_along(spalten)) {\n  mittelwerte[i] &lt;- mean(spalten[[i]])\n}\n\nnames(mittelwerte) &lt;- names(spalten)\nmittelwerte\n\n      mpg        hp        wt \n 20.09062 146.68750   3.21725 \n\n\nDas sind sechs Zeilen für eine einfache Idee: „Berechne mean für jede Spalte und sammle die Ergebnisse.” Genau diese Idee erledigt sapply() in einer Zeile — inklusive Namen:\n\nsapply(spalten, mean)\n\n      mpg        hp        wt \n 20.09062 146.68750   3.21725",
+    "crumbs": [
+      "Einheiten",
+      "4 · Funktionen & Schleifen"
+    ]
+  },
+  {
+    "objectID": "einheit-4.html#der-aufbau-sapplyx-fun",
+    "href": "einheit-4.html#der-aufbau-sapplyx-fun",
+    "title": "Einheit 4: Bedingungen, Schleifen & eigene Funktionen",
+    "section": "Der Aufbau: sapply(X, FUN, …)",
+    "text": "Der Aufbau: sapply(X, FUN, …)\n\n\n\n\n\n\n\nArgument\nBedeutung\n\n\n\n\nX\ndie Elemente, über die gegangen wird: ein Vektor, eine Liste oder ein Data Frame\n\n\nFUN\ndie Funktion, die auf jedes Element angewendet wird\n\n\n...\nweitere Argumente, die an FUN weitergegeben werden (optional)\n\n\n\nIntern passiert dasselbe wie in der Schleife oben:\n\nsapply() nimmt das erste Element von X und ruft FUN(element) auf,\ndann das zweite Element, das dritte … bis zum letzten,\nund fasst alle Ergebnisse zu einem möglichst einfachen Objekt zusammen (das s in sapply steht für simplify, „vereinfachen”).\n\nDrei Dinge, auf die man achten muss:\n\nBei einem Data Frame ist jedes Element eine Spalte (ein Data Frame ist eine Liste von Spalten, siehe Einheit 2). sapply(df, mean) rechnet also spaltenweise.\nDie Funktion wird ohne Klammern übergeben: sapply(spalten, mean), nicht sapply(spalten, mean()). Man übergibt die Funktion selbst — aufrufen tut sie sapply().\nDas Ergebnis behält die Namen der Elemente, deshalb steht oben mpg, hp, wt.",
+    "crumbs": [
+      "Einheiten",
+      "4 · Funktionen & Schleifen"
+    ]
+  },
+  {
+    "objectID": "einheit-4.html#zusätzliche-argumente-weitergeben",
+    "href": "einheit-4.html#zusätzliche-argumente-weitergeben",
+    "title": "Einheit 4: Bedingungen, Schleifen & eigene Funktionen",
+    "section": "Zusätzliche Argumente weitergeben",
+    "text": "Zusätzliche Argumente weitergeben\nBei den Mitarbeitenden-Daten gibt es einen fehlenden Wert — mean() liefert dann NA:\n\nsapply(mitarbeitende[, c(\"plusstunden\", \"projekte\")], mean)\n\nplusstunden    projekte \n         NA    6.681818 \n\n\nAlles, was nach der Funktion steht, reicht sapply() an die Funktion weiter. So wird für jede Spalte mean(spalte, na.rm = TRUE) berechnet:\n\nsapply(mitarbeitende[, c(\"plusstunden\", \"projekte\")], mean, na.rm = TRUE)\n\nplusstunden    projekte \n  29.928571    6.681818",
+    "crumbs": [
+      "Einheiten",
+      "4 · Funktionen & Schleifen"
+    ]
+  },
+  {
+    "objectID": "einheit-4.html#was-kommt-heraus",
+    "href": "einheit-4.html#was-kommt-heraus",
+    "title": "Einheit 4: Bedingungen, Schleifen & eigene Funktionen",
+    "section": "Was kommt heraus?",
+    "text": "Was kommt heraus?\nDie Form des Ergebnisses hängt davon ab, was die Funktion pro Element zurückgibt:\n\n\n\n\n\n\n\nFUN liefert pro Element …\nsapply() gibt zurück …\n\n\n\n\ngenau einen Wert\neinen Vektor\n\n\nmehrere Werte, immer gleich viele\neine Matrix — eine Spalte pro Element\n\n\nunterschiedlich viele Werte\neine Liste\n\n\n\n\nsapply(spalten, mean)          # 1 Wert pro Spalte   → Vektor\n\n      mpg        hp        wt \n 20.09062 146.68750   3.21725 \n\nsapply(spalten, range)         # 2 Werte pro Spalte  → Matrix (Minimum, Maximum)\n\n      mpg  hp    wt\n[1,] 10.4  52 1.513\n[2,] 33.9 335 5.424\n\nsapply(c(2, 4), seq_len)       # 2 bzw. 4 Werte      → Liste\n\n[[1]]\n[1] 1 2\n\n[[2]]\n[1] 1 2 3 4\n\n\nMit unserer eigenen Funktion kennzahlen() aus Teil 3 entsteht eine übersichtliche Tabelle:\n\nsapply(spalten, kennzahlen)\n\n            mpg    hp     wt\nn          32.0  32.0 32.000\nmittelwert 20.1 146.7  3.200\nminimum    10.4  52.0  1.513\nmaximum    33.9 335.0  5.424",
+    "crumbs": [
+      "Einheiten",
+      "4 · Funktionen & Schleifen"
+    ]
+  },
+  {
+    "objectID": "einheit-4.html#anonyme-funktionen",
+    "href": "einheit-4.html#anonyme-funktionen",
+    "title": "Einheit 4: Bedingungen, Schleifen & eigene Funktionen",
+    "section": "Anonyme Funktionen",
+    "text": "Anonyme Funktionen\nOft lohnt es sich nicht, für einen einzigen sapply()-Aufruf eine Funktion mit Namen anzulegen. Dann schreibt man die Funktion direkt in den Aufruf — eine anonyme Funktion (ohne Namen):\n\nsapply(c(10, 20, 30), function(x) x^2)\n\n[1] 100 400 900\n\n\nSo liest man das: „Für jedes Element — nenne es x — berechne x^2.” Der Name x ist frei gewählt und gilt nur innerhalb dieser kleinen Funktion.\nEin praktisches Beispiel: die durchschnittlichen Plusstunden für jedes Team. Die anonyme Funktion bekommt einen Teamnamen t und rechnet den Mittelwert nur für dieses Team:\n\nalle_teams &lt;- unique(mitarbeitende$team)\n\nsapply(alle_teams, function(t) {\n  mean(mitarbeitende$plusstunden[mitarbeitende$team == t], na.rm = TRUE)\n})\n\n Team_C  Team_A  Team_B  Team_E \n31.9125 26.7000 35.2000 27.3000 \n\n\nFür Data Frames ist group_by() + summarise() (Einheit 2) meist die bequemere Lösung. sapply() ist dann praktisch, wenn man mit Vektoren, Listen oder Spalten arbeitet.\nKurzschreibweise: In neuerem Code sieht man statt function(x) oft \\(x) — das ist seit R 4.1 dasselbe, nur kürzer: sapply(c(10, 20, 30), \\(x) x^2).",
+    "crumbs": [
+      "Einheiten",
+      "4 · Funktionen & Schleifen"
+    ]
+  },
+  {
+    "objectID": "einheit-4.html#sapply-oder-lapply",
+    "href": "einheit-4.html#sapply-oder-lapply",
+    "title": "Einheit 4: Bedingungen, Schleifen & eigene Funktionen",
+    "section": "sapply() oder lapply()?",
+    "text": "sapply() oder lapply()?\nlapply() (Einheit 3) funktioniert genauso, gibt aber immer eine Liste zurück — das l steht für list:\n\nlapply(spalten, mean)\n\n$mpg\n[1] 20.09062\n\n$hp\n[1] 146.6875\n\n$wt\n[1] 3.21725\n\n\n\n\n\n\n\n\n\n\n\nsapply()\nlapply()\n\n\n\n\nErgebnis\nso einfach wie möglich: Vektor, Matrix oder Liste\nimmer eine Liste\n\n\ngut für\nErgebnisse ansehen, Kennzahlen-Tabellen\nErgebnisse in Spalten zurückschreiben: df[cols] &lt;- lapply(df[cols], as.numeric)\n\n\n\nFaustregel: Zum Anschauen sapply(), zum Weiterverarbeiten in einem Data Frame lapply().\n\nÜbung\n\nWelche Spalten von mitarbeitende sind Zahlen? Wende is.numeric mit sapply() auf mitarbeitende an. Was für ein Objekt kommt heraus?\nBerechne mit sapply() das Maximum von plusstunden und projekte — fehlende Werte sollen ignoriert werden.\nBerechne mit sapply() und einer anonymen Funktion für jedes Land in unique(mitarbeitende$land) die Anzahl Personen.\nWende deine Funktion spanne() aus Teil 3 mit sapply() auf die Spalten mpg, hp und wt von mtcars an.\n\n\n# dein Code",
+    "crumbs": [
+      "Einheiten",
+      "4 · Funktionen & Schleifen"
+    ]
+  }
+]

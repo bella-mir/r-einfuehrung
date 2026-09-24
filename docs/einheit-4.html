@@ -1,0 +1,1290 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="de" xml:lang="de"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.38">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Einheit 4: Bedingungen, Schleifen &amp; eigene Funktionen – R-Einführung</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./cheatsheet.html" rel="next">
+<link href="./einheit-3.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-fe13366c3d06eb92bc1322efad7ca90e.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "Keine Treffer",
+    "search-matching-documents-text": "Treffer",
+    "search-copy-link-title": "Link in die Suche kopieren",
+    "search-hide-matches-text": "Zusätzliche Treffer verbergen",
+    "search-more-match-text": "weitere Treffer in diesem Dokument",
+    "search-more-matches-text": "weitere Treffer in diesem Dokument",
+    "search-clear-button-title": "Zurücksetzen",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Abbrechen",
+    "search-submit-button-title": "Abschicken",
+    "search-label": "Suchen"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="nav-sidebar docked quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Seitenleiste umschalten" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./einheit-0.html">Einheiten</a></li><li class="breadcrumb-item"><a href="./einheit-4.html">4 · Funktionen &amp; Schleifen</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Seitenleiste umschalten" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Suchen" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">R-Einführung</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/bella-mir/r-einfuehrung" title="" class="quarto-navigation-tool px-1" aria-label=""><i class="bi bi-github"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Suchen"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Start</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Einheiten</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Abschnitt umschalten">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./einheit-0.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">0 · RStudio, Projekte &amp; Pakete</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./einheit-1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">1 · Grundlagen</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./einheit-2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">2 · Data Frames &amp; dplyr</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./einheit-3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">3 · ggplot2 &amp; Daten aufräumen</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./einheit-4.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">4 · Funktionen &amp; Schleifen</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./cheatsheet.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Cheatsheet</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Auf dieser Seite</h2>
+   
+  <ul class="collapse">
+  <li><a href="#teil-1-bedingungen" id="toc-teil-1-bedingungen" class="nav-link active" data-scroll-target="#teil-1-bedingungen">Teil 1: Bedingungen</a>
+  <ul class="collapse">
+  <li><a href="#if-und-else" id="toc-if-und-else" class="nav-link" data-scroll-target="#if-und-else">if und else</a></li>
+  <li><a href="#achtung-if-prüft-genau-einen-wert" id="toc-achtung-if-prüft-genau-einen-wert" class="nav-link" data-scroll-target="#achtung-if-prüft-genau-einen-wert">Achtung: if prüft genau einen Wert</a></li>
+  <li><a href="#mehrere-fälle-in-einem-data-frame-case_when" id="toc-mehrere-fälle-in-einem-data-frame-case_when" class="nav-link" data-scroll-target="#mehrere-fälle-in-einem-data-frame-case_when">Mehrere Fälle in einem Data Frame: case_when()</a></li>
+  </ul></li>
+  <li><a href="#teil-2-schleifen" id="toc-teil-2-schleifen" class="nav-link" data-scroll-target="#teil-2-schleifen">Teil 2: Schleifen</a>
+  <ul class="collapse">
+  <li><a href="#for-schleifen" id="toc-for-schleifen" class="nav-link" data-scroll-target="#for-schleifen">for-Schleifen</a></li>
+  <li><a href="#ergebnisse-in-einer-schleife-sammeln" id="toc-ergebnisse-in-einer-schleife-sammeln" class="nav-link" data-scroll-target="#ergebnisse-in-einer-schleife-sammeln">Ergebnisse in einer Schleife sammeln</a></li>
+  <li><a href="#wann-braucht-man-eine-schleife-und-wann-nicht" id="toc-wann-braucht-man-eine-schleife-und-wann-nicht" class="nav-link" data-scroll-target="#wann-braucht-man-eine-schleife-und-wann-nicht">Wann braucht man eine Schleife — und wann nicht?</a></li>
+  <li><a href="#while-schleifen" id="toc-while-schleifen" class="nav-link" data-scroll-target="#while-schleifen">while-Schleifen</a></li>
+  </ul></li>
+  <li><a href="#teil-3-eigene-funktionen" id="toc-teil-3-eigene-funktionen" class="nav-link" data-scroll-target="#teil-3-eigene-funktionen">Teil 3: Eigene Funktionen</a>
+  <ul class="collapse">
+  <li><a href="#eine-funktion-schreiben" id="toc-eine-funktion-schreiben" class="nav-link" data-scroll-target="#eine-funktion-schreiben">Eine Funktion schreiben</a></li>
+  <li><a href="#standardwerte-für-argumente" id="toc-standardwerte-für-argumente" class="nav-link" data-scroll-target="#standardwerte-für-argumente">Standardwerte für Argumente</a></li>
+  <li><a href="#mehrere-ergebnisse-zurückgeben" id="toc-mehrere-ergebnisse-zurückgeben" class="nav-link" data-scroll-target="#mehrere-ergebnisse-zurückgeben">Mehrere Ergebnisse zurückgeben</a></li>
+  <li><a href="#eingaben-prüfen-stop" id="toc-eingaben-prüfen-stop" class="nav-link" data-scroll-target="#eingaben-prüfen-stop">Eingaben prüfen: stop()</a></li>
+  <li><a href="#variablen-in-funktionen-bleiben-lokal" id="toc-variablen-in-funktionen-bleiben-lokal" class="nav-link" data-scroll-target="#variablen-in-funktionen-bleiben-lokal">Variablen in Funktionen bleiben lokal</a></li>
+  </ul></li>
+  <li><a href="#teil-4-sapply-eine-funktion-auf-viele-elemente-anwenden" id="toc-teil-4-sapply-eine-funktion-auf-viele-elemente-anwenden" class="nav-link" data-scroll-target="#teil-4-sapply-eine-funktion-auf-viele-elemente-anwenden">Teil 4: sapply() — eine Funktion auf viele Elemente anwenden</a>
+  <ul class="collapse">
+  <li><a href="#die-idee" id="toc-die-idee" class="nav-link" data-scroll-target="#die-idee">Die Idee</a></li>
+  <li><a href="#der-aufbau-sapplyx-fun" id="toc-der-aufbau-sapplyx-fun" class="nav-link" data-scroll-target="#der-aufbau-sapplyx-fun">Der Aufbau: sapply(X, FUN, …)</a></li>
+  <li><a href="#zusätzliche-argumente-weitergeben" id="toc-zusätzliche-argumente-weitergeben" class="nav-link" data-scroll-target="#zusätzliche-argumente-weitergeben">Zusätzliche Argumente weitergeben</a></li>
+  <li><a href="#was-kommt-heraus" id="toc-was-kommt-heraus" class="nav-link" data-scroll-target="#was-kommt-heraus">Was kommt heraus?</a></li>
+  <li><a href="#anonyme-funktionen" id="toc-anonyme-funktionen" class="nav-link" data-scroll-target="#anonyme-funktionen">Anonyme Funktionen</a></li>
+  <li><a href="#sapply-oder-lapply" id="toc-sapply-oder-lapply" class="nav-link" data-scroll-target="#sapply-oder-lapply">sapply() oder lapply()?</a></li>
+  </ul></li>
+  <li><a href="#teil-5-alles-zusammen-eine-grafik-pro-team" id="toc-teil-5-alles-zusammen-eine-grafik-pro-team" class="nav-link" data-scroll-target="#teil-5-alles-zusammen-eine-grafik-pro-team">Teil 5: Alles zusammen — eine Grafik pro Team</a></li>
+  <li><a href="#zusammenfassung" id="toc-zusammenfassung" class="nav-link" data-scroll-target="#zusammenfassung">Zusammenfassung</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./einheit-0.html">Einheiten</a></li><li class="breadcrumb-item"><a href="./einheit-4.html">4 · Funktionen &amp; Schleifen</a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title">Einheit 4: Bedingungen, Schleifen &amp; eigene Funktionen</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>Bisher lief jeder Code einfach von oben nach unten. In dieser Einheit lernst du, den Ablauf zu steuern und eigene Werkzeuge zu bauen:</p>
+<ol type="1">
+<li><strong>Bedingungen</strong> — Code nur ausführen, wenn etwas zutrifft: <code>if</code>, <code>else</code>, <code>ifelse()</code>, <code>case_when()</code></li>
+<li><strong>Schleifen</strong> — Code wiederholen: <code>for</code>, <code>while</code></li>
+<li><strong>Eigene Funktionen</strong> — wiederkehrende Schritte einmal schreiben, oft verwenden</li>
+<li><strong>Funktionen auf viele Elemente anwenden</strong> — <code>sapply()</code> und <code>lapply()</code></li>
+<li><strong>Alles zusammen</strong> — eine Grafik pro Team</li>
+</ol>
+<p>Wir verwenden wieder die Temperaturen aus Einheit 1 und die Mitarbeitenden-Daten aus Einheit 2:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>tmax_wien <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="at">Mai =</span> <span class="fl">20.1</span>, <span class="at">Juni =</span> <span class="fl">24.1</span>, <span class="at">Juli =</span> <span class="fl">26.0</span>, <span class="at">August =</span> <span class="fl">25.7</span>, <span class="at">September =</span> <span class="fl">20.5</span>)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>mitarbeitende <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"data/raw/mitarbeitende.csv"</span>)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<section id="teil-1-bedingungen" class="level1">
+<h1>Teil 1: Bedingungen</h1>
+<section id="if-und-else" class="level2">
+<h2 class="anchored" data-anchor-id="if-und-else">if und else</h2>
+<p><code>if</code> führt den Code in den geschweiften Klammern <code>{ }</code> nur aus, wenn die Bedingung in den runden Klammern <code>TRUE</code> ist. <code>else</code> gibt an, was sonst passieren soll:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>temperatur <span class="ot">&lt;-</span> <span class="dv">26</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (temperatur <span class="sc">&gt;</span> <span class="dv">25</span>) {</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">"Sommertag"</span>)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> {</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">"kein Sommertag"</span>)</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Sommertag"</code></pre>
+</div>
+</div>
+<p>Mit <code>else if</code> lassen sich mehrere Fälle nacheinander prüfen — der erste zutreffende gewinnt:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>temperatur <span class="ot">&lt;-</span> <span class="dv">18</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (temperatur <span class="sc">&gt;=</span> <span class="dv">30</span>) {</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">"heiß"</span>)</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> <span class="cf">if</span> (temperatur <span class="sc">&gt;=</span> <span class="dv">20</span>) {</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">"warm"</span>)</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> {</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">"kühl"</span>)</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "kühl"</code></pre>
+</div>
+</div>
+</section>
+<section id="achtung-if-prüft-genau-einen-wert" class="level2">
+<h2 class="anchored" data-anchor-id="achtung-if-prüft-genau-einen-wert">Achtung: if prüft genau einen Wert</h2>
+<p><code>if</code> braucht <strong>ein einzelnes</strong> <code>TRUE</code> oder <code>FALSE</code>. Bei einem Vektor mit mehreren Werten gibt es einen Fehler:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (tmax_wien <span class="sc">&gt;</span> <span class="dv">25</span>) {</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">"Sommertag"</span>)</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-error">
+<pre><code>Error in `if (tmax_wien &gt; 25) ...`:
+! Bedingung hat Länge &gt; 1</code></pre>
+</div>
+</div>
+<p>Soll eine Bedingung für <strong>jedes Element</strong> eines Vektors geprüft werden, nimmt man <code>ifelse(bedingung, wert_wenn_wahr, wert_wenn_falsch)</code>:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ifelse</span>(tmax_wien <span class="sc">&gt;</span> <span class="dv">25</span>, <span class="st">"Sommertag"</span>, <span class="st">"kein Sommertag"</span>)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>             Mai             Juni             Juli           August 
+"kein Sommertag" "kein Sommertag"      "Sommertag"      "Sommertag" 
+       September 
+"kein Sommertag" </code></pre>
+</div>
+</div>
+</section>
+<section id="mehrere-fälle-in-einem-data-frame-case_when" class="level2">
+<h2 class="anchored" data-anchor-id="mehrere-fälle-in-einem-data-frame-case_when">Mehrere Fälle in einem Data Frame: case_when()</h2>
+<p>Für neue Spalten mit mehr als zwei Kategorien ist <code>case_when()</code> aus <code>dplyr</code> übersichtlicher als verschachtelte <code>ifelse()</code>. Jede Zeile hat die Form <code>bedingung ~ ergebnis</code>; die erste zutreffende Bedingung gewinnt, <code>TRUE ~</code> fängt alles Übrige auf:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>mitarbeitende <span class="ot">&lt;-</span> mitarbeitende <span class="sc">%&gt;%</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">belastung =</span> <span class="fu">case_when</span>(</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">is.na</span>(plusstunden) <span class="sc">~</span> <span class="cn">NA</span>,          <span class="co"># fehlende Werte zuerst abfangen</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>    plusstunden <span class="sc">&gt;</span> <span class="dv">40</span>   <span class="sc">~</span> <span class="st">"hoch"</span>,</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>    plusstunden <span class="sc">&gt;</span> <span class="dv">20</span>   <span class="sc">~</span> <span class="st">"mittel"</span>,</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>    <span class="cn">TRUE</span>               <span class="sc">~</span> <span class="st">"niedrig"</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>  ))</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>mitarbeitende <span class="sc">%&gt;%</span> <span class="fu">select</span>(name, plusstunden, belastung) <span class="sc">%&gt;%</span> <span class="fu">head</span>(<span class="dv">8</span>)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>       name plusstunden belastung
+1      Anna        16.5   niedrig
+2   Bertram        44.4      hoch
+3 Charlotte         1.8   niedrig
+4    Dennis        33.7    mittel
+5     Emily        13.2   niedrig
+6     Farid         9.6   niedrig
+7     Greta        57.4      hoch
+8    Hannes        21.5    mittel</code></pre>
+</div>
+</div>
+<p>Ohne die erste Zeile würde Vera als <code>"niedrig"</code> eingestuft: Ihre Vergleiche ergeben <code>NA</code>, und dann greift <code>TRUE ~</code>.</p>
+<section id="übung" class="level3">
+<h3 class="anchored" data-anchor-id="übung">Übung</h3>
+<ol type="1">
+<li>Schreibe ein <code>if</code>/<code>else</code>, das für eine Variable <code>projekte_anzahl</code> ausgibt, ob jemand <code>"viele Projekte"</code> (mindestens 10) oder <code>"wenige Projekte"</code> hat.</li>
+<li>Füge <code>mitarbeitende</code> mit <code>mutate()</code> und <code>ifelse()</code> eine Spalte <code>region_bekannt</code> hinzu, die <code>TRUE</code> ist, wenn das Team in <code>c("Team_A", "Team_B", "Team_C", "Team_D")</code> vorkommt (Tipp: <code>%in%</code> — braucht man hier überhaupt <code>ifelse()</code>?).</li>
+</ol>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># dein Code</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+</section>
+</section>
+<section id="teil-2-schleifen" class="level1">
+<h1>Teil 2: Schleifen</h1>
+<section id="for-schleifen" class="level2">
+<h2 class="anchored" data-anchor-id="for-schleifen">for-Schleifen</h2>
+<p>Eine <code>for</code>-Schleife führt denselben Code für <strong>jedes Element</strong> eines Vektors aus. Die Schleifenvariable (hier <code>monat</code>) nimmt nacheinander jeden Wert an:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (monat <span class="cf">in</span> <span class="fu">names</span>(tmax_wien)) {</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="fu">paste</span>(monat, <span class="st">":"</span>, tmax_wien[monat], <span class="st">"°C"</span>))</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Mai : 20.1 °C"
+[1] "Juni : 24.1 °C"
+[1] "Juli : 26 °C"
+[1] "August : 25.7 °C"
+[1] "September : 20.5 °C"</code></pre>
+</div>
+</div>
+<p>Innerhalb einer Schleife wird nichts automatisch angezeigt — deshalb braucht es <code>print()</code>.</p>
+</section>
+<section id="ergebnisse-in-einer-schleife-sammeln" class="level2">
+<h2 class="anchored" data-anchor-id="ergebnisse-in-einer-schleife-sammeln">Ergebnisse in einer Schleife sammeln</h2>
+<p>Will man die Ergebnisse behalten, legt man <strong>vorher</strong> einen leeren Vektor passender Länge an und füllt ihn Position für Position. <code>seq_along(x)</code> liefert die Positionen <code>1, 2, …, length(x)</code>:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>fahrenheit <span class="ot">&lt;-</span> <span class="fu">numeric</span>(<span class="fu">length</span>(tmax_wien))   <span class="co"># Vektor aus Nullen</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="fu">seq_along</span>(tmax_wien)) {</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>  fahrenheit[i] <span class="ot">&lt;-</span> tmax_wien[i] <span class="sc">*</span> <span class="dv">9</span> <span class="sc">/</span> <span class="dv">5</span> <span class="sc">+</span> <span class="dv">32</span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>fahrenheit</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 68.18 75.38 78.80 78.26 68.90</code></pre>
+</div>
+</div>
+</section>
+<section id="wann-braucht-man-eine-schleife-und-wann-nicht" class="level2">
+<h2 class="anchored" data-anchor-id="wann-braucht-man-eine-schleife-und-wann-nicht">Wann braucht man eine Schleife — und wann nicht?</h2>
+<p>Das Beispiel oben geht in R auch ohne Schleife, weil Rechnungen auf Vektoren <strong>elementweise</strong> laufen (Einheit 1) — kürzer und schneller:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>tmax_wien <span class="sc">*</span> <span class="dv">9</span> <span class="sc">/</span> <span class="dv">5</span> <span class="sc">+</span> <span class="dv">32</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>      Mai      Juni      Juli    August September 
+    68.18     75.38     78.80     78.26     68.90 </code></pre>
+</div>
+</div>
+<p>Faustregel: Erst prüfen, ob es eine vektorisierte Lösung gibt (Rechnen mit Vektoren, <code>ifelse()</code>, <code>mutate()</code>, <code>group_by()</code>). Schleifen braucht man vor allem dann, wenn pro Durchlauf etwas <strong>passiert</strong>: eine Datei einlesen, eine Grafik speichern, eine Meldung ausgeben (siehe Teil 5).</p>
+</section>
+<section id="while-schleifen" class="level2">
+<h2 class="anchored" data-anchor-id="while-schleifen">while-Schleifen</h2>
+<p><code>while</code> wiederholt, <strong>solange</strong> eine Bedingung gilt. Die Bedingung muss sich in der Schleife irgendwann ändern — sonst läuft sie endlos (abbrechen mit dem roten Stopp-Knopf oder <code>Esc</code>):</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>kontostand <span class="ot">&lt;-</span> <span class="dv">1000</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>jahre      <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a><span class="cf">while</span> (kontostand <span class="sc">&lt;</span> <span class="dv">1500</span>) {</span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>  kontostand <span class="ot">&lt;-</span> kontostand <span class="sc">*</span> <span class="fl">1.05</span>   <span class="co"># 5 % Zinsen pro Jahr</span></span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>  jahre      <span class="ot">&lt;-</span> jahre <span class="sc">+</span> <span class="dv">1</span></span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>jahre</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 9</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(kontostand, <span class="dv">2</span>)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1551.33</code></pre>
+</div>
+</div>
+<p>Zwei Befehle steuern Schleifen zusätzlich: <code>next</code> springt zum nächsten Durchlauf, <code>break</code> beendet die Schleife sofort.</p>
+<section id="übung-1" class="level3">
+<h3 class="anchored" data-anchor-id="übung-1">Übung</h3>
+<ol type="1">
+<li>Gib mit einer <code>for</code>-Schleife für jedes Team in <code>unique(mitarbeitende$team)</code> die Anzahl Personen aus, z. B. <code>"Team_A: 9 Personen"</code>.</li>
+<li>Wie viele Jahre dauert es, bis sich 1000 € bei 3 % Zinsen verdoppeln? Löse es mit <code>while</code>.</li>
+</ol>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># dein Code</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+</section>
+</section>
+<section id="teil-3-eigene-funktionen" class="level1">
+<h1>Teil 3: Eigene Funktionen</h1>
+<section id="eine-funktion-schreiben" class="level2">
+<h2 class="anchored" data-anchor-id="eine-funktion-schreiben">Eine Funktion schreiben</h2>
+<p>Wenn du denselben Code mehrmals kopierst, ist es Zeit für eine eigene Funktion. Aufbau:</p>
+<pre><code>name &lt;- function(argument1, argument2) {
+  # was die Funktion tut
+  ergebnis
+}</code></pre>
+<p>Der <strong>letzte Ausdruck</strong> im Funktionskörper ist das Ergebnis, das zurückgegeben wird:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>celsius_zu_fahrenheit <span class="ot">&lt;-</span> <span class="cf">function</span>(celsius) {</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>  celsius <span class="sc">*</span> <span class="dv">9</span> <span class="sc">/</span> <span class="dv">5</span> <span class="sc">+</span> <span class="dv">32</span></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a><span class="fu">celsius_zu_fahrenheit</span>(<span class="dv">20</span>)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 68</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">celsius_zu_fahrenheit</span>(tmax_wien)   <span class="co"># funktioniert auch mit Vektoren</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>      Mai      Juni      Juli    August September 
+    68.18     75.38     78.80     78.26     68.90 </code></pre>
+</div>
+</div>
+</section>
+<section id="standardwerte-für-argumente" class="level2">
+<h2 class="anchored" data-anchor-id="standardwerte-für-argumente">Standardwerte für Argumente</h2>
+<p>Wie bei eingebauten Funktionen können Argumente einen <strong>Standardwert</strong> haben, der gilt, wenn man sie weglässt:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>runde_prozent <span class="ot">&lt;-</span> <span class="cf">function</span>(anteil, <span class="at">stellen =</span> <span class="dv">1</span>) {</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">round</span>(anteil <span class="sc">*</span> <span class="dv">100</span>, stellen)</span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a><span class="fu">runde_prozent</span>(<span class="fl">0.12345</span>)               <span class="co"># stellen = 1</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 12.3</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">runde_prozent</span>(<span class="fl">0.12345</span>, <span class="at">stellen =</span> <span class="dv">3</span>)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 12.345</code></pre>
+</div>
+</div>
+</section>
+<section id="mehrere-ergebnisse-zurückgeben" class="level2">
+<h2 class="anchored" data-anchor-id="mehrere-ergebnisse-zurückgeben">Mehrere Ergebnisse zurückgeben</h2>
+<p>Eine Funktion gibt genau <strong>ein</strong> Objekt zurück. Für mehrere Werte packt man sie in einen benannten Vektor (oder eine Liste):</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>kennzahlen <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">c</span>(<span class="at">n          =</span> <span class="fu">sum</span>(<span class="sc">!</span><span class="fu">is.na</span>(x)),</span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">mittelwert =</span> <span class="fu">round</span>(<span class="fu">mean</span>(x, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), <span class="dv">1</span>),</span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">minimum    =</span> <span class="fu">min</span>(x, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">maximum    =</span> <span class="fu">max</span>(x, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span>
+<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a><span class="fu">kennzahlen</span>(mitarbeitende<span class="sc">$</span>plusstunden)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>         n mittelwert    minimum    maximum 
+      21.0       29.9        1.8       59.1 </code></pre>
+</div>
+</div>
+</section>
+<section id="eingaben-prüfen-stop" class="level2">
+<h2 class="anchored" data-anchor-id="eingaben-prüfen-stop">Eingaben prüfen: stop()</h2>
+<p>Mit <code>if</code> und <code>stop()</code> bricht eine Funktion mit einer verständlichen Fehlermeldung ab, wenn die Eingabe nicht passt — viel hilfreicher als ein kryptischer Fehler weiter hinten:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>kennzahlen <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">is.numeric</span>(x)) {</span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">stop</span>(<span class="st">"x muss ein Zahlenvektor sein."</span>)</span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">c</span>(<span class="at">n          =</span> <span class="fu">sum</span>(<span class="sc">!</span><span class="fu">is.na</span>(x)),</span>
+<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">mittelwert =</span> <span class="fu">round</span>(<span class="fu">mean</span>(x, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), <span class="dv">1</span>),</span>
+<span id="cb35-7"><a href="#cb35-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">minimum    =</span> <span class="fu">min</span>(x, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb35-8"><a href="#cb35-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">maximum    =</span> <span class="fu">max</span>(x, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span>
+<span id="cb35-9"><a href="#cb35-9" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb35-10"><a href="#cb35-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-11"><a href="#cb35-11" aria-hidden="true" tabindex="-1"></a><span class="fu">kennzahlen</span>(mitarbeitende<span class="sc">$</span>name)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-error">
+<pre><code>Error in `kennzahlen()`:
+! x muss ein Zahlenvektor sein.</code></pre>
+</div>
+</div>
+</section>
+<section id="variablen-in-funktionen-bleiben-lokal" class="level2">
+<h2 class="anchored" data-anchor-id="variablen-in-funktionen-bleiben-lokal">Variablen in Funktionen bleiben lokal</h2>
+<p>Was innerhalb einer Funktion erzeugt wird, existiert nur dort — es taucht nicht im Environment auf und überschreibt keine gleichnamigen Variablen außerhalb:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>verdoppeln <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>  zwischenergebnis <span class="ot">&lt;-</span> x <span class="sc">*</span> <span class="dv">2</span></span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>  zwischenergebnis</span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-6"><a href="#cb37-6" aria-hidden="true" tabindex="-1"></a><span class="fu">verdoppeln</span>(<span class="dv">5</span>)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 10</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>zwischenergebnis   <span class="co"># Fehler: existiert außerhalb der Funktion nicht</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-error">
+<pre><code>Error:
+! Objekt 'zwischenergebnis' nicht gefunden</code></pre>
+</div>
+</div>
+<p>Eine Funktion sollte deshalb alles, was sie braucht, über ihre <strong>Argumente</strong> bekommen.</p>
+<section id="übung-2" class="level3">
+<h3 class="anchored" data-anchor-id="übung-2">Übung</h3>
+<ol type="1">
+<li>Schreibe eine Funktion <code>bmi(gewicht_kg, groesse_m)</code>, die den BMI auf eine Nachkommastelle gerundet zurückgibt.</li>
+<li>Schreibe eine Funktion <code>spanne(x)</code>, die die Differenz zwischen größtem und kleinstem Wert zurückgibt und fehlende Werte ignoriert. Teste sie mit <code>mitarbeitende$plusstunden</code>.</li>
+</ol>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="co"># dein Code</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+</section>
+</section>
+<section id="teil-4-sapply-eine-funktion-auf-viele-elemente-anwenden" class="level1">
+<h1>Teil 4: sapply() — eine Funktion auf viele Elemente anwenden</h1>
+<section id="die-idee" class="level2">
+<h2 class="anchored" data-anchor-id="die-idee">Die Idee</h2>
+<p>Sehr oft will man <strong>dieselbe Funktion auf mehrere Dinge</strong> anwenden: den Mittelwert jeder Spalte, die Länge jedes Textes, eine Kennzahl für jedes Team. Mit einer <code>for</code>-Schleife sieht das so aus:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>spalten     <span class="ot">&lt;-</span> mtcars[, <span class="fu">c</span>(<span class="st">"mpg"</span>, <span class="st">"hp"</span>, <span class="st">"wt"</span>)]</span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>mittelwerte <span class="ot">&lt;-</span> <span class="fu">numeric</span>(<span class="fu">ncol</span>(spalten))</span>
+<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="fu">seq_along</span>(spalten)) {</span>
+<span id="cb42-5"><a href="#cb42-5" aria-hidden="true" tabindex="-1"></a>  mittelwerte[i] <span class="ot">&lt;-</span> <span class="fu">mean</span>(spalten[[i]])</span>
+<span id="cb42-6"><a href="#cb42-6" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb42-7"><a href="#cb42-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-8"><a href="#cb42-8" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(mittelwerte) <span class="ot">&lt;-</span> <span class="fu">names</span>(spalten)</span>
+<span id="cb42-9"><a href="#cb42-9" aria-hidden="true" tabindex="-1"></a>mittelwerte</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>      mpg        hp        wt 
+ 20.09062 146.68750   3.21725 </code></pre>
+</div>
+</div>
+<p>Das sind sechs Zeilen für eine einfache Idee: <em>„Berechne <code>mean</code> für jede Spalte und sammle die Ergebnisse.”</em> Genau diese Idee erledigt <code>sapply()</code> in einer Zeile — inklusive Namen:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sapply</span>(spalten, mean)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>      mpg        hp        wt 
+ 20.09062 146.68750   3.21725 </code></pre>
+</div>
+</div>
+</section>
+<section id="der-aufbau-sapplyx-fun" class="level2">
+<h2 class="anchored" data-anchor-id="der-aufbau-sapplyx-fun">Der Aufbau: sapply(X, FUN, …)</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Argument</th>
+<th>Bedeutung</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>X</code></td>
+<td>die Elemente, über die gegangen wird: ein Vektor, eine Liste oder ein Data Frame</td>
+</tr>
+<tr class="even">
+<td><code>FUN</code></td>
+<td>die Funktion, die auf <strong>jedes</strong> Element angewendet wird</td>
+</tr>
+<tr class="odd">
+<td><code>...</code></td>
+<td>weitere Argumente, die an <code>FUN</code> weitergegeben werden (optional)</td>
+</tr>
+</tbody>
+</table>
+<p>Intern passiert dasselbe wie in der Schleife oben:</p>
+<ol type="1">
+<li><code>sapply()</code> nimmt das erste Element von <code>X</code> und ruft <code>FUN(element)</code> auf,</li>
+<li>dann das zweite Element, das dritte … bis zum letzten,</li>
+<li>und fasst alle Ergebnisse zu einem möglichst einfachen Objekt zusammen (das <em>s</em> in <code>sapply</code> steht für <em>simplify</em>, „vereinfachen”).</li>
+</ol>
+<p>Drei Dinge, auf die man achten muss:</p>
+<ul>
+<li><strong>Bei einem Data Frame ist jedes Element eine Spalte</strong> (ein Data Frame ist eine Liste von Spalten, siehe Einheit 2). <code>sapply(df, mean)</code> rechnet also spaltenweise.</li>
+<li><strong>Die Funktion wird ohne Klammern übergeben:</strong> <code>sapply(spalten, mean)</code>, nicht <code>sapply(spalten, mean())</code>. Man übergibt die Funktion selbst — aufrufen tut sie <code>sapply()</code>.</li>
+<li><strong>Das Ergebnis behält die Namen</strong> der Elemente, deshalb steht oben <code>mpg</code>, <code>hp</code>, <code>wt</code>.</li>
+</ul>
+</section>
+<section id="zusätzliche-argumente-weitergeben" class="level2">
+<h2 class="anchored" data-anchor-id="zusätzliche-argumente-weitergeben">Zusätzliche Argumente weitergeben</h2>
+<p>Bei den Mitarbeitenden-Daten gibt es einen fehlenden Wert — <code>mean()</code> liefert dann <code>NA</code>:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sapply</span>(mitarbeitende[, <span class="fu">c</span>(<span class="st">"plusstunden"</span>, <span class="st">"projekte"</span>)], mean)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>plusstunden    projekte 
+         NA    6.681818 </code></pre>
+</div>
+</div>
+<p>Alles, was nach der Funktion steht, reicht <code>sapply()</code> an die Funktion weiter. So wird für jede Spalte <code>mean(spalte, na.rm = TRUE)</code> berechnet:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sapply</span>(mitarbeitende[, <span class="fu">c</span>(<span class="st">"plusstunden"</span>, <span class="st">"projekte"</span>)], mean, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>plusstunden    projekte 
+  29.928571    6.681818 </code></pre>
+</div>
+</div>
+</section>
+<section id="was-kommt-heraus" class="level2">
+<h2 class="anchored" data-anchor-id="was-kommt-heraus">Was kommt heraus?</h2>
+<p>Die Form des Ergebnisses hängt davon ab, was die Funktion <strong>pro Element</strong> zurückgibt:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th><code>FUN</code> liefert pro Element …</th>
+<th><code>sapply()</code> gibt zurück …</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>genau einen Wert</td>
+<td>einen <strong>Vektor</strong></td>
+</tr>
+<tr class="even">
+<td>mehrere Werte, immer gleich viele</td>
+<td>eine <strong>Matrix</strong> — eine Spalte pro Element</td>
+</tr>
+<tr class="odd">
+<td>unterschiedlich viele Werte</td>
+<td>eine <strong>Liste</strong></td>
+</tr>
+</tbody>
+</table>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sapply</span>(spalten, mean)          <span class="co"># 1 Wert pro Spalte   → Vektor</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>      mpg        hp        wt 
+ 20.09062 146.68750   3.21725 </code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sapply</span>(spalten, range)         <span class="co"># 2 Werte pro Spalte  → Matrix (Minimum, Maximum)</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>      mpg  hp    wt
+[1,] 10.4  52 1.513
+[2,] 33.9 335 5.424</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sapply</span>(<span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">4</span>), seq_len)       <span class="co"># 2 bzw. 4 Werte      → Liste</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[[1]]
+[1] 1 2
+
+[[2]]
+[1] 1 2 3 4</code></pre>
+</div>
+</div>
+<p>Mit unserer eigenen Funktion <code>kennzahlen()</code> aus Teil 3 entsteht eine übersichtliche Tabelle:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sapply</span>(spalten, kennzahlen)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>            mpg    hp     wt
+n          32.0  32.0 32.000
+mittelwert 20.1 146.7  3.200
+minimum    10.4  52.0  1.513
+maximum    33.9 335.0  5.424</code></pre>
+</div>
+</div>
+</section>
+<section id="anonyme-funktionen" class="level2">
+<h2 class="anchored" data-anchor-id="anonyme-funktionen">Anonyme Funktionen</h2>
+<p>Oft lohnt es sich nicht, für einen einzigen <code>sapply()</code>-Aufruf eine Funktion mit Namen anzulegen. Dann schreibt man die Funktion <strong>direkt in den Aufruf</strong> — eine <em>anonyme Funktion</em> (ohne Namen):</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb58"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sapply</span>(<span class="fu">c</span>(<span class="dv">10</span>, <span class="dv">20</span>, <span class="dv">30</span>), <span class="cf">function</span>(x) x<span class="sc">^</span><span class="dv">2</span>)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 100 400 900</code></pre>
+</div>
+</div>
+<p>So liest man das: <em>„Für jedes Element — nenne es <code>x</code> — berechne <code>x^2</code>.”</em> Der Name <code>x</code> ist frei gewählt und gilt nur innerhalb dieser kleinen Funktion.</p>
+<p>Ein praktisches Beispiel: die durchschnittlichen Plusstunden für jedes Team. Die anonyme Funktion bekommt einen Teamnamen <code>t</code> und rechnet den Mittelwert nur für dieses Team:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb60"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a>alle_teams <span class="ot">&lt;-</span> <span class="fu">unique</span>(mitarbeitende<span class="sc">$</span>team)</span>
+<span id="cb60-2"><a href="#cb60-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-3"><a href="#cb60-3" aria-hidden="true" tabindex="-1"></a><span class="fu">sapply</span>(alle_teams, <span class="cf">function</span>(t) {</span>
+<span id="cb60-4"><a href="#cb60-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mean</span>(mitarbeitende<span class="sc">$</span>plusstunden[mitarbeitende<span class="sc">$</span>team <span class="sc">==</span> t], <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb60-5"><a href="#cb60-5" aria-hidden="true" tabindex="-1"></a>})</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> Team_C  Team_A  Team_B  Team_E 
+31.9125 26.7000 35.2000 27.3000 </code></pre>
+</div>
+</div>
+<p>Für Data Frames ist <code>group_by()</code> + <code>summarise()</code> (Einheit 2) meist die bequemere Lösung. <code>sapply()</code> ist dann praktisch, wenn man mit Vektoren, Listen oder Spalten arbeitet.</p>
+<p><strong>Kurzschreibweise:</strong> In neuerem Code sieht man statt <code>function(x)</code> oft <code>\(x)</code> — das ist seit R 4.1 dasselbe, nur kürzer: <code>sapply(c(10, 20, 30), \(x) x^2)</code>.</p>
+</section>
+<section id="sapply-oder-lapply" class="level2">
+<h2 class="anchored" data-anchor-id="sapply-oder-lapply">sapply() oder lapply()?</h2>
+<p><code>lapply()</code> (Einheit 3) funktioniert genauso, gibt aber <strong>immer eine Liste</strong> zurück — das <em>l</em> steht für <em>list</em>:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb62"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a><span class="fu">lapply</span>(spalten, mean)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>$mpg
+[1] 20.09062
+
+$hp
+[1] 146.6875
+
+$wt
+[1] 3.21725</code></pre>
+</div>
+</div>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th><code>sapply()</code></th>
+<th><code>lapply()</code></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Ergebnis</td>
+<td>so einfach wie möglich: Vektor, Matrix oder Liste</td>
+<td>immer eine Liste</td>
+</tr>
+<tr class="even">
+<td>gut für</td>
+<td>Ergebnisse ansehen, Kennzahlen-Tabellen</td>
+<td>Ergebnisse in Spalten zurückschreiben: <code>df[cols] &lt;- lapply(df[cols], as.numeric)</code></td>
+</tr>
+</tbody>
+</table>
+<p>Faustregel: Zum <strong>Anschauen</strong> <code>sapply()</code>, zum <strong>Weiterverarbeiten in einem Data Frame</strong> <code>lapply()</code>.</p>
+<section id="übung-3" class="level3">
+<h3 class="anchored" data-anchor-id="übung-3">Übung</h3>
+<ol type="1">
+<li>Welche Spalten von <code>mitarbeitende</code> sind Zahlen? Wende <code>is.numeric</code> mit <code>sapply()</code> auf <code>mitarbeitende</code> an. Was für ein Objekt kommt heraus?</li>
+<li>Berechne mit <code>sapply()</code> das <strong>Maximum</strong> von <code>plusstunden</code> und <code>projekte</code> — fehlende Werte sollen ignoriert werden.</li>
+<li>Berechne mit <code>sapply()</code> und einer anonymen Funktion für jedes Land in <code>unique(mitarbeitende$land)</code> die <strong>Anzahl Personen</strong>.</li>
+<li>Wende deine Funktion <code>spanne()</code> aus Teil 3 mit <code>sapply()</code> auf die Spalten <code>mpg</code>, <code>hp</code> und <code>wt</code> von <code>mtcars</code> an.</li>
+</ol>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb64"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a><span class="co"># dein Code</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+</section>
+</section>
+<section id="teil-5-alles-zusammen-eine-grafik-pro-team" class="level1">
+<h1>Teil 5: Alles zusammen — eine Grafik pro Team</h1>
+<p>Eine typische Aufgabe: Für jede Gruppe soll dieselbe Grafik entstehen. Wir schreiben eine Funktion für <strong>eine</strong> Grafik und rufen sie in einer Schleife für <strong>jedes</strong> Team auf:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb65"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a>grafik_team <span class="ot">&lt;-</span> <span class="cf">function</span>(daten, team_name) {</span>
+<span id="cb65-2"><a href="#cb65-2" aria-hidden="true" tabindex="-1"></a>  daten <span class="sc">%&gt;%</span></span>
+<span id="cb65-3"><a href="#cb65-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(team <span class="sc">==</span> team_name, <span class="sc">!</span><span class="fu">is.na</span>(plusstunden)) <span class="sc">%&gt;%</span></span>
+<span id="cb65-4"><a href="#cb65-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> projekte, <span class="at">y =</span> plusstunden)) <span class="sc">+</span></span>
+<span id="cb65-5"><a href="#cb65-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>(<span class="at">color =</span> <span class="st">"steelblue"</span>, <span class="at">size =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb65-6"><a href="#cb65-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">title =</span> <span class="fu">paste</span>(<span class="st">"Plusstunden nach Projekten —"</span>, team_name),</span>
+<span id="cb65-7"><a href="#cb65-7" aria-hidden="true" tabindex="-1"></a>         <span class="at">x =</span> <span class="st">"Anzahl Projekte"</span>, <span class="at">y =</span> <span class="st">"Plusstunden"</span>) <span class="sc">+</span></span>
+<span id="cb65-8"><a href="#cb65-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_minimal</span>()</span>
+<span id="cb65-9"><a href="#cb65-9" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb65-10"><a href="#cb65-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb65-11"><a href="#cb65-11" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (t <span class="cf">in</span> <span class="fu">c</span>(<span class="st">"Team_A"</span>, <span class="st">"Team_C"</span>)) {</span>
+<span id="cb65-12"><a href="#cb65-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="fu">grafik_team</span>(mitarbeitende, t))   <span class="co"># in Schleifen: print() nötig</span></span>
+<span id="cb65-13"><a href="#cb65-13" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="einheit-4_files/figure-html/unnamed-chunk-29-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="einheit-4_files/figure-html/unnamed-chunk-29-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Zum Speichern ersetzt man <code>print()</code> durch <code>ggsave()</code> und baut den Dateinamen mit <code>paste0()</code>:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb66"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (t <span class="cf">in</span> <span class="fu">unique</span>(mitarbeitende<span class="sc">$</span>team)) {</span>
+<span id="cb66-2"><a href="#cb66-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggsave</span>(<span class="fu">paste0</span>(<span class="st">"output/plusstunden_"</span>, t, <span class="st">".png"</span>),</span>
+<span id="cb66-3"><a href="#cb66-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">plot =</span> <span class="fu">grafik_team</span>(mitarbeitende, t), <span class="at">width =</span> <span class="dv">6</span>, <span class="at">height =</span> <span class="dv">4</span>)</span>
+<span id="cb66-4"><a href="#cb66-4" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Ohne Funktion stünde der ganze Grafik-Code in der Schleife; mit Funktion lässt er sich einzeln testen und auch an anderer Stelle wiederverwenden.</p>
+<section id="übung-4" class="level3">
+<h3 class="anchored" data-anchor-id="übung-4">Übung</h3>
+<p>Schreibe eine Funktion <code>team_bericht(daten, team_name)</code>, die mit <code>cat()</code> einen Satz ausgibt wie <code>"Team_A: 9 Personen, im Schnitt 26.7 Plusstunden"</code>. Rufe sie in einer Schleife für alle Teams auf.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb67"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a><span class="co"># dein Code</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+</section>
+<section id="zusammenfassung" class="level1">
+<h1>Zusammenfassung</h1>
+<ul>
+<li><strong>Bedingungen:</strong> <code>if (bedingung) { } else if { } else { }</code> für <strong>einen</strong> Wert · <code>ifelse()</code> für Vektoren · <code>case_when()</code> in <code>mutate()</code>, fehlende Werte zuerst abfangen</li>
+<li><strong>Schleifen:</strong> <code>for (x in vektor) { }</code> · Ergebnisse in vorher angelegtem Vektor sammeln · <code>seq_along()</code> · <code>while</code> mit Abbruchbedingung · <code>next</code> / <code>break</code> · in Schleifen <code>print()</code> · erst nach einer vektorisierten Lösung suchen</li>
+<li><strong>Funktionen:</strong> <code>name &lt;- function(arg, arg2 = standard) { … }</code> · letzter Ausdruck ist das Ergebnis · mehrere Werte als benannter Vektor oder Liste · Eingaben mit <code>stop()</code> prüfen · Variablen innerhalb bleiben lokal</li>
+<li><strong>Anwenden:</strong> <code>sapply(X, FUN, ...)</code> wendet <code>FUN</code> auf jedes Element an (Data Frame: jede Spalte) · Funktion ohne Klammern übergeben · weitere Argumente wie <code>na.rm = TRUE</code> dahinter · Ergebnis Vektor, Matrix oder Liste · <code>lapply()</code> gibt immer eine Liste · anonyme Funktion <code>function(x) …</code></li>
+</ul>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Kopiert");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Kopiert");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./einheit-3.html" class="pagination-link" aria-label="3 · ggplot2 &amp; Daten aufräumen">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">3 · ggplot2 &amp; Daten aufräumen</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./cheatsheet.html" class="pagination-link" aria-label="Cheatsheet">
+        <span class="nav-page-text">Cheatsheet</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

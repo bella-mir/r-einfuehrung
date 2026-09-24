@@ -1,0 +1,504 @@
+---
+title: "R-Einführung — Einheit 4: Bedingungen, Schleifen & eigene Funktionen"
+output: html_notebook
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, message = FALSE)
+```
+
+Bisher lief jeder Code einfach von oben nach unten. In dieser Einheit lernst du, den Ablauf zu
+steuern und eigene Werkzeuge zu bauen:
+
+1. **Bedingungen** — Code nur ausführen, wenn etwas zutrifft: `if`, `else`, `ifelse()`,
+   `case_when()`
+2. **Schleifen** — Code wiederholen: `for`, `while`
+3. **Eigene Funktionen** — wiederkehrende Schritte einmal schreiben, oft verwenden
+4. **Funktionen auf viele Elemente anwenden** — `sapply()` und `lapply()`
+5. **Alles zusammen** — eine Grafik pro Team
+
+Wir verwenden wieder die Temperaturen aus Einheit 1 und die Mitarbeitenden-Daten aus Einheit 2:
+
+```{r}
+library(dplyr)
+library(ggplot2)
+
+tmax_wien <- c(Mai = 20.1, Juni = 24.1, Juli = 26.0, August = 25.7, September = 20.5)
+
+mitarbeitende <- read.csv("data/raw/mitarbeitende.csv")
+```
+
+
+# Teil 1: Bedingungen
+
+## if und else
+
+`if` führt den Code in den geschweiften Klammern `{ }` nur aus, wenn die Bedingung in den
+runden Klammern `TRUE` ist. `else` gibt an, was sonst passieren soll:
+
+```{r}
+temperatur <- 26
+
+if (temperatur > 25) {
+  print("Sommertag")
+} else {
+  print("kein Sommertag")
+}
+```
+
+Mit `else if` lassen sich mehrere Fälle nacheinander prüfen — der erste zutreffende gewinnt:
+
+```{r}
+temperatur <- 18
+
+if (temperatur >= 30) {
+  print("heiß")
+} else if (temperatur >= 20) {
+  print("warm")
+} else {
+  print("kühl")
+}
+```
+
+## Achtung: if prüft genau einen Wert
+
+`if` braucht **ein einzelnes** `TRUE` oder `FALSE`. Bei einem Vektor mit mehreren Werten gibt
+es einen Fehler:
+
+```{r, error=TRUE}
+if (tmax_wien > 25) {
+  print("Sommertag")
+}
+```
+
+Soll eine Bedingung für **jedes Element** eines Vektors geprüft werden, nimmt man
+`ifelse(bedingung, wert_wenn_wahr, wert_wenn_falsch)`:
+
+```{r}
+ifelse(tmax_wien > 25, "Sommertag", "kein Sommertag")
+```
+
+## Mehrere Fälle in einem Data Frame: case_when()
+
+Für neue Spalten mit mehr als zwei Kategorien ist `case_when()` aus `dplyr` übersichtlicher als
+verschachtelte `ifelse()`. Jede Zeile hat die Form `bedingung ~ ergebnis`; die erste
+zutreffende Bedingung gewinnt, `TRUE ~` fängt alles Übrige auf:
+
+```{r}
+mitarbeitende <- mitarbeitende %>%
+  mutate(belastung = case_when(
+    is.na(plusstunden) ~ NA,          # fehlende Werte zuerst abfangen
+    plusstunden > 40   ~ "hoch",
+    plusstunden > 20   ~ "mittel",
+    TRUE               ~ "niedrig"
+  ))
+
+mitarbeitende %>% select(name, plusstunden, belastung) %>% head(8)
+```
+
+Ohne die erste Zeile würde Vera als `"niedrig"` eingestuft: Ihre Vergleiche ergeben `NA`, und
+dann greift `TRUE ~`.
+
+### Übung
+
+1. Schreibe ein `if`/`else`, das für eine Variable `projekte_anzahl` ausgibt, ob jemand
+   `"viele Projekte"` (mindestens 10) oder `"wenige Projekte"` hat.
+2. Füge `mitarbeitende` mit `mutate()` und `ifelse()` eine Spalte `region_bekannt` hinzu, die
+   `TRUE` ist, wenn das Team in `c("Team_A", "Team_B", "Team_C", "Team_D")` vorkommt
+   (Tipp: `%in%` — braucht man hier überhaupt `ifelse()`?).
+
+```{r}
+# dein Code
+
+```
+
+
+# Teil 2: Schleifen
+
+## for-Schleifen
+
+Eine `for`-Schleife führt denselben Code für **jedes Element** eines Vektors aus. Die
+Schleifenvariable (hier `monat`) nimmt nacheinander jeden Wert an:
+
+```{r}
+for (monat in names(tmax_wien)) {
+  print(paste(monat, ":", tmax_wien[monat], "°C"))
+}
+```
+
+Innerhalb einer Schleife wird nichts automatisch angezeigt — deshalb braucht es `print()`.
+
+## Ergebnisse in einer Schleife sammeln
+
+Will man die Ergebnisse behalten, legt man **vorher** einen leeren Vektor passender Länge an
+und füllt ihn Position für Position. `seq_along(x)` liefert die Positionen `1, 2, …,
+length(x)`:
+
+```{r}
+fahrenheit <- numeric(length(tmax_wien))   # Vektor aus Nullen
+
+for (i in seq_along(tmax_wien)) {
+  fahrenheit[i] <- tmax_wien[i] * 9 / 5 + 32
+}
+
+fahrenheit
+```
+
+## Wann braucht man eine Schleife — und wann nicht?
+
+Das Beispiel oben geht in R auch ohne Schleife, weil Rechnungen auf Vektoren **elementweise**
+laufen (Einheit 1) — kürzer und schneller:
+
+```{r}
+tmax_wien * 9 / 5 + 32
+```
+
+Faustregel: Erst prüfen, ob es eine vektorisierte Lösung gibt (Rechnen mit Vektoren,
+`ifelse()`, `mutate()`, `group_by()`). Schleifen braucht man vor allem dann, wenn pro Durchlauf
+etwas **passiert**: eine Datei einlesen, eine Grafik speichern, eine Meldung ausgeben
+(siehe Teil 5).
+
+## while-Schleifen
+
+`while` wiederholt, **solange** eine Bedingung gilt. Die Bedingung muss sich in der Schleife
+irgendwann ändern — sonst läuft sie endlos (abbrechen mit dem roten Stopp-Knopf oder `Esc`):
+
+```{r}
+kontostand <- 1000
+jahre      <- 0
+
+while (kontostand < 1500) {
+  kontostand <- kontostand * 1.05   # 5 % Zinsen pro Jahr
+  jahre      <- jahre + 1
+}
+
+jahre
+round(kontostand, 2)
+```
+
+Zwei Befehle steuern Schleifen zusätzlich: `next` springt zum nächsten Durchlauf, `break`
+beendet die Schleife sofort.
+
+### Übung
+
+1. Gib mit einer `for`-Schleife für jedes Team in `unique(mitarbeitende$team)` die Anzahl
+   Personen aus, z. B. `"Team_A: 9 Personen"`.
+2. Wie viele Jahre dauert es, bis sich 1000 € bei 3 % Zinsen verdoppeln? Löse es mit `while`.
+
+```{r}
+# dein Code
+
+```
+
+
+# Teil 3: Eigene Funktionen
+
+## Eine Funktion schreiben
+
+Wenn du denselben Code mehrmals kopierst, ist es Zeit für eine eigene Funktion. Aufbau:
+
+```
+name <- function(argument1, argument2) {
+  # was die Funktion tut
+  ergebnis
+}
+```
+
+Der **letzte Ausdruck** im Funktionskörper ist das Ergebnis, das zurückgegeben wird:
+
+```{r}
+celsius_zu_fahrenheit <- function(celsius) {
+  celsius * 9 / 5 + 32
+}
+
+celsius_zu_fahrenheit(20)
+celsius_zu_fahrenheit(tmax_wien)   # funktioniert auch mit Vektoren
+```
+
+## Standardwerte für Argumente
+
+Wie bei eingebauten Funktionen können Argumente einen **Standardwert** haben, der gilt, wenn
+man sie weglässt:
+
+```{r}
+runde_prozent <- function(anteil, stellen = 1) {
+  round(anteil * 100, stellen)
+}
+
+runde_prozent(0.12345)               # stellen = 1
+runde_prozent(0.12345, stellen = 3)
+```
+
+## Mehrere Ergebnisse zurückgeben
+
+Eine Funktion gibt genau **ein** Objekt zurück. Für mehrere Werte packt man sie in einen
+benannten Vektor (oder eine Liste):
+
+```{r}
+kennzahlen <- function(x) {
+  c(n          = sum(!is.na(x)),
+    mittelwert = round(mean(x, na.rm = TRUE), 1),
+    minimum    = min(x, na.rm = TRUE),
+    maximum    = max(x, na.rm = TRUE))
+}
+
+kennzahlen(mitarbeitende$plusstunden)
+```
+
+## Eingaben prüfen: stop()
+
+Mit `if` und `stop()` bricht eine Funktion mit einer verständlichen Fehlermeldung ab, wenn die
+Eingabe nicht passt — viel hilfreicher als ein kryptischer Fehler weiter hinten:
+
+```{r, error=TRUE}
+kennzahlen <- function(x) {
+  if (!is.numeric(x)) {
+    stop("x muss ein Zahlenvektor sein.")
+  }
+  c(n          = sum(!is.na(x)),
+    mittelwert = round(mean(x, na.rm = TRUE), 1),
+    minimum    = min(x, na.rm = TRUE),
+    maximum    = max(x, na.rm = TRUE))
+}
+
+kennzahlen(mitarbeitende$name)
+```
+
+## Variablen in Funktionen bleiben lokal
+
+Was innerhalb einer Funktion erzeugt wird, existiert nur dort — es taucht nicht im Environment
+auf und überschreibt keine gleichnamigen Variablen außerhalb:
+
+```{r, error=TRUE}
+verdoppeln <- function(x) {
+  zwischenergebnis <- x * 2
+  zwischenergebnis
+}
+
+verdoppeln(5)
+zwischenergebnis   # Fehler: existiert außerhalb der Funktion nicht
+```
+
+Eine Funktion sollte deshalb alles, was sie braucht, über ihre **Argumente** bekommen.
+
+### Übung
+
+1. Schreibe eine Funktion `bmi(gewicht_kg, groesse_m)`, die den BMI auf eine Nachkommastelle
+   gerundet zurückgibt.
+2. Schreibe eine Funktion `spanne(x)`, die die Differenz zwischen größtem und kleinstem Wert
+   zurückgibt und fehlende Werte ignoriert. Teste sie mit `mitarbeitende$plusstunden`.
+
+```{r}
+# dein Code
+
+```
+
+
+# Teil 4: sapply() — eine Funktion auf viele Elemente anwenden
+
+## Die Idee
+
+Sehr oft will man **dieselbe Funktion auf mehrere Dinge** anwenden: den Mittelwert jeder
+Spalte, die Länge jedes Textes, eine Kennzahl für jedes Team. Mit einer `for`-Schleife sieht
+das so aus:
+
+```{r}
+spalten     <- mtcars[, c("mpg", "hp", "wt")]
+mittelwerte <- numeric(ncol(spalten))
+
+for (i in seq_along(spalten)) {
+  mittelwerte[i] <- mean(spalten[[i]])
+}
+
+names(mittelwerte) <- names(spalten)
+mittelwerte
+```
+
+Das sind sechs Zeilen für eine einfache Idee: *„Berechne `mean` für jede Spalte und sammle die
+Ergebnisse."* Genau diese Idee erledigt `sapply()` in einer Zeile — inklusive Namen:
+
+```{r}
+sapply(spalten, mean)
+```
+
+## Der Aufbau: sapply(X, FUN, ...)
+
+| Argument | Bedeutung |
+|---|---|
+| `X` | die Elemente, über die gegangen wird: ein Vektor, eine Liste oder ein Data Frame |
+| `FUN` | die Funktion, die auf **jedes** Element angewendet wird |
+| `...` | weitere Argumente, die an `FUN` weitergegeben werden (optional) |
+
+Intern passiert dasselbe wie in der Schleife oben:
+
+1. `sapply()` nimmt das erste Element von `X` und ruft `FUN(element)` auf,
+2. dann das zweite Element, das dritte … bis zum letzten,
+3. und fasst alle Ergebnisse zu einem möglichst einfachen Objekt zusammen (das *s* in `sapply`
+   steht für *simplify*, „vereinfachen").
+
+Drei Dinge, auf die man achten muss:
+
+- **Bei einem Data Frame ist jedes Element eine Spalte** (ein Data Frame ist eine Liste von
+  Spalten, siehe Einheit 2). `sapply(df, mean)` rechnet also spaltenweise.
+- **Die Funktion wird ohne Klammern übergeben:** `sapply(spalten, mean)`, nicht
+  `sapply(spalten, mean())`. Man übergibt die Funktion selbst — aufrufen tut sie `sapply()`.
+- **Das Ergebnis behält die Namen** der Elemente, deshalb steht oben `mpg`, `hp`, `wt`.
+
+## Zusätzliche Argumente weitergeben
+
+Bei den Mitarbeitenden-Daten gibt es einen fehlenden Wert — `mean()` liefert dann `NA`:
+
+```{r}
+sapply(mitarbeitende[, c("plusstunden", "projekte")], mean)
+```
+
+Alles, was nach der Funktion steht, reicht `sapply()` an die Funktion weiter. So wird für
+jede Spalte `mean(spalte, na.rm = TRUE)` berechnet:
+
+```{r}
+sapply(mitarbeitende[, c("plusstunden", "projekte")], mean, na.rm = TRUE)
+```
+
+## Was kommt heraus?
+
+Die Form des Ergebnisses hängt davon ab, was die Funktion **pro Element** zurückgibt:
+
+| `FUN` liefert pro Element … | `sapply()` gibt zurück … |
+|---|---|
+| genau einen Wert | einen **Vektor** |
+| mehrere Werte, immer gleich viele | eine **Matrix** — eine Spalte pro Element |
+| unterschiedlich viele Werte | eine **Liste** |
+
+```{r}
+sapply(spalten, mean)          # 1 Wert pro Spalte   → Vektor
+sapply(spalten, range)         # 2 Werte pro Spalte  → Matrix (Minimum, Maximum)
+sapply(c(2, 4), seq_len)       # 2 bzw. 4 Werte      → Liste
+```
+
+Mit unserer eigenen Funktion `kennzahlen()` aus Teil 3 entsteht eine übersichtliche Tabelle:
+
+```{r}
+sapply(spalten, kennzahlen)
+```
+
+## Anonyme Funktionen
+
+Oft lohnt es sich nicht, für einen einzigen `sapply()`-Aufruf eine Funktion mit Namen
+anzulegen. Dann schreibt man die Funktion **direkt in den Aufruf** — eine *anonyme Funktion*
+(ohne Namen):
+
+```{r}
+sapply(c(10, 20, 30), function(x) x^2)
+```
+
+So liest man das: *„Für jedes Element — nenne es `x` — berechne `x^2`."* Der Name `x` ist frei
+gewählt und gilt nur innerhalb dieser kleinen Funktion.
+
+Ein praktisches Beispiel: die durchschnittlichen Plusstunden für jedes Team. Die anonyme
+Funktion bekommt einen Teamnamen `t` und rechnet den Mittelwert nur für dieses Team:
+
+```{r}
+alle_teams <- unique(mitarbeitende$team)
+
+sapply(alle_teams, function(t) {
+  mean(mitarbeitende$plusstunden[mitarbeitende$team == t], na.rm = TRUE)
+})
+```
+
+Für Data Frames ist `group_by()` + `summarise()` (Einheit 2) meist die bequemere Lösung.
+`sapply()` ist dann praktisch, wenn man mit Vektoren, Listen oder Spalten arbeitet.
+
+**Kurzschreibweise:** In neuerem Code sieht man statt `function(x)` oft `\(x)` — das ist
+seit R 4.1 dasselbe, nur kürzer: `sapply(c(10, 20, 30), \(x) x^2)`.
+
+## sapply() oder lapply()?
+
+`lapply()` (Einheit 3) funktioniert genauso, gibt aber **immer eine Liste** zurück — das *l*
+steht für *list*:
+
+```{r}
+lapply(spalten, mean)
+```
+
+| | `sapply()` | `lapply()` |
+|---|---|---|
+| Ergebnis | so einfach wie möglich: Vektor, Matrix oder Liste | immer eine Liste |
+| gut für | Ergebnisse ansehen, Kennzahlen-Tabellen | Ergebnisse in Spalten zurückschreiben: `df[cols] <- lapply(df[cols], as.numeric)` |
+
+Faustregel: Zum **Anschauen** `sapply()`, zum **Weiterverarbeiten in einem Data Frame**
+`lapply()`.
+
+### Übung
+
+1. Welche Spalten von `mitarbeitende` sind Zahlen? Wende `is.numeric` mit `sapply()` auf
+   `mitarbeitende` an. Was für ein Objekt kommt heraus?
+2. Berechne mit `sapply()` das **Maximum** von `plusstunden` und `projekte` — fehlende Werte
+   sollen ignoriert werden.
+3. Berechne mit `sapply()` und einer anonymen Funktion für jedes Land in
+   `unique(mitarbeitende$land)` die **Anzahl Personen**.
+4. Wende deine Funktion `spanne()` aus Teil 3 mit `sapply()` auf die Spalten `mpg`, `hp` und
+   `wt` von `mtcars` an.
+
+```{r}
+# dein Code
+
+```
+
+
+# Teil 5: Alles zusammen — eine Grafik pro Team
+
+Eine typische Aufgabe: Für jede Gruppe soll dieselbe Grafik entstehen. Wir schreiben eine
+Funktion für **eine** Grafik und rufen sie in einer Schleife für **jedes** Team auf:
+
+```{r}
+grafik_team <- function(daten, team_name) {
+  daten %>%
+    filter(team == team_name, !is.na(plusstunden)) %>%
+    ggplot(aes(x = projekte, y = plusstunden)) +
+    geom_point(color = "steelblue", size = 2) +
+    labs(title = paste("Plusstunden nach Projekten —", team_name),
+         x = "Anzahl Projekte", y = "Plusstunden") +
+    theme_minimal()
+}
+
+for (t in c("Team_A", "Team_C")) {
+  print(grafik_team(mitarbeitende, t))   # in Schleifen: print() nötig
+}
+```
+
+Zum Speichern ersetzt man `print()` durch `ggsave()` und baut den Dateinamen mit `paste0()`:
+
+```{r, eval=FALSE}
+for (t in unique(mitarbeitende$team)) {
+  ggsave(paste0("output/plusstunden_", t, ".png"),
+         plot = grafik_team(mitarbeitende, t), width = 6, height = 4)
+}
+```
+
+Ohne Funktion stünde der ganze Grafik-Code in der Schleife; mit Funktion lässt er sich einzeln
+testen und auch an anderer Stelle wiederverwenden.
+
+### Übung
+
+Schreibe eine Funktion `team_bericht(daten, team_name)`, die mit `cat()` einen Satz ausgibt wie
+`"Team_A: 9 Personen, im Schnitt 26.7 Plusstunden"`. Rufe sie in einer Schleife für alle Teams
+auf.
+
+```{r}
+# dein Code
+
+```
+
+
+# Zusammenfassung
+
+- **Bedingungen:** `if (bedingung) { } else if { } else { }` für **einen** Wert · `ifelse()`
+  für Vektoren · `case_when()` in `mutate()`, fehlende Werte zuerst abfangen
+- **Schleifen:** `for (x in vektor) { }` · Ergebnisse in vorher angelegtem Vektor sammeln ·
+  `seq_along()` · `while` mit Abbruchbedingung · `next` / `break` · in Schleifen `print()` ·
+  erst nach einer vektorisierten Lösung suchen
+- **Funktionen:** `name <- function(arg, arg2 = standard) { … }` · letzter Ausdruck ist das
+  Ergebnis · mehrere Werte als benannter Vektor oder Liste · Eingaben mit `stop()` prüfen ·
+  Variablen innerhalb bleiben lokal
+- **Anwenden:** `sapply(X, FUN, ...)` wendet `FUN` auf jedes Element an (Data Frame: jede Spalte) · Funktion ohne Klammern übergeben · weitere Argumente wie `na.rm = TRUE` dahinter · Ergebnis Vektor, Matrix oder Liste · `lapply()` gibt immer eine Liste · anonyme Funktion
+  `function(x) …`

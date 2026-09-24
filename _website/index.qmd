@@ -1,0 +1,23 @@
+---
+title: "R-Einführung"
+toc: false
+---
+
+Alle Materialien der R-Einführung zum Nachlesen — auch ohne RStudio.
+
+| Einheit | Inhalt |
+|---|---|
+| [0 · RStudio, Projekte & Pakete](einheit-0.Rmd) | Installation, Projekte, R Markdown, Pakete, Hilfe |
+| [1 · Grundlagen](einheit-1.Rmd) | Rechnen, Variablen, Funktionen, Vektoren, Matrizen, erste Grafiken |
+| [2 · Data Frames & dplyr](einheit-2.Rmd) | Listen, Faktoren, Data Frames, CSV einlesen, `dplyr` |
+| [3 · ggplot2 & Daten aufräumen](einheit-3.Rmd) | Grafiken mit `ggplot2`, Dateien bereinigen, Abschlussprojekt |
+| [4 · Funktionen & Schleifen](einheit-4.Rmd) | `if`/`else`, `for`, `while`, eigene Funktionen, `sapply()` |
+| [Cheatsheet](cheatsheet.md) | alle Funktionen auf einen Blick |
+
+## Selbst ausprobieren
+
+1. R und RStudio installieren (siehe [Einheit 0](einheit-0.Rmd#installation)).
+2. [Kursmaterialien als ZIP](https://github.com/bella-mir/r-einfuehrung/archive/refs/heads/main.zip)
+   herunterladen und entpacken.
+3. `RIntroduction.Rproj` per Doppelklick öffnen und die Notebooks (`I_RINTRO.Rmd`, …) Block
+   für Block ausführen.

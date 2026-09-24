@@ -1,0 +1,5 @@
+/* Keep wide tables (e.g. the cheat sheet) readable on small screens */
+main table {
+  display: block;
+  overflow-x: auto;
+}

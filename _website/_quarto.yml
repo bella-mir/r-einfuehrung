@@ -1,0 +1,48 @@
+project:
+  type: website
+  output-dir: ../docs
+  render:
+    - index.qmd
+    - einheit-0.Rmd
+    - einheit-1.Rmd
+    - einheit-2.Rmd
+    - einheit-3.Rmd
+    - einheit-4.Rmd
+    - cheatsheet.md
+
+lang: de
+
+website:
+  title: "R-Einführung"
+  search: true
+  page-navigation: true
+  sidebar:
+    style: docked
+    tools:
+      - icon: github
+        href: https://github.com/bella-mir/r-einfuehrung
+    contents:
+      - href: index.qmd
+        text: Start
+      - section: Einheiten
+        contents:
+          - href: einheit-0.Rmd
+            text: "0 · RStudio, Projekte & Pakete"
+          - href: einheit-1.Rmd
+            text: "1 · Grundlagen"
+          - href: einheit-2.Rmd
+            text: "2 · Data Frames & dplyr"
+          - href: einheit-3.Rmd
+            text: "3 · ggplot2 & Daten aufräumen"
+          - href: einheit-4.Rmd
+            text: "4 · Funktionen & Schleifen"
+      - href: cheatsheet.md
+        text: Cheatsheet
+
+format:
+  html:
+    theme: cosmo
+    toc: true
+    toc-depth: 2
+    code-copy: true
+    css: styles.css

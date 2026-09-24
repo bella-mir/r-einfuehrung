@@ -1,0 +1,566 @@
+---
+title: "R-Einführung — Einheit 2: Data Frames, Daten einlesen & dplyr"
+output: html_notebook
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, message = FALSE)
+```
+
+In dieser Einheit geht es vom einzelnen Vektor zur ganzen Tabelle:
+
+1. **Listen und Faktoren** — zwei weitere Datenstrukturen, die in Tabellen ständig vorkommen
+2. **Data Frames** — die zentrale Struktur für tabellarische Daten in R
+3. **Daten einlesen und speichern** — CSV & Co.
+4. **Datenbearbeitung mit `dplyr`** — filtern, sortieren, umformen, gruppieren, verbinden
+
+Für Teil 4 wird das Paket `dplyr` gebraucht. Falls noch nicht geschehen, einmalig **in der
+Console** installieren:
+
+```{r, eval=FALSE}
+install.packages("dplyr")
+```
+
+
+# Teil 1: Listen und Faktoren
+
+## Listen
+
+Vektoren und Matrizen enthalten nur **einen** Datentyp. Eine **Liste** kann dagegen beliebige
+Objekte unterschiedlichen Typs und unterschiedlicher Länge sammeln:
+
+```{r}
+wien_info <- list(stadt           = "Wien",
+                  einwohner       = 2000000,
+                  bezirke         = c("Innere Stadt", "Leopoldstadt", "Landstraße"),
+                  temperatur_juli = c(TMax = 26.0, TMin = 16.4))
+str(wien_info)
+```
+
+Ein einzelnes Element holt man mit `$` oder doppelten eckigen Klammern `[[ ]]`:
+
+```{r}
+wien_info$stadt
+wien_info[["bezirke"]]
+```
+
+Listen begegnen dir vor allem indirekt: Viele Funktionen geben ihr Ergebnis als Liste zurück,
+und ein **Data Frame** (Teil 2) ist eine Liste gleich langer Vektoren.
+
+## Faktoren
+
+Ein **Faktor** ist der Datentyp für **kategoriale Variablen** — Werte aus einer begrenzten Menge
+an Kategorien (z. B. Land, Bewertungsstufe). Zwei Arten:
+
+- **nominal** — ohne Reihenfolge, z. B. `"Katze"`, `"Hund"`, `"Pferd"`
+- **ordinal** — mit Reihenfolge, z. B. `"niedrig"` < `"mittel"` < `"hoch"`
+
+Mit `factor()` wird ein Text-Vektor zu einem Faktor; die vorkommenden Werte werden zu
+**Levels**. `summary()` zählt die Häufigkeit pro Level:
+
+```{r}
+tiere <- factor(c("h", "k", "h", "p", "k", "h"))
+tiere
+summary(tiere)
+```
+
+### Levels umbenennen
+
+Daten enthalten oft Kürzel statt lesbarer Bezeichnungen. R sortiert die Levels alphabetisch
+(`"h"`, `"k"`, `"p"`) — in genau dieser Reihenfolge lassen sie sich mit `levels()` umbenennen:
+
+```{r}
+levels(tiere) <- c("Hund", "Katze", "Pferd")
+tiere
+```
+
+### Nominal vs. ordinal
+
+Bei einem **nominalen** Faktor ergibt ein Größenvergleich keinen Sinn — R gibt eine Warnung und
+`NA` zurück:
+
+```{r, warning=TRUE}
+tiere[1] > tiere[2]
+```
+
+Für einen **geordneten** Faktor gibt man `ordered = TRUE` und die `levels` in der richtigen
+Reihenfolge an — dann funktionieren Vergleiche:
+
+```{r}
+tempo <- factor(c("mittel", "langsam", "schnell", "mittel"),
+                ordered = TRUE, levels = c("langsam", "mittel", "schnell"))
+tempo
+tempo[1] > tempo[2]   # ist "mittel" schneller als "langsam"?
+```
+
+### Übung
+
+1. Lege eine Liste `kurs` an mit den Elementen `titel` (`"R-Einführung"`), `teilnehmende`
+   (eine Zahl) und `themen` (ein Vektor mit mindestens drei Themen). Gib das zweite Thema aus
+   (Tipp: erst das Element holen, dann `[ ]`).
+2. Kursbewertungen liegen als Text vor:
+   `bewertungen <- c("gut", "sehr gut", "mittel", "gut", "schlecht", "sehr gut", "gut")`
+   - Mache daraus einen **geordneten** Faktor von `"schlecht"` bis `"sehr gut"`.
+   - Zähle mit `table()`, wie oft jede Bewertung vorkommt. In welcher Reihenfolge stehen die
+     Levels — und warum?
+   - Wie viele Bewertungen sind besser als `"mittel"`? (Tipp: `sum()`)
+
+```{r}
+# dein Code
+
+```
+
+
+# Teil 2: Data Frames
+
+## Was ist ein Data Frame?
+
+In einer Matrix haben alle Elemente denselben Datentyp. Reale Datensätze mischen aber fast
+immer Typen: ein Name (`character`), ein Alter (`numeric`), eine Ja/Nein-Angabe (`logical`) …
+
+Ein **Data Frame** speichert genau das: **Variablen als Spalten, Beobachtungen als Zeilen** —
+jede Spalte mit ihrem eigenen Datentyp. Das entspricht einer Tabelle, wie man sie aus Excel
+kennt.
+
+R bringt einige Datensätze mit, z. B. `mtcars` (Kenndaten von 32 Automodellen, 1974):
+
+```{r}
+head(mtcars)
+```
+
+## Erste Einblicke in einen Datensatz
+
+- `head()` / `tail()` — die ersten bzw. letzten Zeilen
+- `str()` — Anzahl Zeilen und Spalten, Datentypen, Beispielwerte
+- `summary()` — Kennzahlen pro Spalte (Minimum, Mittelwert, Maximum …)
+- `nrow()` / `ncol()` — Anzahl Zeilen bzw. Spalten
+
+`str()` ist meist der erste Befehl bei einem unbekannten Datensatz:
+
+```{r}
+str(mtcars)
+summary(mtcars)
+```
+
+## Einen eigenen Data Frame erstellen
+
+Wir bauen einen Data Frame mit den acht Planeten unseres Sonnensystems: Typ, Durchmesser
+(relativ zur Erde), Rotationsdauer (in Erdtagen; negativ = dreht sich rückwärts) und ob der
+Planet Ringe hat:
+
+```{r}
+name        <- c("Merkur", "Venus", "Erde", "Mars", "Jupiter", "Saturn", "Uranus", "Neptun")
+typ         <- c("Gesteinsplanet", "Gesteinsplanet", "Gesteinsplanet", "Gesteinsplanet",
+                 "Gasriese", "Gasriese", "Eisriese", "Eisriese")
+durchmesser <- c(0.382, 0.949, 1, 0.532, 11.209, 9.449, 4.007, 3.883)
+rotation    <- c(58.64, -243.02, 1, 1.03, 0.41, 0.43, -0.72, 0.67)
+hat_ringe   <- c(FALSE, FALSE, FALSE, FALSE, TRUE, TRUE, TRUE, TRUE)
+```
+
+`data.frame()` fügt gleich lange Vektoren zu einem Data Frame zusammen — jeder Vektor wird
+eine Spalte:
+
+```{r}
+planeten <- data.frame(name, typ, durchmesser, rotation, hat_ringe)
+planeten
+str(planeten)
+```
+
+## Elemente und Spalten auswählen
+
+Wie bei Matrizen: `[Zeile, Spalte]`. Statt Nummern lassen sich Spaltennamen verwenden — das ist
+besser lesbar:
+
+```{r}
+planeten[1, 3]          # Zeile 1, Spalte 3: Durchmesser von Merkur
+planeten[4, ]           # ganze Zeile 4: alle Daten zu Mars
+planeten[1:3, "typ"]    # Zeilen 1-3 der Spalte "typ"
+```
+
+Eine ganze Spalte bekommt man kürzer mit dem Dollarzeichen `$` — das Ergebnis ist ein Vektor:
+
+```{r}
+planeten$durchmesser
+```
+
+Ein **Minuszeichen** vor der Nummer bedeutet „alles außer":
+
+```{r}
+planeten[, -1]        # alle Spalten außer der ersten
+planeten[-(1:4), ]    # alle Zeilen außer 1–4
+```
+
+## Kategorien ansehen und zählen: unique(), table()
+
+`unique()` zeigt, welche verschiedenen Werte in einer Spalte vorkommen, `table()` zählt sie:
+
+```{r}
+unique(planeten$typ)
+table(planeten$typ)
+```
+
+Soll die Spalte als Kategorie behandelt werden, macht man sie zum Faktor (Teil 1) — z. B. um
+eine sinnvolle Reihenfolge festzulegen statt der alphabetischen:
+
+```{r}
+planeten$typ <- factor(planeten$typ,
+                       levels = c("Gesteinsplanet", "Gasriese", "Eisriese"))
+table(planeten$typ)
+```
+
+## Zeilen filtern
+
+Ein logischer Vektor in der Zeilenposition wählt die Zeilen aus, bei denen `TRUE` steht:
+
+```{r}
+planeten[planeten$hat_ringe, ]           # nur Planeten mit Ringen
+planeten[planeten$durchmesser < 1, ]     # nur Planeten kleiner als die Erde
+```
+
+`subset()` ist die kürzere Schreibweise — man kann die Spaltennamen direkt verwenden:
+
+```{r}
+subset(planeten, durchmesser < 1)
+```
+
+## Sortieren mit order()
+
+`sort()` sortiert einen Vektor. Um einen **Data Frame** zu sortieren, braucht man `order()`:
+Es liefert nicht die Werte, sondern die **Positionen** in sortierter Reihenfolge.
+
+```{r}
+preise <- c(100, 10, 1000)
+sort(preise)    # die sortierten Werte
+order(preise)   # 10 steht an Position 2, 100 an Position 1, 1000 an Position 3
+```
+
+Diese Positionen als Zeilenindex sortieren den ganzen Data Frame:
+
+```{r}
+planeten[order(planeten$durchmesser), ]                    # aufsteigend
+planeten[order(planeten$durchmesser, decreasing = TRUE), ] # absteigend
+```
+
+### Übung
+
+1. Wie viele Planeten haben einen größeren Durchmesser als die Erde? (Tipp: `sum()`)
+2. Zeige nur `name` und `rotation` der Planeten, die sich rückwärts drehen.
+
+```{r}
+# dein Code
+
+```
+
+
+# Teil 3: Daten einlesen und speichern
+
+In der Praxis liegen Daten fast immer als **Datei** vor — meistens als CSV (*comma-separated
+values*): eine Textdatei mit einer Beobachtung pro Zeile und einem Trennzeichen zwischen den
+Spalten.
+
+R sucht Dateien relativ zum **Arbeitsverzeichnis**. Wird das Projekt über
+`RIntroduction.Rproj` geöffnet, ist das der Projektordner (siehe Einheit 0):
+
+```{r}
+getwd()
+```
+
+## CSV einlesen mit read.csv()
+
+`read.csv()` liest eine CSV-Datei und gibt einen Data Frame zurück:
+
+```{r}
+mitarbeitende <- read.csv("data/raw/mitarbeitende.csv")
+teams         <- read.csv("data/raw/teams.csv")
+```
+
+Nach dem Einlesen **immer** prüfen, ob Spaltenzahl und Datentypen stimmen:
+
+```{r}
+str(mitarbeitende)
+teams
+```
+
+Leere Felder in einer Zahlenspalte werden automatisch zu `NA` — bei Vera fehlen die
+Plusstunden:
+
+```{r}
+mitarbeitende[is.na(mitarbeitende$plusstunden), ]
+```
+
+## Deutsche CSV-Dateien: read.csv2()
+
+`read.csv()` erwartet `,` als Trennzeichen und `.` als Dezimalzeichen. Excel im
+deutschsprachigen Raum speichert CSV dagegen oft mit `;` als Trennzeichen und `,` als
+Dezimalzeichen. Dafür gibt es `read.csv2()`:
+
+```{r, eval=FALSE}
+read.csv2("data/raw/datei.csv")                       # ; als Trenner, , als Dezimalzeichen
+read.csv("data/raw/datei.csv", sep = ";", dec = ",")  # gleichwertig, explizit
+```
+
+Weitere nützliche Argumente:
+
+- `skip = 3` — die ersten 3 Zeilen überspringen (z. B. Info-Zeilen über der Tabelle)
+- `header = FALSE` — wenn die erste Zeile keine Spaltennamen enthält
+- `na.strings = c("", "NA", "-")` — welche Einträge als fehlend (`NA`) gelten sollen
+- `fileEncoding = "UTF-8"` (oder `"latin1"`) — bei falsch dargestellten Umlauten
+
+## Andere Dateiformate
+
+| Format | Funktion | Paket |
+|---|---|---|
+| Excel (`.xlsx`, `.xls`) | `read_excel("datei.xlsx")` | `readxl` |
+| CSV, schneller & strenger | `read_csv("datei.csv")` | `readr` |
+| R-eigenes Format (`.rds`) | `readRDS("datei.rds")` | Basis-R |
+
+## Ergebnisse speichern
+
+`write.csv()` schreibt einen Data Frame als CSV; `row.names = FALSE` verhindert eine zusätzliche
+Spalte mit Zeilennummern. Gespeichert wird nach `data/processed/` — `data/raw/` bleibt
+unverändert:
+
+```{r, eval=FALSE}
+write.csv(mitarbeitende, "data/processed/mitarbeitende_clean.csv", row.names = FALSE)
+```
+
+<!-- TODO: Übung „Daten einlesen" — Datensatz folgt (Trennzeichen, skip, na.strings, str()). -->
+
+
+# Teil 4: Datenbearbeitung mit dplyr
+
+`dplyr` bündelt die typischen Arbeitsschritte in wenige, gut lesbare Funktionen („Verben").
+Jedes Verb bekommt einen Data Frame und gibt einen neuen Data Frame zurück.
+
+```{r}
+library(dplyr)
+```
+
+## filter() — Zeilen auswählen
+
+```{r}
+filter(mitarbeitende, plusstunden > 40)
+filter(mitarbeitende, land %in% c("AT", "DE"), projekte >= 10)   # Komma = und
+```
+
+Zeilen, bei denen die Bedingung `NA` ergibt (hier: Vera), fallen bei `filter()` weg.
+
+## select() — Spalten auswählen
+
+```{r}
+select(mitarbeitende, name, team, projekte)
+```
+
+## arrange() — sortieren
+
+`arrange()` sortiert nach einer oder mehreren Spalten; `desc()` dreht die Reihenfolge um:
+
+```{r}
+arrange(mitarbeitende, desc(plusstunden))
+```
+
+## Der Pipe-Operator: %>% und |>
+
+### Das Problem: mehrere Schritte hintereinander
+
+Sollen mehrere Funktionen nacheinander angewendet werden, gibt es ohne Pipe zwei Wege — beide
+sind unhandlich:
+
+```{r}
+# 1. Verschachteln: muss von innen nach außen gelesen werden
+arrange(filter(mitarbeitende, land == "AT"), desc(plusstunden))
+
+# 2. Zwischenergebnisse speichern: lesbar, aber viele Hilfsvariablen
+nur_at <- filter(mitarbeitende, land == "AT")
+arrange(nur_at, desc(plusstunden))
+```
+
+### Die Lösung: die Pipe
+
+Der **Pipe-Operator** nimmt das Ergebnis auf seiner linken Seite und setzt es als **erstes
+Argument** in die Funktion auf der rechten Seite ein:
+
+```
+x %>% f(y)      ist dasselbe wie      f(x, y)
+```
+
+Damit wird aus der Verschachtelung eine Kette, die man von oben nach unten liest. Die Pipe
+spricht man am besten als **„und dann"**: *Nimm `mitarbeitende`, und dann filtere nach
+Österreich, und dann sortiere nach Plusstunden.*
+
+```{r}
+mitarbeitende %>%
+  filter(land == "AT") %>%
+  arrange(desc(plusstunden))
+```
+
+Beachte: In der Kette steht in `filter()` und `arrange()` **kein** Data Frame mehr — den
+liefert die Pipe von oben.
+
+### Zwei Schreibweisen: %>% und |>
+
+In R gibt es zwei Pipes. Für alles, was in dieser Einführung vorkommt, verhalten sie sich
+**gleich** — dieselbe Kette mit der eingebauten Pipe `|>`:
+
+```{r}
+mitarbeitende |>
+  filter(land == "AT") |>
+  arrange(desc(plusstunden))
+```
+
+| | `%>%` | `\|>` |
+|---|---|---|
+| Name | magrittr-Pipe | native Pipe (eingebaut) |
+| Herkunft | Paket `magrittr`, wird von `dplyr` mitgeladen | fester Bestandteil von R seit Version 4.1 (2021) |
+| braucht ein Paket? | ja — ohne `library(dplyr)` gibt es einen Fehler | nein |
+| wo man sie sieht | ältere Tutorials, Stack Overflow, viele Kurse — **auch in den weiteren Kursmaterialien** | aktuelle R-Dokumentation, *R for Data Science* (2. Auflage), tidyverse-Stilempfehlung |
+
+**In diesem Kurs verwenden wir `%>%`**, weil es in den weiteren Kursmaterialien verwendet wird.
+Die aktuelle Empfehlung für neuen Code ist `|>`. Du solltest **beide lesen können** — wenn du
+eine der beiden siehst, denk einfach „und dann".
+
+### Zwei kleine Unterschiede
+
+Für den Anfang selten wichtig, aber gut zu wissen, wenn Code aus dem Netz nicht funktioniert:
+
+1. **Klammern:** Bei `|>` muss rechts immer ein Funktions*aufruf* mit Klammern stehen.
+   `mitarbeitende %>% head` funktioniert, `mitarbeitende |> head` nicht — richtig ist
+   `mitarbeitende |> head()`. Einfachste Regel: **immer Klammern schreiben.**
+2. **Platzhalter:** Soll das Ergebnis *nicht* an die erste Stelle, markiert man die Stelle mit
+   einem Platzhalter — bei `%>%` ein Punkt `.`, bei `|>` ein Unterstrich `_` (nur mit
+   Argumentnamen). Beispiel: `lm()` berechnet eine Regression und erwartet die Daten erst im
+   Argument `data`:
+
+```{r}
+mitarbeitende %>% lm(plusstunden ~ projekte, data = .)
+mitarbeitende |>  lm(plusstunden ~ projekte, data = _)
+```
+
+**Tastenkürzel:** *Strg/Cmd + Shift + M* fügt eine Pipe ein. Welche, stellt man unter
+*Tools → Global Options → Code → „Use native pipe operator, |>"* ein — für diesen Kurs den Haken
+**nicht** setzen, dann kommt `%>%`.
+
+## mutate() — neue Spalten berechnen
+
+`mutate()` berechnet eine neue Spalte aus bestehenden — elementweise für jede Zeile.
+Gleichwertig in Basis-R wäre
+`mitarbeitende$stunden_pro_projekt <- mitarbeitende$plusstunden / mitarbeitende$projekte`.
+
+```{r}
+mitarbeitende <- mitarbeitende %>%
+  mutate(stunden_pro_projekt = round(plusstunden / projekte, 1))
+
+head(mitarbeitende)
+```
+
+## Mehrere Schritte kombinieren
+
+```{r}
+mitarbeitende %>%
+  filter(land == "AT") %>%
+  select(name, team, plusstunden) %>%
+  arrange(desc(plusstunden))
+```
+
+## count() — Häufigkeiten zählen
+
+`count()` zählt, wie oft jeder Wert vorkommt — das `dplyr`-Gegenstück zu `table()`:
+
+```{r}
+mitarbeitende %>% count(team)
+```
+
+## group_by() + summarise() — Kennzahlen pro Gruppe
+
+Eine der häufigsten Aufgaben: eine Kennzahl je Gruppe — z. B. die durchschnittlichen
+Plusstunden pro Team.
+
+```{r}
+mitarbeitende %>%
+  group_by(team) %>%
+  summarise(
+    anzahl           = n(),
+    plusstunden_mean = mean(plusstunden),
+    projekte_max     = max(projekte)
+  )
+```
+
+Die Ausgabe beginnt mit `# A tibble`. Ein **Tibble** ist die `dplyr`-Variante eines Data
+Frames — er zeigt zusätzlich Größe und Spaltentypen an, alles andere funktioniert wie gewohnt.
+
+Bei `Team_B` steht `NA`, weil Veras Plusstunden fehlen (siehe Einheit 1, *Fehlende Werte: NA*).
+Mit `na.rm = TRUE` wird der fehlende Wert ausgelassen:
+
+```{r}
+mitarbeitende %>%
+  group_by(team) %>%
+  summarise(anzahl = n(), plusstunden_mean = mean(plusstunden, na.rm = TRUE))
+```
+
+## Datensätze verbinden: Joins
+
+`teams` enthält zu jedem Team die Region. Mit einem **Join** wird diese Information über die
+gemeinsame Spalte `team` an `mitarbeitende` angehängt.
+
+Die Datensätze passen nicht perfekt zusammen — wie so oft in echten Daten:
+
+- **Uwe** gehört zu `Team_E`, das in `teams` fehlt.
+- **`Team_D`** steht in `teams`, hat aber keine Mitarbeitenden.
+
+Die vier Join-Varianten unterscheiden sich genau darin, was mit solchen Zeilen passiert:
+
+| Funktion | Behält |
+|---|---|
+| `left_join(x, y)` | alle Zeilen von `x`; fehlt die Entsprechung in `y` → `NA` |
+| `right_join(x, y)` | alle Zeilen von `y` |
+| `inner_join(x, y)` | nur Zeilen, die in **beiden** vorkommen |
+| `full_join(x, y)` | alle Zeilen aus **beiden** |
+
+```{r}
+nrow(left_join(mitarbeitende, teams, by = "team"))    # alle 22 Personen, Uwe mit Region NA
+nrow(inner_join(mitarbeitende, teams, by = "team"))   # 21 — Uwe fällt weg
+nrow(full_join(mitarbeitende, teams, by = "team"))    # 23 — alle Personen + Team_D
+```
+
+Meist will man keine Personen verlieren, deshalb ist `left_join()` der Standard:
+
+```{r}
+mitarbeitende_join <- mitarbeitende %>%
+  left_join(teams, by = "team")
+
+mitarbeitende_join %>% filter(is.na(region))
+```
+
+Über mehrere Spalten verbindet man mit `by = c("spalte1", "spalte2")`. In Basis-R heißt die
+Funktion `merge()` (`merge(x, y, by = "team", all.x = TRUE)` entspricht `left_join`).
+
+### Übung
+
+1. Welche drei Personen haben die meisten Projekte? Zeige nur `name` und `projekte`.
+2. Berechne pro `land` die Anzahl Personen und die durchschnittlichen Plusstunden, absteigend
+   sortiert nach dem Durchschnitt.
+3. Wie viele Frauen und Männer gibt es pro Team? (Tipp: `count()` mit zwei Spalten)
+4. Schreibe deine Lösung zu Aufgabe 2 einmal mit `|>` statt `%>%` und prüfe, dass dasselbe
+   herauskommt.
+
+```{r}
+# dein Code
+
+```
+
+
+# Zusammenfassung
+
+- **Listen & Faktoren:** `list()` · `l$a` / `l[["a"]]` · `factor()` · `levels()` ·
+  `ordered = TRUE`
+- **Data Frames:** `str()` / `head()` / `summary()` · Auswahl mit `[Zeile, Spalte]` und `$` ·
+  negativer Index · `unique()` / `table()` · filtern mit logischem Vektor oder `subset()` ·
+  sortieren mit `order()`
+- **Einlesen:** relative Pfade im RStudio-Projekt · `read.csv()` / `read.csv2()` · danach mit
+  `str()` prüfen · `write.csv(..., row.names = FALSE)`
+- **dplyr:** `filter` / `select` / `arrange` / `mutate` / `count` · Pipe `%>%` bzw. `|>` ·
+  `group_by` + `summarise` (`na.rm = TRUE`) · `left_join` & Co.
+
+**Wie es weitergeht:** In Einheit 3 werden die Daten mit `ggplot2` visualisiert. Hilfe gibt es
+über `?funktionsname`, die RStudio Cheat Sheets (*Help → Cheat Sheets*) und das frei verfügbare
+Buch *R for Data Science* (r4ds.hadley.nz).

@@ -1,0 +1,13 @@
+Export Bezirksdaten;;;
+Quelle: Beispielstatistik Wien;;;
+Stand: Maerz 2026;;;
+;;;
+Bezirk Nummer;Bezirk Name;Haushalte;Mittleres Einkommen
+1;Innere Stadt;9800;52000
+2;Leopoldstadt;54000;38500
+3;Landstrasse;46000;41200
+4;Wieden;16000;49800
+5;Margareten;30000;36400
+6;Mariahilf;15000;44700
+7;Neubau;16000;47300
+8;Josefstadt;12000;50100

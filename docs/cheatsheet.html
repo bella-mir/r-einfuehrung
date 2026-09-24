@@ -1,0 +1,1365 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="de" xml:lang="de"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.38">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Cheatsheet – R-Einführung</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./einheit-4.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-fe13366c3d06eb92bc1322efad7ca90e.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "Keine Treffer",
+    "search-matching-documents-text": "Treffer",
+    "search-copy-link-title": "Link in die Suche kopieren",
+    "search-hide-matches-text": "Zusätzliche Treffer verbergen",
+    "search-more-match-text": "weitere Treffer in diesem Dokument",
+    "search-more-matches-text": "weitere Treffer in diesem Dokument",
+    "search-clear-button-title": "Zurücksetzen",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Abbrechen",
+    "search-submit-button-title": "Abschicken",
+    "search-label": "Suchen"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="nav-sidebar docked quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Seitenleiste umschalten" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./cheatsheet.html">Cheatsheet</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Seitenleiste umschalten" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Suchen" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">R-Einführung</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/bella-mir/r-einfuehrung" title="" class="quarto-navigation-tool px-1" aria-label=""><i class="bi bi-github"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Suchen"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Start</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Einheiten</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Abschnitt umschalten">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./einheit-0.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">0 · RStudio, Projekte &amp; Pakete</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./einheit-1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">1 · Grundlagen</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./einheit-2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">2 · Data Frames &amp; dplyr</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./einheit-3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">3 · ggplot2 &amp; Daten aufräumen</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./einheit-4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">4 · Funktionen &amp; Schleifen</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./cheatsheet.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Cheatsheet</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Auf dieser Seite</h2>
+   
+  <ul class="collapse">
+  <li><a href="#einheit-0-rstudio-projekte-pakete" id="toc-einheit-0-rstudio-projekte-pakete" class="nav-link active" data-scroll-target="#einheit-0-rstudio-projekte-pakete">Einheit 0 — RStudio, Projekte &amp; Pakete</a>
+  <ul class="collapse">
+  <li><a href="#pakete-hilfe" id="toc-pakete-hilfe" class="nav-link" data-scroll-target="#pakete-hilfe">Pakete &amp; Hilfe</a></li>
+  <li><a href="#rstudio-r-markdown" id="toc-rstudio-r-markdown" class="nav-link" data-scroll-target="#rstudio-r-markdown">RStudio &amp; R Markdown</a></li>
+  </ul></li>
+  <li><a href="#einheit-1-grundlagen-vektoren-matrizen-erste-grafiken" id="toc-einheit-1-grundlagen-vektoren-matrizen-erste-grafiken" class="nav-link" data-scroll-target="#einheit-1-grundlagen-vektoren-matrizen-erste-grafiken">Einheit 1 — Grundlagen, Vektoren, Matrizen &amp; erste Grafiken</a>
+  <ul class="collapse">
+  <li><a href="#rechnen-zuweisen-vergleichen" id="toc-rechnen-zuweisen-vergleichen" class="nav-link" data-scroll-target="#rechnen-zuweisen-vergleichen">Rechnen, Zuweisen, Vergleichen</a></li>
+  <li><a href="#datentypen" id="toc-datentypen" class="nav-link" data-scroll-target="#datentypen">Datentypen</a></li>
+  <li><a href="#vektoren" id="toc-vektoren" class="nav-link" data-scroll-target="#vektoren">Vektoren</a></li>
+  <li><a href="#kennzahlen-fehlende-werte" id="toc-kennzahlen-fehlende-werte" class="nav-link" data-scroll-target="#kennzahlen-fehlende-werte">Kennzahlen &amp; fehlende Werte</a></li>
+  <li><a href="#matrizen" id="toc-matrizen" class="nav-link" data-scroll-target="#matrizen">Matrizen</a></li>
+  <li><a href="#base-r-grafik" id="toc-base-r-grafik" class="nav-link" data-scroll-target="#base-r-grafik">Base-R-Grafik</a></li>
+  </ul></li>
+  <li><a href="#einheit-2-data-frames-daten-einlesen-dplyr" id="toc-einheit-2-data-frames-daten-einlesen-dplyr" class="nav-link" data-scroll-target="#einheit-2-data-frames-daten-einlesen-dplyr">Einheit 2 — Data Frames, Daten einlesen &amp; dplyr</a>
+  <ul class="collapse">
+  <li><a href="#listen-faktoren" id="toc-listen-faktoren" class="nav-link" data-scroll-target="#listen-faktoren">Listen &amp; Faktoren</a></li>
+  <li><a href="#data-frames" id="toc-data-frames" class="nav-link" data-scroll-target="#data-frames">Data Frames</a></li>
+  <li><a href="#einlesen-speichern" id="toc-einlesen-speichern" class="nav-link" data-scroll-target="#einlesen-speichern">Einlesen &amp; Speichern</a></li>
+  <li><a href="#dplyr" id="toc-dplyr" class="nav-link" data-scroll-target="#dplyr">dplyr</a></li>
+  </ul></li>
+  <li><a href="#einheit-3-ggplot2-daten-aufräumen" id="toc-einheit-3-ggplot2-daten-aufräumen" class="nav-link" data-scroll-target="#einheit-3-ggplot2-daten-aufräumen">Einheit 3 — ggplot2 &amp; Daten aufräumen</a>
+  <ul class="collapse">
+  <li><a href="#ggplot2" id="toc-ggplot2" class="nav-link" data-scroll-target="#ggplot2">ggplot2</a></li>
+  <li><a href="#daten-aufräumen" id="toc-daten-aufräumen" class="nav-link" data-scroll-target="#daten-aufräumen">Daten aufräumen</a></li>
+  </ul></li>
+  <li><a href="#einheit-4-bedingungen-schleifen-funktionen" id="toc-einheit-4-bedingungen-schleifen-funktionen" class="nav-link" data-scroll-target="#einheit-4-bedingungen-schleifen-funktionen">Einheit 4 — Bedingungen, Schleifen &amp; Funktionen</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Cheatsheet</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>Die wichtigsten Funktionen dieser Einführung, in der Reihenfolge der Einheiten. Platzhalter: <code>x</code> = Vektor · <code>df</code> = Data Frame · <code>m</code> = Matrix · <code>l</code> = Liste · <code>f</code> = Faktor · <code>g</code> = Gruppenspalte.</p>
+<hr>
+<section id="einheit-0-rstudio-projekte-pakete" class="level1">
+<h1>Einheit 0 — RStudio, Projekte &amp; Pakete</h1>
+<section id="pakete-hilfe" class="level2">
+<h2 class="anchored" data-anchor-id="pakete-hilfe">Pakete &amp; Hilfe</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Code</th>
+<th>Bedeutung</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>install.packages("pkg")</code></td>
+<td>Paket installieren — einmal pro Rechner, in der Console</td>
+</tr>
+<tr class="even">
+<td><code>library(pkg)</code></td>
+<td>Paket laden — in jeder Sitzung, oben im Skript</td>
+</tr>
+<tr class="odd">
+<td><code>pkg::fun()</code></td>
+<td>eine Funktion nutzen, ohne das Paket zu laden</td>
+</tr>
+<tr class="even">
+<td><code>?fun</code></td>
+<td>Hilfeseite öffnen (Arguments, Examples)</td>
+</tr>
+<tr class="odd">
+<td><code>getwd()</code></td>
+<td>aktuelles Arbeitsverzeichnis anzeigen</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="rstudio-r-markdown" class="level2">
+<h2 class="anchored" data-anchor-id="rstudio-r-markdown">RStudio &amp; R Markdown</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Tastenkürzel (Windows)</th>
+<th>Wirkung</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>Strg + Enter</code></td>
+<td>Zeile / Auswahl ausführen</td>
+</tr>
+<tr class="even">
+<td><code>Strg + Shift + Enter</code></td>
+<td>Chunk ausführen</td>
+</tr>
+<tr class="odd">
+<td><code>Strg + Alt + I</code></td>
+<td>neuen Chunk einfügen</td>
+</tr>
+<tr class="even">
+<td><code>Strg + Shift + K</code></td>
+<td>Dokument knitten</td>
+</tr>
+<tr class="odd">
+<td><code>Alt + -</code></td>
+<td><code>&lt;-</code> einfügen</td>
+</tr>
+<tr class="even">
+<td><code>Strg + Shift + M</code></td>
+<td>Pipe einfügen</td>
+</tr>
+<tr class="odd">
+<td><code>Strg + Shift + F10</code></td>
+<td>R neu starten (leert Environment, entlädt Pakete)</td>
+</tr>
+</tbody>
+</table>
+<p>Auf dem Mac: <code>Cmd</code> statt <code>Strg</code>, <code>Option</code> statt <code>Alt</code>.</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Chunk-Option</th>
+<th>Wirkung</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>echo=FALSE</code></td>
+<td>Code ausführen, aber nicht zeigen</td>
+</tr>
+<tr class="even">
+<td><code>eval=FALSE</code></td>
+<td>Code zeigen, aber nicht ausführen</td>
+</tr>
+<tr class="odd">
+<td><code>message=FALSE</code> · <code>warning=FALSE</code></td>
+<td>Meldungen · Warnungen ausblenden</td>
+</tr>
+<tr class="even">
+<td><code>error=TRUE</code></td>
+<td>Fehler anzeigen statt abbrechen</td>
+</tr>
+</tbody>
+</table>
+<hr>
+</section>
+</section>
+<section id="einheit-1-grundlagen-vektoren-matrizen-erste-grafiken" class="level1">
+<h1>Einheit 1 — Grundlagen, Vektoren, Matrizen &amp; erste Grafiken</h1>
+<section id="rechnen-zuweisen-vergleichen" class="level2">
+<h2 class="anchored" data-anchor-id="rechnen-zuweisen-vergleichen">Rechnen, Zuweisen, Vergleichen</h2>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Code</th>
+<th>Bedeutung</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>+ - * / ^</code></td>
+<td>Grundrechenarten, Potenz</td>
+</tr>
+<tr class="even">
+<td><code>%/%</code> · <code>%%</code></td>
+<td>ganzzahlige Division · Rest</td>
+</tr>
+<tr class="odd">
+<td><code>x &lt;- 5</code></td>
+<td>zuweisen</td>
+</tr>
+<tr class="even">
+<td><code>&gt; &gt;= &lt; &lt;=</code> · <code>==</code> · <code>!=</code></td>
+<td>vergleichen · gleich? · ungleich?</td>
+</tr>
+<tr class="odd">
+<td><code>&amp;</code> · <code>\|</code> · <code>!</code></td>
+<td>und · oder · nicht</td>
+</tr>
+<tr class="even">
+<td><code>round(3.14159, digits = 2)</code></td>
+<td>Funktion mit benanntem Argument</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="datentypen" class="level2">
+<h2 class="anchored" data-anchor-id="datentypen">Datentypen</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Code</th>
+<th>Bedeutung</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>42.5</code> · <code>4L</code> · <code>"Text"</code> · <code>TRUE</code> / <code>FALSE</code> · <code>NA</code></td>
+<td>Zahl · Ganzzahl · Text · logisch · fehlend</td>
+</tr>
+<tr class="even">
+<td><code>class(x)</code></td>
+<td>Datentyp anzeigen</td>
+</tr>
+<tr class="odd">
+<td><code>as.numeric(x)</code> · <code>as.character(x)</code></td>
+<td>Typ umwandeln (nicht umwandelbar → <code>NA</code>)</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="vektoren" class="level2">
+<h2 class="anchored" data-anchor-id="vektoren">Vektoren</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Code</th>
+<th>Bedeutung</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>c(1, 2, 3)</code></td>
+<td>Vektor bauen</td>
+</tr>
+<tr class="even">
+<td><code>1:10</code> · <code>seq(0, 100, by = 25)</code></td>
+<td>Folge in Einerschritten · mit Schrittweite</td>
+</tr>
+<tr class="odd">
+<td><code>length(x)</code></td>
+<td>Anzahl Elemente</td>
+</tr>
+<tr class="even">
+<td><code>names(x) &lt;- c(...)</code></td>
+<td>Elemente benennen</td>
+</tr>
+<tr class="odd">
+<td><code>x[1]</code> · <code>x[c(1, 3)]</code> · <code>x[2:4]</code> · <code>x["Juli"]</code></td>
+<td>auswählen (Index beginnt bei 1)</td>
+</tr>
+<tr class="even">
+<td><code>x[-1]</code></td>
+<td>alles außer Position 1</td>
+</tr>
+<tr class="odd">
+<td><code>x[x &gt; 5]</code> · <code>which(x &gt; 5)</code> · <code>sum(x &gt; 5)</code></td>
+<td>filtern · Positionen · Anzahl</td>
+</tr>
+<tr class="even">
+<td><code>x %in% c("a", "b")</code></td>
+<td>kommt der Wert in der Menge vor?</td>
+</tr>
+<tr class="odd">
+<td><code>x[2] &lt;- 99</code> · <code>x[x &lt; 0] &lt;- NA</code></td>
+<td>Elemente überschreiben</td>
+</tr>
+<tr class="even">
+<td><code>x + y</code></td>
+<td>elementweise rechnen</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="kennzahlen-fehlende-werte" class="level2">
+<h2 class="anchored" data-anchor-id="kennzahlen-fehlende-werte">Kennzahlen &amp; fehlende Werte</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Code</th>
+<th>Bedeutung</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>mean(x)</code> · <code>median(x)</code> · <code>sum(x)</code> · <code>min(x)</code> · <code>max(x)</code> · <code>sd(x)</code></td>
+<td>Grundfunktionen</td>
+</tr>
+<tr class="even">
+<td><code>mean(x, na.rm = TRUE)</code></td>
+<td>fehlende Werte auslassen</td>
+</tr>
+<tr class="odd">
+<td><code>is.na(x)</code> · <code>sum(is.na(x))</code></td>
+<td>fehlt der Wert? · wie viele fehlen?</td>
+</tr>
+<tr class="even">
+<td><code>round(x, 1)</code> · <code>sort(x)</code> · <code>which.max(x)</code></td>
+<td>runden · sortieren · Position des Maximums</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="matrizen" class="level2">
+<h2 class="anchored" data-anchor-id="matrizen">Matrizen</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Code</th>
+<th>Bedeutung</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>matrix(1:6, nrow = 2)</code></td>
+<td>Matrix bauen (spaltenweise; <code>byrow = TRUE</code> zeilenweise)</td>
+</tr>
+<tr class="even">
+<td><code>matrix(..., dimnames = list(zeilen, spalten))</code></td>
+<td>direkt benennen</td>
+</tr>
+<tr class="odd">
+<td><code>rownames(m) &lt;- ...</code> · <code>colnames(m) &lt;- ...</code></td>
+<td>Namen setzen</td>
+</tr>
+<tr class="even">
+<td><code>m[i, j]</code> · <code>m[, j]</code> · <code>m[i, ]</code> · <code>m["Juli", "TMax"]</code></td>
+<td>auswählen</td>
+</tr>
+<tr class="odd">
+<td><code>rowMeans(m)</code> · <code>colMeans(m)</code></td>
+<td>Mittelwert je Zeile · je Spalte</td>
+</tr>
+<tr class="even">
+<td><code>cbind(m, neu = x)</code> · <code>rbind(m, neu = x)</code></td>
+<td>Spalte · Zeile anhängen</td>
+</tr>
+<tr class="odd">
+<td><code>t(m)</code></td>
+<td>Zeilen und Spalten tauschen</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="base-r-grafik" class="level2">
+<h2 class="anchored" data-anchor-id="base-r-grafik">Base-R-Grafik</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Code</th>
+<th>Bedeutung</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>barplot(x)</code></td>
+<td>Balken (Namen → Achsenbeschriftung)</td>
+</tr>
+<tr class="even">
+<td><code>plot(x, type = "b")</code> · <code>plot(x, y)</code></td>
+<td>Verlauf · Streudiagramm</td>
+</tr>
+<tr class="odd">
+<td><code>hist(x, breaks = 8)</code></td>
+<td>Histogramm</td>
+</tr>
+<tr class="even">
+<td><code>boxplot(y ~ g, data = df)</code></td>
+<td>Boxplot je Gruppe</td>
+</tr>
+<tr class="odd">
+<td><code>main =</code> · <code>xlab =</code> · <code>ylab =</code> · <code>col =</code> · <code>pch = 19</code></td>
+<td>Titel · Achsen · Farbe · Punktsymbol</td>
+</tr>
+<tr class="even">
+<td><code>par(mfrow = c(1, 2))</code> … <code>par(mfrow = c(1, 1))</code></td>
+<td>Grafiken nebeneinander — danach zurücksetzen</td>
+</tr>
+</tbody>
+</table>
+<hr>
+</section>
+</section>
+<section id="einheit-2-data-frames-daten-einlesen-dplyr" class="level1">
+<h1>Einheit 2 — Data Frames, Daten einlesen &amp; dplyr</h1>
+<section id="listen-faktoren" class="level2">
+<h2 class="anchored" data-anchor-id="listen-faktoren">Listen &amp; Faktoren</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Code</th>
+<th>Bedeutung</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>list(a = x, b = df)</code></td>
+<td>Liste mit beliebigen Objekten</td>
+</tr>
+<tr class="even">
+<td><code>l$a</code> · <code>l[["a"]]</code></td>
+<td>ein Element holen</td>
+</tr>
+<tr class="odd">
+<td><code>factor(x)</code> · <code>levels(f)</code></td>
+<td>Faktor bauen · Levels anzeigen</td>
+</tr>
+<tr class="even">
+<td><code>levels(f) &lt;- c(...)</code></td>
+<td>Levels umbenennen (in alphabetischer Reihenfolge)</td>
+</tr>
+<tr class="odd">
+<td><code>factor(x, levels = c(...), ordered = TRUE)</code></td>
+<td>geordneter Faktor</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="data-frames" class="level2">
+<h2 class="anchored" data-anchor-id="data-frames">Data Frames</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Code</th>
+<th>Bedeutung</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>data.frame(a = x, b = y)</code></td>
+<td>Data Frame bauen</td>
+</tr>
+<tr class="even">
+<td><code>str(df)</code> · <code>head(df)</code> · <code>summary(df)</code></td>
+<td>Struktur · erste Zeilen · Kennzahlen</td>
+</tr>
+<tr class="odd">
+<td><code>nrow(df)</code> · <code>ncol(df)</code></td>
+<td>Anzahl Zeilen · Spalten</td>
+</tr>
+<tr class="even">
+<td><code>df[i, j]</code> · <code>df[, "spalte"]</code> · <code>df$spalte</code></td>
+<td>auswählen</td>
+</tr>
+<tr class="odd">
+<td><code>df[df$x &gt; 5, ]</code> · <code>subset(df, x &gt; 5)</code></td>
+<td>Zeilen nach Bedingung</td>
+</tr>
+<tr class="even">
+<td><code>unique(df$x)</code> · <code>table(df$x)</code></td>
+<td>vorkommende Werte · Häufigkeiten</td>
+</tr>
+<tr class="odd">
+<td><code>df$neu &lt;- df$a / df$b</code></td>
+<td>neue Spalte</td>
+</tr>
+<tr class="even">
+<td><code>df[order(df$x), ]</code> · <code>order(df$x, decreasing = TRUE)</code></td>
+<td>sortieren · absteigend</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="einlesen-speichern" class="level2">
+<h2 class="anchored" data-anchor-id="einlesen-speichern">Einlesen &amp; Speichern</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Code</th>
+<th>Bedeutung</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>read.csv("data/raw/f.csv")</code></td>
+<td>CSV mit <code>,</code> als Trenner und <code>.</code> als Dezimalzeichen</td>
+</tr>
+<tr class="even">
+<td><code>read.csv2("data/raw/f.csv")</code></td>
+<td>CSV mit <code>;</code> und <code>,</code> (deutsches Excel)</td>
+</tr>
+<tr class="odd">
+<td><code>skip = 4</code> · <code>header = FALSE</code> · <code>na.strings = c("", "-")</code></td>
+<td>Zeilen überspringen · keine Kopfzeile · was als <code>NA</code> gilt</td>
+</tr>
+<tr class="even">
+<td><code>readxl::read_excel("f.xlsx")</code></td>
+<td>Excel-Datei</td>
+</tr>
+<tr class="odd">
+<td><code>write.csv(df, "data/processed/f.csv", row.names = FALSE)</code></td>
+<td>als CSV speichern</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="dplyr" class="level2">
+<h2 class="anchored" data-anchor-id="dplyr">dplyr</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Code</th>
+<th>Bedeutung</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>df %&gt;% f()</code> · <code>df \|&gt; f()</code></td>
+<td>Pipe „und dann”: Ergebnis links → erstes Argument rechts</td>
+</tr>
+<tr class="even">
+<td><code>data = .</code> (bei <code>%&gt;%</code>) · <code>data = _</code> (bei <code>\|&gt;</code>)</td>
+<td>Platzhalter, wenn die Daten nicht an erster Stelle stehen</td>
+</tr>
+<tr class="odd">
+<td><code>filter(df, x &gt; 5, g %in% c("a", "b"))</code></td>
+<td>Zeilen auswählen (Komma = und)</td>
+</tr>
+<tr class="even">
+<td><code>select(df, a, b)</code></td>
+<td>Spalten auswählen</td>
+</tr>
+<tr class="odd">
+<td><code>arrange(df, desc(x))</code></td>
+<td>sortieren (absteigend)</td>
+</tr>
+<tr class="even">
+<td><code>mutate(df, neu = a / b)</code></td>
+<td>neue Spalte berechnen</td>
+</tr>
+<tr class="odd">
+<td><code>count(df, g)</code></td>
+<td>Häufigkeiten zählen</td>
+</tr>
+<tr class="even">
+<td><code>df %&gt;% group_by(g) %&gt;% summarise(n = n(), m = mean(x, na.rm = TRUE))</code></td>
+<td>Kennzahlen je Gruppe</td>
+</tr>
+<tr class="odd">
+<td><code>left_join(df1, df2, by = "id")</code></td>
+<td>verbinden, alle Zeilen von <code>df1</code> behalten</td>
+</tr>
+<tr class="even">
+<td><code>inner_join()</code> · <code>right_join()</code> · <code>full_join()</code></td>
+<td>nur gemeinsame · alle von <code>df2</code> · alle</td>
+</tr>
+</tbody>
+</table>
+<hr>
+</section>
+</section>
+<section id="einheit-3-ggplot2-daten-aufräumen" class="level1">
+<h1>Einheit 3 — ggplot2 &amp; Daten aufräumen</h1>
+<section id="ggplot2" class="level2">
+<h2 class="anchored" data-anchor-id="ggplot2">ggplot2</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Code</th>
+<th>Bedeutung</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>ggplot(df, aes(x = a, y = b)) + geom_point()</code></td>
+<td>Grundgerüst: Daten, Achsen, Form</td>
+</tr>
+<tr class="even">
+<td><code>geom_point()</code> · <code>geom_col()</code> · <code>geom_line()</code></td>
+<td>Punkte · Balken · Linien</td>
+</tr>
+<tr class="odd">
+<td><code>geom_boxplot()</code> · <code>geom_histogram(bins = 8)</code></td>
+<td>Verteilungen</td>
+</tr>
+<tr class="even">
+<td><code>aes(color = g)</code> · <code>color = "steelblue"</code></td>
+<td>Farbe nach Spalte · feste Farbe</td>
+</tr>
+<tr class="odd">
+<td><code>labs(title =, x =, y =)</code></td>
+<td>Beschriftung</td>
+</tr>
+<tr class="even">
+<td><code>facet_wrap(~ g)</code></td>
+<td>eine Teilgrafik pro Gruppe</td>
+</tr>
+<tr class="odd">
+<td><code>theme_minimal()</code> · <code>theme_bw()</code></td>
+<td>Erscheinungsbild</td>
+</tr>
+<tr class="even">
+<td><code>ggsave("output/grafik.png", width = 8, height = 5)</code></td>
+<td>letzte Grafik speichern</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="daten-aufräumen" class="level2">
+<h2 class="anchored" data-anchor-id="daten-aufräumen">Daten aufräumen</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Code</th>
+<th>Bedeutung</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>names(df) &lt;- as.character(df[5, ])</code></td>
+<td>Zeile 5 zur Kopfzeile machen</td>
+</tr>
+<tr class="even">
+<td><code>df[-(1:5), ]</code> · <code>rownames(df) &lt;- NULL</code></td>
+<td>Zeilen entfernen · neu nummerieren</td>
+</tr>
+<tr class="odd">
+<td><code>tolower(gsub(" ", "_", names(df)))</code></td>
+<td>Spaltennamen in snake_case</td>
+</tr>
+<tr class="even">
+<td><code>df[cols] &lt;- lapply(df[cols], as.numeric)</code></td>
+<td>mehrere Spalten umwandeln</td>
+</tr>
+<tr class="odd">
+<td><code>paste("a", "b")</code> · <code>paste0("a", "b")</code></td>
+<td>Text verbinden mit / ohne Leerzeichen</td>
+</tr>
+<tr class="even">
+<td><code>substr(x, 1, 2)</code> · <code>trimws(x)</code></td>
+<td>Zeichen ausschneiden · Randleerzeichen entfernen</td>
+</tr>
+<tr class="odd">
+<td><code>cut(x, breaks = c(0, 10, Inf), labels = c("klein", "groß"))</code></td>
+<td>Zahlen → Kategorien</td>
+</tr>
+<tr class="even">
+<td><code>saveRDS(df, "f.rds")</code> · <code>readRDS("f.rds")</code></td>
+<td>im R-Format speichern · laden (behält Typen)</td>
+</tr>
+</tbody>
+</table>
+<hr>
+</section>
+</section>
+<section id="einheit-4-bedingungen-schleifen-funktionen" class="level1">
+<h1>Einheit 4 — Bedingungen, Schleifen &amp; Funktionen</h1>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Code</th>
+<th>Bedeutung</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>if (x &gt; 0) { ... } else { ... }</code></td>
+<td>Bedingung für <strong>einen</strong> Wert</td>
+</tr>
+<tr class="even">
+<td><code>ifelse(x &gt; 0, "ja", "nein")</code></td>
+<td>Bedingung für jedes Element eines Vektors</td>
+</tr>
+<tr class="odd">
+<td><code>mutate(df, k = case_when(is.na(x) ~ NA, x &gt; 40 ~ "hoch", TRUE ~ "niedrig"))</code></td>
+<td>mehrere Fälle, erster Treffer gewinnt</td>
+</tr>
+<tr class="even">
+<td><code>for (i in seq_along(x)) { ... }</code></td>
+<td>für jede Position wiederholen</td>
+</tr>
+<tr class="odd">
+<td><code>ergebnis &lt;- numeric(length(x))</code></td>
+<td>Ergebnisvektor vor der Schleife anlegen</td>
+</tr>
+<tr class="even">
+<td><code>while (bedingung) { ... }</code></td>
+<td>wiederholen, solange die Bedingung gilt</td>
+</tr>
+<tr class="odd">
+<td><code>next</code> · <code>break</code></td>
+<td>nächster Durchlauf · Schleife beenden</td>
+</tr>
+<tr class="even">
+<td><code>print(x)</code> · <code>cat("Text", x, "\n")</code></td>
+<td>Ausgabe innerhalb von Schleifen und Funktionen</td>
+</tr>
+<tr class="odd">
+<td><code>f &lt;- function(x, n = 1) { ... }</code></td>
+<td>eigene Funktion mit Standardwert</td>
+</tr>
+<tr class="even">
+<td><code>stop("Meldung")</code></td>
+<td>mit Fehlermeldung abbrechen</td>
+</tr>
+<tr class="odd">
+<td><code>sapply(df, mean)</code> · <code>lapply(df, mean)</code></td>
+<td>Funktion auf jede Spalte anwenden (Vektor · Liste)</td>
+</tr>
+<tr class="even">
+<td><code>sapply(df, mean, na.rm = TRUE)</code></td>
+<td>weitere Argumente an die Funktion weiterreichen</td>
+</tr>
+<tr class="odd">
+<td><code>sapply(x, function(v) v^2)</code> · <code>sapply(x, \(v) v^2)</code></td>
+<td>mit anonymer Funktion (lang · kurz)</td>
+</tr>
+</tbody>
+</table>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Kopiert");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Kopiert");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./einheit-4.html" class="pagination-link" aria-label="4 · Funktionen &amp; Schleifen">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">4 · Funktionen &amp; Schleifen</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
