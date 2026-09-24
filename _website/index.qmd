@@ -1,5 +1,6 @@
 ---
 title: "R-Einführung"
+subtitle: "Einführungsmaterialien zur Lehrveranstaltung *Quantitative Analysemethoden in der Raumforschung*"
 toc: false
 ---
 
@@ -21,3 +22,13 @@ Alle Materialien der R-Einführung zum Nachlesen — auch ohne RStudio.
    herunterladen und entpacken.
 3. `RIntroduction.Rproj` per Doppelklick öffnen und die Notebooks (`I_RINTRO.Rmd`, …) Block
    für Block ausführen.
+
+## Über diese Materialien
+
+**Autorin:** Bella Mironova, TU Wien, SRF
+
+Die Materialien wurden mit Unterstützung von Claude (Anthropic) überarbeitet und von der
+Autorin geprüft.
+
+**Lizenz:** [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/deed.de) — die Materialien
+dürfen unter Nennung der Autorin weiterverwendet und angepasst werden.

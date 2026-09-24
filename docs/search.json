@@ -643,6 +643,16 @@
     ]
   },
   {
+    "objectID": "index.html#über-diese-materialien",
+    "href": "index.html#über-diese-materialien",
+    "title": "R-Einführung",
+    "section": "Über diese Materialien",
+    "text": "Über diese Materialien\nAutorin: Bella Mironova, TU Wien, SRF\nDie Materialien wurden mit Unterstützung von Claude (Anthropic) überarbeitet und von der Autorin geprüft.\nLizenz: CC BY 4.0 — die Materialien dürfen unter Nennung der Autorin weiterverwendet und angepasst werden.",
+    "crumbs": [
+      "Start"
+    ]
+  },
+  {
     "objectID": "einheit-0.html",
     "href": "einheit-0.html",
     "title": "Einheit 0: RStudio, Projekte & Pakete",

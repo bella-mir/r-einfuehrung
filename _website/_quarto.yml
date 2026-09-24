@@ -16,6 +16,8 @@ website:
   title: "R-Einführung"
   search: true
   page-navigation: true
+  page-footer:
+    center: "© 2026 Bella Mironova · TU Wien, SRF · [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/deed.de)"
   sidebar:
     style: docked
     tools:
