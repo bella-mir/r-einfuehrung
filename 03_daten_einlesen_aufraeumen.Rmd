@@ -1,0 +1,304 @@
+---
+title: "R-Einführung — Einheit 3: Daten einlesen, aufräumen & speichern"
+output: html_notebook
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, message = FALSE)
+options(width = 110)   # breite Tabellen nicht umbrechen
+```
+
+In Einheit 2 hast du Data Frames selbst erstellt. Meistens liegen Daten aber in **Dateien**
+vor und müssen vor der Auswertung noch aufgeräumt werden. In dieser Einheit lernst du:
+
+1. **Daten einlesen** — CSV- und Excel-Dateien in R laden
+2. **Daten aufräumen** — Spaltennamen und Texte bereinigen, Kategorien bilden
+3. **Daten speichern** — als CSV, Excel, RDS oder RData
+
+Für Excel-Dateien brauchen wir zwei Pakete. Falls noch nicht geschehen, einmalig **in der
+Console** installieren: `install.packages(c("readxl", "writexl"))`. Geladen werden Pakete
+immer **am Anfang** des Dokuments:
+
+```{r}
+library(readxl)    # Excel-Dateien lesen
+library(writexl)   # Excel-Dateien schreiben
+```
+
+
+# Teil 1: Daten einlesen
+
+Tabellen werden am häufigsten als **CSV**- oder **Excel**-Datei gespeichert. Eine CSV-Datei
+(*comma-separated values*) ist eine einfache Textdatei: eine Beobachtung pro Zeile, die
+Spalten durch ein Trennzeichen getrennt.
+
+R sucht Dateien relativ zum **Arbeitsverzeichnis**. Wird das Projekt über
+`r-einfuehrung.Rproj` geöffnet, ist das der Projektordner (siehe Vorbereitung):
+
+```{r, eval=FALSE}
+getwd()
+```
+
+## CSV einlesen mit read.csv()
+
+`read.csv()` liest eine CSV-Datei und gibt einen Data Frame zurück. `gemeinden.csv` enthält
+28 österreichische Gemeinden: Gemeindekennziffer, Bundesland, Gemeindetyp, Einwohnerzahl,
+Fläche, Entfernung zur Landeshauptstadt (Luftlinie in km) und den durchschnittlichen Preis
+für Baugrundstücke (in € pro m²). Die Werte stammen von Statistik Austria; für den Kurs haben
+wir 28 Gemeinden ausgewählt und einen Preis entfernt.
+
+```{r}
+gemeinden <- read.csv("data/raw/gemeinden.csv")
+```
+
+Nach dem Einlesen **immer** prüfen, ob Spaltenzahl und Datentypen stimmen:
+
+```{r}
+str(gemeinden)
+```
+
+Leere Felder in einer Zahlenspalte werden automatisch zu `NA` — bei Ischgl fehlt der Preis:
+
+```{r}
+gemeinden[is.na(gemeinden$preis_m2), ]
+```
+
+## Andere Trennzeichen: sep und dec
+
+`read.csv()` erwartet `,` als Trennzeichen und `.` als Dezimalzeichen. Viele Dateien sehen
+anders aus: Ein Excel mit deutschen Spracheinstellungen speichert CSV zum Beispiel mit `;` als
+Trennzeichen und `,` als Dezimalzeichen (`2,87` statt `2.87`). Mit den Argumenten `sep` und
+`dec` sagst du `read.csv()`, wie die Datei aufgebaut ist:
+
+```{r, eval=FALSE}
+read.csv("data/raw/datei.csv", sep = ";", dec = ",")   # ; als Trenner, , als Dezimalzeichen
+```
+
+Weitere nützliche Argumente:
+
+- `skip = 3` — die ersten 3 Zeilen überspringen (z. B. Info-Zeilen über der Tabelle)
+- `header = FALSE` — wenn die erste Zeile keine Spaltennamen enthält
+- `na.strings = c("", "NA", "-")` — welche Einträge als fehlend (`NA`) gelten sollen
+- `fileEncoding = "UTF-8"` (oder `"latin1"`) — bei falsch dargestellten Umlauten
+
+## Excel einlesen: read_excel()
+
+Excel-Dateien (`.xlsx`, `.xls`) liest das Paket `readxl`. Eine Excel-Datei kann mehrere
+**Tabellenblätter** enthalten — `excel_sheets()` zeigt ihre Namen:
+
+```{r}
+excel_sheets("data/raw/gemeinden.xlsx")
+```
+
+`read_excel()` liest das erste Tabellenblatt, mit `sheet` wählst du ein anderes (über den
+Namen oder die Nummer):
+
+```{r}
+gemeinden_xlsx <- read_excel("data/raw/gemeinden.xlsx")
+bundeslaender  <- read_excel("data/raw/gemeinden.xlsx", sheet = "bundeslaender")
+
+str(gemeinden_xlsx)
+```
+
+Trennzeichen und Dezimalzeichen spielen hier keine Rolle: Excel speichert Zahlen als Zahlen.
+Die übrigen Argumente kennst du schon — nur heißt `na.strings` hier `na`:
+
+- `sheet = "bundeslaender"` oder `sheet = 2` — welches Tabellenblatt
+- `skip = 3` — die ersten 3 Zeilen überspringen
+- `na = c("", "-")` — welche Einträge als fehlend (`NA`) gelten sollen
+- `range = "A5:D20"` — nur einen bestimmten Zellbereich einlesen
+
+`read_excel()` gibt ein **Tibble** zurück — eine Variante des Data Frames, die du in Einheit 4
+kennenlernst. Mit `as.data.frame()` wird daraus ein gewöhnlicher Data Frame:
+
+```{r}
+gemeinden_xlsx <- as.data.frame(gemeinden_xlsx)
+```
+
+Für sehr große CSV-Dateien gibt es außerdem `read_csv()` aus dem Paket `readr` — schneller
+und strenger als `read.csv()`.
+
+### Übung
+
+Die Datei `data/raw/luftguete.csv` enthält die Jahresmittelwerte 2025 der 16 Wiener
+Luftgüte-Messstellen für Stickstoffdioxid (NO2) und Feinstaub (PM10) — für den Kurs
+zusammengestellt aus dem Luftgütebericht 2025 der Stadt Wien. Nicht jede Station misst beide
+Schadstoffe. Öffne die Datei zuerst als Text (im *Files*-Bereich anklicken → *View File*).
+
+1. Welches Trennzeichen verwendet die Datei, und wie viele Info-Zeilen stehen über der
+   Kopfzeile? Lies sie mit `sep` und `skip` ein.
+2. Prüfe das Ergebnis mit `str()`. Warum sind `NO2` und `PM10` Text (`chr`) statt Zahlen?
+3. Ergänze `na.strings`, sodass beide Spalten als Zahlen ankommen.
+4. Wie viele Werte fehlen in `PM10`, und wie hoch ist der mittlere `NO2`-Wert?
+5. An welcher Station ist der `NO2`-Wert am höchsten? Liegt er über dem Grenzwert für den
+   Jahresmittelwert von 35 µg/m³?
+
+```{r}
+# dein Code
+
+```
+
+
+# Teil 2: Daten aufräumen
+
+Echte Dateien sind selten sofort verwendbar: oben stehen Info-Zeilen, Zahlen kommen als Text
+an, Spaltennamen enthalten Leerzeichen. Die Datei `data/raw/bezirke_roh.csv` ist so ein Fall —
+Semikolon-getrennt, mit vier Info-Zeilen vor der eigentlichen Kopfzeile. Sie enthält
+Einwohnerzahl (1. Jänner 2021), mittleres Netto-Jahreseinkommen pro Arbeitnehmer:in (2021) und
+Fläche von acht Wiener Bezirken. Die Werte stammen aus den offenen Daten der Stadt Wien; für
+den Kurs haben wir typische Fehler eingebaut (Leerzeichen, ein fehlender Wert).
+
+## Einlesen mit den passenden Argumenten
+
+Ein Blick in die Datei (im *Files*-Bereich anklicken → *View File*) zeigt, was zu tun ist. Das
+meiste erledigt `read.csv()` gleich beim Einlesen: `sep = ";"` für das Semikolon, `skip = 4`
+überspringt die vier Info-Zeilen, `dec = ","` erkennt das Dezimalkomma, und `na.strings = "-"`
+macht aus dem Strich bei Neubau ein `NA`:
+
+```{r}
+bezirke <- read.csv("data/raw/bezirke_roh.csv", sep = ";", dec = ",", skip = 4, na.strings = "-")
+str(bezirke)
+```
+
+Alle Zahlenspalten kommen als Zahlen an. Übrig bleiben zwei Dinge, die `read.csv()` nicht
+löst: die Spaltennamen und die Texte.
+
+## Spaltennamen säubern: gsub() und tolower()
+
+Die Namen in der Datei enthalten Leerzeichen (`Bezirk Nummer`); R hat sie beim Einlesen durch
+Punkte ersetzt. `gsub(muster, ersatz, text)` ist Suchen-und-Ersetzen: Wir tauschen die Punkte
+gegen Unterstriche. `fixed = TRUE` sagt, dass der Punkt wörtlich gemeint ist — sonst hat er in
+`gsub()` eine Sonderbedeutung. `tolower()` macht alles klein, damit die Namen snake_case sind:
+
+```{r}
+names(bezirke)
+names(bezirke) <- tolower(gsub(".", "_", names(bezirke), fixed = TRUE))
+names(bezirke)
+```
+
+## Text aufräumen und zusammensetzen: trimws(), paste(), substr()
+
+Ein häufiges Problem bei von Hand eingegebenen Daten sind überflüssige Leerzeichen. In der
+Tabelle sieht man sie nicht — aber ein Vergleich findet nichts:
+
+```{r}
+bezirke[bezirke$bezirk_name == "Wieden", ]   # kein Treffer
+bezirke$bezirk_name[4]                       # in der Datei steht "Wieden  "
+```
+
+`trimws()` entfernt Leerzeichen am Anfang und Ende:
+
+```{r}
+bezirke$bezirk_name <- trimws(bezirke$bezirk_name)
+bezirke[bezirke$bezirk_name == "Wieden", ]
+```
+
+`paste()` verbindet Textstücke mit einem Leerzeichen, `paste0()` ohne Trennzeichen:
+
+```{r}
+paste("AT", "13", "01")     # "AT 13 01"
+paste0("AT", "13", "01")    # "AT1301"
+
+bezirke$label <- paste0(bezirke$bezirk_nummer, ". ", bezirke$bezirk_name)
+head(bezirke$label)
+```
+
+`substr(text, start, stop)` schneidet Zeichen nach Position heraus — nützlich, um kombinierte
+Codes zu trennen:
+
+```{r}
+codes <- c("AT130", "AT127", "AT111")
+substr(codes, 1, 2)   # Land
+substr(codes, 3, 5)   # Regionscode
+```
+
+## Zahlen in Kategorien einteilen: cut()
+
+`cut()` teilt eine Zahlenspalte anhand von Grenzen (`breaks`) in Kategorien ein und liefert
+einen **Faktor** zurück (siehe Einheit 2, *Faktoren*):
+
+```{r}
+bezirke$groesse <- cut(bezirke$einwohner,
+                       breaks = c(0, 30000, 60000, Inf),
+                       labels = c("klein", "mittel", "groß"))
+
+bezirke[, c("bezirk_name", "einwohner", "groesse")]
+table(bezirke$groesse)
+```
+
+### Übung
+
+1. Berechne das mittlere Einkommen über alle Bezirke und zeige die Bezirke, die darüber liegen.
+2. Berechne die Einwohner pro km² als neue Spalte `einwohner_pro_km2` (gerundet). Welcher
+   Bezirk ist am dichtesten besiedelt (Tipp: `which.max()`)? Warum fehlt der Wert bei Neubau?
+3. Zeichne mit `barplot()` die Einwohner pro Bezirk; beschrifte die Balken mit
+   `names.arg = bezirke$bezirk_name` (Tipp: `las = 2` dreht die Beschriftung).
+
+```{r}
+# dein Code
+
+```
+
+
+# Teil 3: Ergebnisse speichern
+
+Bereinigte Daten speichert man nach `data/processed/` — `data/raw/` bleibt unverändert.
+
+## Als CSV: write.csv()
+
+Gut zum Weitergeben. `write.csv()` schreibt mit `,` als Trennzeichen und `.` als
+Dezimalzeichen; `row.names = FALSE` verhindert eine zusätzliche Spalte mit Zeilennummern:
+
+```{r, eval=FALSE}
+write.csv(bezirke, "data/processed/bezirke_clean.csv", row.names = FALSE)
+```
+
+Nachteil von CSV: Faktor-Stufen gehen verloren, und beim erneuten Einlesen muss R die
+Datentypen neu erkennen.
+
+## Als Excel: write_xlsx()
+
+`readxl` kann nur lesen; zum Schreiben gibt es das Paket `writexl`. `write_xlsx()` speichert
+einen Data Frame als `.xlsx`-Datei — praktisch, wenn jemand ohne R mit den Daten
+weiterarbeiten soll:
+
+```{r, eval=FALSE}
+write_xlsx(bezirke, "data/processed/bezirke_clean.xlsx")
+```
+
+Für mehrere Tabellenblätter übergibst du eine **benannte Liste** (siehe Einheit 2, *Listen*) —
+die Namen werden zu den Namen der Tabellenblätter:
+
+```{r, eval=FALSE}
+write_xlsx(list(bezirke = bezirke, gemeinden = gemeinden),
+           "data/processed/kursdaten.xlsx")
+```
+
+## Im R-Format: saveRDS() und save()
+
+R hat eigene Dateiformate, die ein Objekt **genau so** speichern, wie es in R vorliegt — mit
+Datentypen, Faktor-Stufen und Spaltennamen. Beim Laden ist nichts neu zu erkennen oder
+aufzuräumen. Der Preis: Nur R kann diese Dateien lesen, Excel oder ein Texteditor nicht.
+
+```{r, eval=FALSE}
+# RDS — ein Objekt, behält Datentypen und Faktor-Stufen exakt
+saveRDS(bezirke, "data/processed/bezirke.rds")
+bezirke <- readRDS("data/processed/bezirke.rds")
+
+# RData — mehrere Objekte in einer Datei
+save(bezirke, gemeinden, file = "data/processed/bezirke.RData")
+load("data/processed/bezirke.RData")   # holt sie unter denselben Namen zurück
+```
+
+Faustregel: **CSV** oder **Excel** zum Weitergeben, **RDS** als Zwischenstand für die eigene
+Weiterarbeit in R.
+
+### Übung
+
+1. Speichere `bezirke` in `data/processed/` einmal als CSV und einmal als RDS.
+2. Lies beide Dateien wieder ein und vergleiche sie mit `str()`. Was ist in der CSV-Datei mit
+   der Spalte `groesse` passiert?
+
+```{r}
+# dein Code
+
+```

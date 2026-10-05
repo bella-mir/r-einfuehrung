@@ -5,48 +5,15 @@
 #
 # The notebooks are copied into _website/ and rendered there, so the course files
 # themselves stay unchanged (no Quarto config in the folder students work in).
+# While editing, use _website/preview_site.R for a live preview instead.
 
-if (!file.exists("r-einfuehrung.Rproj")) {
-  stop("Bitte aus dem Projektordner ausführen (r-einfuehrung.Rproj öffnen).")
-}
-
-# Quarto: on the PATH, otherwise the version bundled with RStudio
-quarto <- Sys.which("quarto")
-if (quarto == "") {
-  quarto <- "C:/Program Files/RStudio/resources/app/bin/quarto/bin/quarto.exe"
-}
-
-# Source file -> file name inside _website/ (becomes the page name on the website)
-seiten <- c(
-  "00_vorbereitung.Rmd"                  = "vorbereitung.Rmd",
-  "01_grundlagen.Rmd"                    = "einheit-1.Rmd",
-  "02_datenstrukturen_einlesen.Rmd"      = "einheit-2.Rmd",
-  "03_daten_auswerten_visualisieren.Rmd" = "einheit-3.Rmd",
-  "04_funktionen_schleifen.Rmd"          = "einheit-4.Rmd",
-  "05_uebungsaufgabe_1.Rmd"              = "uebungsaufgabe-1.Rmd"
-)
-
-for (quelle in names(seiten)) {
-  zeilen <- readLines(quelle, encoding = "UTF-8")
-  # On the website the course name is already in the header: drop the prefix from titles
-  zeilen <- sub('^title: "R-Einführung — ', 'title: "', zeilen)
-  writeLines(zeilen, file.path("_website", seiten[[quelle]]), useBytes = TRUE)
-}
-
-# The cheat sheet has no YAML header: its first heading becomes the page title
-cheatsheet <- readLines("cheatsheet.md", encoding = "UTF-8")
-writeLines(c("---", 'title: "Cheatsheet"', "---", cheatsheet[-1]),
-           "_website/cheatsheet.md", useBytes = TRUE)
-
-# Course data, so that paths like "data/raw/..." work while rendering
-dir.create("_website/data/raw", recursive = TRUE, showWarnings = FALSE)
-file.copy(list.files("data/raw", full.names = TRUE), "_website/data/raw", overwrite = TRUE)
+source("_website/prepare_site.R")
+kopiere_quellen()
 
 # docs/ lies outside the Quarto project, so Quarto does not clean it up itself:
 # start from an empty folder to avoid leftover files from earlier builds
 unlink("docs", recursive = TRUE)
 
-Sys.setenv(QUARTO_R = R.home("bin"))
 status <- system2(quarto, c("render", shQuote("_website")))
 if (status != 0) stop("Quarto render ist fehlgeschlagen.")
 

@@ -8,6 +8,7 @@ project:
     - einheit-2.Rmd
     - einheit-3.Rmd
     - einheit-4.Rmd
+    - einheit-5.Rmd
     - uebungsaufgabe-1.Rmd
     - cheatsheet.md
 
@@ -34,11 +35,13 @@ website:
           - href: einheit-1.Rmd
             text: "1 · Grundlagen"
           - href: einheit-2.Rmd
-            text: "2 · Datenstrukturen & Daten einlesen"
+            text: "2 · Datenstrukturen"
           - href: einheit-3.Rmd
-            text: "3 · Daten auswerten & visualisieren"
+            text: "3 · Daten einlesen, aufräumen & speichern"
           - href: einheit-4.Rmd
-            text: "4 · Bedingungen, Schleifen & Funktionen"
+            text: "4 · Daten auswerten & visualisieren"
+          - href: einheit-5.Rmd
+            text: "5 · Bedingungen, Schleifen & Funktionen"
       - href: uebungsaufgabe-1.Rmd
         text: Übungsaufgabe 1
       - href: cheatsheet.md

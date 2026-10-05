@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="de" xml:lang="de"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.9.38">
+<meta name="generator" content="quarto-1.10.18">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -12,10 +12,13 @@
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
 */
-code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
-div.columns{display: flex; gap: min(4vw, 1.5em);}
-div.column{flex: auto; overflow-x: auto;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
@@ -76,10 +79,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-bb13f761afd1698ae8f29792cda6a076.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-b780e26fcea2d1faebb34e9a9f24195f.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -179,19 +182,25 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./einheit-2.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">2 · Datenstrukturen &amp; Daten einlesen</span></a>
+ <span class="menu-text">2 · Datenstrukturen</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./einheit-3.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">3 · Daten auswerten &amp; visualisieren</span></a>
+ <span class="menu-text">3 · Daten einlesen, aufräumen &amp; speichern</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./einheit-4.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">4 · Bedingungen, Schleifen &amp; Funktionen</span></a>
+ <span class="menu-text">4 · Daten auswerten &amp; visualisieren</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./einheit-5.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">5 · Bedingungen, Schleifen &amp; Funktionen</span></a>
   </div>
 </li>
       </ul>
@@ -222,14 +231,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#rstudio-die-vier-bereiche" id="toc-rstudio-die-vier-bereiche" class="nav-link" data-scroll-target="#rstudio-die-vier-bereiche">RStudio: die vier Bereiche</a></li>
   <li><a href="#projekte-und-arbeitsverzeichnis" id="toc-projekte-und-arbeitsverzeichnis" class="nav-link" data-scroll-target="#projekte-und-arbeitsverzeichnis">Projekte und Arbeitsverzeichnis</a>
   <ul class="collapse">
+  <li><a href="#was-ist-ein-projekt" id="toc-was-ist-ein-projekt" class="nav-link" data-scroll-target="#was-ist-ein-projekt">Was ist ein Projekt?</a></li>
+  <li><a href="#ein-projekt-anlegen" id="toc-ein-projekt-anlegen" class="nav-link" data-scroll-target="#ein-projekt-anlegen">Ein Projekt anlegen</a></li>
+  <li><a href="#daten-und-dateien-ordnen" id="toc-daten-und-dateien-ordnen" class="nav-link" data-scroll-target="#daten-und-dateien-ordnen">Daten und Dateien ordnen</a></li>
   <li><a href="#die-kursmaterialien" id="toc-die-kursmaterialien" class="nav-link" data-scroll-target="#die-kursmaterialien">Die Kursmaterialien</a></li>
   </ul></li>
   <li><a href="#r-markdown" id="toc-r-markdown" class="nav-link" data-scroll-target="#r-markdown">R Markdown</a></li>
   <li><a href="#wichtige-tastenkürzel" id="toc-wichtige-tastenkürzel" class="nav-link" data-scroll-target="#wichtige-tastenkürzel">Wichtige Tastenkürzel</a></li>
   <li><a href="#pakete-installieren-und-laden" id="toc-pakete-installieren-und-laden" class="nav-link" data-scroll-target="#pakete-installieren-und-laden">Pakete installieren und laden</a></li>
   <li><a href="#hilfe-finden" id="toc-hilfe-finden" class="nav-link" data-scroll-target="#hilfe-finden">Hilfe finden</a></li>
-  <li><a href="#grundregeln-für-den-anfang" id="toc-grundregeln-für-den-anfang" class="nav-link" data-scroll-target="#grundregeln-für-den-anfang">Grundregeln für den Anfang</a></li>
-  <li><a href="#übung-dein-erstes-eigenes-projekt" id="toc-übung-dein-erstes-eigenes-projekt" class="nav-link" data-scroll-target="#übung-dein-erstes-eigenes-projekt">Übung: dein erstes eigenes Projekt</a></li>
   </ul>
 </nav>
     </div>
@@ -262,13 +272,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><strong>R</strong> installieren: <a href="https://cran.r-project.org" class="uri">https://cran.r-project.org</a> (<em>Download R for Windows / macOS</em>).</li>
 <li><strong>Danach RStudio</strong> installieren: <a href="https://posit.co/download/rstudio-desktop/" class="uri">https://posit.co/download/rstudio-desktop/</a>.</li>
 </ol>
-<p>R ist die Programmiersprache, RStudio die Oberfläche dazu. RStudio findet R automatisch — man öffnet danach nur noch RStudio.</p>
+<p>R ist die Programmiersprache, RStudio die Oberfläche dazu — man öffnet danach nur noch RStudio.</p>
 <p><strong>Einmalig einstellen</strong> unter <em>Tools → Global Options → General</em>:</p>
 <ul>
 <li>Haken bei <em>Restore .RData into workspace at startup</em> <strong>entfernen</strong></li>
 <li><em>Save workspace to .RData on exit</em> auf <strong>Never</strong> setzen</li>
 </ul>
-<p>So startet jede Sitzung mit einer leeren Umgebung, und das Skript muss alles selbst erzeugen — genau das macht es reproduzierbar.</p>
 </section>
 <section id="rstudio-die-vier-bereiche" class="level1">
 <h1>RStudio: die vier Bereiche</h1>
@@ -302,43 +311,50 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 </tbody>
 </table>
-<p>Nur was in einer <strong>Datei</strong> steht, ist reproduzierbar — die Console ist ein Notizzettel.</p>
-<p>Code steht in einer Datei in grauen <strong>Code-Blöcken</strong> (<em>Chunks</em>). Ausgeführt wird er mit <code>Strg + Enter</code> (aktuelle Zeile) oder mit dem grünen Pfeil oben rechts im Block (ganzer Block); das Ergebnis erscheint direkt darunter:</p>
+<p>Code steht in einer <code>.Rmd</code>-Datei in grauen <strong>Code-Blöcken</strong> (<em>Chunks</em>). Ausgeführt wird er mit <code>Strg + Enter</code> (aktuelle Zeile) oder mit dem grünen Pfeil oben rechts im Block (ganzer Block); das Ergebnis erscheint direkt darunter:</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="sc">+</span> <span class="dv">2</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 3</code></pre>
 </div>
 </div>
-<p>Ein Befehl darf über mehrere Zeilen gehen. Solange eine Klammer offen ist oder die Zeile mit einem Operator endet, liest R in der nächsten Zeile weiter:</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>(<span class="dv">1</span> <span class="sc">+</span> <span class="dv">2</span> <span class="sc">+</span> <span class="dv">3</span> <span class="sc">+</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>   <span class="dv">4</span> <span class="sc">+</span> <span class="dv">5</span>) <span class="sc">/</span> <span class="dv">3</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 5</code></pre>
-</div>
-</div>
 <p>Kommentare beginnen mit <code>#</code> und werden von R ignoriert — sie sind nur für Menschen da.</p>
 </section>
 <section id="projekte-und-arbeitsverzeichnis" class="level1">
 <h1>Projekte und Arbeitsverzeichnis</h1>
-<p>Ein <strong>RStudio-Projekt</strong> ist ein Ordner mit einer <code>.Rproj</code>-Datei. Öffnet man es per Doppelklick auf die <code>.Rproj</code>-Datei (oder <em>File → Open Project</em>), setzt RStudio das <strong>Arbeitsverzeichnis</strong> (working directory) automatisch auf diesen Ordner.</p>
-<p>Dadurch funktionieren <strong>relative Pfade</strong> wie <code>"data/raw/daten.csv"</code> auf jedem Rechner — niemand muss seinen eigenen Pfad eintragen, und <code>setwd("C:/Users/…")</code> wird nie gebraucht. Das aktuelle Arbeitsverzeichnis zeigt <code>getwd()</code>.</p>
-<p>Neues Projekt anlegen: <strong>File → New Project → New Directory → New Project.</strong></p>
-<p>Empfohlene Ordnerstruktur:</p>
+<section id="was-ist-ein-projekt" class="level2">
+<h2 class="anchored" data-anchor-id="was-ist-ein-projekt">Was ist ein Projekt?</h2>
+<p>Ein <strong>RStudio-Projekt</strong> ist ein Ordner, in dem alles liegt, was zu einer Arbeit gehört: Daten, Code und Ergebnisse. Erkennbar ist er an einer <code>.Rproj</code>-Datei. Öffnet man das Projekt per Doppelklick auf diese Datei, setzt RStudio das <strong>Arbeitsverzeichnis</strong> (working directory) automatisch auf den Projektordner — das ist der Ort, von dem aus R Dateien sucht. <code>getwd()</code> zeigt ihn an.</p>
+<p>Der Vorteil: Dateien lassen sich mit <strong>relativen Pfaden</strong> ansprechen, z. B. <code>"data/raw/daten.csv"</code>. Solche Pfade funktionieren auf jedem Rechner, auch wenn der Projektordner woanders liegt — <code>setwd("C:/Users/…")</code> wird nie gebraucht.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">read.csv</span>(<span class="st">"data/raw/daten.csv"</span>)     <span class="co"># richtig: relativ, mit Schrägstrich /</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">read.csv</span>(<span class="st">"data</span><span class="sc">\r</span><span class="st">aw\daten.csv"</span>)     <span class="co"># Fehler: Backslash, wie ihn der Windows-Explorer zeigt</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="ein-projekt-anlegen" class="level2">
+<h2 class="anchored" data-anchor-id="ein-projekt-anlegen">Ein Projekt anlegen</h2>
+<ol type="1">
+<li><em>File → New Project → New Directory → New Project</em>, Namen und Speicherort wählen.</li>
+<li>Im <em>Files</em>-Bereich mit <em>New Folder</em> die Ordner anlegen (siehe unten).</li>
+<li>Später immer per Doppelklick auf die <code>.Rproj</code>-Datei öffnen.</li>
+</ol>
+</section>
+<section id="daten-und-dateien-ordnen" class="level2">
+<h2 class="anchored" data-anchor-id="daten-und-dateien-ordnen">Daten und Dateien ordnen</h2>
+<p>Eine feste Ordnerstruktur trennt, was man <strong>bekommen</strong> hat, von dem, was man <strong>selbst erzeugt</strong>:</p>
 <pre><code>mein-projekt/
 ├── mein-projekt.Rproj
+├── analyse.Rmd       # eigene .R / .Rmd Dateien
 ├── data/
 │   ├── raw/          # Originaldaten – nie überschreiben
-│   └── processed/    # bereinigte / gespeicherte Zwischenstände
-├── scripts/          # eigene .R / .Rmd Dateien
-└── output/           # Grafiken, gerenderte Reports</code></pre>
-<p><strong>Achtung bei <code>.Rmd</code>-Dateien in Unterordnern:</strong> Beim Knitten verwendet R den Ordner der <code>.Rmd</code>-Datei als Arbeitsverzeichnis — liegt sie in <code>scripts/</code>, findet <code>"data/raw/…"</code> nichts mehr. Abhilfe: Im Menü neben dem Knit-Button <em>Knit Directory → Project Directory</em> wählen, oder Pfade mit dem Paket <code>here</code> bauen: <code>here::here("data", "raw", "daten.csv")</code> beginnt immer beim Projektordner.</p>
-<p><strong>Pfade unter Windows:</strong> Im Explorer steht <code>C:\Users\...</code> mit Backslash. In R ist <code>\</code> aber ein Sonderzeichen — Pfade immer mit <strong>Schrägstrich</strong> <code>/</code> schreiben (oder doppeltem <code>\\</code>):</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">read.csv</span>(<span class="st">"data/raw/daten.csv"</span>)     <span class="co"># richtig</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">read.csv</span>(<span class="st">"data</span><span class="sc">\r</span><span class="st">aw\daten.csv"</span>)     <span class="co"># Fehler</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
+│   └── processed/    # bereinigte Daten und Zwischenstände
+└── output/           # Grafiken, fertige Berichte</code></pre>
+<ul>
+<li><strong><code>data/raw/</code></strong> enthält die Originaldaten, unverändert. So lässt sich jede Auswertung von vorne wiederholen und jeder Schritt nachprüfen.</li>
+<li><strong><code>data/processed/</code></strong> und <strong><code>output/</code></strong> enthalten nur, was der Code erzeugt — sie lassen sich jederzeit löschen und neu erstellen.</li>
+<li><strong><code>.Rmd</code>-Dateien</strong> liegen direkt im Projektordner: Beim Knitten verwendet R den Ordner der <code>.Rmd</code>-Datei als Arbeitsverzeichnis, und so stimmen die relativen Pfade immer.</li>
+</ul>
+</section>
 <section id="die-kursmaterialien" class="level2">
 <h2 class="anchored" data-anchor-id="die-kursmaterialien">Die Kursmaterialien</h2>
 <p>Der Kurs ist selbst ein RStudio-Projekt:</p>
@@ -347,7 +363,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><code>r-einfuehrung.Rproj</code> per Doppelklick öffnen.</li>
 <li>Die Notebooks der Reihe nach bearbeiten: <code>00_…</code>, <code>01_…</code>, … — die Nummer entspricht der Einheit. Die Kursdaten liegen in <code>data/raw/</code>.</li>
 </ol>
-<p>Der Kursordner ist etwas vereinfacht: Die Notebooks liegen direkt im Projektordner statt in <code>scripts/</code>.</p>
 </section>
 </section>
 <section id="r-markdown" class="level1">
@@ -358,11 +373,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><strong>Text/Markdown</strong> — Fließtext mit einfacher Formatierung: <code># Überschrift</code>, <code>## Unterüberschrift</code>, <code>**fett**</code>, <code>*kursiv*</code>, <code>`code`</code>, Listen mit <code>-</code> oder <code>1.</code>.</li>
 <li><strong>Code-Chunks</strong> — grau hinterlegte Blöcke, die R ausführt. Neuer Chunk: <code>Strg + Alt + I</code>.</li>
 </ol>
-<p>Der <strong>Knit-Button</strong> (<code>Strg + Shift + K</code>) führt das ganze Dokument in einer <strong>frischen R-Sitzung</strong> von oben nach unten aus und erzeugt daraus HTML (oder PDF/Word) — Code, Ausgabe und Text zusammen. Läuft ein Dokument beim Knitten nicht durch, fehlt meist ein Schritt, der nur in der eigenen Sitzung passiert ist.</p>
+<p>Der <strong>Knit-Button</strong> (<code>Strg + Shift + K</code>) führt das ganze Dokument in einer <strong>frischen R-Sitzung</strong> von oben nach unten aus und erzeugt daraus HTML — Code, Ausgabe und Text zusammen. Läuft ein Dokument beim Knitten nicht durch, fehlt meist ein Schritt, der nur in der eigenen Sitzung passiert ist.</p>
 <p>Zwei Ausgabeformate begegnen einem häufig:</p>
 <ul>
 <li><code>output: html_document</code> — beim Knitten entsteht ein fertiger HTML-Report.</li>
-<li><code>output: html_notebook</code> — beim <strong>Speichern</strong> entsteht eine <code>.nb.html</code>-Datei mit den Ergebnissen der Chunks, die man bisher ausgeführt hat. Praktisch zum interaktiven Arbeiten.</li>
+<li><code>output: html_notebook</code> — beim <strong>Speichern</strong> entsteht eine <code>.nb.html</code>-Datei mit den Ergebnissen der bisher ausgeführten Chunks. Praktisch zum interaktiven Arbeiten.</li>
 </ul>
 <p>Nützliche <strong>Chunk-Optionen</strong> (in den geschweiften Klammern nach <code>r</code>, z. B. <code>{r, eval=FALSE}</code>):</p>
 <table class="caption-top table">
@@ -395,13 +410,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 </tbody>
 </table>
-<blockquote class="blockquote">
-<p><strong>Hinweis:</strong> <em>Quarto</em> (<code>.qmd</code>) ist der Nachfolger von R Markdown und funktioniert fast identisch. Alles hier Gezeigte lässt sich direkt übertragen.</p>
-</blockquote>
+<p>Alles Weitere zu Formatierung, Chunks und Ausgabeformaten steht im <a href="https://rstudio.github.io/cheatsheets/html/rmarkdown.html">R-Markdown-Cheatsheet</a>.</p>
 </section>
 <section id="wichtige-tastenkürzel" class="level1">
 <h1>Wichtige Tastenkürzel</h1>
-<p>RStudio, Standardbelegung:</p>
 <table class="caption-top table">
 <colgroup>
 <col style="width: 33%">
@@ -427,49 +439,29 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td><code>Cmd + Shift + Enter</code></td>
 </tr>
 <tr class="odd">
-<td>Alle Chunks davor ausführen</td>
-<td><code>Strg + Alt + P</code></td>
-<td><code>Cmd + Option + P</code></td>
-</tr>
-<tr class="even">
 <td>Neuen Chunk einfügen</td>
 <td><code>Strg + Alt + I</code></td>
 <td><code>Cmd + Option + I</code></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td>Dokument rendern (Knit)</td>
 <td><code>Strg + Shift + K</code></td>
 <td><code>Cmd + Shift + K</code></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td>Zuweisungspfeil <code>&lt;-</code></td>
 <td><code>Alt + -</code></td>
 <td><code>Option + -</code></td>
 </tr>
-<tr class="odd">
-<td>Pipe <code>%&gt;%</code> / <code>\|&gt;</code></td>
+<tr class="even">
+<td>Pipe <code>%&gt;%</code> / <code>|&gt;</code></td>
 <td><code>Strg + Shift + M</code></td>
 <td><code>Cmd + Shift + M</code></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td>Zeile(n) aus-/einkommentieren</td>
 <td><code>Strg + Shift + C</code></td>
 <td><code>Cmd + Shift + C</code></td>
-</tr>
-<tr class="odd">
-<td>Code neu einrücken</td>
-<td><code>Strg + I</code></td>
-<td><code>Cmd + I</code></td>
-</tr>
-<tr class="even">
-<td>In allen Dateien suchen</td>
-<td><code>Strg + Shift + F</code></td>
-<td><code>Cmd + Shift + F</code></td>
-</tr>
-<tr class="odd">
-<td>Console leeren</td>
-<td><code>Strg + L</code></td>
-<td><code>Ctrl + L</code></td>
 </tr>
 <tr class="even">
 <td>R-Session neu starten</td>
@@ -477,11 +469,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td><code>Cmd + Shift + F10</code></td>
 </tr>
 <tr class="odd">
-<td>Autovervollständigung</td>
-<td><code>Tab</code></td>
-<td><code>Tab</code></td>
-</tr>
-<tr class="even">
 <td>Alle Tastenkürzel anzeigen</td>
 <td><code>Alt + Shift + K</code></td>
 <td><code>Option + Shift + K</code></td>
@@ -492,76 +479,36 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="pakete-installieren-und-laden" class="level1">
 <h1>Pakete installieren und laden</h1>
 <p>R bringt viele Funktionen mit (<code>base</code>). Alles Weitere steckt in <strong>Paketen</strong>, die andere geschrieben und auf <strong>CRAN</strong> bereitgestellt haben.</p>
-<p><strong>Einmal pro Rechner</strong> installieren — am besten direkt <strong>in der Console</strong>, nicht im Skript (sonst wird bei jedem Durchlauf neu installiert):</p>
+<p><strong>Einmal pro Rechner</strong> installieren — direkt <strong>in der Console</strong>, nicht im Dokument (sonst wird bei jedem Durchlauf neu installiert):</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"dplyr"</span>)</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="fu">c</span>(<span class="st">"dplyr"</span>, <span class="st">"ggplot2"</span>, <span class="st">"readxl"</span>))   <span class="co"># mehrere auf einmal</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"dplyr"</span>)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="fu">c</span>(<span class="st">"dplyr"</span>, <span class="st">"ggplot2"</span>, <span class="st">"tidyr"</span>, <span class="st">"readxl"</span>, <span class="st">"writexl"</span>))   <span class="co"># alle Pakete dieses Kurses</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p><strong>In jeder Sitzung</strong> laden — das gehört ganz oben ins Skript:</p>
+<p><strong>In jeder Sitzung</strong> laden — das gehört ganz oben ins Dokument:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p>Eine einzelne Funktion lässt sich auch ohne <code>library()</code> über <code>paket::funktion()</code> aufrufen, z. B. <code>dplyr::filter(...)</code>.</p>
 <p>Typische Fehlermeldungen:</p>
 <ul>
 <li><em>„there is no package called ‘x’“</em> → Paket ist nicht installiert.</li>
 <li><em>„could not find function ‘y’“</em> → Paket nicht geladen (<code>library()</code> vergessen) oder Tippfehler.</li>
 </ul>
-<p>Aktualisieren: <code>update.packages()</code> oder im <em>Packages</em>-Bereich (dort zeigt ein Häkchen auch, welche Pakete gerade geladen sind).</p>
 </section>
 <section id="hilfe-finden" class="level1">
 <h1>Hilfe finden</h1>
 <ul>
-<li><code>?mean</code> oder <code>help(mean)</code> öffnet die Hilfeseite einer Funktion im <em>Help</em>-Bereich. Am nützlichsten sind meist die Abschnitte <strong>Arguments</strong> und ganz unten <strong>Examples</strong>.</li>
-<li><code>??regression</code> durchsucht alle Hilfeseiten nach einem Begriff.</li>
-<li><em>Help → Cheat Sheets</em> in RStudio: kompakte Übersichten zu <code>dplyr</code>, <code>ggplot2</code> u. a.</li>
-<li>Fehlermeldungen <strong>lesen</strong>: Sie nennen meist die Funktion und das Problem. Die Meldung zu kopieren und zu suchen (Stack Overflow, Suchmaschine) ist normal und erwünscht.</li>
+<li><code>?mean</code> öffnet die Hilfeseite einer Funktion im <em>Help</em>-Bereich. Am nützlichsten sind meist die Abschnitte <strong>Arguments</strong> und ganz unten <strong>Examples</strong>.</li>
+<li><em>Help → Cheat Sheets</em> in RStudio: kompakte Übersichten zu R Markdown, <code>dplyr</code>, <code>ggplot2</code> u. a.</li>
+<li>Fehlermeldungen <strong>lesen</strong>: Sie nennen meist die Funktion und das Problem. Die Meldung zu kopieren und zu suchen ist normal und erwünscht.</li>
+<li>Eine Übersicht aller Funktionen dieser Einführung steht in <code>cheatsheet.md</code>.</li>
 </ul>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(<span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="st">"drei"</span>))   <span class="co"># Warnung: das Argument ist nicht numerisch</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning in mean.default(c(1, 2, "drei")): Argument ist weder numerisch noch
-boolesch: gebe NA zurück</code></pre>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] NA</code></pre>
-</div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sqrt</span>(<span class="st">"vier"</span>)            <span class="co"># Fehler: nicht-numerisches Argument</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sqrt</span>(<span class="st">"vier"</span>)            <span class="co"># Fehler: nicht-numerisches Argument</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-error">
 <pre><code>Error in `sqrt()`:
-! Nicht-numerisches Argument für mathematische Funktion</code></pre>
+! non-numeric argument to mathematical function</code></pre>
 </div>
 </div>
-<p>Eine kompakte Übersicht aller Funktionen dieser Einführung steht in <code>cheatsheet.md</code>.</p>
-</section>
-<section id="grundregeln-für-den-anfang" class="level1">
-<h1>Grundregeln für den Anfang</h1>
-<ol type="1">
-<li><strong>In Dateien arbeiten, nicht in der Console.</strong> Die Console ist ein Notizzettel; das Skript ist das Ergebnis.</li>
-<li><strong>Ein Skript läuft von oben bis unten durch</strong> — ohne dass man vorher von Hand etwas vorbereiten muss. Reihenfolge: Pakete laden → Daten einlesen → aufbereiten → auswerten → visualisieren.</li>
-<li><strong>Regelmäßig R neu starten</strong> (<code>Strg + Shift + F10</code>) und das Skript komplett durchlaufen lassen — so merkt man früh, wenn etwas nur „zufällig” noch funktioniert.</li>
-<li><strong>Immer über die <code>.Rproj</code>-Datei öffnen</strong> und <strong>relative Pfade</strong> verwenden. Kein <code>setwd("C:/…")</code>.</li>
-<li><strong>Rohdaten sind heilig</strong> — <code>data/raw/</code> nie überschreiben, Ergebnisse nach <code>data/processed/</code> bzw. <code>output/</code> schreiben.</li>
-<li><strong><code>&lt;-</code> zum Zuweisen, <code>==</code> zum Vergleichen.</strong></li>
-<li><strong>Sprechende Namen in <code>snake_case</code></strong>, keine Basisfunktionen überschreiben (<code>mean</code>, <code>c</code>, …).</li>
-<li><strong>R unterscheidet Groß-/Kleinschreibung</strong> — <code>Daten</code> und <code>daten</code> sind verschieden.</li>
-<li><strong>Nach dem Einlesen prüfen:</strong> <code>str()</code>, <code>head()</code>, <code>summary()</code>.</li>
-<li><strong>Kommentieren</strong>, was nicht offensichtlich ist.</li>
-<li><strong>Fehlermeldungen lesen</strong> und mit <code>?funktion</code> nachschlagen.</li>
-</ol>
-</section>
-<section id="übung-dein-erstes-eigenes-projekt" class="level1">
-<h1>Übung: dein erstes eigenes Projekt</h1>
-<p>Zum Abschluss richtest du ein eigenes Projekt so ein, wie du es im restlichen Kurs verwendest:</p>
-<ol type="1">
-<li><strong>Projekt anlegen:</strong> <em>File → New Project → New Directory → New Project</em>. Name z. B. <code>mein-r-projekt</code>, Speicherort frei wählbar. RStudio öffnet das Projekt danach automatisch — der Projektname steht oben rechts.</li>
-<li><strong>Ordner anlegen:</strong> Im <em>Files</em>-Bereich mit <em>New Folder</em> die Ordner <code>data/raw</code>, <code>data/processed</code>, <code>scripts</code> und <code>output</code> erstellen (wie in der Ordnerstruktur oben).</li>
-<li><strong>Arbeitsverzeichnis prüfen:</strong> In der Console <code>getwd()</code> ausführen. Es muss der Projektordner sein.</li>
-<li><strong>R-Markdown-Dokument anlegen:</strong> <em>File → New File → R Markdown</em>, Titel eintragen, als <code>scripts/erste_schritte.Rmd</code> speichern. Die Beispielinhalte unter dem YAML-Header löschen. Neben dem Knit-Button <em>Knit Directory → Project Directory</em> einstellen (siehe oben).</li>
-<li><strong>Inhalt schreiben:</strong> eine Überschrift, ein Satz Text über dich und ein Code-Chunk (<code>Strg + Alt + I</code>), in dem du etwas berechnest, z. B. dein Alter in Tagen.</li>
-<li><strong>Knitten</strong> (<code>Strg + Shift + K</code>) und prüfen, dass die HTML-Datei neben dem <code>.Rmd</code> entsteht.</li>
-<li><strong>Test:</strong> RStudio schließen, das Projekt per Doppelklick auf die <code>.Rproj</code>-Datei wieder öffnen — die zuletzt geöffneten Dateien sind wieder da.</li>
-</ol>
 
 
 </section>

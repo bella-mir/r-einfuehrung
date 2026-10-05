@@ -1,0 +1,142 @@
+---
+title: "R-Einführung — Übungsaufgabe 1"
+output: html_document
+---
+
+# Regionale Bevölkerungsentwicklung in Österreich 2000–2024: Geburtenbilanz und Wanderung
+
+In dieser Übungsaufgabe wendet ihr die Einheiten 1–4 an **echten Daten** an (Pakete: `dplyr`,
+`tidyr`, `ggplot2`). Danach könnt ihr:
+
+1. Daten aus verschiedenen Dateien **einlesen** und **aufräumen**.
+2. Tabellen **umformen** (lang ↔ breit), **verbinden** und das Ergebnis **überprüfen**.
+3. Kennzahlen **berechnen** und Regionen damit **vergleichen** und **einteilen**.
+4. Ergebnisse **darstellen**, **interpretieren** und die Grenzen der Daten **beurteilen**.
+5. Eine Auswertung nachvollziehbar und reproduzierbar **dokumentieren**.
+
+## Worum es geht
+
+Österreich hat heute über eine Million Einwohner mehr als im Jahr 2000 — aber nicht jede
+Region wächst. Ihr untersucht:
+
+1. **Welche** Regionen Österreichs sind seit 2000 gewachsen, welche geschrumpft?
+2. **Woher** kommt das Wachstum — und welche Regionen wachsen **nur** durch Wanderungsgewinn
+   (mehr Zuzüge als Wegzüge)?
+
+Grundlage ist die **Bevölkerungsbilanz**:
+
+> Veränderung = Geburtenbilanz (Geburten − Sterbefälle) + Wanderungssaldo (Zuzüge − Wegzüge)
+
+
+## Die Daten
+
+Die Dateien liegen in `data/uebung/` und enthalten 36 europäische Staaten mit ihren
+**NUTS-3-Regionen**. Ihr braucht nur **Österreich**: den Staat insgesamt (`AT`) und seine 35
+Regionen, z. B. `AT130` Wien. Die ersten zwei Zeichen des Codes sind das Länderkürzel.
+
+| Datei | Inhalt | Aufbau |
+|---|---|---|
+| `regionen.csv` | Code, Name und Ebene (`0` = Staat, `3` = NUTS-3-Region) | eine Zeile pro Region |
+| `bevoelkerung.csv` | Einwohner am **1. Jänner**, 2000–2024 | **lang:** eine Zeile pro Region und Jahr |
+| `geburten_sterbefaelle.csv` | Geburten und Sterbefälle **im Lauf des Jahres**, 2000–2023 | **lang:** eine Zeile pro Region und Jahr |
+| `wanderung.csv` | Wanderungssaldo **im Lauf des Jahres**, 1990–2025 | **breit:** eine Spalte pro Jahr |
+
+Seht euch jede Datei vor dem Einlesen an (*Files* → anklicken → *View File*): Trennzeichen,
+Info-Zeilen und Spaltennamen sind nicht überall gleich.
+
+**Quelle:** [ARDECO-Datenbank](https://urban.jrc.ec.europa.eu/ardeco) der Europäischen
+Kommission, abgerufen im Oktober 2026. `wanderung.csv` ist der unveränderte Originalexport;
+die anderen drei Dateien haben wir daraus für die Übung vorbereitet (Jahre 2000–2024, langes
+Format, unterschiedlich gespeichert). Die Werte sind unverändert.
+
+
+## Aufgaben
+
+Schreibt zu jedem Schritt 1–2 Sätze: **was** ihr macht und **warum**.
+
+### 1. Einlesen
+
+Lest alle vier Dateien über relative Pfade ein und prüft sie mit `str()`.
+
+### 2. Aufräumen und zusammenfassen
+
+- **Namen:** Spaltennamen in `snake_case`; der Regionscode heißt überall `nuts`.
+- **Nur Österreich:** In allen Tabellen nur Zeilen behalten, deren Code mit `AT` beginnt
+  (Tipp: `substr()`).
+- **Lang → breit:** Bevölkerung mit `pivot_wider()` in eine Zeile pro Region bringen, mit den
+  Spalten `einwohner_2000` und `einwohner_2024`.
+- **Breit → lang:** Wanderung mit `pivot_longer()` in eine Zeile pro Region und Jahr bringen.
+  Behaltet nur Regionscode, Jahr und Wert — und nur die Jahre, die zwischen dem 1. Jänner 2000
+  und dem 1. Jänner 2024 liegen.
+- **Summieren:** Geburten, Sterbefälle und Wanderungssaldo pro Region über diese Jahre.
+- **Prüfen:** Fehlen irgendwo Werte (`NA`)?
+
+### 3. Verbinden
+
+Erstellt den Data Frame `bilanz` mit 36 Zeilen (Österreich insgesamt und 35 Regionen) und den
+Spalten `nuts`, `name`, `ebene`, `einwohner_2000`, `einwohner_2024`, `geburten`,
+`sterbefaelle`, `wanderungssaldo`. Begründet euren Join und zeigt mit Code, dass keine Region
+fehlt oder doppelt vorkommt.
+
+### 4. Rechnen
+
+- `veraenderung` (Einwohner 2024 − 2000) und `geburtenbilanz` (Geburten − Sterbefälle).
+- **Kontrolle:** Wie stark weicht `veraenderung` von `geburtenbilanz + wanderungssaldo` ab?
+  Bis zu 5 Personen pro Region (84 für Österreich insgesamt) sind Rundung; mehr bedeutet
+  falsche Jahre.
+- Alle drei Größen in **Prozent der Bevölkerung von 2000**: `veraenderung_pct`,
+  `geburtenbilanz_pct`, `wanderung_pct`. Zeigt an einem Beispiel, dass die Reihenfolge der
+  Regionen in absoluten Zahlen und in Prozent verschieden ist.
+- Wie stark ist Österreich insgesamt gewachsen — und wodurch?
+
+### 5. Typen bilden
+
+Teilt jede Region mit `case_when()` in einen von vier Typen ein (Spalte `typ`):
+
+| Typ | Bedingung |
+|---|---|
+| wächst, mit Geburtenüberschuss | wächst, mehr Geburten als Sterbefälle |
+| wächst nur durch Wanderungsgewinn | wächst, obwohl mehr Menschen sterben als geboren werden |
+| schrumpft trotz Wanderungsgewinn | schrumpft, Wanderungssaldo positiv |
+| schrumpft, mit Wanderungsverlust | schrumpft, Wanderungssaldo negativ |
+
+Ab hier nur noch die 35 Regionen (Ebene 3): Wie viele gehören zu welchem Typ? Welche wachsen
+nur durch Wanderungsgewinn, welche schrumpfen?
+
+### 6. Grafiken
+
+Jede Grafik braucht Titel, beschriftete Achsen (mit Einheit) und eine verständliche Legende.
+
+- **Balkendiagramm:** `veraenderung_pct` der 35 Regionen, sortiert (`reorder()`) und nach
+  `typ` eingefärbt.
+- **Streudiagramm:** `geburtenbilanz_pct` gegen `wanderung_pct`, eingefärbt nach `typ`; mit
+  `ggsave()` nach `output/` speichern.
+- **Zeitverlauf:** jährlicher Wanderungssaldo von Österreich insgesamt (`AT`), 2000–2023, als
+  Linie (`geom_line()`). In welchen Jahren war er besonders hoch — und warum?
+
+Alle Bausteine stehen in Einheit 4. Mehr Möglichkeiten zeigen die
+[ggplot2-Referenz](https://ggplot2.tidyverse.org/reference/), das
+[ggplot2-Cheatsheet](https://rstudio.github.io/cheatsheets/html/data-visualization.html) und
+die [R Graph Gallery](https://r-graph-gallery.com/).
+
+### 7. Interpretation
+
+Beantwortet in 5–8 Sätzen die beiden Fragen vom Anfang und nennt eine **Grenze der Daten**
+(z. B.: Was erfährt man aus dem Wanderungssaldo **nicht**?).
+
+## Abgabe
+
+Arbeitet im Kursprojekt in einer neuen Datei `UE1_GruppeXX.Rmd` direkt im Projektordner. Gebt
+die **`.Rmd`-Datei und die geknittete `.html`-Datei** über **TUWEL** ab; die Frist steht dort.
+
+Das Dokument muss nach einem Neustart von R fehlerfrei durchlaufen: nur relative Pfade, kein
+`setwd()`, alle Pakete oben mit `library()` laden.
+
+### Bewertung
+
+| Kriterium | Punkte |
+|---|---|
+| **Nachvollziehbar und reproduzierbar:** läuft in einem Durchlauf durch, klar gegliedert, lesbarer Code, jeder Schritt in 1–2 Sätzen erklärt | 1 |
+| **Vollständig und plausibel:** Schritte 1–6 bearbeitet, `bilanz` wie verlangt, keine groben Fehler in Zahlen und Grafiken | 2 |
+| **Interpretation:** in eigenen Worten, mit Bezug auf die eigenen Ergebnisse, inklusive einer Grenze der Daten | 1 |
+| **Summe** | **4** |

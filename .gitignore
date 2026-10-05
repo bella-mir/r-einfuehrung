@@ -1,5 +1,7 @@
 # Nicht veröffentlichen
 Loesungen.Rmd
+loesungen.Rmd
+loesung_*.Rmd
 drafts/
 last_year/
 
@@ -22,8 +24,9 @@ output/*
 # Website: Arbeitskopien, die build_site.R erzeugt
 _website/einheit-*.Rmd
 _website/vorbereitung.Rmd
-_website/uebungsaufgabe-1.Rmd
+_website/uebungsaufgabe-*.Rmd
 _website/cheatsheet.md
 _website/data/
+_website/images/
 _website/.quarto/
 _website/*_files/

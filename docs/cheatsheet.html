@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="de" xml:lang="de"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.9.38">
+<meta name="generator" content="quarto-1.10.18">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -12,10 +12,13 @@
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
 */
-code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
-div.columns{display: flex; gap: min(4vw, 1.5em);}
-div.column{flex: auto; overflow-x: auto;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
@@ -40,10 +43,10 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-bb13f761afd1698ae8f29792cda6a076.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-b780e26fcea2d1faebb34e9a9f24195f.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -143,19 +146,25 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./einheit-2.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">2 · Datenstrukturen &amp; Daten einlesen</span></a>
+ <span class="menu-text">2 · Datenstrukturen</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./einheit-3.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">3 · Daten auswerten &amp; visualisieren</span></a>
+ <span class="menu-text">3 · Daten einlesen, aufräumen &amp; speichern</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./einheit-4.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">4 · Bedingungen, Schleifen &amp; Funktionen</span></a>
+ <span class="menu-text">4 · Daten auswerten &amp; visualisieren</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./einheit-5.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">5 · Bedingungen, Schleifen &amp; Funktionen</span></a>
   </div>
 </li>
       </ul>
@@ -195,21 +204,24 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#kennzahlen-fehlende-werte" id="toc-kennzahlen-fehlende-werte" class="nav-link" data-scroll-target="#kennzahlen-fehlende-werte">Kennzahlen &amp; fehlende Werte</a></li>
   <li><a href="#base-r-grafik" id="toc-base-r-grafik" class="nav-link" data-scroll-target="#base-r-grafik">Base-R-Grafik</a></li>
   </ul></li>
-  <li><a href="#einheit-2-datenstrukturen-daten-einlesen" id="toc-einheit-2-datenstrukturen-daten-einlesen" class="nav-link" data-scroll-target="#einheit-2-datenstrukturen-daten-einlesen">Einheit 2 — Datenstrukturen &amp; Daten einlesen</a>
+  <li><a href="#einheit-2-datenstrukturen" id="toc-einheit-2-datenstrukturen" class="nav-link" data-scroll-target="#einheit-2-datenstrukturen">Einheit 2 — Datenstrukturen</a>
   <ul class="collapse">
   <li><a href="#matrizen" id="toc-matrizen" class="nav-link" data-scroll-target="#matrizen">Matrizen</a></li>
   <li><a href="#listen-faktoren" id="toc-listen-faktoren" class="nav-link" data-scroll-target="#listen-faktoren">Listen &amp; Faktoren</a></li>
   <li><a href="#data-frames" id="toc-data-frames" class="nav-link" data-scroll-target="#data-frames">Data Frames</a></li>
+  </ul></li>
+  <li><a href="#einheit-3-daten-einlesen-aufräumen-speichern" id="toc-einheit-3-daten-einlesen-aufräumen-speichern" class="nav-link" data-scroll-target="#einheit-3-daten-einlesen-aufräumen-speichern">Einheit 3 — Daten einlesen, aufräumen &amp; speichern</a>
+  <ul class="collapse">
   <li><a href="#einlesen" id="toc-einlesen" class="nav-link" data-scroll-target="#einlesen">Einlesen</a></li>
   <li><a href="#daten-aufräumen" id="toc-daten-aufräumen" class="nav-link" data-scroll-target="#daten-aufräumen">Daten aufräumen</a></li>
   <li><a href="#speichern" id="toc-speichern" class="nav-link" data-scroll-target="#speichern">Speichern</a></li>
   </ul></li>
-  <li><a href="#einheit-3-daten-auswerten-visualisieren" id="toc-einheit-3-daten-auswerten-visualisieren" class="nav-link" data-scroll-target="#einheit-3-daten-auswerten-visualisieren">Einheit 3 — Daten auswerten &amp; visualisieren</a>
+  <li><a href="#einheit-4-daten-auswerten-visualisieren" id="toc-einheit-4-daten-auswerten-visualisieren" class="nav-link" data-scroll-target="#einheit-4-daten-auswerten-visualisieren">Einheit 4 — Daten auswerten &amp; visualisieren</a>
   <ul class="collapse">
   <li><a href="#dplyr" id="toc-dplyr" class="nav-link" data-scroll-target="#dplyr">dplyr</a></li>
   <li><a href="#ggplot2" id="toc-ggplot2" class="nav-link" data-scroll-target="#ggplot2">ggplot2</a></li>
   </ul></li>
-  <li><a href="#einheit-4-bedingungen-schleifen-funktionen" id="toc-einheit-4-bedingungen-schleifen-funktionen" class="nav-link" data-scroll-target="#einheit-4-bedingungen-schleifen-funktionen">Einheit 4 — Bedingungen, Schleifen &amp; Funktionen</a></li>
+  <li><a href="#einheit-5-bedingungen-schleifen-funktionen" id="toc-einheit-5-bedingungen-schleifen-funktionen" class="nav-link" data-scroll-target="#einheit-5-bedingungen-schleifen-funktionen">Einheit 5 — Bedingungen, Schleifen &amp; Funktionen</a></li>
   </ul>
 </nav>
     </div>
@@ -379,7 +391,7 @@ ul.task-list li input[type="checkbox"] {
 <td>vergleichen · gleich? · ungleich?</td>
 </tr>
 <tr class="odd">
-<td><code>&amp;</code> · <code>\|</code> · <code>!</code></td>
+<td><code>&amp;</code> · <code>|</code> · <code>!</code></td>
 <td>und · oder · nicht</td>
 </tr>
 <tr class="even">
@@ -449,7 +461,7 @@ ul.task-list li input[type="checkbox"] {
 <td>Elemente benennen</td>
 </tr>
 <tr class="odd">
-<td><code>x[1]</code> · <code>x[c(1, 3)]</code> · <code>x[2:4]</code> · <code>x["Juli"]</code></td>
+<td><code>x[1]</code> · <code>x[c(1, 3)]</code> · <code>x[2:4]</code> · <code>x["Jul"]</code></td>
 <td>auswählen (Index beginnt bei 1)</td>
 </tr>
 <tr class="even">
@@ -502,8 +514,8 @@ ul.task-list li input[type="checkbox"] {
 <td>fehlt der Wert? · wie viele fehlen?</td>
 </tr>
 <tr class="even">
-<td><code>round(x, 1)</code> · <code>sort(x)</code> · <code>which.max(x)</code></td>
-<td>runden · sortieren · Position des Maximums</td>
+<td><code>round(x, 1)</code> · <code>sort(x)</code> · <code>which.max(x)</code> / <code>which.min(x)</code></td>
+<td>runden · sortieren · Position des Maximums / Minimums</td>
 </tr>
 </tbody>
 </table>
@@ -535,8 +547,8 @@ ul.task-list li input[type="checkbox"] {
 <td>Histogramm</td>
 </tr>
 <tr class="even">
-<td><code>boxplot(y ~ g, data = df)</code></td>
-<td>Boxplot je Gruppe</td>
+<td><code>boxplot(x, y, names = c("a", "b"))</code></td>
+<td>Boxplots mehrerer Vektoren nebeneinander</td>
 </tr>
 <tr class="odd">
 <td><code>main =</code> · <code>xlab =</code> · <code>ylab =</code> · <code>col =</code> · <code>pch = 19</code></td>
@@ -551,8 +563,8 @@ ul.task-list li input[type="checkbox"] {
 <hr>
 </section>
 </section>
-<section id="einheit-2-datenstrukturen-daten-einlesen" class="level1">
-<h1>Einheit 2 — Datenstrukturen &amp; Daten einlesen</h1>
+<section id="einheit-2-datenstrukturen" class="level1">
+<h1>Einheit 2 — Datenstrukturen</h1>
 <section id="matrizen" class="level2">
 <h2 class="anchored" data-anchor-id="matrizen">Matrizen</h2>
 <table class="caption-top table">
@@ -580,7 +592,7 @@ ul.task-list li input[type="checkbox"] {
 <td>Namen setzen</td>
 </tr>
 <tr class="even">
-<td><code>m[i, j]</code> · <code>m[, j]</code> · <code>m[i, ]</code> · <code>m["Juli", "TMax"]</code></td>
+<td><code>m[i, j]</code> · <code>m[, j]</code> · <code>m[i, ]</code> · <code>m["Jul", "TMax"]</code></td>
 <td>auswählen</td>
 </tr>
 <tr class="odd">
@@ -658,8 +670,8 @@ ul.task-list li input[type="checkbox"] {
 <td>Struktur · erste Zeilen · Kennzahlen</td>
 </tr>
 <tr class="odd">
-<td><code>nrow(df)</code> · <code>ncol(df)</code></td>
-<td>Anzahl Zeilen · Spalten</td>
+<td><code>nrow(df)</code> · <code>ncol(df)</code> · <code>dim(df)</code></td>
+<td>Anzahl Zeilen · Spalten · beides</td>
 </tr>
 <tr class="even">
 <td><code>df[i, j]</code> · <code>df[, "spalte"]</code> · <code>df$spalte</code></td>
@@ -683,7 +695,11 @@ ul.task-list li input[type="checkbox"] {
 </tr>
 </tbody>
 </table>
+<hr>
 </section>
+</section>
+<section id="einheit-3-daten-einlesen-aufräumen-speichern" class="level1">
+<h1>Einheit 3 — Daten einlesen, aufräumen &amp; speichern</h1>
 <section id="einlesen" class="level2">
 <h2 class="anchored" data-anchor-id="einlesen">Einlesen</h2>
 <table class="caption-top table">
@@ -703,16 +719,20 @@ ul.task-list li input[type="checkbox"] {
 <td>CSV mit <code>,</code> als Trenner und <code>.</code> als Dezimalzeichen</td>
 </tr>
 <tr class="even">
-<td><code>read.csv2("data/raw/f.csv")</code></td>
-<td>CSV mit <code>;</code> und <code>,</code> (deutsches Excel)</td>
+<td><code>read.csv("data/raw/f.csv", sep = ";", dec = ",")</code></td>
+<td>CSV mit <code>;</code> als Trenner und <code>,</code> als Dezimalzeichen</td>
 </tr>
 <tr class="odd">
 <td><code>skip = 4</code> · <code>header = FALSE</code> · <code>na.strings = c("", "-")</code></td>
 <td>Zeilen überspringen · keine Kopfzeile · was als <code>NA</code> gilt</td>
 </tr>
 <tr class="even">
-<td><code>readxl::read_excel("f.xlsx")</code></td>
-<td>Excel-Datei</td>
+<td><code>readxl::read_excel("data/raw/f.xlsx", sheet = 2)</code></td>
+<td>Excel-Datei, Tabellenblatt 2 (<code>skip</code>, <code>na</code> wie oben)</td>
+</tr>
+<tr class="odd">
+<td><code>readxl::excel_sheets("data/raw/f.xlsx")</code></td>
+<td>Namen der Tabellenblätter</td>
 </tr>
 </tbody>
 </table>
@@ -732,20 +752,12 @@ ul.task-list li input[type="checkbox"] {
 </thead>
 <tbody>
 <tr class="odd">
-<td><code>names(df) &lt;- as.character(df[5, ])</code></td>
-<td>Zeile 5 zur Kopfzeile machen</td>
+<td><code>tolower(gsub(".", "_", names(df), fixed = TRUE))</code></td>
+<td>Spaltennamen in snake_case (Punkte → Unterstriche)</td>
 </tr>
 <tr class="even">
-<td><code>df[-(1:5), ]</code> · <code>rownames(df) &lt;- NULL</code></td>
-<td>Zeilen entfernen · neu nummerieren</td>
-</tr>
-<tr class="odd">
-<td><code>tolower(gsub(" ", "_", names(df)))</code></td>
-<td>Spaltennamen in snake_case</td>
-</tr>
-<tr class="even">
-<td><code>df[cols] &lt;- lapply(df[cols], as.numeric)</code></td>
-<td>mehrere Spalten umwandeln</td>
+<td><code>df$x &lt;- as.numeric(df$x)</code></td>
+<td>Spalte in Zahlen umwandeln</td>
 </tr>
 <tr class="odd">
 <td><code>paste("a", "b")</code> · <code>paste0("a", "b")</code></td>
@@ -781,8 +793,8 @@ ul.task-list li input[type="checkbox"] {
 <td>als CSV speichern (<code>,</code> und <code>.</code>)</td>
 </tr>
 <tr class="even">
-<td><code>write.csv2(df, "data/processed/f.csv", row.names = FALSE)</code></td>
-<td>als CSV für deutsches Excel (<code>;</code> und <code>,</code>)</td>
+<td><code>writexl::write_xlsx(df, "data/processed/f.xlsx")</code></td>
+<td>als Excel-Datei speichern (<code>list(a = df1, b = df2)</code> für mehrere Blätter)</td>
 </tr>
 <tr class="odd">
 <td><code>saveRDS(df, "f.rds")</code> · <code>readRDS("f.rds")</code></td>
@@ -793,8 +805,8 @@ ul.task-list li input[type="checkbox"] {
 <hr>
 </section>
 </section>
-<section id="einheit-3-daten-auswerten-visualisieren" class="level1">
-<h1>Einheit 3 — Daten auswerten &amp; visualisieren</h1>
+<section id="einheit-4-daten-auswerten-visualisieren" class="level1">
+<h1>Einheit 4 — Daten auswerten &amp; visualisieren</h1>
 <section id="dplyr" class="level2">
 <h2 class="anchored" data-anchor-id="dplyr">dplyr</h2>
 <table class="caption-top table">
@@ -810,11 +822,11 @@ ul.task-list li input[type="checkbox"] {
 </thead>
 <tbody>
 <tr class="odd">
-<td><code>df %&gt;% f()</code> · <code>df \|&gt; f()</code></td>
+<td><code>df %&gt;% f()</code> · <code>df |&gt; f()</code></td>
 <td>Pipe „und dann”: Ergebnis links → erstes Argument rechts</td>
 </tr>
 <tr class="even">
-<td><code>data = .</code> (bei <code>%&gt;%</code>) · <code>data = _</code> (bei <code>\|&gt;</code>)</td>
+<td><code>data = .</code> (bei <code>%&gt;%</code>) · <code>data = _</code> (bei <code>|&gt;</code>)</td>
 <td>Platzhalter, wenn die Daten nicht an erster Stelle stehen</td>
 </tr>
 <tr class="odd">
@@ -834,8 +846,16 @@ ul.task-list li input[type="checkbox"] {
 <td>neue Spalte berechnen</td>
 </tr>
 <tr class="odd">
+<td><code>mutate(df, k = case_when(is.na(x) ~ NA, x &gt; 40 ~ "hoch", TRUE ~ "niedrig"))</code></td>
+<td>mehrere Fälle, erster Treffer gewinnt</td>
+</tr>
+<tr class="even">
 <td><code>count(df, g)</code></td>
 <td>Häufigkeiten zählen</td>
+</tr>
+<tr class="odd">
+<td><code>as.data.frame(tb)</code> · <code>as_tibble(df)</code></td>
+<td>Tibble → Data Frame · Data Frame → Tibble</td>
 </tr>
 <tr class="even">
 <td><code>df %&gt;% group_by(g) %&gt;% summarise(n = n(), m = mean(x, na.rm = TRUE))</code></td>
@@ -848,6 +868,14 @@ ul.task-list li input[type="checkbox"] {
 <tr class="even">
 <td><code>inner_join()</code> · <code>right_join()</code> · <code>full_join()</code></td>
 <td>nur gemeinsame · alle von <code>df2</code> · alle</td>
+</tr>
+<tr class="odd">
+<td><code>tidyr::pivot_longer(df, cols = starts_with("X"), names_to = "jahr", values_to = "wert")</code></td>
+<td>breit → lang: viele Spalten werden zu Namens- und Wertespalte</td>
+</tr>
+<tr class="even">
+<td><code>tidyr::pivot_wider(df, names_from = jahr, values_from = wert)</code></td>
+<td>lang → breit: Werte einer Spalte werden zu Spaltennamen</td>
 </tr>
 </tbody>
 </table>
@@ -879,22 +907,26 @@ ul.task-list li input[type="checkbox"] {
 <td>Verteilungen</td>
 </tr>
 <tr class="even">
+<td><code>aes(x = reorder(g, wert), y = wert)</code> · <code>coord_flip()</code></td>
+<td>Balken nach Wert sortieren · Grafik drehen</td>
+</tr>
+<tr class="odd">
 <td><code>aes(color = g)</code> · <code>color = "steelblue"</code></td>
 <td>Farbe nach Spalte · feste Farbe</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><code>labs(title =, x =, y =)</code></td>
 <td>Beschriftung</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><code>facet_wrap(~ g)</code></td>
 <td>eine Teilgrafik pro Gruppe</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><code>theme_minimal()</code> · <code>theme_bw()</code></td>
 <td>Erscheinungsbild</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><code>ggsave("output/grafik.png", width = 8, height = 5)</code></td>
 <td>letzte Grafik speichern</td>
 </tr>
@@ -903,8 +935,8 @@ ul.task-list li input[type="checkbox"] {
 <hr>
 </section>
 </section>
-<section id="einheit-4-bedingungen-schleifen-funktionen" class="level1">
-<h1>Einheit 4 — Bedingungen, Schleifen &amp; Funktionen</h1>
+<section id="einheit-5-bedingungen-schleifen-funktionen" class="level1">
+<h1>Einheit 5 — Bedingungen, Schleifen &amp; Funktionen</h1>
 <table class="caption-top table">
 <colgroup>
 <col style="width: 50%">
@@ -926,40 +958,40 @@ ul.task-list li input[type="checkbox"] {
 <td>Bedingung für jedes Element eines Vektors</td>
 </tr>
 <tr class="odd">
-<td><code>mutate(df, k = case_when(is.na(x) ~ NA, x &gt; 40 ~ "hoch", TRUE ~ "niedrig"))</code></td>
-<td>mehrere Fälle, erster Treffer gewinnt</td>
-</tr>
-<tr class="even">
 <td><code>for (i in seq_along(x)) { ... }</code></td>
 <td>für jede Position wiederholen</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><code>ergebnis &lt;- numeric(length(x))</code></td>
 <td>Ergebnisvektor vor der Schleife anlegen</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><code>while (bedingung) { ... }</code></td>
 <td>wiederholen, solange die Bedingung gilt</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><code>next</code> · <code>break</code></td>
 <td>nächster Durchlauf · Schleife beenden</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><code>print(x)</code> · <code>cat("Text", x, "\n")</code></td>
 <td>Ausgabe innerhalb von Schleifen und Funktionen</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><code>f &lt;- function(x, n = 1) { ... }</code></td>
 <td>eigene Funktion mit Standardwert</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><code>stop("Meldung")</code></td>
 <td>mit Fehlermeldung abbrechen</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><code>sapply(df, mean)</code> · <code>lapply(df, mean)</code></td>
 <td>Funktion auf jede Spalte anwenden (Vektor · Liste)</td>
+</tr>
+<tr class="odd">
+<td><code>df[cols] &lt;- lapply(df[cols], as.numeric)</code></td>
+<td>mehrere Spalten auf einmal umwandeln</td>
 </tr>
 <tr class="even">
 <td><code>sapply(df, mean, na.rm = TRUE)</code></td>

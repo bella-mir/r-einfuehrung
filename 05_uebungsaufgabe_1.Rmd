@@ -1,6 +1,0 @@
----
-title: "R-Einführung — Übungsaufgabe 1"
-output: html_document
----
-
-The task will appear here a little bit later 

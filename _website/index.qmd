@@ -8,12 +8,13 @@ toc: false
 | Einheit | Inhalt |
 |---|---|
 | [Vorbereitung](vorbereitung.Rmd) | Installation, Projekte, R Markdown, Pakete, Hilfe |
-| [1 · Grundlagen](einheit-1.Rmd) | Rechnen, Variablen, Funktionen verwenden, Datentypen, Vektoren |
-| [2 · Datenstrukturen & Daten einlesen](einheit-2.Rmd) | Matrizen, Listen, Data Frames, Faktoren, CSV einlesen, Daten bereinigen, speichern |
-| [3 · Daten auswerten & visualisieren](einheit-3.Rmd) | Datenbearbeitung mit `dplyr`, Grafiken mit `ggplot2` |
-| [4 · Bedingungen, Schleifen & Funktionen](einheit-4.Rmd) | `if`/`else`, `for`, `while`, eigene Funktionen, `sapply()` |
-| [Übungsaufgabe 1](uebungsaufgabe-1.Rmd) | |
-| [Cheatsheet](cheatsheet.md) |  |
+| [1 · Grundlagen](einheit-1.Rmd) | Rechnen, Variablen, Funktionen verwenden, Datentypen, Vektoren, schnelle Grafiken mit Base-R |
+| [2 · Datenstrukturen](einheit-2.Rmd) | Matrizen, Listen, Data Frames, Faktoren |
+| [3 · Daten einlesen, aufräumen & speichern](einheit-3.Rmd) | CSV und Excel einlesen, Daten bereinigen, als CSV, Excel oder RDS speichern |
+| [4 · Daten auswerten & visualisieren](einheit-4.Rmd) | Auswerten und Verbinden mit `dplyr`, lange und breite Tabellen mit `tidyr`, Grafiken mit `ggplot2` |
+| [5 · Bedingungen, Schleifen & Funktionen](einheit-5.Rmd) | `if`/`else`, `for`, `while`, eigene Funktionen, `sapply()` |
+| [Übungsaufgabe 1](uebungsaufgabe-1.Rmd) | Regionale Bevölkerungsentwicklung in Österreich 2000–2024: Geburtenbilanz und Wanderung |
+| [Cheatsheet](cheatsheet.md) | Die wichtigsten Funktionen aller Einheiten |
 
 ## Selbst ausprobieren
 
@@ -22,6 +23,24 @@ toc: false
    herunterladen und entpacken.
 3. `r-einfuehrung.Rproj` per Doppelklick öffnen und die Notebooks (`01_grundlagen.Rmd`, …)
    Block für Block ausführen.
+
+## Datenquellen
+
+Alle Datensätze beruhen auf echten Daten und wurden für den Kurs aufbereitet (Auswahl,
+Vereinfachung, einzelne eingebaute Fehler und fehlende Werte).
+
+- **Temperaturen Wien:** [GeoSphere Austria](https://www.geosphere.at), Klimanormalwerte
+  1991–2020
+- **Wiener Bezirke:** [Statistik Wien](https://www.wien.gv.at/statistik/bezirksdaten), 2021
+  (Datenquelle: Stadt Wien – data.wien.gv.at)
+- **Luftgüte Wien:** [Luftgütebericht 2025](https://www.wien.gv.at/spezial/luftguetebericht/)
+  der Stadt Wien
+- **Gemeinden und Bundesländer:** [Statistik Austria](https://www.statistik.at)
+  (Gemeindeverzeichnis 2026, Urban-Rural-Typologie, Baugrundstückspreise 2025); Entfernungen
+  berechnet aus Koordinaten von Wikidata
+- **Bevölkerung, Geburten, Sterbefälle, Wanderung:**
+  [ARDECO](https://urban.jrc.ec.europa.eu/ardeco), Europäische Kommission, abgerufen im
+  Oktober 2026
 
 ## Impressum
 

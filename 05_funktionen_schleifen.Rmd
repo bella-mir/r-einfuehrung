@@ -1,31 +1,41 @@
 ---
-title: "R-Einführung — Einheit 4: Bedingungen, Schleifen & Funktionen"
+title: "R-Einführung — Einheit 5: Bedingungen, Schleifen & Funktionen"
 output: html_notebook
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE, message = FALSE)
+options(width = 110)   # breite Tabellen nicht umbrechen
 ```
 
 Bisher lief jeder Code einfach von oben nach unten. In dieser Einheit lernst du, den Ablauf zu
 steuern und eigene Werkzeuge zu bauen:
 
-1. **Bedingungen** — Code nur ausführen, wenn etwas zutrifft: `if`, `else`, `ifelse()`,
-   `case_when()`
+1. **Bedingungen** — Code nur ausführen, wenn etwas zutrifft: `if`, `else`, `ifelse()`
 2. **Schleifen** — Code wiederholen: `for`, `while`
 3. **Eigene Funktionen** — wiederkehrende Schritte einmal schreiben, oft verwenden
 4. **Funktionen auf viele Elemente anwenden** — `sapply()` und `lapply()`
-5. **Alles zusammen** — eine Grafik pro Team
+5. **Alles zusammen** — eine Grafik pro Bundesland
 
-Wir verwenden wieder die Temperaturen aus Einheit 1 und die Mitarbeitenden-Daten aus Einheit 3:
+Zuerst die Pakete — wie immer am Anfang des Dokuments:
 
 ```{r}
 library(dplyr)
 library(ggplot2)
+```
 
-tmax_wien <- c(Mai = 20.1, Juni = 24.1, Juli = 26.0, August = 25.7, September = 20.5)
+Wir verwenden wieder die Temperaturen aus Einheit 1:
 
-mitarbeitende <- read.csv("data/raw/mitarbeitende.csv")
+```{r}
+monate    <- c("Jän", "Feb", "Mär", "Apr", "Mai", "Jun", "Jul", "Aug", "Sep", "Okt", "Nov", "Dez")
+tmax_wien <- c(3.5, 6.5, 10.7, 17.2, 20.7, 25.1, 26.4, 26.1, 21.1, 14.3, 8.8, 4.0)
+names(tmax_wien) <- monate
+```
+
+Und die Gemeinde-Daten aus Einheit 4:
+
+```{r}
+gemeinden <- read.csv("data/raw/gemeinden.csv")
 ```
 
 
@@ -34,12 +44,13 @@ mitarbeitende <- read.csv("data/raw/mitarbeitende.csv")
 ## if und else
 
 `if` führt den Code in den geschweiften Klammern `{ }` nur aus, wenn die Bedingung in den
-runden Klammern `TRUE` ist. `else` gibt an, was sonst passieren soll:
+runden Klammern `TRUE` ist. `else` gibt an, was sonst passieren soll. Als **Sommertag** gilt
+ein Tag mit einer Höchsttemperatur von mindestens 25 °C:
 
 ```{r}
 temperatur <- 26
 
-if (temperatur > 25) {
+if (temperatur >= 25) {
   print("Sommertag")
 } else {
   print("kein Sommertag")
@@ -66,46 +77,29 @@ if (temperatur >= 30) {
 es einen Fehler:
 
 ```{r, error=TRUE}
-if (tmax_wien > 25) {
-  print("Sommertag")
+if (tmax_wien >= 25) {
+  print("sommerlich")
 }
 ```
 
 Soll eine Bedingung für **jedes Element** eines Vektors geprüft werden, nimmt man
-`ifelse(bedingung, wert_wenn_wahr, wert_wenn_falsch)`:
+`ifelse(bedingung, wert_wenn_wahr, wert_wenn_falsch)`. `tmax_wien` enthält Monatsmittel, keine
+einzelnen Tage — deshalb nennen wir die Monate hier „sommerlich" statt „Sommertag":
 
 ```{r}
-ifelse(tmax_wien > 25, "Sommertag", "kein Sommertag")
+ifelse(tmax_wien >= 25, "sommerlich", "nicht sommerlich")
 ```
 
-## Mehrere Fälle in einem Data Frame: case_when()
-
-Für neue Spalten mit mehr als zwei Kategorien ist `case_when()` aus `dplyr` übersichtlicher als
-verschachtelte `ifelse()`. Jede Zeile hat die Form `bedingung ~ ergebnis`; die erste
-zutreffende Bedingung gewinnt, `TRUE ~` fängt alles Übrige auf:
-
-```{r}
-mitarbeitende <- mitarbeitende %>%
-  mutate(belastung = case_when(
-    is.na(plusstunden) ~ NA,          # fehlende Werte zuerst abfangen
-    plusstunden > 40   ~ "hoch",
-    plusstunden > 20   ~ "mittel",
-    TRUE               ~ "niedrig"
-  ))
-
-mitarbeitende %>% select(name, plusstunden, belastung) %>% head(8)
-```
-
-Ohne die erste Zeile würde Vera als `"niedrig"` eingestuft: Ihre Vergleiche ergeben `NA`, und
-dann greift `TRUE ~`.
+`ifelse()` kennt genau zwei Ergebnisse. Für mehr Kategorien in einem Data Frame gibt es
+`case_when()` aus `dplyr` (siehe Einheit 4, *case_when()*).
 
 ### Übung
 
-1. Schreibe ein `if`/`else`, das für eine Variable `projekte_anzahl` ausgibt, ob jemand
-   `"viele Projekte"` (mindestens 10) oder `"wenige Projekte"` hat.
-2. Füge `mitarbeitende` mit `mutate()` und `ifelse()` eine Spalte `region_bekannt` hinzu, die
-   `TRUE` ist, wenn das Team in `c("Team_A", "Team_B", "Team_C", "Team_D")` vorkommt
-   (Tipp: `%in%` — braucht man hier überhaupt `ifelse()`?).
+1. Schreibe ein `if`/`else`, das für eine Variable `entfernung` (in km) ausgibt, ob eine
+   Gemeinde `"nahe der Landeshauptstadt"` (höchstens 30 km) oder `"abgelegen"` ist.
+2. Füge `gemeinden` mit `mutate()` und `ifelse()` eine Spalte `region_bekannt` hinzu, die
+   `TRUE` ist, wenn das Bundesland in `c("Burgenland", "Salzburg", "Steiermark", "Tirol")`
+   vorkommt (Tipp: `%in%` — braucht man hier überhaupt `ifelse()`?).
 
 ```{r}
 # dein Code
@@ -181,9 +175,11 @@ beendet die Schleife sofort.
 
 ### Übung
 
-1. Gib mit einer `for`-Schleife für jedes Team in `unique(mitarbeitende$team)` die Anzahl
-   Personen aus, z. B. `"Team_A: 9 Personen"`.
-2. Wie viele Jahre dauert es, bis sich 1000 € bei 3 % Zinsen verdoppeln? Löse es mit `while`.
+1. Gib mit einer `for`-Schleife für jedes Bundesland in `unique(gemeinden$bundesland)` die
+   Anzahl Gemeinden aus, z. B. `"Steiermark: 10 Gemeinden"`.
+2. Am 1. Jänner 2024 hatte Österreich 9 158 750 Einwohner. Angenommen, die Bevölkerung wächst
+   jedes Jahr um 0,6 %: Nach wie vielen Jahren sind es mehr als 10 Millionen? Löse es mit
+   `while`.
 
 ```{r}
 # dein Code
@@ -242,7 +238,7 @@ kennzahlen <- function(x) {
     maximum    = max(x, na.rm = TRUE))
 }
 
-kennzahlen(mitarbeitende$plusstunden)
+kennzahlen(gemeinden$preis_m2)
 ```
 
 ## Eingaben prüfen: stop()
@@ -261,7 +257,7 @@ kennzahlen <- function(x) {
     maximum    = max(x, na.rm = TRUE))
 }
 
-kennzahlen(mitarbeitende$name)
+kennzahlen(gemeinden$gemeinde)
 ```
 
 ## Variablen in Funktionen bleiben lokal
@@ -283,10 +279,13 @@ Eine Funktion sollte deshalb alles, was sie braucht, über ihre **Argumente** be
 
 ### Übung
 
-1. Schreibe eine Funktion `bmi(gewicht_kg, groesse_m)`, die den BMI auf eine Nachkommastelle
-   gerundet zurückgibt.
-2. Schreibe eine Funktion `spanne(x)`, die die Differenz zwischen größtem und kleinstem Wert
-   zurückgibt und fehlende Werte ignoriert. Teste sie mit `mitarbeitende$plusstunden`.
+1. Schreibe eine Funktion `miete_pro_m2(miete, flaeche_m2, stellen = 1)`, die die Miete pro m²
+   gerundet zurückgibt — standardmäßig auf eine Nachkommastelle. Teste sie mit 890 € und
+   62,5 m² (Einheit 1), einmal ohne und einmal mit `stellen = 2`.
+2. Ergänze die Funktion so, dass sie mit einer verständlichen Fehlermeldung abbricht, wenn die
+   Fläche 0 oder negativ ist.
+3. Schreibe eine Funktion `spanne(x)`, die die Differenz zwischen größtem und kleinstem Wert
+   zurückgibt und fehlende Werte ignoriert. Teste sie mit `gemeinden$preis_m2`.
 
 ```{r}
 # dein Code
@@ -299,11 +298,11 @@ Eine Funktion sollte deshalb alles, was sie braucht, über ihre **Argumente** be
 ## Die Idee
 
 Sehr oft will man **dieselbe Funktion auf mehrere Dinge** anwenden: den Mittelwert jeder
-Spalte, die Länge jedes Textes, eine Kennzahl für jedes Team. Mit einer `for`-Schleife sieht
-das so aus:
+Spalte, die Länge jedes Textes, eine Kennzahl für jedes Bundesland. Mit einer `for`-Schleife
+sieht das so aus:
 
 ```{r}
-spalten     <- mtcars[, c("mpg", "hp", "wt")]
+spalten     <- gemeinden[, c("einwohner", "flaeche_km2", "entfernung_km")]
 mittelwerte <- numeric(ncol(spalten))
 
 for (i in seq_along(spalten)) {
@@ -342,21 +341,22 @@ Drei Dinge, auf die man achten muss:
   Spalten, siehe Einheit 2). `sapply(df, mean)` rechnet also spaltenweise.
 - **Die Funktion wird ohne Klammern übergeben:** `sapply(spalten, mean)`, nicht
   `sapply(spalten, mean())`. Man übergibt die Funktion selbst — aufrufen tut sie `sapply()`.
-- **Das Ergebnis behält die Namen** der Elemente, deshalb steht oben `mpg`, `hp`, `wt`.
+- **Das Ergebnis behält die Namen** der Elemente, deshalb steht oben `einwohner`,
+  `flaeche_km2`, `entfernung_km`.
 
 ## Zusätzliche Argumente weitergeben
 
-Bei den Mitarbeitenden-Daten gibt es einen fehlenden Wert — `mean()` liefert dann `NA`:
+Beim Preis gibt es einen fehlenden Wert — `mean()` liefert dann `NA`:
 
 ```{r}
-sapply(mitarbeitende[, c("plusstunden", "projekte")], mean)
+sapply(gemeinden[, c("preis_m2", "entfernung_km")], mean)
 ```
 
 Alles, was nach der Funktion steht, reicht `sapply()` an die Funktion weiter. So wird für
 jede Spalte `mean(spalte, na.rm = TRUE)` berechnet:
 
 ```{r}
-sapply(mitarbeitende[, c("plusstunden", "projekte")], mean, na.rm = TRUE)
+sapply(gemeinden[, c("preis_m2", "entfernung_km")], mean, na.rm = TRUE)
 ```
 
 ## Was kommt heraus?
@@ -394,18 +394,19 @@ sapply(c(10, 20, 30), function(x) x^2)
 So liest man das: *„Für jedes Element — nenne es `x` — berechne `x^2`."* Der Name `x` ist frei
 gewählt und gilt nur innerhalb dieser kleinen Funktion.
 
-Ein praktisches Beispiel: die durchschnittlichen Plusstunden für jedes Team. Die anonyme
-Funktion bekommt einen Teamnamen `t` und rechnet den Mittelwert nur für dieses Team:
+Ein praktisches Beispiel: der durchschnittliche Preis für jedes Bundesland. Die anonyme
+Funktion bekommt den Namen eines Bundeslands `b` und rechnet den Mittelwert nur für dessen
+Gemeinden:
 
 ```{r}
-alle_teams <- unique(mitarbeitende$team)
+alle_bundeslaender <- unique(gemeinden$bundesland)
 
-sapply(alle_teams, function(t) {
-  mean(mitarbeitende$plusstunden[mitarbeitende$team == t], na.rm = TRUE)
+sapply(alle_bundeslaender, function(b) {
+  mean(gemeinden$preis_m2[gemeinden$bundesland == b], na.rm = TRUE)
 })
 ```
 
-Für Data Frames ist `group_by()` + `summarise()` (Einheit 3) meist die bequemere Lösung.
+Für Data Frames ist `group_by()` + `summarise()` (Einheit 4) meist die bequemere Lösung.
 `sapply()` ist dann praktisch, wenn man mit Vektoren, Listen oder Spalten arbeitet.
 
 **Kurzschreibweise:** In neuerem Code sieht man statt `function(x)` oft `\(x)` — das ist
@@ -413,7 +414,7 @@ seit R 4.1 dasselbe, nur kürzer: `sapply(c(10, 20, 30), \(x) x^2)`.
 
 ## sapply() oder lapply()?
 
-`lapply()` (Einheit 2) funktioniert genauso, gibt aber **immer eine Liste** zurück — das *l*
+`lapply()` funktioniert genauso, gibt aber **immer eine Liste** zurück — das *l*
 steht für *list*:
 
 ```{r}
@@ -430,14 +431,12 @@ Faustregel: Zum **Anschauen** `sapply()`, zum **Weiterverarbeiten in einem Data 
 
 ### Übung
 
-1. Welche Spalten von `mitarbeitende` sind Zahlen? Wende `is.numeric` mit `sapply()` auf
-   `mitarbeitende` an. Was für ein Objekt kommt heraus?
-2. Berechne mit `sapply()` das **Maximum** von `plusstunden` und `projekte` — fehlende Werte
-   sollen ignoriert werden.
-3. Berechne mit `sapply()` und einer anonymen Funktion für jedes Land in
-   `unique(mitarbeitende$land)` die **Anzahl Personen**.
-4. Wende deine Funktion `spanne()` aus Teil 3 mit `sapply()` auf die Spalten `mpg`, `hp` und
-   `wt` von `mtcars` an.
+1. Welche Spalten von `gemeinden` sind Zahlen? Wende `is.numeric` mit `sapply()` auf
+   `gemeinden` an. Was für ein Objekt kommt heraus?
+2. Berechne mit `sapply()` und einer anonymen Funktion für jeden Gemeindetyp in
+   `unique(gemeinden$typ)` die **Anzahl Gemeinden**.
+3. Wende deine Funktion `spanne()` aus Teil 3 mit `sapply()` auf die Spalten `einwohner`,
+   `flaeche_km2` und `entfernung_km` an.
 
 ```{r}
 # dein Code
@@ -445,35 +444,49 @@ Faustregel: Zum **Anschauen** `sapply()`, zum **Weiterverarbeiten in einem Data 
 ```
 
 
-# Teil 5: Alles zusammen — eine Grafik pro Team
+# Teil 5: Alles zusammen — eine Grafik pro Bundesland
 
 Eine typische Aufgabe: Für jede Gruppe soll dieselbe Grafik entstehen. Wir schreiben eine
-Funktion für **eine** Grafik und rufen sie in einer Schleife für **jedes** Team auf:
+Funktion für **eine** Grafik und rufen sie in einer Schleife für **jedes** Bundesland auf:
 
 ```{r}
-grafik_team <- function(daten, team_name) {
+grafik_bundesland <- function(daten, bl) {
   daten %>%
-    filter(team == team_name, !is.na(plusstunden)) %>%
-    ggplot(aes(x = projekte, y = plusstunden)) +
+    filter(bundesland == bl, !is.na(preis_m2)) %>%
+    ggplot(aes(x = entfernung_km, y = preis_m2)) +
     geom_point(color = "steelblue", size = 2) +
-    labs(title = paste("Plusstunden nach Projekten —", team_name),
-         x = "Anzahl Projekte", y = "Plusstunden") +
+    labs(title = paste("Baugrundstückspreis nach Entfernung —", bl),
+         x = "Entfernung (km, Luftlinie)", y = "Preis (€ pro m²)") +
     theme_minimal()
 }
 
-for (t in c("Team_A", "Team_C")) {
-  print(grafik_team(mitarbeitende, t))   # in Schleifen: print() nötig
+for (bl in c("Steiermark", "Tirol")) {
+  print(grafik_bundesland(gemeinden, bl))   # in Schleifen: print() nötig
 }
 ```
 
 Zum Speichern ersetzt man `print()` durch `ggsave()` und baut den Dateinamen mit `paste0()`:
 
 ```{r, eval=FALSE}
-for (t in unique(mitarbeitende$team)) {
-  ggsave(paste0("output/plusstunden_", t, ".png"),
-         plot = grafik_team(mitarbeitende, t), width = 6, height = 4)
+for (bl in unique(gemeinden$bundesland)) {
+  ggsave(paste0("output/preis_", bl, ".png"),
+         plot = grafik_bundesland(gemeinden, bl), width = 6, height = 4)
 }
 ```
 
 Ohne Funktion stünde der ganze Grafik-Code in der Schleife; mit Funktion lässt er sich einzeln
 testen und auch an anderer Stelle wiederverwenden.
+
+### Übung
+
+1. Schreibe eine Funktion `bundesland_bericht(daten, bl)`, die mit `cat()` einen Satz ausgibt
+   wie `"Steiermark: 10 Gemeinden, im Schnitt 105.1 € pro m²"`. Rufe sie in einer Schleife für
+   alle Bundesländer auf.
+2. **Erweiterung:** Schreibe eine Funktion `bundesland_kennzahlen(daten, bl)`, die Anzahl und
+   Durchschnittspreis als benannten Vektor zurückgibt, und erstelle mit `sapply()` eine
+   Tabelle für alle Bundesländer.
+
+```{r}
+# dein Code
+
+```

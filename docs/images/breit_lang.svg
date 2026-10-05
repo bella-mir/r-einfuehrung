@@ -1,0 +1,80 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 340" width="880" height="340" role="img" aria-label="Dieselben Daten als breite Tabelle mit einer Spalte pro Jahr und als lange Tabelle mit einer Zeile pro Region und Jahr; pivot_longer führt von breit zu lang, pivot_wider zurück" font-family="-apple-system, 'Segoe UI', Helvetica, Arial, sans-serif">
+<rect width="880" height="340" fill="#ffffff"/>
+<defs><marker id="pf" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#52606d"/></marker></defs>
+<text x="24" y="86" font-size="17" font-weight="700" fill="#1f2933">breit</text>
+<text x="24" y="106" font-size="13" fill="#52606d">eine Zeile pro Region, eine Spalte pro Jahr</text>
+<rect x="24" y="120" width="84" height="30" fill="#eef1f4" stroke="#9aa5b1" stroke-width="1"/>
+<text x="34" y="140.0" font-size="14" fill="#1f2933" text-anchor="start" font-weight="700">region</text>
+<rect x="108" y="120" width="68" height="30" fill="#f8dcae" stroke="#9aa5b1" stroke-width="1"/>
+<text x="142.0" y="140.0" font-size="14" fill="#1f2933" text-anchor="middle" font-weight="700">2000</text>
+<rect x="176" y="120" width="68" height="30" fill="#f8dcae" stroke="#9aa5b1" stroke-width="1"/>
+<text x="210.0" y="140.0" font-size="14" fill="#1f2933" text-anchor="middle" font-weight="700">2010</text>
+<rect x="244" y="120" width="68" height="30" fill="#f8dcae" stroke="#9aa5b1" stroke-width="1"/>
+<text x="278.0" y="140.0" font-size="14" fill="#1f2933" text-anchor="middle" font-weight="700">2020</text>
+<rect x="24" y="150" width="84" height="30" fill="#eef1f4" stroke="#9aa5b1" stroke-width="1"/>
+<text x="34" y="170.0" font-size="14" fill="#1f2933" text-anchor="start">Wien</text>
+<rect x="108" y="150" width="68" height="30" fill="#cfe3f1" stroke="#9aa5b1" stroke-width="1"/>
+<text x="142.0" y="170.0" font-size="14" fill="#1f2933" text-anchor="middle">1549</text>
+<rect x="176" y="150" width="68" height="30" fill="#cfe3f1" stroke="#9aa5b1" stroke-width="1"/>
+<text x="210.0" y="170.0" font-size="14" fill="#1f2933" text-anchor="middle">1690</text>
+<rect x="244" y="150" width="68" height="30" fill="#cfe3f1" stroke="#9aa5b1" stroke-width="1"/>
+<text x="278.0" y="170.0" font-size="14" fill="#1f2933" text-anchor="middle">1911</text>
+<rect x="24" y="180" width="84" height="30" fill="#eef1f4" stroke="#9aa5b1" stroke-width="1"/>
+<text x="34" y="200.0" font-size="14" fill="#1f2933" text-anchor="start">Graz</text>
+<rect x="108" y="180" width="68" height="30" fill="#cfe3f1" stroke="#9aa5b1" stroke-width="1"/>
+<text x="142.0" y="200.0" font-size="14" fill="#1f2933" text-anchor="middle">356</text>
+<rect x="176" y="180" width="68" height="30" fill="#cfe3f1" stroke="#9aa5b1" stroke-width="1"/>
+<text x="210.0" y="200.0" font-size="14" fill="#1f2933" text-anchor="middle">397</text>
+<rect x="244" y="180" width="68" height="30" fill="#cfe3f1" stroke="#9aa5b1" stroke-width="1"/>
+<text x="278.0" y="200.0" font-size="14" fill="#1f2933" text-anchor="middle">447</text>
+<text x="600" y="40" font-size="17" font-weight="700" fill="#1f2933">lang</text>
+<text x="600" y="60" font-size="13" fill="#52606d">eine Zeile pro Region und Jahr</text>
+<rect x="600" y="74" width="84" height="30" fill="#eef1f4" stroke="#9aa5b1" stroke-width="1"/>
+<text x="610" y="94.0" font-size="14" fill="#1f2933" text-anchor="start" font-weight="700">region</text>
+<rect x="684" y="74" width="68" height="30" fill="#eef1f4" stroke="#9aa5b1" stroke-width="1"/>
+<text x="718.0" y="94.0" font-size="14" fill="#1f2933" text-anchor="middle" font-weight="700">jahr</text>
+<rect x="752" y="74" width="100" height="30" fill="#eef1f4" stroke="#9aa5b1" stroke-width="1"/>
+<text x="802.0" y="94.0" font-size="14" fill="#1f2933" text-anchor="middle" font-weight="700">einwohner</text>
+<rect x="600" y="104" width="84" height="30" fill="#eef1f4" stroke="#9aa5b1" stroke-width="1"/>
+<text x="610" y="124.0" font-size="14" fill="#1f2933" text-anchor="start">Wien</text>
+<rect x="684" y="104" width="68" height="30" fill="#f8dcae" stroke="#9aa5b1" stroke-width="1"/>
+<text x="718.0" y="124.0" font-size="14" fill="#1f2933" text-anchor="middle">2000</text>
+<rect x="752" y="104" width="100" height="30" fill="#cfe3f1" stroke="#9aa5b1" stroke-width="1"/>
+<text x="802.0" y="124.0" font-size="14" fill="#1f2933" text-anchor="middle">1549</text>
+<rect x="600" y="134" width="84" height="30" fill="#eef1f4" stroke="#9aa5b1" stroke-width="1"/>
+<text x="610" y="154.0" font-size="14" fill="#1f2933" text-anchor="start">Wien</text>
+<rect x="684" y="134" width="68" height="30" fill="#f8dcae" stroke="#9aa5b1" stroke-width="1"/>
+<text x="718.0" y="154.0" font-size="14" fill="#1f2933" text-anchor="middle">2010</text>
+<rect x="752" y="134" width="100" height="30" fill="#cfe3f1" stroke="#9aa5b1" stroke-width="1"/>
+<text x="802.0" y="154.0" font-size="14" fill="#1f2933" text-anchor="middle">1690</text>
+<rect x="600" y="164" width="84" height="30" fill="#eef1f4" stroke="#9aa5b1" stroke-width="1"/>
+<text x="610" y="184.0" font-size="14" fill="#1f2933" text-anchor="start">Wien</text>
+<rect x="684" y="164" width="68" height="30" fill="#f8dcae" stroke="#9aa5b1" stroke-width="1"/>
+<text x="718.0" y="184.0" font-size="14" fill="#1f2933" text-anchor="middle">2020</text>
+<rect x="752" y="164" width="100" height="30" fill="#cfe3f1" stroke="#9aa5b1" stroke-width="1"/>
+<text x="802.0" y="184.0" font-size="14" fill="#1f2933" text-anchor="middle">1911</text>
+<rect x="600" y="194" width="84" height="30" fill="#eef1f4" stroke="#9aa5b1" stroke-width="1"/>
+<text x="610" y="214.0" font-size="14" fill="#1f2933" text-anchor="start">Graz</text>
+<rect x="684" y="194" width="68" height="30" fill="#f8dcae" stroke="#9aa5b1" stroke-width="1"/>
+<text x="718.0" y="214.0" font-size="14" fill="#1f2933" text-anchor="middle">2000</text>
+<rect x="752" y="194" width="100" height="30" fill="#cfe3f1" stroke="#9aa5b1" stroke-width="1"/>
+<text x="802.0" y="214.0" font-size="14" fill="#1f2933" text-anchor="middle">356</text>
+<rect x="600" y="224" width="84" height="30" fill="#eef1f4" stroke="#9aa5b1" stroke-width="1"/>
+<text x="610" y="244.0" font-size="14" fill="#1f2933" text-anchor="start">Graz</text>
+<rect x="684" y="224" width="68" height="30" fill="#f8dcae" stroke="#9aa5b1" stroke-width="1"/>
+<text x="718.0" y="244.0" font-size="14" fill="#1f2933" text-anchor="middle">2010</text>
+<rect x="752" y="224" width="100" height="30" fill="#cfe3f1" stroke="#9aa5b1" stroke-width="1"/>
+<text x="802.0" y="244.0" font-size="14" fill="#1f2933" text-anchor="middle">397</text>
+<rect x="600" y="254" width="84" height="30" fill="#eef1f4" stroke="#9aa5b1" stroke-width="1"/>
+<text x="610" y="274.0" font-size="14" fill="#1f2933" text-anchor="start">Graz</text>
+<rect x="684" y="254" width="68" height="30" fill="#f8dcae" stroke="#9aa5b1" stroke-width="1"/>
+<text x="718.0" y="274.0" font-size="14" fill="#1f2933" text-anchor="middle">2020</text>
+<rect x="752" y="254" width="100" height="30" fill="#cfe3f1" stroke="#9aa5b1" stroke-width="1"/>
+<text x="802.0" y="274.0" font-size="14" fill="#1f2933" text-anchor="middle">447</text>
+<line x1="338" y1="140" x2="574" y2="140" stroke="#52606d" stroke-width="2" marker-end="url(#pf)"/>
+<text x="456.0" y="130" font-size="14" font-weight="700" fill="#1f2933" text-anchor="middle" font-family="Menlo, Consolas, monospace">pivot_longer()</text>
+<line x1="574" y1="190" x2="338" y2="190" stroke="#52606d" stroke-width="2" marker-end="url(#pf)"/>
+<text x="456.0" y="212" font-size="14" font-weight="700" fill="#1f2933" text-anchor="middle" font-family="Menlo, Consolas, monospace">pivot_wider()</text>
+<rect x="24" y="258" width="16" height="16" fill="#f8dcae" stroke="#9aa5b1"/><text x="48" y="271" font-size="13" fill="#52606d">Spaltennamen werden zur Spalte „jahr"</text>
+<rect x="24" y="284" width="16" height="16" fill="#cfe3f1" stroke="#9aa5b1"/><text x="48" y="297" font-size="13" fill="#52606d">Werte wandern in die Spalte „einwohner" (in 1000)</text>
+</svg>

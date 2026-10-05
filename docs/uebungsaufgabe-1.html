@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="de" xml:lang="de"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.9.38">
+<meta name="generator" content="quarto-1.10.18">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -12,10 +12,13 @@
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
 */
-code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
-div.columns{display: flex; gap: min(4vw, 1.5em);}
-div.column{flex: auto; overflow-x: auto;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
@@ -34,17 +37,17 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
 <link href="./cheatsheet.html" rel="next">
-<link href="./einheit-4.html" rel="prev">
+<link href="./einheit-5.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-bb13f761afd1698ae8f29792cda6a076.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-b780e26fcea2d1faebb34e9a9f24195f.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -144,19 +147,25 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./einheit-2.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">2 · Datenstrukturen &amp; Daten einlesen</span></a>
+ <span class="menu-text">2 · Datenstrukturen</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./einheit-3.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">3 · Daten auswerten &amp; visualisieren</span></a>
+ <span class="menu-text">3 · Daten einlesen, aufräumen &amp; speichern</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./einheit-4.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">4 · Bedingungen, Schleifen &amp; Funktionen</span></a>
+ <span class="menu-text">4 · Daten auswerten &amp; visualisieren</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./einheit-5.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">5 · Bedingungen, Schleifen &amp; Funktionen</span></a>
   </div>
 </li>
       </ul>
@@ -183,8 +192,13 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Auf dieser Seite</h2>
    
   <ul class="collapse">
-  <li><a href="#aufgabe" id="toc-aufgabe" class="nav-link active" data-scroll-target="#aufgabe">Aufgabe</a></li>
-  <li><a href="#checkliste-vor-der-abgabe" id="toc-checkliste-vor-der-abgabe" class="nav-link" data-scroll-target="#checkliste-vor-der-abgabe">Checkliste vor der Abgabe</a></li>
+  <li><a href="#regionale-bevölkerungsentwicklung-in-österreich-20002024-geburtenbilanz-und-wanderung" id="toc-regionale-bevölkerungsentwicklung-in-österreich-20002024-geburtenbilanz-und-wanderung" class="nav-link active" data-scroll-target="#regionale-bevölkerungsentwicklung-in-österreich-20002024-geburtenbilanz-und-wanderung">Regionale Bevölkerungsentwicklung in Österreich 2000–2024: Geburtenbilanz und Wanderung</a>
+  <ul class="collapse">
+  <li><a href="#worum-es-geht" id="toc-worum-es-geht" class="nav-link" data-scroll-target="#worum-es-geht">Worum es geht</a></li>
+  <li><a href="#die-daten" id="toc-die-daten" class="nav-link" data-scroll-target="#die-daten">Die Daten</a></li>
+  <li><a href="#aufgaben" id="toc-aufgaben" class="nav-link" data-scroll-target="#aufgaben">Aufgaben</a></li>
+  <li><a href="#abgabe" id="toc-abgabe" class="nav-link" data-scroll-target="#abgabe">Abgabe</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -210,9 +224,104 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>In dieser Übungsaufgabe entsteht eure erste eigenständige Auswertung. Alles, was dafür nötig ist, steht in Einheit 1–3.</p>
-<section id="aufgabe" class="level2">
-<h2 class="anchored" data-anchor-id="aufgabe">Aufgabe</h2>
+<section id="regionale-bevölkerungsentwicklung-in-österreich-20002024-geburtenbilanz-und-wanderung" class="level1">
+<h1>Regionale Bevölkerungsentwicklung in Österreich 2000–2024: Geburtenbilanz und Wanderung</h1>
+<p>In dieser Übungsaufgabe wendet ihr die Einheiten 1–4 an <strong>echten Daten</strong> an (Pakete: <code>dplyr</code>, <code>tidyr</code>, <code>ggplot2</code>). Danach könnt ihr:</p>
+<ol type="1">
+<li>Daten aus verschiedenen Dateien <strong>einlesen</strong> und <strong>aufräumen</strong>.</li>
+<li>Tabellen <strong>umformen</strong> (lang ↔︎ breit), <strong>verbinden</strong> und das Ergebnis <strong>überprüfen</strong>.</li>
+<li>Kennzahlen <strong>berechnen</strong> und Regionen damit <strong>vergleichen</strong> und <strong>einteilen</strong>.</li>
+<li>Ergebnisse <strong>darstellen</strong>, <strong>interpretieren</strong> und die Grenzen der Daten <strong>beurteilen</strong>.</li>
+<li>Eine Auswertung nachvollziehbar und reproduzierbar <strong>dokumentieren</strong>.</li>
+</ol>
+<section id="worum-es-geht" class="level2">
+<h2 class="anchored" data-anchor-id="worum-es-geht">Worum es geht</h2>
+<p>Österreich hat heute über eine Million Einwohner mehr als im Jahr 2000 — aber nicht jede Region wächst. Ihr untersucht:</p>
+<ol type="1">
+<li><strong>Welche</strong> Regionen Österreichs sind seit 2000 gewachsen, welche geschrumpft?</li>
+<li><strong>Woher</strong> kommt das Wachstum — und welche Regionen wachsen <strong>nur</strong> durch Wanderungsgewinn (mehr Zuzüge als Wegzüge)?</li>
+</ol>
+<p>Grundlage ist die <strong>Bevölkerungsbilanz</strong>:</p>
+<blockquote class="blockquote">
+<p>Veränderung = Geburtenbilanz (Geburten − Sterbefälle) + Wanderungssaldo (Zuzüge − Wegzüge)</p>
+</blockquote>
+</section>
+<section id="die-daten" class="level2">
+<h2 class="anchored" data-anchor-id="die-daten">Die Daten</h2>
+<p>Die Dateien liegen in <code>data/uebung/</code> und enthalten 36 europäische Staaten mit ihren <strong>NUTS-3-Regionen</strong>. Ihr braucht nur <strong>Österreich</strong>: den Staat insgesamt (<code>AT</code>) und seine 35 Regionen, z. B. <code>AT130</code> Wien. Die ersten zwei Zeichen des Codes sind das Länderkürzel.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Datei</th>
+<th>Inhalt</th>
+<th>Aufbau</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>regionen.csv</code></td>
+<td>Code, Name und Ebene (<code>0</code> = Staat, <code>3</code> = NUTS-3-Region)</td>
+<td>eine Zeile pro Region</td>
+</tr>
+<tr class="even">
+<td><code>bevoelkerung.csv</code></td>
+<td>Einwohner am <strong>1. Jänner</strong>, 2000–2024</td>
+<td><strong>lang:</strong> eine Zeile pro Region und Jahr</td>
+</tr>
+<tr class="odd">
+<td><code>geburten_sterbefaelle.csv</code></td>
+<td>Geburten und Sterbefälle <strong>im Lauf des Jahres</strong>, 2000–2023</td>
+<td><strong>lang:</strong> eine Zeile pro Region und Jahr</td>
+</tr>
+<tr class="even">
+<td><code>wanderung.csv</code></td>
+<td>Wanderungssaldo <strong>im Lauf des Jahres</strong>, 1990–2025</td>
+<td><strong>breit:</strong> eine Spalte pro Jahr</td>
+</tr>
+</tbody>
+</table>
+<p>Seht euch jede Datei vor dem Einlesen an (<em>Files</em> → anklicken → <em>View File</em>): Trennzeichen, Info-Zeilen und Spaltennamen sind nicht überall gleich.</p>
+<p><strong>Quelle:</strong> <a href="https://urban.jrc.ec.europa.eu/ardeco">ARDECO-Datenbank</a> der Europäischen Kommission, abgerufen im Oktober 2026. <code>wanderung.csv</code> ist der unveränderte Originalexport; die anderen drei Dateien haben wir daraus für die Übung vorbereitet (Jahre 2000–2024, langes Format, unterschiedlich gespeichert). Die Werte sind unverändert.</p>
+</section>
+<section id="aufgaben" class="level2">
+<h2 class="anchored" data-anchor-id="aufgaben">Aufgaben</h2>
+<p>Schreibt zu jedem Schritt 1–2 Sätze: <strong>was</strong> ihr macht und <strong>warum</strong>.</p>
+<section id="einlesen" class="level3">
+<h3 class="anchored" data-anchor-id="einlesen">1. Einlesen</h3>
+<p>Lest alle vier Dateien über relative Pfade ein und prüft sie mit <code>str()</code>.</p>
+</section>
+<section id="aufräumen-und-zusammenfassen" class="level3">
+<h3 class="anchored" data-anchor-id="aufräumen-und-zusammenfassen">2. Aufräumen und zusammenfassen</h3>
+<ul>
+<li><strong>Namen:</strong> Spaltennamen in <code>snake_case</code>; der Regionscode heißt überall <code>nuts</code>.</li>
+<li><strong>Nur Österreich:</strong> In allen Tabellen nur Zeilen behalten, deren Code mit <code>AT</code> beginnt (Tipp: <code>substr()</code>).</li>
+<li><strong>Lang → breit:</strong> Bevölkerung mit <code>pivot_wider()</code> in eine Zeile pro Region bringen, mit den Spalten <code>einwohner_2000</code> und <code>einwohner_2024</code>.</li>
+<li><strong>Breit → lang:</strong> Wanderung mit <code>pivot_longer()</code> in eine Zeile pro Region und Jahr bringen. Behaltet nur Regionscode, Jahr und Wert — und nur die Jahre, die zwischen dem 1. Jänner 2000 und dem 1. Jänner 2024 liegen.</li>
+<li><strong>Summieren:</strong> Geburten, Sterbefälle und Wanderungssaldo pro Region über diese Jahre.</li>
+<li><strong>Prüfen:</strong> Fehlen irgendwo Werte (<code>NA</code>)?</li>
+</ul>
+</section>
+<section id="verbinden" class="level3">
+<h3 class="anchored" data-anchor-id="verbinden">3. Verbinden</h3>
+<p>Erstellt den Data Frame <code>bilanz</code> mit 36 Zeilen (Österreich insgesamt und 35 Regionen) und den Spalten <code>nuts</code>, <code>name</code>, <code>ebene</code>, <code>einwohner_2000</code>, <code>einwohner_2024</code>, <code>geburten</code>, <code>sterbefaelle</code>, <code>wanderungssaldo</code>. Begründet euren Join und zeigt mit Code, dass keine Region fehlt oder doppelt vorkommt.</p>
+</section>
+<section id="rechnen" class="level3">
+<h3 class="anchored" data-anchor-id="rechnen">4. Rechnen</h3>
+<ul>
+<li><code>veraenderung</code> (Einwohner 2024 − 2000) und <code>geburtenbilanz</code> (Geburten − Sterbefälle).</li>
+<li><strong>Kontrolle:</strong> Wie stark weicht <code>veraenderung</code> von <code>geburtenbilanz + wanderungssaldo</code> ab? Bis zu 5 Personen pro Region (84 für Österreich insgesamt) sind Rundung; mehr bedeutet falsche Jahre.</li>
+<li>Alle drei Größen in <strong>Prozent der Bevölkerung von 2000</strong>: <code>veraenderung_pct</code>, <code>geburtenbilanz_pct</code>, <code>wanderung_pct</code>. Zeigt an einem Beispiel, dass die Reihenfolge der Regionen in absoluten Zahlen und in Prozent verschieden ist.</li>
+<li>Wie stark ist Österreich insgesamt gewachsen — und wodurch?</li>
+</ul>
+</section>
+<section id="typen-bilden" class="level3">
+<h3 class="anchored" data-anchor-id="typen-bilden">5. Typen bilden</h3>
+<p>Teilt jede Region mit <code>case_when()</code> in einen von vier Typen ein (Spalte <code>typ</code>):</p>
 <table class="caption-top table">
 <colgroup>
 <col style="width: 50%">
@@ -220,56 +329,86 @@ ul.task-list li input[type="checkbox"] {
 </colgroup>
 <thead>
 <tr class="header">
-<th>Schritt</th>
-<th>Nachschlagen in</th>
+<th>Typ</th>
+<th>Bedingung</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td>1. Neues <code>.Rmd</code> im Projektordner anlegen (<em>File → New File → R Markdown</em>).</td>
-<td>Vorbereitung</td>
+<td>wächst, mit Geburtenüberschuss</td>
+<td>wächst, mehr Geburten als Sterbefälle</td>
 </tr>
 <tr class="even">
-<td>2. <code>data/raw/mitarbeitende.csv</code> und <code>data/raw/teams.csv</code> über relative Pfade einlesen und mit <code>str()</code> prüfen.</td>
-<td>Einheit 2, Teil 4</td>
+<td>wächst nur durch Wanderungsgewinn</td>
+<td>wächst, obwohl mehr Menschen sterben als geboren werden</td>
 </tr>
 <tr class="odd">
-<td>3. Die beiden Datensätze mit einem Join verbinden und begründen, welchen Join ihr wählt.</td>
-<td>Einheit 3, <em>Joins</em></td>
+<td>schrumpft trotz Wanderungsgewinn</td>
+<td>schrumpft, Wanderungssaldo positiv</td>
 </tr>
 <tr class="even">
-<td>4. Mindestens einen <code>filter()</code>- und einen <code>mutate()</code>-Schritt anwenden.</td>
-<td>Einheit 3, Teil 1</td>
-</tr>
-<tr class="odd">
-<td>5. Eine Zusammenfassungstabelle mit <code>group_by()</code> + <code>summarise()</code> erstellen (fehlende Werte beachten).</td>
-<td>Einheit 3, Teil 1</td>
-</tr>
-<tr class="even">
-<td>6. Eine <code>ggplot2</code>-Grafik bauen, die diese Tabelle sichtbar macht, und mit <code>ggsave()</code> nach <code>output/</code> speichern.</td>
-<td>Einheit 3, Teil 2</td>
-</tr>
-<tr class="odd">
-<td>7. Das Dokument zu HTML knitten.</td>
-<td>Vorbereitung</td>
+<td>schrumpft, mit Wanderungsverlust</td>
+<td>schrumpft, Wanderungssaldo negativ</td>
 </tr>
 </tbody>
 </table>
-<p><strong>Abgabe:</strong> die <code>.Rmd</code>-Datei <strong>und</strong> die geknittete <code>.html</code>-Datei.</p>
+<p>Ab hier nur noch die 35 Regionen (Ebene 3): Wie viele gehören zu welchem Typ? Welche wachsen nur durch Wanderungsgewinn, welche schrumpfen?</p>
 </section>
-<section id="checkliste-vor-der-abgabe" class="level2">
-<h2 class="anchored" data-anchor-id="checkliste-vor-der-abgabe">Checkliste vor der Abgabe</h2>
-<ul class="task-list">
-<li><label><input type="checkbox">Das Dokument läuft nach einem Neustart von R (<code>Strg + Shift + F10</code>) fehlerfrei durch.</label></li>
-<li><label><input type="checkbox">Keine absoluten Pfade und kein <code>setwd()</code>; kein <code>install.packages()</code> im Dokument.</label></li>
-<li><label><input type="checkbox">Alle Pakete werden oben im Dokument mit <code>library()</code> geladen.</label></li>
-<li><label><input type="checkbox">Jeder Arbeitsschritt hat 1–2 Sätze Text: <strong>was</strong> wird gemacht und <strong>warum</strong>.</label></li>
-<li><label><input type="checkbox">Fehlende Werte (Vera, Uwe) sind bemerkt und bewusst behandelt.</label></li>
-<li><label><input type="checkbox">Die Grafik hat Titel, Achsenbeschriftungen und ggf. eine Legende.</label></li>
-<li><label><input type="checkbox">Die Grafik liegt als Datei in <code>output/</code>.</label></li>
+<section id="grafiken" class="level3">
+<h3 class="anchored" data-anchor-id="grafiken">6. Grafiken</h3>
+<p>Jede Grafik braucht Titel, beschriftete Achsen (mit Einheit) und eine verständliche Legende.</p>
+<ul>
+<li><strong>Balkendiagramm:</strong> <code>veraenderung_pct</code> der 35 Regionen, sortiert (<code>reorder()</code>) und nach <code>typ</code> eingefärbt.</li>
+<li><strong>Streudiagramm:</strong> <code>geburtenbilanz_pct</code> gegen <code>wanderung_pct</code>, eingefärbt nach <code>typ</code>; mit <code>ggsave()</code> nach <code>output/</code> speichern.</li>
+<li><strong>Zeitverlauf:</strong> jährlicher Wanderungssaldo von Österreich insgesamt (<code>AT</code>), 2000–2023, als Linie (<code>geom_line()</code>). In welchen Jahren war er besonders hoch — und warum?</li>
 </ul>
+<p>Alle Bausteine stehen in Einheit 4. Mehr Möglichkeiten zeigen die <a href="https://ggplot2.tidyverse.org/reference/">ggplot2-Referenz</a>, das <a href="https://rstudio.github.io/cheatsheets/html/data-visualization.html">ggplot2-Cheatsheet</a> und die <a href="https://r-graph-gallery.com/">R Graph Gallery</a>.</p>
+</section>
+<section id="interpretation" class="level3">
+<h3 class="anchored" data-anchor-id="interpretation">7. Interpretation</h3>
+<p>Beantwortet in 5–8 Sätzen die beiden Fragen vom Anfang und nennt eine <strong>Grenze der Daten</strong> (z. B.: Was erfährt man aus dem Wanderungssaldo <strong>nicht</strong>?).</p>
+</section>
+</section>
+<section id="abgabe" class="level2">
+<h2 class="anchored" data-anchor-id="abgabe">Abgabe</h2>
+<p>Arbeitet im Kursprojekt in einer neuen Datei <code>UE1_GruppeXX.Rmd</code> direkt im Projektordner. Gebt die <strong><code>.Rmd</code>-Datei und die geknittete <code>.html</code>-Datei</strong> über <strong>TUWEL</strong> ab; die Frist steht dort.</p>
+<p>Das Dokument muss nach einem Neustart von R fehlerfrei durchlaufen: nur relative Pfade, kein <code>setwd()</code>, alle Pakete oben mit <code>library()</code> laden.</p>
+<section id="bewertung" class="level3">
+<h3 class="anchored" data-anchor-id="bewertung">Bewertung</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Kriterium</th>
+<th>Punkte</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Nachvollziehbar und reproduzierbar:</strong> läuft in einem Durchlauf durch, klar gegliedert, lesbarer Code, jeder Schritt in 1–2 Sätzen erklärt</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td><strong>Vollständig und plausibel:</strong> Schritte 1–6 bearbeitet, <code>bilanz</code> wie verlangt, keine groben Fehler in Zahlen und Grafiken</td>
+<td>2</td>
+</tr>
+<tr class="odd">
+<td><strong>Interpretation:</strong> in eigenen Worten, mit Bezug auf die eigenen Ergebnisse, inklusive einer Grenze der Daten</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td><strong>Summe</strong></td>
+<td><strong>4</strong></td>
+</tr>
+</tbody>
+</table>
 
 
+</section>
+</section>
 </section>
 
 </main> <!-- /main -->
@@ -675,8 +814,8 @@ ul.task-list li input[type="checkbox"] {
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./einheit-4.html" class="pagination-link" aria-label="4 · Bedingungen, Schleifen &amp; Funktionen">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">4 · Bedingungen, Schleifen &amp; Funktionen</span>
+      <a href="./einheit-5.html" class="pagination-link" aria-label="5 · Bedingungen, Schleifen &amp; Funktionen">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">5 · Bedingungen, Schleifen &amp; Funktionen</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">

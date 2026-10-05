@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="de" xml:lang="de"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.9.38">
+<meta name="generator" content="quarto-1.10.18">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -12,10 +12,13 @@
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
 */
-code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
-div.columns{display: flex; gap: min(4vw, 1.5em);}
-div.column{flex: auto; overflow-x: auto;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
@@ -40,10 +43,10 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-bb13f761afd1698ae8f29792cda6a076.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-b780e26fcea2d1faebb34e9a9f24195f.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -143,19 +146,25 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./einheit-2.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">2 · Datenstrukturen &amp; Daten einlesen</span></a>
+ <span class="menu-text">2 · Datenstrukturen</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./einheit-3.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">3 · Daten auswerten &amp; visualisieren</span></a>
+ <span class="menu-text">3 · Daten einlesen, aufräumen &amp; speichern</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./einheit-4.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">4 · Bedingungen, Schleifen &amp; Funktionen</span></a>
+ <span class="menu-text">4 · Daten auswerten &amp; visualisieren</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./einheit-5.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">5 · Bedingungen, Schleifen &amp; Funktionen</span></a>
   </div>
 </li>
       </ul>
@@ -215,27 +224,31 @@ ul.task-list li input[type="checkbox"] {
 </tr>
 <tr class="even">
 <td><a href="./einheit-1.html">1 · Grundlagen</a></td>
-<td>Rechnen, Variablen, Funktionen verwenden, Datentypen, Vektoren</td>
+<td>Rechnen, Variablen, Funktionen verwenden, Datentypen, Vektoren, schnelle Grafiken mit Base-R</td>
 </tr>
 <tr class="odd">
-<td><a href="./einheit-2.html">2 · Datenstrukturen &amp; Daten einlesen</a></td>
-<td>Matrizen, Listen, Data Frames, Faktoren, CSV einlesen, Daten bereinigen, speichern</td>
+<td><a href="./einheit-2.html">2 · Datenstrukturen</a></td>
+<td>Matrizen, Listen, Data Frames, Faktoren</td>
 </tr>
 <tr class="even">
-<td><a href="./einheit-3.html">3 · Daten auswerten &amp; visualisieren</a></td>
-<td>Datenbearbeitung mit <code>dplyr</code>, Grafiken mit <code>ggplot2</code></td>
+<td><a href="./einheit-3.html">3 · Daten einlesen, aufräumen &amp; speichern</a></td>
+<td>CSV und Excel einlesen, Daten bereinigen, als CSV, Excel oder RDS speichern</td>
 </tr>
 <tr class="odd">
-<td><a href="./einheit-4.html">4 · Bedingungen, Schleifen &amp; Funktionen</a></td>
+<td><a href="./einheit-4.html">4 · Daten auswerten &amp; visualisieren</a></td>
+<td>Auswerten und Verbinden mit <code>dplyr</code>, lange und breite Tabellen mit <code>tidyr</code>, Grafiken mit <code>ggplot2</code></td>
+</tr>
+<tr class="even">
+<td><a href="./einheit-5.html">5 · Bedingungen, Schleifen &amp; Funktionen</a></td>
 <td><code>if</code>/<code>else</code>, <code>for</code>, <code>while</code>, eigene Funktionen, <code>sapply()</code></td>
 </tr>
-<tr class="even">
-<td><a href="./uebungsaufgabe-1.html">Übungsaufgabe 1</a></td>
-<td></td>
-</tr>
 <tr class="odd">
+<td><a href="./uebungsaufgabe-1.html">Übungsaufgabe 1</a></td>
+<td>Regionale Bevölkerungsentwicklung in Österreich 2000–2024: Geburtenbilanz und Wanderung</td>
+</tr>
+<tr class="even">
 <td><a href="./cheatsheet.html">Cheatsheet</a></td>
-<td></td>
+<td>Die wichtigsten Funktionen aller Einheiten</td>
 </tr>
 </tbody>
 </table>
@@ -247,9 +260,22 @@ ul.task-list li input[type="checkbox"] {
 <li><code>r-einfuehrung.Rproj</code> per Doppelklick öffnen und die Notebooks (<code>01_grundlagen.Rmd</code>, …) Block für Block ausführen.</li>
 </ol>
 </section>
+<section id="datenquellen" class="level2">
+<h2 class="anchored" data-anchor-id="datenquellen">Datenquellen</h2>
+<p>Alle Datensätze beruhen auf echten Daten und wurden für den Kurs aufbereitet (Auswahl, Vereinfachung, einzelne eingebaute Fehler und fehlende Werte).</p>
+<ul>
+<li><strong>Temperaturen Wien:</strong> <a href="https://www.geosphere.at">GeoSphere Austria</a>, Klimanormalwerte 1991–2020</li>
+<li><strong>Wiener Bezirke:</strong> <a href="https://www.wien.gv.at/statistik/bezirksdaten">Statistik Wien</a>, 2021 (Datenquelle: Stadt Wien – data.wien.gv.at)</li>
+<li><strong>Luftgüte Wien:</strong> <a href="https://www.wien.gv.at/spezial/luftguetebericht/">Luftgütebericht 2025</a> der Stadt Wien</li>
+<li><strong>Gemeinden und Bundesländer:</strong> <a href="https://www.statistik.at">Statistik Austria</a> (Gemeindeverzeichnis 2026, Urban-Rural-Typologie, Baugrundstückspreise 2025); Entfernungen berechnet aus Koordinaten von Wikidata</li>
+<li><strong>Bevölkerung, Geburten, Sterbefälle, Wanderung:</strong> <a href="https://urban.jrc.ec.europa.eu/ardeco">ARDECO</a>, Europäische Kommission, abgerufen im Oktober 2026</li>
+</ul>
+</section>
 <section id="impressum" class="level2">
 <h2 class="anchored" data-anchor-id="impressum">Impressum</h2>
-<p><strong>Autorin:</strong> Bella Mironova, TU Wien, SRF <strong>Überarbeitung:</strong> mit Unterstützung von Claude (Anthropic) <strong>Lizenz:</strong> <a href="https://creativecommons.org/licenses/by/4.0/deed.de">CC BY 4.0</a></p>
+<p><strong>Autorin:</strong> Bella Mironova, TU Wien, SRF</p>
+<p><strong>Lizenz:</strong> <a href="https://creativecommons.org/licenses/by/4.0/deed.de">CC BY 4.0</a></p>
+<p><em>Überarbeitung mit Unterstützung von Claude (Anthropic)</em></p>
 
 
 </section>

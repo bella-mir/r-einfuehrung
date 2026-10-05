@@ -2,20 +2,23 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="de" xml:lang="de"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.9.38">
+<meta name="generator" content="quarto-1.10.18">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Einheit 4: Bedingungen, Schleifen &amp; Funktionen – R-Einführung</title>
+<title>Einheit 4: Daten auswerten &amp; visualisieren – R-Einführung</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
 */
-code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
-div.columns{display: flex; gap: min(4vw, 1.5em);}
-div.column{flex: auto; overflow-x: auto;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
@@ -68,7 +71,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./uebungsaufgabe-1.html" rel="next">
+<link href="./einheit-5.html" rel="next">
 <link href="./einheit-3.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
@@ -76,10 +79,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-bb13f761afd1698ae8f29792cda6a076.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-b780e26fcea2d1faebb34e9a9f24195f.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -121,7 +124,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Seitenleiste umschalten" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./vorbereitung.html">Einheiten</a></li><li class="breadcrumb-item"><a href="./einheit-4.html">4 · Bedingungen, Schleifen &amp; Funktionen</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./vorbereitung.html">Einheiten</a></li><li class="breadcrumb-item"><a href="./einheit-4.html">4 · Daten auswerten &amp; visualisieren</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Seitenleiste umschalten" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Suchen" onclick="window.quartoOpenSearch();">
@@ -179,19 +182,25 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./einheit-2.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">2 · Datenstrukturen &amp; Daten einlesen</span></a>
+ <span class="menu-text">2 · Datenstrukturen</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./einheit-3.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">3 · Daten auswerten &amp; visualisieren</span></a>
+ <span class="menu-text">3 · Daten einlesen, aufräumen &amp; speichern</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./einheit-4.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">4 · Bedingungen, Schleifen &amp; Funktionen</span></a>
+ <span class="menu-text">4 · Daten auswerten &amp; visualisieren</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./einheit-5.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">5 · Bedingungen, Schleifen &amp; Funktionen</span></a>
   </div>
 </li>
       </ul>
@@ -218,47 +227,42 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Auf dieser Seite</h2>
    
   <ul class="collapse">
-  <li><a href="#teil-1-bedingungen" id="toc-teil-1-bedingungen" class="nav-link active" data-scroll-target="#teil-1-bedingungen">Teil 1: Bedingungen</a>
+  <li><a href="#teil-1-datenbearbeitung-mit-dplyr" id="toc-teil-1-datenbearbeitung-mit-dplyr" class="nav-link active" data-scroll-target="#teil-1-datenbearbeitung-mit-dplyr">Teil 1: Datenbearbeitung mit dplyr</a>
   <ul class="collapse">
-  <li><a href="#if-und-else" id="toc-if-und-else" class="nav-link" data-scroll-target="#if-und-else">if und else</a></li>
-  <li><a href="#achtung-if-prüft-genau-einen-wert" id="toc-achtung-if-prüft-genau-einen-wert" class="nav-link" data-scroll-target="#achtung-if-prüft-genau-einen-wert">Achtung: if prüft genau einen Wert</a></li>
-  <li><a href="#mehrere-fälle-in-einem-data-frame-case_when" id="toc-mehrere-fälle-in-einem-data-frame-case_when" class="nav-link" data-scroll-target="#mehrere-fälle-in-einem-data-frame-case_when">Mehrere Fälle in einem Data Frame: case_when()</a></li>
+  <li><a href="#filter-zeilen-auswählen" id="toc-filter-zeilen-auswählen" class="nav-link" data-scroll-target="#filter-zeilen-auswählen">filter() — Zeilen auswählen</a></li>
+  <li><a href="#select-spalten-auswählen" id="toc-select-spalten-auswählen" class="nav-link" data-scroll-target="#select-spalten-auswählen">select() — Spalten auswählen</a></li>
+  <li><a href="#arrange-sortieren" id="toc-arrange-sortieren" class="nav-link" data-scroll-target="#arrange-sortieren">arrange() — sortieren</a></li>
+  <li><a href="#der-pipe-operator-und" id="toc-der-pipe-operator-und" class="nav-link" data-scroll-target="#der-pipe-operator-und">Der Pipe-Operator: %&gt;% und |&gt;</a></li>
+  <li><a href="#mutate-neue-spalten-berechnen" id="toc-mutate-neue-spalten-berechnen" class="nav-link" data-scroll-target="#mutate-neue-spalten-berechnen">mutate() — neue Spalten berechnen</a></li>
+  <li><a href="#case_when-werte-nach-bedingungen-einteilen" id="toc-case_when-werte-nach-bedingungen-einteilen" class="nav-link" data-scroll-target="#case_when-werte-nach-bedingungen-einteilen">case_when() — Werte nach Bedingungen einteilen</a></li>
+  <li><a href="#mehrere-schritte-kombinieren" id="toc-mehrere-schritte-kombinieren" class="nav-link" data-scroll-target="#mehrere-schritte-kombinieren">Mehrere Schritte kombinieren</a></li>
+  <li><a href="#count-häufigkeiten-zählen" id="toc-count-häufigkeiten-zählen" class="nav-link" data-scroll-target="#count-häufigkeiten-zählen">count() — Häufigkeiten zählen</a></li>
+  <li><a href="#group_by-summarise-kennzahlen-pro-gruppe" id="toc-group_by-summarise-kennzahlen-pro-gruppe" class="nav-link" data-scroll-target="#group_by-summarise-kennzahlen-pro-gruppe">group_by() + summarise() — Kennzahlen pro Gruppe</a></li>
+  <li><a href="#datensätze-verbinden-joins" id="toc-datensätze-verbinden-joins" class="nav-link" data-scroll-target="#datensätze-verbinden-joins">Datensätze verbinden: Joins</a></li>
+  <li><a href="#breite-und-lange-tabellen-pivot_longer-und-pivot_wider" id="toc-breite-und-lange-tabellen-pivot_longer-und-pivot_wider" class="nav-link" data-scroll-target="#breite-und-lange-tabellen-pivot_longer-und-pivot_wider">Breite und lange Tabellen: pivot_longer() und pivot_wider()</a></li>
   </ul></li>
-  <li><a href="#teil-2-schleifen" id="toc-teil-2-schleifen" class="nav-link" data-scroll-target="#teil-2-schleifen">Teil 2: Schleifen</a>
+  <li><a href="#teil-2-visualisierung-mit-ggplot2" id="toc-teil-2-visualisierung-mit-ggplot2" class="nav-link" data-scroll-target="#teil-2-visualisierung-mit-ggplot2">Teil 2: Visualisierung mit ggplot2</a>
   <ul class="collapse">
-  <li><a href="#for-schleifen" id="toc-for-schleifen" class="nav-link" data-scroll-target="#for-schleifen">for-Schleifen</a></li>
-  <li><a href="#ergebnisse-in-einer-schleife-sammeln" id="toc-ergebnisse-in-einer-schleife-sammeln" class="nav-link" data-scroll-target="#ergebnisse-in-einer-schleife-sammeln">Ergebnisse in einer Schleife sammeln</a></li>
-  <li><a href="#wann-braucht-man-eine-schleife-und-wann-nicht" id="toc-wann-braucht-man-eine-schleife-und-wann-nicht" class="nav-link" data-scroll-target="#wann-braucht-man-eine-schleife-und-wann-nicht">Wann braucht man eine Schleife — und wann nicht?</a></li>
-  <li><a href="#while-schleifen" id="toc-while-schleifen" class="nav-link" data-scroll-target="#while-schleifen">while-Schleifen</a></li>
+  <li><a href="#die-daten-vorbereiten" id="toc-die-daten-vorbereiten" class="nav-link" data-scroll-target="#die-daten-vorbereiten">Die Daten vorbereiten</a></li>
+  <li><a href="#der-grundaufbau" id="toc-der-grundaufbau" class="nav-link" data-scroll-target="#der-grundaufbau">Der Grundaufbau</a></li>
+  <li><a href="#streudiagramm-geom_point" id="toc-streudiagramm-geom_point" class="nav-link" data-scroll-target="#streudiagramm-geom_point">Streudiagramm: geom_point()</a></li>
+  <li><a href="#nach-gruppe-einfärben" id="toc-nach-gruppe-einfärben" class="nav-link" data-scroll-target="#nach-gruppe-einfärben">Nach Gruppe einfärben</a></li>
+  <li><a href="#balkendiagramm-einer-kennzahl-geom_col" id="toc-balkendiagramm-einer-kennzahl-geom_col" class="nav-link" data-scroll-target="#balkendiagramm-einer-kennzahl-geom_col">Balkendiagramm einer Kennzahl: geom_col()</a></li>
+  <li><a href="#zeitverläufe-geom_line" id="toc-zeitverläufe-geom_line" class="nav-link" data-scroll-target="#zeitverläufe-geom_line">Zeitverläufe: geom_line()</a></li>
+  <li><a href="#verteilungen-geom_boxplot-und-geom_histogram" id="toc-verteilungen-geom_boxplot-und-geom_histogram" class="nav-link" data-scroll-target="#verteilungen-geom_boxplot-und-geom_histogram">Verteilungen: geom_boxplot() und geom_histogram()</a></li>
+  <li><a href="#teilgrafiken-facet_wrap" id="toc-teilgrafiken-facet_wrap" class="nav-link" data-scroll-target="#teilgrafiken-facet_wrap">Teilgrafiken: facet_wrap()</a></li>
+  <li><a href="#grafik-speichern-ggsave" id="toc-grafik-speichern-ggsave" class="nav-link" data-scroll-target="#grafik-speichern-ggsave">Grafik speichern: ggsave()</a></li>
+  <li><a href="#weitere-möglichkeiten-entdecken" id="toc-weitere-möglichkeiten-entdecken" class="nav-link" data-scroll-target="#weitere-möglichkeiten-entdecken">Weitere Möglichkeiten entdecken</a></li>
   </ul></li>
-  <li><a href="#teil-3-eigene-funktionen" id="toc-teil-3-eigene-funktionen" class="nav-link" data-scroll-target="#teil-3-eigene-funktionen">Teil 3: Eigene Funktionen</a>
-  <ul class="collapse">
-  <li><a href="#eine-funktion-schreiben" id="toc-eine-funktion-schreiben" class="nav-link" data-scroll-target="#eine-funktion-schreiben">Eine Funktion schreiben</a></li>
-  <li><a href="#standardwerte-für-argumente" id="toc-standardwerte-für-argumente" class="nav-link" data-scroll-target="#standardwerte-für-argumente">Standardwerte für Argumente</a></li>
-  <li><a href="#mehrere-ergebnisse-zurückgeben" id="toc-mehrere-ergebnisse-zurückgeben" class="nav-link" data-scroll-target="#mehrere-ergebnisse-zurückgeben">Mehrere Ergebnisse zurückgeben</a></li>
-  <li><a href="#eingaben-prüfen-stop" id="toc-eingaben-prüfen-stop" class="nav-link" data-scroll-target="#eingaben-prüfen-stop">Eingaben prüfen: stop()</a></li>
-  <li><a href="#variablen-in-funktionen-bleiben-lokal" id="toc-variablen-in-funktionen-bleiben-lokal" class="nav-link" data-scroll-target="#variablen-in-funktionen-bleiben-lokal">Variablen in Funktionen bleiben lokal</a></li>
-  </ul></li>
-  <li><a href="#teil-4-funktionen-anwenden-mit-sapply" id="toc-teil-4-funktionen-anwenden-mit-sapply" class="nav-link" data-scroll-target="#teil-4-funktionen-anwenden-mit-sapply">Teil 4: Funktionen anwenden mit sapply()</a>
-  <ul class="collapse">
-  <li><a href="#die-idee" id="toc-die-idee" class="nav-link" data-scroll-target="#die-idee">Die Idee</a></li>
-  <li><a href="#der-aufbau-sapplyx-fun" id="toc-der-aufbau-sapplyx-fun" class="nav-link" data-scroll-target="#der-aufbau-sapplyx-fun">Der Aufbau: sapply(X, FUN, …)</a></li>
-  <li><a href="#zusätzliche-argumente-weitergeben" id="toc-zusätzliche-argumente-weitergeben" class="nav-link" data-scroll-target="#zusätzliche-argumente-weitergeben">Zusätzliche Argumente weitergeben</a></li>
-  <li><a href="#was-kommt-heraus" id="toc-was-kommt-heraus" class="nav-link" data-scroll-target="#was-kommt-heraus">Was kommt heraus?</a></li>
-  <li><a href="#anonyme-funktionen" id="toc-anonyme-funktionen" class="nav-link" data-scroll-target="#anonyme-funktionen">Anonyme Funktionen</a></li>
-  <li><a href="#sapply-oder-lapply" id="toc-sapply-oder-lapply" class="nav-link" data-scroll-target="#sapply-oder-lapply">sapply() oder lapply()?</a></li>
-  </ul></li>
-  <li><a href="#teil-5-alles-zusammen-eine-grafik-pro-team" id="toc-teil-5-alles-zusammen-eine-grafik-pro-team" class="nav-link" data-scroll-target="#teil-5-alles-zusammen-eine-grafik-pro-team">Teil 5: Alles zusammen — eine Grafik pro Team</a></li>
-  <li><a href="#zusammenfassung" id="toc-zusammenfassung" class="nav-link" data-scroll-target="#zusammenfassung">Zusammenfassung</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./vorbereitung.html">Einheiten</a></li><li class="breadcrumb-item"><a href="./einheit-4.html">4 · Bedingungen, Schleifen &amp; Funktionen</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./vorbereitung.html">Einheiten</a></li><li class="breadcrumb-item"><a href="./einheit-4.html">4 · Daten auswerten &amp; visualisieren</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Einheit 4: Bedingungen, Schleifen &amp; Funktionen</h1>
+<h1 class="title">Einheit 4: Daten auswerten &amp; visualisieren</h1>
 </div>
 
 
@@ -275,503 +279,209 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<p>Bisher lief jeder Code einfach von oben nach unten. In dieser Einheit lernst du, den Ablauf zu steuern und eigene Werkzeuge zu bauen:</p>
+<p>In Einheit 3 hast du Daten eingelesen und aufgeräumt. Jetzt geht es darum, sie auszuwerten und darzustellen:</p>
 <ol type="1">
-<li><strong>Bedingungen</strong> — Code nur ausführen, wenn etwas zutrifft: <code>if</code>, <code>else</code>, <code>ifelse()</code>, <code>case_when()</code></li>
-<li><strong>Schleifen</strong> — Code wiederholen: <code>for</code>, <code>while</code></li>
-<li><strong>Eigene Funktionen</strong> — wiederkehrende Schritte einmal schreiben, oft verwenden</li>
-<li><strong>Funktionen auf viele Elemente anwenden</strong> — <code>sapply()</code> und <code>lapply()</code></li>
-<li><strong>Alles zusammen</strong> — eine Grafik pro Team</li>
+<li><strong>Datenbearbeitung mit <code>dplyr</code></strong> — filtern, sortieren, neue Spalten berechnen, gruppieren, verbinden, umformen</li>
+<li><strong>Visualisierung mit <code>ggplot2</code></strong> — Grafiken schichtweise aufbauen</li>
 </ol>
-<p>Wir verwenden wieder die Temperaturen aus Einheit 1 und die Mitarbeitenden-Daten aus Einheit 3:</p>
+<p>Dafür werden drei Pakete gebraucht. Falls noch nicht geschehen, einmalig <strong>in der Console</strong> installieren: <code>install.packages(c("dplyr", "tidyr", "ggplot2"))</code>. Geladen werden Pakete immer <strong>am Anfang</strong> des Dokuments — so sieht man sofort, was es braucht:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>tmax_wien <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="at">Mai =</span> <span class="fl">20.1</span>, <span class="at">Juni =</span> <span class="fl">24.1</span>, <span class="at">Juli =</span> <span class="fl">26.0</span>, <span class="at">August =</span> <span class="fl">25.7</span>, <span class="at">September =</span> <span class="fl">20.5</span>)</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>mitarbeitende <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"data/raw/mitarbeitende.csv"</span>)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)     <span class="co"># Daten bearbeiten</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyr)     <span class="co"># Tabellen umformen</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)   <span class="co"># Grafiken</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<section id="teil-1-bedingungen" class="level1">
-<h1>Teil 1: Bedingungen</h1>
-<section id="if-und-else" class="level2">
-<h2 class="anchored" data-anchor-id="if-und-else">if und else</h2>
-<p><code>if</code> führt den Code in den geschweiften Klammern <code>{ }</code> nur aus, wenn die Bedingung in den runden Klammern <code>TRUE</code> ist. <code>else</code> gibt an, was sonst passieren soll:</p>
+<p>Wir arbeiten mit den Gemeinde-Daten, die du in Einheit 3 schon eingelesen hast: 28 österreichische Gemeinden mit Bundesland, Gemeindetyp, Einwohnerzahl, Fläche, Entfernung zur Landeshauptstadt (Luftlinie in km) und durchschnittlichem Preis für Baugrundstücke (in € pro m²; Quelle: Statistik Austria):</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>temperatur <span class="ot">&lt;-</span> <span class="dv">26</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (temperatur <span class="sc">&gt;</span> <span class="dv">25</span>) {</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">"Sommertag"</span>)</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> {</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">"kein Sommertag"</span>)</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>gemeinden     <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"data/raw/gemeinden.csv"</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>bundeslaender <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"data/raw/bundeslaender.csv"</span>)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Bei Ischgl fehlt der Preis (<code>NA</code>) — darauf kommen wir mehrmals zurück.</p>
+<section id="teil-1-datenbearbeitung-mit-dplyr" class="level1">
+<h1>Teil 1: Datenbearbeitung mit dplyr</h1>
+<p><code>dplyr</code> bündelt die typischen Arbeitsschritte in wenige, gut lesbare Funktionen („Verben”). Jedes Verb bekommt einen Data Frame und gibt einen neuen Data Frame zurück.</p>
+<section id="filter-zeilen-auswählen" class="level2">
+<h2 class="anchored" data-anchor-id="filter-zeilen-auswählen">filter() — Zeilen auswählen</h2>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">filter</span>(gemeinden, preis_m2 <span class="sc">&gt;</span> <span class="dv">400</span>)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "Sommertag"</code></pre>
+<pre><code>    gkz     gemeinde bundesland    typ einwohner flaeche_km2 entfernung_km preis_m2
+1 70501      Alpbach      Tirol   Land      2510        58.4            44    514.9
+2 60101         Graz Steiermark  Stadt    306971       127.6             0    430.3
+3 70101    Innsbruck      Tirol  Stadt    132820       104.9             0   1050.5
+4 70513     Kufstein      Tirol  Stadt     20118        39.4            68    834.9
+5 70526         Söll      Tirol   Land      3784        46.0            66    536.6
+6 70933      Terfens      Tirol Umland      2326        15.2            20    458.5
+7 70361 Unterperfuss      Tirol Umland       248         2.2            10    526.8
+8 80422  Viktorsberg Vorarlberg Umland       441        12.5            23    523.8</code></pre>
 </div>
-</div>
-<p>Mit <code>else if</code> lassen sich mehrere Fälle nacheinander prüfen — der erste zutreffende gewinnt:</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>temperatur <span class="ot">&lt;-</span> <span class="dv">18</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (temperatur <span class="sc">&gt;=</span> <span class="dv">30</span>) {</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">"heiß"</span>)</span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> <span class="cf">if</span> (temperatur <span class="sc">&gt;=</span> <span class="dv">20</span>) {</span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">"warm"</span>)</span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> {</span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">"kühl"</span>)</span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">filter</span>(gemeinden, typ <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"Stadt"</span>, <span class="st">"Umland"</span>), entfernung_km <span class="sc">&lt;=</span> <span class="dv">20</span>)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "kühl"</code></pre>
+<pre><code>    gkz     gemeinde bundesland    typ einwohner flaeche_km2 entfernung_km preis_m2
+1 10101   Eisenstadt Burgenland  Stadt     16396        42.9             0    310.3
+2 60101         Graz Steiermark  Stadt    306971       127.6             0    430.3
+3 70101    Innsbruck      Tirol  Stadt    132820       104.9             0   1050.5
+4 60626      Kumberg Steiermark Umland      3924        29.3            12     94.9
+5 61612       Ligist Steiermark Umland      3177        34.6            19     61.9
+6 10321     Stotzing Burgenland Umland       839        12.9             7    142.4
+7 70933      Terfens      Tirol Umland      2326        15.2            20    458.5
+8 70361 Unterperfuss      Tirol Umland       248         2.2            10    526.8</code></pre>
+</div>
+</div>
+<p>Zeilen, bei denen die Bedingung <code>NA</code> ergibt (hier: Ischgl), fallen bei <code>filter()</code> weg.</p>
+</section>
+<section id="select-spalten-auswählen" class="level2">
+<h2 class="anchored" data-anchor-id="select-spalten-auswählen">select() — Spalten auswählen</h2>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">select</span>(gemeinden, gemeinde, bundesland, einwohner)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>            gemeinde bundesland einwohner
+1   Aigen im Ennstal Steiermark      2756
+2            Alpbach      Tirol      2510
+3         Eisenstadt Burgenland     16396
+4         Finkenberg      Tirol      1413
+5           Forchach      Tirol       260
+6               Graz Steiermark    306971
+7          Innsbruck      Tirol    132820
+8             Ischgl      Tirol      1624
+9  Kitzeck im Sausal Steiermark      1137
+10          Kufstein      Tirol     20118
+11           Kumberg Steiermark      3924
+12            Leoben Steiermark     24455
+13            Ligist Steiermark      3177
+14       Moschendorf Burgenland       357
+15            Mühlen Steiermark       847
+16          Oberwart Burgenland      8130
+17              Pama Burgenland      1271
+18 Podersdorf am See Burgenland      2129
+19 Rohr bei Hartberg Steiermark      1382
+20              Söll      Tirol      3784
+21          Stotzing Burgenland       839
+22           Terfens      Tirol      2326
+23           Traboch Steiermark      1398
+24  Unterkohlstätten Burgenland       963
+25      Unterperfuss      Tirol       248
+26       Viktorsberg Vorarlberg       441
+27     Weiden am See Burgenland      2560
+28              Wies Steiermark      4264</code></pre>
 </div>
 </div>
 </section>
-<section id="achtung-if-prüft-genau-einen-wert" class="level2">
-<h2 class="anchored" data-anchor-id="achtung-if-prüft-genau-einen-wert">Achtung: if prüft genau einen Wert</h2>
-<p><code>if</code> braucht <strong>ein einzelnes</strong> <code>TRUE</code> oder <code>FALSE</code>. Bei einem Vektor mit mehreren Werten gibt es einen Fehler:</p>
+<section id="arrange-sortieren" class="level2">
+<h2 class="anchored" data-anchor-id="arrange-sortieren">arrange() — sortieren</h2>
+<p><code>arrange()</code> sortiert nach einer oder mehreren Spalten; <code>desc()</code> dreht die Reihenfolge um:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (tmax_wien <span class="sc">&gt;</span> <span class="dv">25</span>) {</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">"Sommertag"</span>)</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-error">
-<pre><code>Error in `if (tmax_wien &gt; 25) ...`:
-! Bedingung hat Länge &gt; 1</code></pre>
-</div>
-</div>
-<p>Soll eine Bedingung für <strong>jedes Element</strong> eines Vektors geprüft werden, nimmt man <code>ifelse(bedingung, wert_wenn_wahr, wert_wenn_falsch)</code>:</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ifelse</span>(tmax_wien <span class="sc">&gt;</span> <span class="dv">25</span>, <span class="st">"Sommertag"</span>, <span class="st">"kein Sommertag"</span>)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">arrange</span>(gemeinden, <span class="fu">desc</span>(preis_m2))</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>             Mai             Juni             Juli           August 
-"kein Sommertag" "kein Sommertag"      "Sommertag"      "Sommertag" 
-       September 
-"kein Sommertag" </code></pre>
+<pre><code>     gkz          gemeinde bundesland    typ einwohner flaeche_km2 entfernung_km preis_m2
+1  70101         Innsbruck      Tirol  Stadt    132820       104.9             0   1050.5
+2  70513          Kufstein      Tirol  Stadt     20118        39.4            68    834.9
+3  70526              Söll      Tirol   Land      3784        46.0            66    536.6
+4  70361      Unterperfuss      Tirol Umland       248         2.2            10    526.8
+5  80422       Viktorsberg Vorarlberg Umland       441        12.5            23    523.8
+6  70501           Alpbach      Tirol   Land      2510        58.4            44    514.9
+7  70933           Terfens      Tirol Umland      2326        15.2            20    458.5
+8  60101              Graz Steiermark  Stadt    306971       127.6             0    430.3
+9  70908        Finkenberg      Tirol   Land      1413       171.5            35    365.9
+10 10722     Weiden am See Burgenland Umland      2560        32.5            27    333.6
+11 10101        Eisenstadt Burgenland  Stadt     16396        42.9             0    310.3
+12 70810          Forchach      Tirol Umland       260        14.3            63    204.5
+13 10718 Podersdorf am See Burgenland   Land      2129        41.7            23    178.9
+14 10321          Stotzing Burgenland Umland       839        12.9             7    142.4
+15 61108            Leoben Steiermark  Stadt     24455       107.8            43    129.0
+16 10715              Pama Burgenland Umland      1271        26.4            44    118.3
+17 60626           Kumberg Steiermark Umland      3924        29.3            12     94.9
+18 10917          Oberwart Burgenland  Stadt      8130        36.5            67     93.3
+19 61203  Aigen im Ennstal Steiermark   Land      2756        86.4           110     91.4
+20 61116           Traboch Steiermark Umland      1398        12.5            48     81.1
+21 61612            Ligist Steiermark Umland      3177        34.6            19     61.9
+22 61019 Kitzeck im Sausal Steiermark   Land      1137        16.3            32     52.1
+23 61410            Mühlen Steiermark   Land       847        50.8            71     46.0
+24 60351              Wies Steiermark   Land      4264        76.4            41     35.8
+25 62276 Rohr bei Hartberg Steiermark   Land      1382        27.7            50     29.0
+26 10924  Unterkohlstätten Burgenland   Land       963        29.1            54     23.0
+27 10428       Moschendorf Burgenland   Land       357        13.2            88     17.3
+28 70608            Ischgl      Tirol   Land      1624       103.3            88       NA</code></pre>
 </div>
 </div>
 </section>
-<section id="mehrere-fälle-in-einem-data-frame-case_when" class="level2">
-<h2 class="anchored" data-anchor-id="mehrere-fälle-in-einem-data-frame-case_when">Mehrere Fälle in einem Data Frame: case_when()</h2>
-<p>Für neue Spalten mit mehr als zwei Kategorien ist <code>case_when()</code> aus <code>dplyr</code> übersichtlicher als verschachtelte <code>ifelse()</code>. Jede Zeile hat die Form <code>bedingung ~ ergebnis</code>; die erste zutreffende Bedingung gewinnt, <code>TRUE ~</code> fängt alles Übrige auf:</p>
+<section id="der-pipe-operator-und" class="level2">
+<h2 class="anchored" data-anchor-id="der-pipe-operator-und">Der Pipe-Operator: %&gt;% und |&gt;</h2>
+<section id="das-problem-mehrere-schritte-hintereinander" class="level3">
+<h3 class="anchored" data-anchor-id="das-problem-mehrere-schritte-hintereinander">Das Problem: mehrere Schritte hintereinander</h3>
+<p>Sollen mehrere Funktionen nacheinander angewendet werden, gibt es ohne Pipe zwei Wege — beide sind unhandlich:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>mitarbeitende <span class="ot">&lt;-</span> mitarbeitende <span class="sc">%&gt;%</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">belastung =</span> <span class="fu">case_when</span>(</span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">is.na</span>(plusstunden) <span class="sc">~</span> <span class="cn">NA</span>,          <span class="co"># fehlende Werte zuerst abfangen</span></span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>    plusstunden <span class="sc">&gt;</span> <span class="dv">40</span>   <span class="sc">~</span> <span class="st">"hoch"</span>,</span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>    plusstunden <span class="sc">&gt;</span> <span class="dv">20</span>   <span class="sc">~</span> <span class="st">"mittel"</span>,</span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>    <span class="cn">TRUE</span>               <span class="sc">~</span> <span class="st">"niedrig"</span></span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>  ))</span>
-<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>mitarbeitende <span class="sc">%&gt;%</span> <span class="fu">select</span>(name, plusstunden, belastung) <span class="sc">%&gt;%</span> <span class="fu">head</span>(<span class="dv">8</span>)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Verschachteln: muss von innen nach außen gelesen werden</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">arrange</span>(<span class="fu">filter</span>(gemeinden, bundesland <span class="sc">==</span> <span class="st">"Tirol"</span>), <span class="fu">desc</span>(preis_m2))</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>       name plusstunden belastung
-1      Anna        16.5   niedrig
-2   Bertram        44.4      hoch
-3 Charlotte         1.8   niedrig
-4    Dennis        33.7    mittel
-5     Emily        13.2   niedrig
-6     Farid         9.6   niedrig
-7     Greta        57.4      hoch
-8    Hannes        21.5    mittel</code></pre>
+<pre><code>    gkz     gemeinde bundesland    typ einwohner flaeche_km2 entfernung_km preis_m2
+1 70101    Innsbruck      Tirol  Stadt    132820       104.9             0   1050.5
+2 70513     Kufstein      Tirol  Stadt     20118        39.4            68    834.9
+3 70526         Söll      Tirol   Land      3784        46.0            66    536.6
+4 70361 Unterperfuss      Tirol Umland       248         2.2            10    526.8
+5 70501      Alpbach      Tirol   Land      2510        58.4            44    514.9
+6 70933      Terfens      Tirol Umland      2326        15.2            20    458.5
+7 70908   Finkenberg      Tirol   Land      1413       171.5            35    365.9
+8 70810     Forchach      Tirol Umland       260        14.3            63    204.5
+9 70608       Ischgl      Tirol   Land      1624       103.3            88       NA</code></pre>
 </div>
-</div>
-<p>Ohne die erste Zeile würde Vera als <code>"niedrig"</code> eingestuft: Ihre Vergleiche ergeben <code>NA</code>, und dann greift <code>TRUE ~</code>.</p>
-<section id="übung" class="level3">
-<h3 class="anchored" data-anchor-id="übung">Übung</h3>
-<ol type="1">
-<li>Schreibe ein <code>if</code>/<code>else</code>, das für eine Variable <code>projekte_anzahl</code> ausgibt, ob jemand <code>"viele Projekte"</code> (mindestens 10) oder <code>"wenige Projekte"</code> hat.</li>
-<li>Füge <code>mitarbeitende</code> mit <code>mutate()</code> und <code>ifelse()</code> eine Spalte <code>region_bekannt</code> hinzu, die <code>TRUE</code> ist, wenn das Team in <code>c("Team_A", "Team_B", "Team_C", "Team_D")</code> vorkommt (Tipp: <code>%in%</code> — braucht man hier überhaupt <code>ifelse()</code>?).</li>
-</ol>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># dein Code</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-</section>
-</section>
-</section>
-<section id="teil-2-schleifen" class="level1">
-<h1>Teil 2: Schleifen</h1>
-<section id="for-schleifen" class="level2">
-<h2 class="anchored" data-anchor-id="for-schleifen">for-Schleifen</h2>
-<p>Eine <code>for</code>-Schleife führt denselben Code für <strong>jedes Element</strong> eines Vektors aus. Die Schleifenvariable (hier <code>monat</code>) nimmt nacheinander jeden Wert an:</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (monat <span class="cf">in</span> <span class="fu">names</span>(tmax_wien)) {</span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="fu">paste</span>(monat, <span class="st">":"</span>, tmax_wien[monat], <span class="st">"°C"</span>))</span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Zwischenergebnisse speichern: lesbar, aber viele Hilfsvariablen</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>nur_tirol <span class="ot">&lt;-</span> <span class="fu">filter</span>(gemeinden, bundesland <span class="sc">==</span> <span class="st">"Tirol"</span>)</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="fu">arrange</span>(nur_tirol, <span class="fu">desc</span>(preis_m2))</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "Mai : 20.1 °C"
-[1] "Juni : 24.1 °C"
-[1] "Juli : 26 °C"
-[1] "August : 25.7 °C"
-[1] "September : 20.5 °C"</code></pre>
-</div>
-</div>
-<p>Innerhalb einer Schleife wird nichts automatisch angezeigt — deshalb braucht es <code>print()</code>.</p>
-</section>
-<section id="ergebnisse-in-einer-schleife-sammeln" class="level2">
-<h2 class="anchored" data-anchor-id="ergebnisse-in-einer-schleife-sammeln">Ergebnisse in einer Schleife sammeln</h2>
-<p>Will man die Ergebnisse behalten, legt man <strong>vorher</strong> einen leeren Vektor passender Länge an und füllt ihn Position für Position. <code>seq_along(x)</code> liefert die Positionen <code>1, 2, …, length(x)</code>:</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>fahrenheit <span class="ot">&lt;-</span> <span class="fu">numeric</span>(<span class="fu">length</span>(tmax_wien))   <span class="co"># Vektor aus Nullen</span></span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="fu">seq_along</span>(tmax_wien)) {</span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>  fahrenheit[i] <span class="ot">&lt;-</span> tmax_wien[i] <span class="sc">*</span> <span class="dv">9</span> <span class="sc">/</span> <span class="dv">5</span> <span class="sc">+</span> <span class="dv">32</span></span>
-<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>fahrenheit</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 68.18 75.38 78.80 78.26 68.90</code></pre>
+<pre><code>    gkz     gemeinde bundesland    typ einwohner flaeche_km2 entfernung_km preis_m2
+1 70101    Innsbruck      Tirol  Stadt    132820       104.9             0   1050.5
+2 70513     Kufstein      Tirol  Stadt     20118        39.4            68    834.9
+3 70526         Söll      Tirol   Land      3784        46.0            66    536.6
+4 70361 Unterperfuss      Tirol Umland       248         2.2            10    526.8
+5 70501      Alpbach      Tirol   Land      2510        58.4            44    514.9
+6 70933      Terfens      Tirol Umland      2326        15.2            20    458.5
+7 70908   Finkenberg      Tirol   Land      1413       171.5            35    365.9
+8 70810     Forchach      Tirol Umland       260        14.3            63    204.5
+9 70608       Ischgl      Tirol   Land      1624       103.3            88       NA</code></pre>
 </div>
 </div>
 </section>
-<section id="wann-braucht-man-eine-schleife-und-wann-nicht" class="level2">
-<h2 class="anchored" data-anchor-id="wann-braucht-man-eine-schleife-und-wann-nicht">Wann braucht man eine Schleife — und wann nicht?</h2>
-<p>Das Beispiel oben geht in R auch ohne Schleife, weil Rechnungen auf Vektoren <strong>elementweise</strong> laufen (Einheit 1) — kürzer und schneller:</p>
+<section id="die-lösung-die-pipe" class="level3">
+<h3 class="anchored" data-anchor-id="die-lösung-die-pipe">Die Lösung: die Pipe</h3>
+<p>Der <strong>Pipe-Operator</strong> nimmt das Ergebnis auf seiner linken Seite und setzt es als <strong>erstes Argument</strong> in die Funktion auf der rechten Seite ein.</p>
+<p>Damit wird aus der Verschachtelung eine Kette, die man von oben nach unten liest. Die Pipe spricht man am besten als <strong>„und dann”</strong>: <em>Nimm <code>gemeinden</code>, und dann filtere nach Tirol, und dann sortiere nach dem Preis.</em></p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>tmax_wien <span class="sc">*</span> <span class="dv">9</span> <span class="sc">/</span> <span class="dv">5</span> <span class="sc">+</span> <span class="dv">32</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>gemeinden <span class="sc">%&gt;%</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(bundesland <span class="sc">==</span> <span class="st">"Tirol"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(preis_m2))</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>      Mai      Juni      Juli    August September 
-    68.18     75.38     78.80     78.26     68.90 </code></pre>
+<pre><code>    gkz     gemeinde bundesland    typ einwohner flaeche_km2 entfernung_km preis_m2
+1 70101    Innsbruck      Tirol  Stadt    132820       104.9             0   1050.5
+2 70513     Kufstein      Tirol  Stadt     20118        39.4            68    834.9
+3 70526         Söll      Tirol   Land      3784        46.0            66    536.6
+4 70361 Unterperfuss      Tirol Umland       248         2.2            10    526.8
+5 70501      Alpbach      Tirol   Land      2510        58.4            44    514.9
+6 70933      Terfens      Tirol Umland      2326        15.2            20    458.5
+7 70908   Finkenberg      Tirol   Land      1413       171.5            35    365.9
+8 70810     Forchach      Tirol Umland       260        14.3            63    204.5
+9 70608       Ischgl      Tirol   Land      1624       103.3            88       NA</code></pre>
 </div>
 </div>
-<p>Faustregel: Erst prüfen, ob es eine vektorisierte Lösung gibt (Rechnen mit Vektoren, <code>ifelse()</code>, <code>mutate()</code>, <code>group_by()</code>). Schleifen braucht man vor allem dann, wenn pro Durchlauf etwas <strong>passiert</strong>: eine Datei einlesen, eine Grafik speichern, eine Meldung ausgeben (siehe Teil 5).</p>
+<p>Beachte den Unterschied zu vorher: Ohne Pipe steht der Data Frame als erstes Argument in der Klammer, <code>filter(gemeinden, bundesland == "Tirol")</code>. Mit Pipe lässt man ihn weg, <code>filter(bundesland == "Tirol")</code> — die Pipe setzt ihn automatisch ein.</p>
 </section>
-<section id="while-schleifen" class="level2">
-<h2 class="anchored" data-anchor-id="while-schleifen">while-Schleifen</h2>
-<p><code>while</code> wiederholt, <strong>solange</strong> eine Bedingung gilt. Die Bedingung muss sich in der Schleife irgendwann ändern — sonst läuft sie endlos (abbrechen mit dem roten Stopp-Knopf oder <code>Esc</code>):</p>
+<section id="zwei-schreibweisen-und" class="level3">
+<h3 class="anchored" data-anchor-id="zwei-schreibweisen-und">Zwei Schreibweisen: %&gt;% und |&gt;</h3>
+<p>In R gibt es nicht nur eine Pipe, sondern zwei: <code>%&gt;%</code> und <code>|&gt;</code>. Du wirst beiden begegnen. Für alles, was in dieser Einführung vorkommt, verhalten sie sich <strong>gleich</strong> — hier dieselbe Kette mit <code>|&gt;</code>:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>kontostand <span class="ot">&lt;-</span> <span class="dv">1000</span></span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>jahre      <span class="ot">&lt;-</span> <span class="dv">0</span></span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a><span class="cf">while</span> (kontostand <span class="sc">&lt;</span> <span class="dv">1500</span>) {</span>
-<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>  kontostand <span class="ot">&lt;-</span> kontostand <span class="sc">*</span> <span class="fl">1.05</span>   <span class="co"># 5 % Zinsen pro Jahr</span></span>
-<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>  jahre      <span class="ot">&lt;-</span> jahre <span class="sc">+</span> <span class="dv">1</span></span>
-<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>jahre</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>gemeinden <span class="sc">|&gt;</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(bundesland <span class="sc">==</span> <span class="st">"Tirol"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(preis_m2))</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 9</code></pre>
-</div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(kontostand, <span class="dv">2</span>)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 1551.33</code></pre>
-</div>
-</div>
-<p>Zwei Befehle steuern Schleifen zusätzlich: <code>next</code> springt zum nächsten Durchlauf, <code>break</code> beendet die Schleife sofort.</p>
-<section id="übung-1" class="level3">
-<h3 class="anchored" data-anchor-id="übung-1">Übung</h3>
-<ol type="1">
-<li>Gib mit einer <code>for</code>-Schleife für jedes Team in <code>unique(mitarbeitende$team)</code> die Anzahl Personen aus, z. B. <code>"Team_A: 9 Personen"</code>.</li>
-<li>Wie viele Jahre dauert es, bis sich 1000 € bei 3 % Zinsen verdoppeln? Löse es mit <code>while</code>.</li>
-</ol>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># dein Code</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-</section>
-</section>
-</section>
-<section id="teil-3-eigene-funktionen" class="level1">
-<h1>Teil 3: Eigene Funktionen</h1>
-<section id="eine-funktion-schreiben" class="level2">
-<h2 class="anchored" data-anchor-id="eine-funktion-schreiben">Eine Funktion schreiben</h2>
-<p>Wenn du denselben Code mehrmals kopierst, ist es Zeit für eine eigene Funktion. Aufbau:</p>
-<pre><code>name &lt;- function(argument1, argument2) {
-  # was die Funktion tut
-  ergebnis
-}</code></pre>
-<p>Der <strong>letzte Ausdruck</strong> im Funktionskörper ist das Ergebnis, das zurückgegeben wird:</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>celsius_zu_fahrenheit <span class="ot">&lt;-</span> <span class="cf">function</span>(celsius) {</span>
-<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>  celsius <span class="sc">*</span> <span class="dv">9</span> <span class="sc">/</span> <span class="dv">5</span> <span class="sc">+</span> <span class="dv">32</span></span>
-<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a><span class="fu">celsius_zu_fahrenheit</span>(<span class="dv">20</span>)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 68</code></pre>
-</div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">celsius_zu_fahrenheit</span>(tmax_wien)   <span class="co"># funktioniert auch mit Vektoren</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>      Mai      Juni      Juli    August September 
-    68.18     75.38     78.80     78.26     68.90 </code></pre>
-</div>
-</div>
-</section>
-<section id="standardwerte-für-argumente" class="level2">
-<h2 class="anchored" data-anchor-id="standardwerte-für-argumente">Standardwerte für Argumente</h2>
-<p>Wie bei eingebauten Funktionen können Argumente einen <strong>Standardwert</strong> haben, der gilt, wenn man sie weglässt:</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>runde_prozent <span class="ot">&lt;-</span> <span class="cf">function</span>(anteil, <span class="at">stellen =</span> <span class="dv">1</span>) {</span>
-<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">round</span>(anteil <span class="sc">*</span> <span class="dv">100</span>, stellen)</span>
-<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a><span class="fu">runde_prozent</span>(<span class="fl">0.12345</span>)               <span class="co"># stellen = 1</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 12.3</code></pre>
-</div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">runde_prozent</span>(<span class="fl">0.12345</span>, <span class="at">stellen =</span> <span class="dv">3</span>)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 12.345</code></pre>
-</div>
-</div>
-</section>
-<section id="mehrere-ergebnisse-zurückgeben" class="level2">
-<h2 class="anchored" data-anchor-id="mehrere-ergebnisse-zurückgeben">Mehrere Ergebnisse zurückgeben</h2>
-<p>Eine Funktion gibt genau <strong>ein</strong> Objekt zurück. Für mehrere Werte packt man sie in einen benannten Vektor (oder eine Liste):</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>kennzahlen <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
-<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">c</span>(<span class="at">n          =</span> <span class="fu">sum</span>(<span class="sc">!</span><span class="fu">is.na</span>(x)),</span>
-<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">mittelwert =</span> <span class="fu">round</span>(<span class="fu">mean</span>(x, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), <span class="dv">1</span>),</span>
-<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">minimum    =</span> <span class="fu">min</span>(x, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">maximum    =</span> <span class="fu">max</span>(x, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span>
-<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a><span class="fu">kennzahlen</span>(mitarbeitende<span class="sc">$</span>plusstunden)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>         n mittelwert    minimum    maximum 
-      21.0       29.9        1.8       59.1 </code></pre>
-</div>
-</div>
-</section>
-<section id="eingaben-prüfen-stop" class="level2">
-<h2 class="anchored" data-anchor-id="eingaben-prüfen-stop">Eingaben prüfen: stop()</h2>
-<p>Mit <code>if</code> und <code>stop()</code> bricht eine Funktion mit einer verständlichen Fehlermeldung ab, wenn die Eingabe nicht passt — viel hilfreicher als ein kryptischer Fehler weiter hinten:</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>kennzahlen <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
-<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">is.numeric</span>(x)) {</span>
-<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">stop</span>(<span class="st">"x muss ein Zahlenvektor sein."</span>)</span>
-<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">c</span>(<span class="at">n          =</span> <span class="fu">sum</span>(<span class="sc">!</span><span class="fu">is.na</span>(x)),</span>
-<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">mittelwert =</span> <span class="fu">round</span>(<span class="fu">mean</span>(x, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), <span class="dv">1</span>),</span>
-<span id="cb35-7"><a href="#cb35-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">minimum    =</span> <span class="fu">min</span>(x, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb35-8"><a href="#cb35-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">maximum    =</span> <span class="fu">max</span>(x, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span>
-<span id="cb35-9"><a href="#cb35-9" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb35-10"><a href="#cb35-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-11"><a href="#cb35-11" aria-hidden="true" tabindex="-1"></a><span class="fu">kennzahlen</span>(mitarbeitende<span class="sc">$</span>name)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-error">
-<pre><code>Error in `kennzahlen()`:
-! x muss ein Zahlenvektor sein.</code></pre>
-</div>
-</div>
-</section>
-<section id="variablen-in-funktionen-bleiben-lokal" class="level2">
-<h2 class="anchored" data-anchor-id="variablen-in-funktionen-bleiben-lokal">Variablen in Funktionen bleiben lokal</h2>
-<p>Was innerhalb einer Funktion erzeugt wird, existiert nur dort — es taucht nicht im Environment auf und überschreibt keine gleichnamigen Variablen außerhalb:</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>verdoppeln <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
-<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>  zwischenergebnis <span class="ot">&lt;-</span> x <span class="sc">*</span> <span class="dv">2</span></span>
-<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>  zwischenergebnis</span>
-<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-6"><a href="#cb37-6" aria-hidden="true" tabindex="-1"></a><span class="fu">verdoppeln</span>(<span class="dv">5</span>)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 10</code></pre>
-</div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>zwischenergebnis   <span class="co"># Fehler: existiert außerhalb der Funktion nicht</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-error">
-<pre><code>Error:
-! Objekt 'zwischenergebnis' nicht gefunden</code></pre>
-</div>
-</div>
-<p>Eine Funktion sollte deshalb alles, was sie braucht, über ihre <strong>Argumente</strong> bekommen.</p>
-<section id="übung-2" class="level3">
-<h3 class="anchored" data-anchor-id="übung-2">Übung</h3>
-<ol type="1">
-<li>Schreibe eine Funktion <code>bmi(gewicht_kg, groesse_m)</code>, die den BMI auf eine Nachkommastelle gerundet zurückgibt.</li>
-<li>Schreibe eine Funktion <code>spanne(x)</code>, die die Differenz zwischen größtem und kleinstem Wert zurückgibt und fehlende Werte ignoriert. Teste sie mit <code>mitarbeitende$plusstunden</code>.</li>
-</ol>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="co"># dein Code</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-</section>
-</section>
-</section>
-<section id="teil-4-funktionen-anwenden-mit-sapply" class="level1">
-<h1>Teil 4: Funktionen anwenden mit sapply()</h1>
-<section id="die-idee" class="level2">
-<h2 class="anchored" data-anchor-id="die-idee">Die Idee</h2>
-<p>Sehr oft will man <strong>dieselbe Funktion auf mehrere Dinge</strong> anwenden: den Mittelwert jeder Spalte, die Länge jedes Textes, eine Kennzahl für jedes Team. Mit einer <code>for</code>-Schleife sieht das so aus:</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>spalten     <span class="ot">&lt;-</span> mtcars[, <span class="fu">c</span>(<span class="st">"mpg"</span>, <span class="st">"hp"</span>, <span class="st">"wt"</span>)]</span>
-<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>mittelwerte <span class="ot">&lt;-</span> <span class="fu">numeric</span>(<span class="fu">ncol</span>(spalten))</span>
-<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="fu">seq_along</span>(spalten)) {</span>
-<span id="cb42-5"><a href="#cb42-5" aria-hidden="true" tabindex="-1"></a>  mittelwerte[i] <span class="ot">&lt;-</span> <span class="fu">mean</span>(spalten[[i]])</span>
-<span id="cb42-6"><a href="#cb42-6" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb42-7"><a href="#cb42-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb42-8"><a href="#cb42-8" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(mittelwerte) <span class="ot">&lt;-</span> <span class="fu">names</span>(spalten)</span>
-<span id="cb42-9"><a href="#cb42-9" aria-hidden="true" tabindex="-1"></a>mittelwerte</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>      mpg        hp        wt 
- 20.09062 146.68750   3.21725 </code></pre>
-</div>
-</div>
-<p>Das sind sechs Zeilen für eine einfache Idee: <em>„Berechne <code>mean</code> für jede Spalte und sammle die Ergebnisse.”</em> Genau diese Idee erledigt <code>sapply()</code> in einer Zeile — inklusive Namen:</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sapply</span>(spalten, mean)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>      mpg        hp        wt 
- 20.09062 146.68750   3.21725 </code></pre>
-</div>
-</div>
-</section>
-<section id="der-aufbau-sapplyx-fun" class="level2">
-<h2 class="anchored" data-anchor-id="der-aufbau-sapplyx-fun">Der Aufbau: sapply(X, FUN, …)</h2>
-<table class="caption-top table">
-<colgroup>
-<col style="width: 50%">
-<col style="width: 50%">
-</colgroup>
-<thead>
-<tr class="header">
-<th>Argument</th>
-<th>Bedeutung</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code>X</code></td>
-<td>die Elemente, über die gegangen wird: ein Vektor, eine Liste oder ein Data Frame</td>
-</tr>
-<tr class="even">
-<td><code>FUN</code></td>
-<td>die Funktion, die auf <strong>jedes</strong> Element angewendet wird</td>
-</tr>
-<tr class="odd">
-<td><code>...</code></td>
-<td>weitere Argumente, die an <code>FUN</code> weitergegeben werden (optional)</td>
-</tr>
-</tbody>
-</table>
-<p>Intern passiert dasselbe wie in der Schleife oben:</p>
-<ol type="1">
-<li><code>sapply()</code> nimmt das erste Element von <code>X</code> und ruft <code>FUN(element)</code> auf,</li>
-<li>dann das zweite Element, das dritte … bis zum letzten,</li>
-<li>und fasst alle Ergebnisse zu einem möglichst einfachen Objekt zusammen (das <em>s</em> in <code>sapply</code> steht für <em>simplify</em>, „vereinfachen”).</li>
-</ol>
-<p>Drei Dinge, auf die man achten muss:</p>
-<ul>
-<li><strong>Bei einem Data Frame ist jedes Element eine Spalte</strong> (ein Data Frame ist eine Liste von Spalten, siehe Einheit 2). <code>sapply(df, mean)</code> rechnet also spaltenweise.</li>
-<li><strong>Die Funktion wird ohne Klammern übergeben:</strong> <code>sapply(spalten, mean)</code>, nicht <code>sapply(spalten, mean())</code>. Man übergibt die Funktion selbst — aufrufen tut sie <code>sapply()</code>.</li>
-<li><strong>Das Ergebnis behält die Namen</strong> der Elemente, deshalb steht oben <code>mpg</code>, <code>hp</code>, <code>wt</code>.</li>
-</ul>
-</section>
-<section id="zusätzliche-argumente-weitergeben" class="level2">
-<h2 class="anchored" data-anchor-id="zusätzliche-argumente-weitergeben">Zusätzliche Argumente weitergeben</h2>
-<p>Bei den Mitarbeitenden-Daten gibt es einen fehlenden Wert — <code>mean()</code> liefert dann <code>NA</code>:</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sapply</span>(mitarbeitende[, <span class="fu">c</span>(<span class="st">"plusstunden"</span>, <span class="st">"projekte"</span>)], mean)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>plusstunden    projekte 
-         NA    6.681818 </code></pre>
-</div>
-</div>
-<p>Alles, was nach der Funktion steht, reicht <code>sapply()</code> an die Funktion weiter. So wird für jede Spalte <code>mean(spalte, na.rm = TRUE)</code> berechnet:</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sapply</span>(mitarbeitende[, <span class="fu">c</span>(<span class="st">"plusstunden"</span>, <span class="st">"projekte"</span>)], mean, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>plusstunden    projekte 
-  29.928571    6.681818 </code></pre>
-</div>
-</div>
-</section>
-<section id="was-kommt-heraus" class="level2">
-<h2 class="anchored" data-anchor-id="was-kommt-heraus">Was kommt heraus?</h2>
-<p>Die Form des Ergebnisses hängt davon ab, was die Funktion <strong>pro Element</strong> zurückgibt:</p>
-<table class="caption-top table">
-<colgroup>
-<col style="width: 50%">
-<col style="width: 50%">
-</colgroup>
-<thead>
-<tr class="header">
-<th><code>FUN</code> liefert pro Element …</th>
-<th><code>sapply()</code> gibt zurück …</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>genau einen Wert</td>
-<td>einen <strong>Vektor</strong></td>
-</tr>
-<tr class="even">
-<td>mehrere Werte, immer gleich viele</td>
-<td>eine <strong>Matrix</strong> — eine Spalte pro Element</td>
-</tr>
-<tr class="odd">
-<td>unterschiedlich viele Werte</td>
-<td>eine <strong>Liste</strong></td>
-</tr>
-</tbody>
-</table>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sapply</span>(spalten, mean)          <span class="co"># 1 Wert pro Spalte   → Vektor</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>      mpg        hp        wt 
- 20.09062 146.68750   3.21725 </code></pre>
-</div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sapply</span>(spalten, range)         <span class="co"># 2 Werte pro Spalte  → Matrix (Minimum, Maximum)</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>      mpg  hp    wt
-[1,] 10.4  52 1.513
-[2,] 33.9 335 5.424</code></pre>
-</div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sapply</span>(<span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">4</span>), seq_len)       <span class="co"># 2 bzw. 4 Werte      → Liste</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[[1]]
-[1] 1 2
-
-[[2]]
-[1] 1 2 3 4</code></pre>
-</div>
-</div>
-<p>Mit unserer eigenen Funktion <code>kennzahlen()</code> aus Teil 3 entsteht eine übersichtliche Tabelle:</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sapply</span>(spalten, kennzahlen)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>            mpg    hp     wt
-n          32.0  32.0 32.000
-mittelwert 20.1 146.7  3.200
-minimum    10.4  52.0  1.513
-maximum    33.9 335.0  5.424</code></pre>
-</div>
-</div>
-</section>
-<section id="anonyme-funktionen" class="level2">
-<h2 class="anchored" data-anchor-id="anonyme-funktionen">Anonyme Funktionen</h2>
-<p>Oft lohnt es sich nicht, für einen einzigen <code>sapply()</code>-Aufruf eine Funktion mit Namen anzulegen. Dann schreibt man die Funktion <strong>direkt in den Aufruf</strong> — eine <em>anonyme Funktion</em> (ohne Namen):</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb58"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sapply</span>(<span class="fu">c</span>(<span class="dv">10</span>, <span class="dv">20</span>, <span class="dv">30</span>), <span class="cf">function</span>(x) x<span class="sc">^</span><span class="dv">2</span>)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 100 400 900</code></pre>
-</div>
-</div>
-<p>So liest man das: <em>„Für jedes Element — nenne es <code>x</code> — berechne <code>x^2</code>.”</em> Der Name <code>x</code> ist frei gewählt und gilt nur innerhalb dieser kleinen Funktion.</p>
-<p>Ein praktisches Beispiel: die durchschnittlichen Plusstunden für jedes Team. Die anonyme Funktion bekommt einen Teamnamen <code>t</code> und rechnet den Mittelwert nur für dieses Team:</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb60"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a>alle_teams <span class="ot">&lt;-</span> <span class="fu">unique</span>(mitarbeitende<span class="sc">$</span>team)</span>
-<span id="cb60-2"><a href="#cb60-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb60-3"><a href="#cb60-3" aria-hidden="true" tabindex="-1"></a><span class="fu">sapply</span>(alle_teams, <span class="cf">function</span>(t) {</span>
-<span id="cb60-4"><a href="#cb60-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mean</span>(mitarbeitende<span class="sc">$</span>plusstunden[mitarbeitende<span class="sc">$</span>team <span class="sc">==</span> t], <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb60-5"><a href="#cb60-5" aria-hidden="true" tabindex="-1"></a>})</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code> Team_C  Team_A  Team_B  Team_E 
-31.9125 26.7000 35.2000 27.3000 </code></pre>
-</div>
-</div>
-<p>Für Data Frames ist <code>group_by()</code> + <code>summarise()</code> (Einheit 3) meist die bequemere Lösung. <code>sapply()</code> ist dann praktisch, wenn man mit Vektoren, Listen oder Spalten arbeitet.</p>
-<p><strong>Kurzschreibweise:</strong> In neuerem Code sieht man statt <code>function(x)</code> oft <code>\(x)</code> — das ist seit R 4.1 dasselbe, nur kürzer: <code>sapply(c(10, 20, 30), \(x) x^2)</code>.</p>
-</section>
-<section id="sapply-oder-lapply" class="level2">
-<h2 class="anchored" data-anchor-id="sapply-oder-lapply">sapply() oder lapply()?</h2>
-<p><code>lapply()</code> (Einheit 2) funktioniert genauso, gibt aber <strong>immer eine Liste</strong> zurück — das <em>l</em> steht für <em>list</em>:</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb62"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a><span class="fu">lapply</span>(spalten, mean)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>$mpg
-[1] 20.09062
-
-$hp
-[1] 146.6875
-
-$wt
-[1] 3.21725</code></pre>
+<pre><code>    gkz     gemeinde bundesland    typ einwohner flaeche_km2 entfernung_km preis_m2
+1 70101    Innsbruck      Tirol  Stadt    132820       104.9             0   1050.5
+2 70513     Kufstein      Tirol  Stadt     20118        39.4            68    834.9
+3 70526         Söll      Tirol   Land      3784        46.0            66    536.6
+4 70361 Unterperfuss      Tirol Umland       248         2.2            10    526.8
+5 70501      Alpbach      Tirol   Land      2510        58.4            44    514.9
+6 70933      Terfens      Tirol Umland      2326        15.2            20    458.5
+7 70908   Finkenberg      Tirol   Land      1413       171.5            35    365.9
+8 70810     Forchach      Tirol Umland       260        14.3            63    204.5
+9 70608       Ischgl      Tirol   Land      1624       103.3            88       NA</code></pre>
 </div>
 </div>
 <table class="caption-top table">
@@ -783,55 +493,497 @@ $wt
 <thead>
 <tr class="header">
 <th></th>
-<th><code>sapply()</code></th>
-<th><code>lapply()</code></th>
+<th><code>%&gt;%</code></th>
+<th><code>|&gt;</code></th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td>Ergebnis</td>
-<td>so einfach wie möglich: Vektor, Matrix oder Liste</td>
-<td>immer eine Liste</td>
+<td>Name</td>
+<td>magrittr-Pipe</td>
+<td>native Pipe (eingebaut)</td>
 </tr>
 <tr class="even">
-<td>gut für</td>
-<td>Ergebnisse ansehen, Kennzahlen-Tabellen</td>
-<td>Ergebnisse in Spalten zurückschreiben: <code>df[cols] &lt;- lapply(df[cols], as.numeric)</code></td>
+<td>Herkunft</td>
+<td>Paket <code>magrittr</code>, wird von <code>dplyr</code> mitgeladen</td>
+<td>fester Bestandteil von R seit Version 4.1 (2021)</td>
+</tr>
+<tr class="odd">
+<td>braucht ein Paket?</td>
+<td>ja — ohne <code>library(dplyr)</code> gibt es einen Fehler</td>
+<td>nein</td>
+</tr>
+<tr class="even">
+<td>auf der Tastatur</td>
+<td><em>Strg/Cmd + Shift + M</em> (Standard in RStudio)</td>
+<td>dasselbe Kürzel, wenn unter <em>Tools → Global Options → Code</em> „Use native pipe operator” angehakt ist. Von Hand: <code>|</code> mit <em>AltGr + &lt;</em> (Windows) bzw. <em>Option + 7</em> (Mac), dann <code>&gt;</code></td>
 </tr>
 </tbody>
 </table>
-<p>Faustregel: Zum <strong>Anschauen</strong> <code>sapply()</code>, zum <strong>Weiterverarbeiten in einem Data Frame</strong> <code>lapply()</code>.</p>
-<section id="übung-3" class="level3">
-<h3 class="anchored" data-anchor-id="übung-3">Übung</h3>
+<p><code>%&gt;%</code> war viele Jahre lang die einzige Pipe und steht deshalb in den meisten Büchern, Tutorials und auch in diesem Kurs; neuere Texte verwenden immer öfter <code>|&gt;</code>. Beide sind richtig. Wichtig ist, dass du <strong>beide lesen kannst</strong>.</p>
+</section>
+<section id="zwei-kleine-unterschiede" class="level3">
+<h3 class="anchored" data-anchor-id="zwei-kleine-unterschiede">Zwei kleine Unterschiede</h3>
+<p>Für den Anfang selten wichtig, aber gut zu wissen, wenn Code aus dem Netz nicht funktioniert:</p>
 <ol type="1">
-<li>Welche Spalten von <code>mitarbeitende</code> sind Zahlen? Wende <code>is.numeric</code> mit <code>sapply()</code> auf <code>mitarbeitende</code> an. Was für ein Objekt kommt heraus?</li>
-<li>Berechne mit <code>sapply()</code> das <strong>Maximum</strong> von <code>plusstunden</code> und <code>projekte</code> — fehlende Werte sollen ignoriert werden.</li>
-<li>Berechne mit <code>sapply()</code> und einer anonymen Funktion für jedes Land in <code>unique(mitarbeitende$land)</code> die <strong>Anzahl Personen</strong>.</li>
-<li>Wende deine Funktion <code>spanne()</code> aus Teil 3 mit <code>sapply()</code> auf die Spalten <code>mpg</code>, <code>hp</code> und <code>wt</code> von <code>mtcars</code> an.</li>
+<li><strong>Klammern:</strong> Bei <code>|&gt;</code> muss rechts immer ein Funktions<em>aufruf</em> mit Klammern stehen. <code>gemeinden %&gt;% head</code> funktioniert, <code>gemeinden |&gt; head</code> nicht — richtig ist <code>gemeinden |&gt; head()</code>. Einfachste Regel: <strong>immer Klammern schreiben.</strong></li>
+<li><strong>Platzhalter:</strong> Soll das Ergebnis <em>nicht</em> an die erste Stelle, markiert man die Stelle mit einem Platzhalter — bei <code>%&gt;%</code> ein Punkt <code>.</code>, bei <code>|&gt;</code> ein Unterstrich <code>_</code> (nur mit Argumentnamen). Beispiel: <code>lm()</code> berechnet eine Regression und erwartet die Daten erst im Argument <code>data</code>:</li>
 </ol>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb64"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a><span class="co"># dein Code</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>gemeinden <span class="sc">%&gt;%</span> <span class="fu">lm</span>(preis_m2 <span class="sc">~</span> entfernung_km, <span class="at">data =</span> .)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = preis_m2 ~ entfernung_km, data = .)
+
+Coefficients:
+  (Intercept)  entfernung_km  
+      389.597         -3.037  </code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>gemeinden <span class="sc">|&gt;</span>  <span class="fu">lm</span>(preis_m2 <span class="sc">~</span> entfernung_km, <span class="at">data =</span> _)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = preis_m2 ~ entfernung_km, data = gemeinden)
+
+Coefficients:
+  (Intercept)  entfernung_km  
+      389.597         -3.037  </code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="mutate-neue-spalten-berechnen" class="level2">
+<h2 class="anchored" data-anchor-id="mutate-neue-spalten-berechnen">mutate() — neue Spalten berechnen</h2>
+<p><code>mutate()</code> berechnet eine neue Spalte aus bestehenden — elementweise für jede Zeile. Hier die Bevölkerungsdichte, wie in Einheit 1. Gleichwertig in Basis-R wäre <code>gemeinden$dichte &lt;- gemeinden$einwohner / gemeinden$flaeche_km2</code>.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>gemeinden <span class="ot">&lt;-</span> gemeinden <span class="sc">%&gt;%</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">dichte =</span> <span class="fu">round</span>(einwohner <span class="sc">/</span> flaeche_km2))</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(gemeinden)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>    gkz         gemeinde bundesland    typ einwohner flaeche_km2 entfernung_km preis_m2 dichte
+1 61203 Aigen im Ennstal Steiermark   Land      2756        86.4           110     91.4     32
+2 70501          Alpbach      Tirol   Land      2510        58.4            44    514.9     43
+3 10101       Eisenstadt Burgenland  Stadt     16396        42.9             0    310.3    382
+4 70908       Finkenberg      Tirol   Land      1413       171.5            35    365.9      8
+5 70810         Forchach      Tirol Umland       260        14.3            63    204.5     18
+6 60101             Graz Steiermark  Stadt    306971       127.6             0    430.3   2406</code></pre>
+</div>
+</div>
+</section>
+<section id="case_when-werte-nach-bedingungen-einteilen" class="level2">
+<h2 class="anchored" data-anchor-id="case_when-werte-nach-bedingungen-einteilen">case_when() — Werte nach Bedingungen einteilen</h2>
+<p>Soll eine neue Spalte je nach Bedingung verschiedene Werte bekommen, nimmt man <code>case_when()</code> in <code>mutate()</code>. Jede Zeile hat die Form <code>bedingung ~ ergebnis</code>; die erste zutreffende Bedingung gewinnt, <code>TRUE ~</code> fängt alles Übrige auf:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>gemeinden <span class="ot">&lt;-</span> gemeinden <span class="sc">%&gt;%</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">preisniveau =</span> <span class="fu">case_when</span>(</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">is.na</span>(preis_m2) <span class="sc">~</span> <span class="cn">NA</span>,          <span class="co"># fehlende Werte zuerst abfangen</span></span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>    preis_m2 <span class="sc">&gt;</span> <span class="dv">400</span>  <span class="sc">~</span> <span class="st">"hoch"</span>,</span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>    preis_m2 <span class="sc">&gt;</span> <span class="dv">100</span>  <span class="sc">~</span> <span class="st">"mittel"</span>,</span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>    <span class="cn">TRUE</span>            <span class="sc">~</span> <span class="st">"niedrig"</span></span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>  ))</span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a>gemeinden <span class="sc">%&gt;%</span> <span class="fu">select</span>(gemeinde, preis_m2, preisniveau) <span class="sc">%&gt;%</span> <span class="fu">head</span>(<span class="dv">8</span>)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>          gemeinde preis_m2 preisniveau
+1 Aigen im Ennstal     91.4     niedrig
+2          Alpbach    514.9        hoch
+3       Eisenstadt    310.3      mittel
+4       Finkenberg    365.9      mittel
+5         Forchach    204.5      mittel
+6             Graz    430.3        hoch
+7        Innsbruck   1050.5        hoch
+8           Ischgl       NA        &lt;NA&gt;</code></pre>
+</div>
+</div>
+<p>Ohne die erste Zeile würde Ischgl als <code>"niedrig"</code> eingestuft: Die Vergleiche ergeben dort <code>NA</code>, und dann greift <code>TRUE ~</code>.</p>
+</section>
+<section id="mehrere-schritte-kombinieren" class="level2">
+<h2 class="anchored" data-anchor-id="mehrere-schritte-kombinieren">Mehrere Schritte kombinieren</h2>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>gemeinden <span class="sc">%&gt;%</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(bundesland <span class="sc">==</span> <span class="st">"Tirol"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(gemeinde, typ, preis_m2) <span class="sc">%&gt;%</span></span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(preis_m2))</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>      gemeinde    typ preis_m2
+1    Innsbruck  Stadt   1050.5
+2     Kufstein  Stadt    834.9
+3         Söll   Land    536.6
+4 Unterperfuss Umland    526.8
+5      Alpbach   Land    514.9
+6      Terfens Umland    458.5
+7   Finkenberg   Land    365.9
+8     Forchach Umland    204.5
+9       Ischgl   Land       NA</code></pre>
+</div>
+</div>
+</section>
+<section id="count-häufigkeiten-zählen" class="level2">
+<h2 class="anchored" data-anchor-id="count-häufigkeiten-zählen">count() — Häufigkeiten zählen</h2>
+<p><code>count()</code> zählt, wie oft jeder Wert vorkommt — das <code>dplyr</code>-Gegenstück zu <code>table()</code>:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>gemeinden <span class="sc">%&gt;%</span> <span class="fu">count</span>(bundesland)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  bundesland  n
+1 Burgenland  8
+2 Steiermark 10
+3      Tirol  9
+4 Vorarlberg  1</code></pre>
+</div>
+</div>
+</section>
+<section id="group_by-summarise-kennzahlen-pro-gruppe" class="level2">
+<h2 class="anchored" data-anchor-id="group_by-summarise-kennzahlen-pro-gruppe">group_by() + summarise() — Kennzahlen pro Gruppe</h2>
+<p>Eine der häufigsten Aufgaben: eine Kennzahl je Gruppe — z. B. der durchschnittliche Preis pro Bundesland.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>gemeinden <span class="sc">%&gt;%</span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(bundesland) <span class="sc">%&gt;%</span></span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">anzahl        =</span> <span class="fu">n</span>(),</span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">preis_mean    =</span> <span class="fu">mean</span>(preis_m2),</span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">einwohner_max =</span> <span class="fu">max</span>(einwohner)</span>
+<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 4 × 4
+  bundesland anzahl preis_mean einwohner_max
+  &lt;chr&gt;       &lt;int&gt;      &lt;dbl&gt;         &lt;int&gt;
+1 Burgenland      8       152.         16396
+2 Steiermark     10       105.        306971
+3 Tirol           9        NA         132820
+4 Vorarlberg      1       524.           441</code></pre>
+</div>
+</div>
+<p>Die Ausgabe beginnt mit <code># A tibble</code> — mehr dazu im Kasten.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Was ist ein Tibble?">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Hinweis</span>Was ist ein Tibble?
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Ein <strong>Tibble</strong> ist eine modernere Variante des Data Frames. Viele Funktionen aus <code>dplyr</code>, <code>tidyr</code> und <code>readxl</code> geben einen zurück. Du kannst damit arbeiten wie mit jedem Data Frame; drei Dinge sind anders:</p>
+<ul>
+<li><strong>Die Anzeige:</strong> Oben stehen Größe (<code>4 × 4</code>) und unter jedem Spaltennamen der Datentyp (<code>&lt;chr&gt;</code>, <code>&lt;int&gt;</code>, <code>&lt;dbl&gt;</code>). Gezeigt werden nur die ersten zehn Zeilen und so viele Spalten, wie Platz haben — alles sieht man mit <code>View()</code> oder <code>print(n = Inf)</code>.</li>
+<li><strong>Eine Spalte auswählen:</strong> <code>tabelle[, "spalte"]</code> liefert bei einem Tibble wieder eine Tabelle, bei einem Data Frame einen Vektor. Mit <code>tabelle$spalte</code> bekommt man in beiden Fällen den Vektor.</li>
+<li><strong>Umwandeln:</strong> <code>as.data.frame()</code> macht aus einem Tibble einen gewöhnlichen Data Frame, <code>as_tibble()</code> geht den umgekehrten Weg.</li>
+</ul>
+</div>
+</div>
+<p>Bei Tirol steht <code>NA</code>, weil der Preis von Ischgl fehlt (siehe Einheit 1, <em>Fehlende Werte: NA</em>). Mit <code>na.rm = TRUE</code> wird der fehlende Wert ausgelassen:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>gemeinden <span class="sc">%&gt;%</span></span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(bundesland) <span class="sc">%&gt;%</span></span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">anzahl =</span> <span class="fu">n</span>(), <span class="at">preis_mean =</span> <span class="fu">mean</span>(preis_m2, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 4 × 3
+  bundesland anzahl preis_mean
+  &lt;chr&gt;       &lt;int&gt;      &lt;dbl&gt;
+1 Burgenland      8       152.
+2 Steiermark     10       105.
+3 Tirol           9       562.
+4 Vorarlberg      1       524.</code></pre>
+</div>
+</div>
+</section>
+<section id="datensätze-verbinden-joins" class="level2">
+<h2 class="anchored" data-anchor-id="datensätze-verbinden-joins">Datensätze verbinden: Joins</h2>
+<p><code>bundeslaender</code> enthält zu jedem Bundesland die Region (Ost-, Süd- oder Westösterreich). Mit einem <strong>Join</strong> wird diese Information über die gemeinsame Spalte <code>bundesland</code> an <code>gemeinden</code> angehängt.</p>
+<p>Die Datensätze passen nicht perfekt zusammen — wie so oft in der Praxis (hier haben wir es für den Kurs so eingerichtet):</p>
+<ul>
+<li><strong>Viktorsberg</strong> liegt in Vorarlberg, das in <code>bundeslaender</code> fehlt.</li>
+<li><strong>Salzburg</strong> steht in <code>bundeslaender</code>, hat aber keine Gemeinden im Datensatz.</li>
+</ul>
+<p>Die vier Join-Varianten unterscheiden sich genau darin, was mit solchen Zeilen passiert:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Funktion</th>
+<th>Behält</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>left_join(x, y)</code></td>
+<td>alle Zeilen von <code>x</code>; fehlt die Entsprechung in <code>y</code> → <code>NA</code></td>
+</tr>
+<tr class="even">
+<td><code>right_join(x, y)</code></td>
+<td>alle Zeilen von <code>y</code></td>
+</tr>
+<tr class="odd">
+<td><code>inner_join(x, y)</code></td>
+<td>nur Zeilen, die in <strong>beiden</strong> vorkommen</td>
+</tr>
+<tr class="even">
+<td><code>full_join(x, y)</code></td>
+<td>alle Zeilen aus <strong>beiden</strong></td>
+</tr>
+</tbody>
+</table>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/joins.svg" class="img-fluid figure-img"></p>
+<figcaption>Die vier Join-Varianten: Blau ist, was im Ergebnis bleibt.</figcaption>
+</figure>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>(<span class="fu">left_join</span>(gemeinden, bundeslaender, <span class="at">by =</span> <span class="st">"bundesland"</span>))    <span class="co"># alle 28 Gemeinden, Viktorsberg mit Region NA</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 28</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>(<span class="fu">inner_join</span>(gemeinden, bundeslaender, <span class="at">by =</span> <span class="st">"bundesland"</span>))   <span class="co"># 27 — Viktorsberg fällt weg</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 27</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>(<span class="fu">full_join</span>(gemeinden, bundeslaender, <span class="at">by =</span> <span class="st">"bundesland"</span>))    <span class="co"># 29 — alle Gemeinden + Salzburg</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 29</code></pre>
+</div>
+</div>
+<p>Meist will man keine Zeilen verlieren, deshalb ist <code>left_join()</code> der Standard:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>gemeinden_join <span class="ot">&lt;-</span> gemeinden <span class="sc">%&gt;%</span></span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(bundeslaender, <span class="at">by =</span> <span class="st">"bundesland"</span>)</span>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a>gemeinden_join <span class="sc">%&gt;%</span> <span class="fu">filter</span>(<span class="fu">is.na</span>(region))</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>    gkz    gemeinde bundesland    typ einwohner flaeche_km2 entfernung_km preis_m2 dichte preisniveau region
+1 80422 Viktorsberg Vorarlberg Umland       441        12.5            23    523.8     35        hoch   &lt;NA&gt;</code></pre>
+</div>
+</div>
+<p>Über mehrere Spalten verbindet man mit <code>by = c("spalte1", "spalte2")</code>. In Basis-R heißt die Funktion <code>merge()</code> (<code>merge(x, y, by = "bundesland", all.x = TRUE)</code> entspricht <code>left_join</code>).</p>
+</section>
+<section id="breite-und-lange-tabellen-pivot_longer-und-pivot_wider" class="level2">
+<h2 class="anchored" data-anchor-id="breite-und-lange-tabellen-pivot_longer-und-pivot_wider">Breite und lange Tabellen: pivot_longer() und pivot_wider()</h2>
+<p>Dieselben Daten lassen sich auf zwei Arten anordnen. Ein kleines Beispiel: die Einwohnerzahl von Wien und Graz in drei Jahren — sechs Zahlen, einmal breit und einmal lang.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/breit_lang.svg" class="img-fluid figure-img"></p>
+<figcaption>Dieselben sechs Werte als breite und als lange Tabelle.</figcaption>
+</figure>
+</div>
+<ul>
+<li><strong>breit:</strong> eine Zeile pro Region, <strong>eine Spalte pro Jahr</strong>. So liest man Tabellen gern, und so liefern sie viele Statistikämter. Das Jahr steckt hier aber im <strong>Spaltennamen</strong> — R kann nicht danach filtern oder gruppieren.</li>
+<li><strong>lang:</strong> eine Zeile pro Region <strong>und</strong> Jahr; jede Zeile ist eine einzelne Beobachtung. Das Jahr ist eine eigene Spalte, mit der <code>filter()</code>, <code>group_by()</code> und <code>ggplot2</code> arbeiten können.</li>
+</ul>
+<p>Faustregel: Stehen in den Spaltennamen <strong>Werte</strong> (Jahre, Monate, Kategorien) statt Namen von Variablen, ist die Tabelle breit.</p>
+<p>Zum Umformen gibt es das Paket <code>tidyr</code>. Als Beispiel dient ein Originalexport aus der <a href="https://urban.jrc.ec.europa.eu/ardeco">ARDECO-Datenbank</a> der Europäischen Kommission: die Bevölkerung am 1. Jänner für 36 Staaten und ihre NUTS-3-Regionen — die Quelle, aus der auch die Daten für Übungsaufgabe 1 stammen. Die Tabelle ist <strong>breit</strong>:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>bev_breit <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"data/raw/ardeco_bevoelkerung.csv"</span>)</span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(bev_breit)   <span class="co"># Zeilen und Spalten: 75 Spalten sind zu viele, um alle anzuzeigen</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1374   75</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="co"># die ersten drei Zeilen, nur die Namensspalten und die ersten drei Jahre</span></span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>bev_breit[<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>, <span class="fu">c</span>(<span class="st">"TERRITORY_ID"</span>, <span class="st">"NAME_HTML"</span>, <span class="st">"X1960"</span>, <span class="st">"X1961"</span>, <span class="st">"X1962"</span>)]</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  TERRITORY_ID NAME_HTML   X1960   X1961   X1962
+1           AL   Albania 1583800 1633800 1685800
+2           AT   Austria 7030385 7064693 7107904
+3           BE   Belgium 9128824 9178154 9189741</code></pre>
+</div>
+</div>
+<p>Jedes Jahr von 1960 bis 2027 ist eine eigene Spalte. Weil Spaltennamen in R nicht mit einer Ziffer beginnen dürfen, hat <code>read.csv()</code> ein <code>X</code> davorgesetzt (<code>X1960</code>).</p>
+<p><code>pivot_longer()</code> macht aus vielen Spalten zwei: eine für die bisherigen Spalten<strong>namen</strong> (<code>names_to</code>, im Bild orange) und eine für die <strong>Werte</strong> (<code>values_to</code>, im Bild blau). <code>cols</code> legt fest, welche Spalten gemeint sind — hier alle, die mit <code>X</code> beginnen:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>bev_lang <span class="ot">&lt;-</span> bev_breit <span class="sc">%&gt;%</span></span>
+<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="fu">starts_with</span>(<span class="st">"X"</span>), <span class="at">names_to =</span> <span class="st">"jahr"</span>, <span class="at">values_to =</span> <span class="st">"einwohner"</span>,</span>
+<span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a>               <span class="at">names_prefix =</span> <span class="st">"X"</span>) <span class="sc">%&gt;%</span>          <span class="co"># das X vor der Jahreszahl entfernen</span></span>
+<span id="cb47-4"><a href="#cb47-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">jahr =</span> <span class="fu">as.integer</span>(jahr)) <span class="sc">%&gt;%</span>           <span class="co"># "1960" (Text) -&gt; 1960 (Zahl)</span></span>
+<span id="cb47-5"><a href="#cb47-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(TERRITORY_ID, NAME_HTML, jahr, einwohner)</span>
+<span id="cb47-6"><a href="#cb47-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-7"><a href="#cb47-7" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(bev_lang)    <span class="co"># jetzt viel mehr Zeilen, aber nur vier Spalten</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 93432     4</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(bev_lang, <span class="dv">3</span>)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 4
+  TERRITORY_ID NAME_HTML  jahr einwohner
+  &lt;chr&gt;        &lt;chr&gt;     &lt;int&gt;     &lt;dbl&gt;
+1 AL           Albania    1960   1583800
+2 AL           Albania    1961   1633800
+3 AL           Albania    1962   1685800</code></pre>
+</div>
+</div>
+<p>Aus 1374 Zeilen mit 68 Jahresspalten sind 1374 · 68 = 93 432 Zeilen geworden. Jetzt lässt sich nach dem Jahr filtern wie nach jeder anderen Spalte.</p>
+<p><code>pivot_wider()</code> geht den umgekehrten Weg: Die Werte einer Spalte (<code>names_from</code>, orange) werden zu Spaltennamen, eine zweite Spalte (<code>values_from</code>, blau) füllt die Zellen — praktisch, um Jahre nebeneinander zu stellen und zu vergleichen:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a>bev_lang <span class="sc">%&gt;%</span></span>
+<span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(TERRITORY_ID <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"AT"</span>, <span class="st">"AT130"</span>), jahr <span class="sc">%in%</span> <span class="fu">c</span>(<span class="dv">1960</span>, <span class="dv">1990</span>, <span class="dv">2020</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb51-3"><a href="#cb51-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> jahr, <span class="at">values_from =</span> einwohner, <span class="at">names_prefix =</span> <span class="st">"einwohner_"</span>)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 5
+  TERRITORY_ID NAME_HTML einwohner_1960 einwohner_1990 einwohner_2020
+  &lt;chr&gt;        &lt;chr&gt;              &lt;dbl&gt;          &lt;dbl&gt;          &lt;dbl&gt;
+1 AT           Austria          7030385        7644818        8901064
+2 AT130        Wien             1618135        1492636        1911191</code></pre>
+</div>
+</div>
+<section id="übung" class="level3">
+<h3 class="anchored" data-anchor-id="übung">Übung</h3>
+<ol type="1">
+<li>Welche drei Gemeinden haben die meisten Einwohner? Zeige nur <code>gemeinde</code> und <code>einwohner</code>.</li>
+<li>Zeige für die Tiroler Gemeinden <code>gemeinde</code>, <code>typ</code> und die Bevölkerungsdichte (Einwohner pro km², gerundet), sortiert von der dichtesten zur dünnsten.</li>
+<li>Berechne pro <code>typ</code> die Anzahl Gemeinden und den durchschnittlichen Preis, absteigend sortiert nach dem Durchschnitt. Was fällt auf?</li>
+<li>Verbinde <code>gemeinden</code> mit <code>bundeslaender</code> und berechne den durchschnittlichen Preis pro <code>region</code>. Für welche Gemeinde fehlt die Region — und warum?</li>
+<li>Erstelle aus <code>bev_lang</code> eine breite Tabelle mit den Einwohnern von 1990 und 2024 für Österreich (<code>AT</code>), Deutschland (<code>DE</code>) und die Schweiz (<code>CH</code>). Um wie viel Prozent ist die Bevölkerung jeweils gewachsen?</li>
+</ol>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="co"># dein Code</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 </section>
 </section>
-<section id="teil-5-alles-zusammen-eine-grafik-pro-team" class="level1">
-<h1>Teil 5: Alles zusammen — eine Grafik pro Team</h1>
-<p>Eine typische Aufgabe: Für jede Gruppe soll dieselbe Grafik entstehen. Wir schreiben eine Funktion für <strong>eine</strong> Grafik und rufen sie in einer Schleife für <strong>jedes</strong> Team auf:</p>
+<section id="teil-2-visualisierung-mit-ggplot2" class="level1">
+<h1>Teil 2: Visualisierung mit ggplot2</h1>
+<section id="die-daten-vorbereiten" class="level2">
+<h2 class="anchored" data-anchor-id="die-daten-vorbereiten">Die Daten vorbereiten</h2>
+<p>Wir verwenden <code>gemeinden_join</code> aus Teil 1 (Gemeinden mit Region). Bei Ischgl fehlt der Preis. Ohne y-Wert kann <code>ggplot</code> keinen Punkt zeichnen und würde bei jeder Grafik warnen (<em>„Removed 1 row containing missing values”</em>). Deshalb entfernen wir diese Zeile einmal vorab.</p>
+<p>Außerdem machen wir <code>typ</code> zu einem Faktor mit sinnvoller Reihenfolge (siehe Einheit 2, <em>Faktoren</em>) — sonst sortiert <code>ggplot</code> die Gemeindetypen alphabetisch:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb65"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a>grafik_team <span class="ot">&lt;-</span> <span class="cf">function</span>(daten, team_name) {</span>
-<span id="cb65-2"><a href="#cb65-2" aria-hidden="true" tabindex="-1"></a>  daten <span class="sc">%&gt;%</span></span>
-<span id="cb65-3"><a href="#cb65-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(team <span class="sc">==</span> team_name, <span class="sc">!</span><span class="fu">is.na</span>(plusstunden)) <span class="sc">%&gt;%</span></span>
-<span id="cb65-4"><a href="#cb65-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> projekte, <span class="at">y =</span> plusstunden)) <span class="sc">+</span></span>
-<span id="cb65-5"><a href="#cb65-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>(<span class="at">color =</span> <span class="st">"steelblue"</span>, <span class="at">size =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
-<span id="cb65-6"><a href="#cb65-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">title =</span> <span class="fu">paste</span>(<span class="st">"Plusstunden nach Projekten —"</span>, team_name),</span>
-<span id="cb65-7"><a href="#cb65-7" aria-hidden="true" tabindex="-1"></a>         <span class="at">x =</span> <span class="st">"Anzahl Projekte"</span>, <span class="at">y =</span> <span class="st">"Plusstunden"</span>) <span class="sc">+</span></span>
-<span id="cb65-8"><a href="#cb65-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_minimal</span>()</span>
-<span id="cb65-9"><a href="#cb65-9" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb65-10"><a href="#cb65-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb65-11"><a href="#cb65-11" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (t <span class="cf">in</span> <span class="fu">c</span>(<span class="st">"Team_A"</span>, <span class="st">"Team_C"</span>)) {</span>
-<span id="cb65-12"><a href="#cb65-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="fu">grafik_team</span>(mitarbeitende, t))   <span class="co"># in Schleifen: print() nötig</span></span>
-<span id="cb65-13"><a href="#cb65-13" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a>gemeinden_plot <span class="ot">&lt;-</span> gemeinden_join <span class="sc">%&gt;%</span></span>
+<span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(preis_m2)) <span class="sc">%&gt;%</span></span>
+<span id="cb54-3"><a href="#cb54-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">typ =</span> <span class="fu">factor</span>(typ, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"Stadt"</span>, <span class="st">"Umland"</span>, <span class="st">"Land"</span>)))</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="der-grundaufbau" class="level2">
+<h2 class="anchored" data-anchor-id="der-grundaufbau">Der Grundaufbau</h2>
+<p><code>ggplot2</code> baut Grafiken <strong>schichtweise</strong> mit <code>+</code> auf. Der Grundaufbau ist immer gleich:</p>
+<pre><code>ggplot(daten, aes(x = ..., y = ...)) +   # Daten + welche Spalte auf welche Achse
+  geom_...()                             # welche Form: Punkte, Balken, Linien …</code></pre>
+</section>
+<section id="streudiagramm-geom_point" class="level2">
+<h2 class="anchored" data-anchor-id="streudiagramm-geom_point">Streudiagramm: geom_point()</h2>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(gemeinden_plot, <span class="fu">aes</span>(<span class="at">x =</span> entfernung_km, <span class="at">y =</span> preis_m2)) <span class="sc">+</span></span>
+<span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">color =</span> <span class="st">"steelblue"</span>, <span class="at">size =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb56-3"><a href="#cb56-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Baugrundstückspreis nach Entfernung zur Landeshauptstadt"</span>,</span>
+<span id="cb56-4"><a href="#cb56-4" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Entfernung (km, Luftlinie)"</span>, <span class="at">y =</span> <span class="st">"Preis (€ pro m²)"</span>) <span class="sc">+</span></span>
+<span id="cb56-5"><a href="#cb56-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="einheit-4_files/figure-html/unnamed-chunk-23-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Die Punkte streuen stark: Teure Gemeinden gibt es nahe an der Landeshauptstadt, aber auch 70 km entfernt. Ein klarer Zusammenhang ist so noch nicht zu erkennen.</p>
+</section>
+<section id="nach-gruppe-einfärben" class="level2">
+<h2 class="anchored" data-anchor-id="nach-gruppe-einfärben">Nach Gruppe einfärben</h2>
+<p>Eine weitere Spalte in <code>aes()</code> auf <code>color</code> legen — <code>ggplot</code> vergibt automatisch Farben und eine Legende:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb57"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(gemeinden_plot, <span class="fu">aes</span>(<span class="at">x =</span> entfernung_km, <span class="at">y =</span> preis_m2, <span class="at">color =</span> bundesland)) <span class="sc">+</span></span>
+<span id="cb57-2"><a href="#cb57-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb57-3"><a href="#cb57-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Preis nach Entfernung, eingefärbt nach Bundesland"</span>,</span>
+<span id="cb57-4"><a href="#cb57-4" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Entfernung (km, Luftlinie)"</span>, <span class="at">y =</span> <span class="st">"Preis (€ pro m²)"</span>, <span class="at">color =</span> <span class="st">"Bundesland"</span>) <span class="sc">+</span></span>
+<span id="cb57-5"><a href="#cb57-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="einheit-4_files/figure-html/unnamed-chunk-24-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Jetzt wird das Muster sichtbar: In Tirol und Vorarlberg ist Bauland durchwegs viel teurer als im Burgenland und in der Steiermark. Im Burgenland und in der Steiermark sinkt der Preis mit der Entfernung zur Landeshauptstadt. In Tirol ist das Bild uneinheitlich: Kufstein ist teuer, obwohl es fast 70 km von Innsbruck entfernt liegt.</p>
+<p><code>color = "steelblue"</code> <strong>außerhalb</strong> von <code>aes()</code> setzt eine feste Farbe; <code>color = bundesland</code> <strong>innerhalb</strong> von <code>aes()</code> färbt nach den Werten einer Spalte.</p>
+</section>
+<section id="balkendiagramm-einer-kennzahl-geom_col" class="level2">
+<h2 class="anchored" data-anchor-id="balkendiagramm-einer-kennzahl-geom_col">Balkendiagramm einer Kennzahl: geom_col()</h2>
+<p><code>dplyr</code> und <code>ggplot2</code> greifen ineinander: erst die Kennzahl berechnen, dann direkt an <code>ggplot()</code> weiterreichen. Gemeinden ohne Region (Viktorsberg) filtern wir vorher heraus. Die Farbe dient hier nur der Optik — die Regionen stehen schon auf der x-Achse, deshalb blenden wir die Legende mit <code>show.legend = FALSE</code> aus:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb58"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a>gemeinden_plot <span class="sc">%&gt;%</span></span>
+<span id="cb58-2"><a href="#cb58-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(region)) <span class="sc">%&gt;%</span></span>
+<span id="cb58-3"><a href="#cb58-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(region) <span class="sc">%&gt;%</span></span>
+<span id="cb58-4"><a href="#cb58-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">preis_mean =</span> <span class="fu">mean</span>(preis_m2)) <span class="sc">%&gt;%</span></span>
+<span id="cb58-5"><a href="#cb58-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> region, <span class="at">y =</span> preis_mean, <span class="at">fill =</span> region)) <span class="sc">+</span></span>
+<span id="cb58-6"><a href="#cb58-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb58-7"><a href="#cb58-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Durchschnittlicher Baugrundstückspreis pro Region"</span>,</span>
+<span id="cb58-8"><a href="#cb58-8" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Region"</span>, <span class="at">y =</span> <span class="st">"Ø Preis (€ pro m²)"</span>) <span class="sc">+</span></span>
+<span id="cb58-9"><a href="#cb58-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="einheit-4_files/figure-html/unnamed-chunk-25-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Die Balken stehen in alphabetischer Reihenfolge. <code>reorder(region, preis_mean)</code> sortiert sie nach der Kennzahl. Bei vielen Balken oder langen Namen dreht <code>coord_flip()</code> die Grafik, sodass die Beschriftung waagrecht steht:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb59"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a>gemeinden_plot <span class="sc">%&gt;%</span></span>
+<span id="cb59-2"><a href="#cb59-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(region)) <span class="sc">%&gt;%</span></span>
+<span id="cb59-3"><a href="#cb59-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(region) <span class="sc">%&gt;%</span></span>
+<span id="cb59-4"><a href="#cb59-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">preis_mean =</span> <span class="fu">mean</span>(preis_m2)) <span class="sc">%&gt;%</span></span>
+<span id="cb59-5"><a href="#cb59-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">reorder</span>(region, preis_mean), <span class="at">y =</span> preis_mean)) <span class="sc">+</span></span>
+<span id="cb59-6"><a href="#cb59-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">fill =</span> <span class="st">"steelblue"</span>) <span class="sc">+</span></span>
+<span id="cb59-7"><a href="#cb59-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
+<span id="cb59-8"><a href="#cb59-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Durchschnittlicher Baugrundstückspreis pro Region, sortiert"</span>,</span>
+<span id="cb59-9"><a href="#cb59-9" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Region"</span>, <span class="at">y =</span> <span class="st">"Ø Preis (€ pro m²)"</span>) <span class="sc">+</span></span>
+<span id="cb59-10"><a href="#cb59-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="einheit-4_files/figure-html/unnamed-chunk-26-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="zeitverläufe-geom_line" class="level2">
+<h2 class="anchored" data-anchor-id="zeitverläufe-geom_line">Zeitverläufe: geom_line()</h2>
+<p>Für eine Entwicklung über die Zeit verbindet <code>geom_line()</code> die Werte zu einer Linie. Dafür braucht es das <strong>lange</strong> Format — das Jahr als eigene Spalte, wie in <code>bev_lang</code> aus Teil 1. Die Werte nach 2024 sind Prognosen, deshalb lassen wir sie weg:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb60"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a>bev_lang <span class="sc">%&gt;%</span></span>
+<span id="cb60-2"><a href="#cb60-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(TERRITORY_ID <span class="sc">==</span> <span class="st">"AT"</span>, jahr <span class="sc">&lt;=</span> <span class="dv">2024</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb60-3"><a href="#cb60-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> jahr, <span class="at">y =</span> einwohner <span class="sc">/</span> <span class="dv">1000000</span>)) <span class="sc">+</span></span>
+<span id="cb60-4"><a href="#cb60-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">color =</span> <span class="st">"steelblue"</span>, <span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb60-5"><a href="#cb60-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Bevölkerung Österreichs, 1960–2024"</span>,</span>
+<span id="cb60-6"><a href="#cb60-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Jahr"</span>, <span class="at">y =</span> <span class="st">"Einwohner (in Millionen)"</span>) <span class="sc">+</span></span>
+<span id="cb60-7"><a href="#cb60-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="einheit-4_files/figure-html/unnamed-chunk-27-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Für mehrere Linien in einer Grafik legt man eine Spalte auf <code>color</code>, z. B. <code>aes(x = jahr, y = einwohner, color = NAME_HTML)</code>.</p>
+</section>
+<section id="verteilungen-geom_boxplot-und-geom_histogram" class="level2">
+<h2 class="anchored" data-anchor-id="verteilungen-geom_boxplot-und-geom_histogram">Verteilungen: geom_boxplot() und geom_histogram()</h2>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb61"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(gemeinden_plot, <span class="fu">aes</span>(<span class="at">x =</span> typ, <span class="at">y =</span> preis_m2)) <span class="sc">+</span></span>
+<span id="cb61-2"><a href="#cb61-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">fill =</span> <span class="st">"lightgrey"</span>) <span class="sc">+</span></span>
+<span id="cb61-3"><a href="#cb61-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Baugrundstückspreis je Gemeindetyp"</span>, <span class="at">x =</span> <span class="st">"Gemeindetyp"</span>, <span class="at">y =</span> <span class="st">"Preis (€ pro m²)"</span>) <span class="sc">+</span></span>
+<span id="cb61-4"><a href="#cb61-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="einheit-4_files/figure-html/unnamed-chunk-28-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p><code>geom_histogram()</code> zeigt die Verteilung einer einzelnen Zahlenspalte:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb62"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(gemeinden_plot, <span class="fu">aes</span>(<span class="at">x =</span> preis_m2)) <span class="sc">+</span></span>
+<span id="cb62-2"><a href="#cb62-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">bins =</span> <span class="dv">8</span>, <span class="at">fill =</span> <span class="st">"steelblue"</span>, <span class="at">color =</span> <span class="st">"white"</span>) <span class="sc">+</span></span>
+<span id="cb62-3"><a href="#cb62-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -839,40 +991,58 @@ $wt
 </figure>
 </div>
 </div>
+</div>
+</section>
+<section id="teilgrafiken-facet_wrap" class="level2">
+<h2 class="anchored" data-anchor-id="teilgrafiken-facet_wrap">Teilgrafiken: facet_wrap()</h2>
+<p><code>facet_wrap(~spalte)</code> zerlegt eine Grafik in ein Raster — eine Teilgrafik pro Ausprägung:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb63"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(gemeinden_plot, <span class="fu">aes</span>(<span class="at">x =</span> entfernung_km, <span class="at">y =</span> preis_m2)) <span class="sc">+</span></span>
+<span id="cb63-2"><a href="#cb63-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">color =</span> <span class="st">"darkred"</span>) <span class="sc">+</span></span>
+<span id="cb63-3"><a href="#cb63-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>bundesland) <span class="sc">+</span></span>
+<span id="cb63-4"><a href="#cb63-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Preis nach Entfernung, aufgeteilt nach Bundesland"</span>,</span>
+<span id="cb63-5"><a href="#cb63-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Entfernung (km, Luftlinie)"</span>, <span class="at">y =</span> <span class="st">"Preis (€ pro m²)"</span>) <span class="sc">+</span></span>
+<span id="cb63-6"><a href="#cb63-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="einheit-4_files/figure-html/unnamed-chunk-29-2.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="einheit-4_files/figure-html/unnamed-chunk-30-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
-<p>Zum Speichern ersetzt man <code>print()</code> durch <code>ggsave()</code> und baut den Dateinamen mit <code>paste0()</code>:</p>
+<p>Vorarlberg ist nur mit einer Gemeinde vertreten, deshalb steht dort ein einzelner Punkt.</p>
+</section>
+<section id="grafik-speichern-ggsave" class="level2">
+<h2 class="anchored" data-anchor-id="grafik-speichern-ggsave">Grafik speichern: ggsave()</h2>
+<p><code>ggsave()</code> speichert die zuletzt erzeugte Grafik:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb66"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (t <span class="cf">in</span> <span class="fu">unique</span>(mitarbeitende<span class="sc">$</span>team)) {</span>
-<span id="cb66-2"><a href="#cb66-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggsave</span>(<span class="fu">paste0</span>(<span class="st">"output/plusstunden_"</span>, t, <span class="st">".png"</span>),</span>
-<span id="cb66-3"><a href="#cb66-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">plot =</span> <span class="fu">grafik_team</span>(mitarbeitende, t), <span class="at">width =</span> <span class="dv">6</span>, <span class="at">height =</span> <span class="dv">4</span>)</span>
-<span id="cb66-4"><a href="#cb66-4" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<p>Ohne Funktion stünde der ganze Grafik-Code in der Schleife; mit Funktion lässt er sich einzeln testen und auch an anderer Stelle wiederverwenden.</p>
-<section id="übung-4" class="level3">
-<h3 class="anchored" data-anchor-id="übung-4">Übung</h3>
-<p>Schreibe eine Funktion <code>team_bericht(daten, team_name)</code>, die mit <code>cat()</code> einen Satz ausgibt wie <code>"Team_A: 9 Personen, im Schnitt 26.7 Plusstunden"</code>. Rufe sie in einer Schleife für alle Teams auf.</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb67"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a><span class="co"># dein Code</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb64"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsave</span>(<span class="st">"output/preis_entfernung.png"</span>, <span class="at">width =</span> <span class="dv">8</span>, <span class="at">height =</span> <span class="dv">5</span>)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
-</section>
-<section id="zusammenfassung" class="level1">
-<h1>Zusammenfassung</h1>
+<section id="weitere-möglichkeiten-entdecken" class="level2">
+<h2 class="anchored" data-anchor-id="weitere-möglichkeiten-entdecken">Weitere Möglichkeiten entdecken</h2>
+<p><code>ggplot2</code> kann viel mehr, als hier Platz hat. Zum Nachschlagen und Ausprobieren:</p>
 <ul>
-<li><strong>Bedingungen:</strong> <code>if (bedingung) { } else if { } else { }</code> für <strong>einen</strong> Wert · <code>ifelse()</code> für Vektoren · <code>case_when()</code> in <code>mutate()</code>, fehlende Werte zuerst abfangen</li>
-<li><strong>Schleifen:</strong> <code>for (x in vektor) { }</code> · Ergebnisse in vorher angelegtem Vektor sammeln · <code>seq_along()</code> · <code>while</code> mit Abbruchbedingung · <code>next</code> / <code>break</code> · in Schleifen <code>print()</code> · erst nach einer vektorisierten Lösung suchen</li>
-<li><strong>Funktionen:</strong> <code>name &lt;- function(arg, arg2 = standard) { … }</code> · letzter Ausdruck ist das Ergebnis · mehrere Werte als benannter Vektor oder Liste · Eingaben mit <code>stop()</code> prüfen · Variablen innerhalb bleiben lokal</li>
-<li><strong>Anwenden:</strong> <code>sapply(X, FUN, ...)</code> wendet <code>FUN</code> auf jedes Element an (Data Frame: jede Spalte) · Funktion ohne Klammern übergeben · weitere Argumente wie <code>na.rm = TRUE</code> dahinter · Ergebnis Vektor, Matrix oder Liste · <code>lapply()</code> gibt immer eine Liste · anonyme Funktion <code>function(x) …</code></li>
+<li><a href="https://ggplot2.tidyverse.org/reference/">ggplot2-Referenz</a> — alle <code>geom_...()</code>, Skalen und Themes mit Beispielen</li>
+<li><a href="https://rstudio.github.io/cheatsheets/html/data-visualization.html">ggplot2-Cheatsheet</a> — die wichtigsten Bausteine auf einen Blick</li>
+<li><a href="https://r-graph-gallery.com/">R Graph Gallery</a> — Grafiktypen mit fertigem Code</li>
 </ul>
+<section id="übung-1" class="level3">
+<h3 class="anchored" data-anchor-id="übung-1">Übung</h3>
+<p>Jede Grafik bekommt einen Titel und beschriftete Achsen.</p>
+<ol type="1">
+<li>Zeichne ein Streudiagramm von <code>entfernung_km</code> gegen <code>preis_m2</code>, eingefärbt nach <code>typ</code>.</li>
+<li>Zeichne den durchschnittlichen Preis pro Bundesland als Balkendiagramm, sortiert vom niedrigsten zum höchsten Wert (Tipp: erst <code>group_by()</code> + <code>summarise()</code>, dann <code>reorder()</code>).</li>
+<li>Zeichne aus <code>bev_lang</code> die Bevölkerung der Regionen Graz (<code>AT221</code>) und Östliche Obersteiermark (<code>AT223</code>) von 1960 bis 2024 als zwei Linien in einer Grafik. Was zeigt der Vergleich?</li>
+</ol>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb65"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a><span class="co"># dein Code</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
 
 
+</section>
+</section>
 </section>
 
 </main> <!-- /main -->
@@ -1278,13 +1448,13 @@ $wt
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./einheit-3.html" class="pagination-link" aria-label="3 · Daten auswerten &amp; visualisieren">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">3 · Daten auswerten &amp; visualisieren</span>
+      <a href="./einheit-3.html" class="pagination-link" aria-label="3 · Daten einlesen, aufräumen &amp; speichern">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">3 · Daten einlesen, aufräumen &amp; speichern</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./uebungsaufgabe-1.html" class="pagination-link" aria-label="Übungsaufgabe 1">
-        <span class="nav-page-text">Übungsaufgabe 1</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./einheit-5.html" class="pagination-link" aria-label="5 · Bedingungen, Schleifen &amp; Funktionen">
+        <span class="nav-page-text">5 · Bedingungen, Schleifen &amp; Funktionen</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

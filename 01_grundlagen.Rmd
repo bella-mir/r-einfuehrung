@@ -10,8 +10,6 @@ In dieser Einheit lernst du die grundlegenden Operationen in R kennen:
 2. **Vektoren** — mehrere Werte desselben Typs speichern und damit rechnen
 3. **Schnelle Grafiken mit Base-R** — `plot()`, `hist()`, `boxplot()`
 
-Wie man mit RStudio, Projekten und Paketen arbeitet, steht in der Vorbereitung (`00_vorbereitung.Rmd`).
-
 Führe die Code-Blöcke der Reihe nach aus (grüner Pfeil oben rechts im Block oder
 *Strg/Cmd + Enter*) — spätere Blöcke bauen auf den Variablen früherer Blöcke auf.
 
@@ -117,23 +115,23 @@ Rechnen geht nur mit Zahlen. Ist eine Zahl versehentlich als Text gespeichert, g
 Fehler:
 
 ```{r, error=TRUE}
-kaltmiete   <- 550
-nebenkosten <- "350"   # in Anführungszeichen → Text, nicht Zahl
+nettomiete     <- 550
+betriebskosten <- "150"   # in Anführungszeichen → Text, nicht Zahl
 
-kaltmiete + nebenkosten
+nettomiete + betriebskosten
 ```
 
 `class()` zeigt, wo das Problem liegt:
 
 ```{r}
-class(nebenkosten)
+class(betriebskosten)
 ```
 
 Mit `as.numeric()` wird der Text in eine Zahl umgewandelt:
 
 ```{r}
-warmmiete <- kaltmiete + as.numeric(nebenkosten)
-warmmiete
+bruttomiete <- nettomiete + as.numeric(betriebskosten)
+bruttomiete
 ```
 
 Für jeden Datentyp gibt es eine solche `as.*()`-Funktion. Was sich nicht umwandeln lässt, wird
@@ -191,8 +189,9 @@ Mehrere Bedingungen verknüpft man mit `&` (und), `|` (oder), `!` (nicht):
 
 1. Berechne, wie viele volle Wochen 100 Tage haben und wie viele Tage übrig bleiben
    (Tipp: `%/%` und `%%`).
-2. Speichere deine Körpergröße in Metern und dein Gewicht in kg in zwei Variablen und
-   berechne den BMI (Gewicht / Größe²), gerundet auf eine Nachkommastelle.
+2. Eine Wohnung hat 62,5 m². Die Miete wurde versehentlich als Text gespeichert:
+   `miete <- "890"`. Berechne die Miete pro m², gerundet auf eine Nachkommastelle.
+3. Ist die Miete pro m² höher als 14 €? Lass R die Frage mit `TRUE` oder `FALSE` beantworten.
 
 ```{r}
 # dein Code
@@ -221,24 +220,28 @@ gemischt
 class(gemischt)
 ```
 
-`:` erzeugt eine Folge in Einerschritten, `seq()` mit frei wählbarer Schrittweite;
-`length()` gibt die Anzahl der Elemente:
+`:` erzeugt eine Folge in Einerschritten, `seq()` mit frei wählbarer Schrittweite:
 
 ```{r}
 1:10
 seq(from = 0, to = 100, by = 25)
+```
+
+`length()` gibt die Anzahl der Elemente eines Vektors:
+
+```{r}
 length(zahlen)
 ```
 
 ## Beispieldaten: Temperaturen in Wien
 
-Langjährige Durchschnittswerte der Höchst- und Tiefsttemperatur pro Monat in °C
-(Quelle: climate-data.org):
+Mittlere Höchst- und Tiefsttemperatur pro Monat in °C, von Jänner bis Dezember
+(Klimanormalwerte 1991–2020 der Station Wien Hohe Warte; Quelle: GeoSphere Austria):
 
 ```{r}
-#             Mai   Juni  Juli  Aug   Sep
-tmax_wien <- c(20.1, 24.1, 26.0, 25.7, 20.5)
-tmin_wien <- c(10.4, 14.3, 16.4, 16.0, 11.9)
+#               Jän   Feb   Mär   Apr   Mai   Jun   Jul   Aug   Sep   Okt  Nov   Dez
+tmax_wien <- c( 3.5,  6.5, 10.7, 17.2, 20.7, 25.1, 26.4, 26.1, 21.1, 14.3, 8.8,  4.0)
+tmin_wien <- c(-1.3, -0.5,  2.6,  6.7, 10.7, 14.7, 15.9, 15.6, 12.0,  7.3, 3.7, -0.4)
 ```
 
 ## Vektoren benennen
@@ -247,7 +250,7 @@ Mit `names()` bekommt jedes Element einen Namen — so ist klar, welcher Wert zu
 gehört. Den Vektor der Monate speichern wir einmal als Variable und verwenden ihn zweimal:
 
 ```{r}
-monate <- c("Mai", "Juni", "Juli", "August", "September")
+monate <- c("Jän", "Feb", "Mär", "Apr", "Mai", "Jun", "Jul", "Aug", "Sep", "Okt", "Nov", "Dez")
 names(tmax_wien) <- monate
 names(tmin_wien) <- monate
 tmax_wien
@@ -265,17 +268,12 @@ barplot(tmax_wien,
         col  = "tomato")
 ```
 
-> **Hinweis:** Weitere Grafiken folgen in Teil 3 dieser Einheit und in Einheit 3.
-
 ## Mit Vektoren rechnen
 
 Rechenoperationen zwischen zwei Vektoren erfolgen **elementweise**:
 
 ```{r}
 c(1, 2, 3) + c(4, 5, 6)   # entspricht c(1+4, 2+5, 3+6)
-
-tmittel_wien <- (tmax_wien + tmin_wien) / 2
-tmittel_wien
 ```
 
 Andere Funktionen fassen einen ganzen Vektor zu **einer** Zahl zusammen:
@@ -288,16 +286,27 @@ round(mean(tmax_wien), 1)  # Funktionen lassen sich ineinander schachteln
 sort(tmax_wien)            # sortiert (decreasing = TRUE für absteigend)
 ```
 
+### Übung
+
+1. Berechne die mittlere Temperatur pro Monat als Mittelwert aus Höchst- und Tiefsttemperatur
+   und speichere das Ergebnis als `tmittel_wien`.
+2. Welcher Monat ist im Mittel am wärmsten, welcher am kältesten? (Tipp: `sort()`)
+
+```{r}
+# dein Code
+
+```
+
 ## Vektorelemente auswählen
 
 Mit eckigen Klammern `[ ]` wählst du Elemente aus. Achtung: **das erste Element hat den
 Index 1**, nicht 0.
 
 ```{r}
-tmax_wien[1]          # erstes Element (Mai)
+tmax_wien[1]          # erstes Element (Jänner)
 tmax_wien[c(2, 4)]    # mehrere Elemente über einen Indexvektor
 tmax_wien[2:4]        # ein Bereich
-tmax_wien["Juli"]     # über den Namen
+tmax_wien["Jul"]      # über den Namen
 ```
 
 ## Logische Abfragen auf Vektoren
@@ -316,10 +325,17 @@ which(tmax_wien > 24)      # an welchen Positionen steht TRUE?
 tmax_wien[tmax_wien > 24]  # nur die Werte, für die die Bedingung zutrifft
 ```
 
+`which.max()` und `which.min()` liefern direkt die Position des größten bzw. kleinsten Werts:
+
+```{r}
+which.max(tmax_wien)       # der wärmste Monat: Name und Position
+which.min(tmax_wien)
+```
+
 `%in%` prüft, ob ein Wert in einer Menge vorkommt — viel kürzer als mehrere `==` mit `|`:
 
 ```{r}
-sommer <- c("Juni", "Juli", "August")
+sommer <- c("Jun", "Jul", "Aug")
 monate %in% sommer
 tmax_wien[monate %in% sommer]
 ```
@@ -330,9 +346,9 @@ Weist man einer ausgewählten Stelle einen Wert zu, wird der Vektor **dort über
 per Position, Name oder Bedingung:
 
 ```{r}
-temperaturen <- tmax_wien               # Kopie, damit tmax_wien unverändert bleibt
-temperaturen["Juli"] <- 27.5            # einen einzelnen Wert korrigieren
-temperaturen[temperaturen < 21] <- NA   # alle kühlen Monate auf NA setzen
+temperaturen <- tmax_wien              # Kopie, damit tmax_wien unverändert bleibt
+temperaturen["Jul"] <- 27.5            # einen einzelnen Wert korrigieren
+temperaturen[temperaturen < 5] <- NA   # alle Monate unter 5 °C auf NA setzen
 temperaturen
 ```
 
@@ -360,11 +376,10 @@ temperaturen[!is.na(temperaturen)]   # nur die vorhandenen Werte
 1. In welchen Monaten liegt die **Tiefst**temperatur über 15 °C? Gib die Monatsnamen aus
    (Tipp: `names()`).
 2. Berechne die Differenz zwischen Höchst- und Tiefsttemperatur pro Monat. In welchem Monat
-   ist sie am größten? (Tipp: `which.max()`)
+   ist sie am kleinsten? (Tipp: `which.min()`)
 
 ```{r}
 # dein Code
-
 ```
 
 
@@ -372,10 +387,7 @@ temperaturen[!is.na(temperaturen)]   # nur die vorhandenen Werte
 
 `barplot()` hast du schon kennengelernt. Base-R hat noch einige weitere Grafikfunktionen, die
 mit einem einzigen Befehl ein Bild liefern — ideal, um sich beim Arbeiten schnell einen
-Eindruck zu verschaffen. Für **vorzeigbare** Grafiken nimmt man später `ggplot2` (Einheit 3).
-
-Neben unseren Temperaturen nutzen wir den eingebauten Datensatz `mtcars` (32 Automodelle).
-`mtcars$mpg` holt daraus eine Spalte als Vektor — mehr zu solchen Tabellen in Einheit 2.
+Eindruck zu verschaffen. Wir bleiben bei den Temperaturen aus Teil 2.
 
 ## Punkte und Linien: plot()
 
@@ -384,19 +396,9 @@ Zeit passt `type = "b"` (Punkte und Linie):
 
 ```{r}
 plot(tmax_wien, type = "b",
-     main = "Höchsttemperaturen in Wien, Mai–September",
-     xlab = "Monat (Mai = 1)", ylab = "°C",
+     main = "Höchsttemperaturen in Wien im Jahresverlauf",
+     xlab = "Monat (1 = Jänner)", ylab = "°C",
      pch = 19, col = "tomato")
-```
-
-Mit zwei Vektoren wird daraus ein Streudiagramm. `main`, `xlab`, `ylab` beschriften, `pch`
-wählt das Punktsymbol, `col` die Farbe:
-
-```{r}
-plot(mtcars$hp, mtcars$mpg,
-     main = "Verbrauch nach Leistung",
-     xlab = "PS", ylab = "Meilen pro Gallone",
-     pch = 19, col = "steelblue")
 ```
 
 ## Verteilung: hist()
@@ -405,21 +407,23 @@ plot(mtcars$hp, mtcars$mpg,
 der Balken:
 
 ```{r}
-hist(mtcars$mpg, breaks = 8,
-     main = "Verteilung des Verbrauchs",
-     xlab = "Meilen pro Gallone", col = "lightblue")
+hist(tmax_wien, breaks = 5,
+     main = "Höchsttemperaturen in Wien",
+     xlab = "°C", col = "lightblue")
 ```
 
-## Gruppenvergleich: boxplot()
+## Vergleich: boxplot()
 
-Die Schreibweise `y ~ gruppe` heißt „`y` aufgeschlüsselt nach `gruppe`". Hier: Verbrauch je
-Zylinderzahl:
+`boxplot()` fasst eine Verteilung zusammen: Die Box reicht vom unteren bis zum oberen Viertel
+der Werte, der Strich in der Mitte ist der Median. Mehrere Vektoren nebeneinander lassen sich
+so direkt vergleichen; `names` beschriftet die Boxen:
 
 ```{r}
-boxplot(mpg ~ cyl, data = mtcars,
-        main = "Verbrauch nach Zylinderzahl",
-        xlab = "Zylinder", ylab = "Meilen pro Gallone",
-        col = "lightgreen")
+boxplot(tmax_wien, tmin_wien,
+        names = c("Höchsttemperatur", "Tiefsttemperatur"),
+        main = "Monatliche Temperaturen in Wien",
+        ylab = "°C",
+        col = c("tomato", "steelblue"))
 ```
 
 ## Mehrere Grafiken nebeneinander: par(mfrow)
@@ -429,8 +433,8 @@ boxplot(mpg ~ cyl, data = mtcars,
 ```{r}
 par(mfrow = c(1, 2))
 
-hist(mtcars$mpg,    main = "Histogramm", xlab = "mpg")
-boxplot(mtcars$mpg, main = "Boxplot",   ylab = "mpg")
+hist(tmax_wien,    main = "Histogramm", xlab = "°C")
+boxplot(tmax_wien, main = "Boxplot",    ylab = "°C")
 
 par(mfrow = c(1, 1))   # wieder zurückstellen
 ```
@@ -438,3 +442,15 @@ par(mfrow = c(1, 1))   # wieder zurückstellen
 In einem `.R`-Skript bleibt die Einstellung für die **restliche Sitzung** aktiv — deshalb
 immer zurücksetzen. In einem Notebook gilt sie nur innerhalb des Chunks.
 
+### Übung
+
+Zeichne die Tiefsttemperaturen (`tmin_wien`) als Linie mit Punkten — mit Titel und
+beschrifteten Achsen.
+
+```{r}
+# dein Code
+
+```
+
+> **Hinweis:** Das war nur ein kurzer Überblick — ausführlicher beschäftigen wir uns mit
+> Grafiken in Einheit 4.

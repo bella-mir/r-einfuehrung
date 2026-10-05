@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 250" width="880" height="250" role="img" aria-label="Vier Join-Varianten als Kreisdiagramme: left_join behält alle Zeilen von x, right_join alle von y, inner_join nur die gemeinsamen, full_join alle aus beiden" font-family="-apple-system, 'Segoe UI', Helvetica, Arial, sans-serif">
+<rect width="880" height="250" fill="#ffffff"/>
+<defs><clipPath id="c0"><circle cx="82" cy="100" r="52"/></clipPath></defs>
+<circle cx="82" cy="100" r="52" fill="#2a6f97"/>
+<circle cx="82" cy="100" r="52" fill="none" stroke="#52606d" stroke-width="2"/>
+<circle cx="138" cy="100" r="52" fill="none" stroke="#52606d" stroke-width="2"/>
+<text x="60" y="34" font-size="17" font-weight="700" fill="#1f2933" text-anchor="middle">x</text>
+<text x="160" y="34" font-size="17" font-weight="700" fill="#1f2933" text-anchor="middle">y</text>
+<text x="110" y="190" font-size="15" font-weight="700" fill="#1f2933" text-anchor="middle" font-family="Menlo, Consolas, 'Courier New', monospace">left_join(x, y)</text>
+<text x="110" y="214" font-size="14" fill="#52606d" text-anchor="middle">alle Zeilen von x</text>
+<defs><clipPath id="c1"><circle cx="302" cy="100" r="52"/></clipPath></defs>
+<circle cx="358" cy="100" r="52" fill="#2a6f97"/>
+<circle cx="302" cy="100" r="52" fill="none" stroke="#52606d" stroke-width="2"/>
+<circle cx="358" cy="100" r="52" fill="none" stroke="#52606d" stroke-width="2"/>
+<text x="280" y="34" font-size="17" font-weight="700" fill="#1f2933" text-anchor="middle">x</text>
+<text x="380" y="34" font-size="17" font-weight="700" fill="#1f2933" text-anchor="middle">y</text>
+<text x="330" y="190" font-size="15" font-weight="700" fill="#1f2933" text-anchor="middle" font-family="Menlo, Consolas, 'Courier New', monospace">right_join(x, y)</text>
+<text x="330" y="214" font-size="14" fill="#52606d" text-anchor="middle">alle Zeilen von y</text>
+<defs><clipPath id="c2"><circle cx="522" cy="100" r="52"/></clipPath></defs>
+<circle cx="578" cy="100" r="52" fill="#2a6f97" clip-path="url(#c2)"/>
+<circle cx="522" cy="100" r="52" fill="none" stroke="#52606d" stroke-width="2"/>
+<circle cx="578" cy="100" r="52" fill="none" stroke="#52606d" stroke-width="2"/>
+<text x="500" y="34" font-size="17" font-weight="700" fill="#1f2933" text-anchor="middle">x</text>
+<text x="600" y="34" font-size="17" font-weight="700" fill="#1f2933" text-anchor="middle">y</text>
+<text x="550" y="190" font-size="15" font-weight="700" fill="#1f2933" text-anchor="middle" font-family="Menlo, Consolas, 'Courier New', monospace">inner_join(x, y)</text>
+<text x="550" y="214" font-size="14" fill="#52606d" text-anchor="middle">nur gemeinsame Zeilen</text>
+<defs><clipPath id="c3"><circle cx="742" cy="100" r="52"/></clipPath></defs>
+<circle cx="742" cy="100" r="52" fill="#2a6f97"/>
+<circle cx="798" cy="100" r="52" fill="#2a6f97"/>
+<circle cx="742" cy="100" r="52" fill="none" stroke="#52606d" stroke-width="2"/>
+<circle cx="798" cy="100" r="52" fill="none" stroke="#52606d" stroke-width="2"/>
+<text x="720" y="34" font-size="17" font-weight="700" fill="#1f2933" text-anchor="middle">x</text>
+<text x="820" y="34" font-size="17" font-weight="700" fill="#1f2933" text-anchor="middle">y</text>
+<text x="770" y="190" font-size="15" font-weight="700" fill="#1f2933" text-anchor="middle" font-family="Menlo, Consolas, 'Courier New', monospace">full_join(x, y)</text>
+<text x="770" y="214" font-size="14" fill="#52606d" text-anchor="middle">alle Zeilen aus beiden</text>
+</svg>
