@@ -9,7 +9,8 @@ options(width = 110)   # breite Tabellen nicht umbrechen
 ```
 
 In Einheit 2 hast du Data Frames selbst erstellt. Meistens liegen Daten aber in **Dateien**
-vor und müssen vor der Auswertung noch aufgeräumt werden. In dieser Einheit lernst du:
+vor und müssen vor der Auswertung noch aufgeräumt werden. Nach einer kurzen Wiederholung zu
+Data Frames und Faktoren lernst du in dieser Einheit:
 
 1. **Daten einlesen** — CSV- und Excel-Dateien in R laden
 2. **Daten aufräumen** — Spaltennamen und Texte bereinigen, Kategorien bilden
@@ -22,6 +23,114 @@ immer **am Anfang** des Dokuments:
 ```{r}
 library(readxl)    # Excel-Dateien lesen
 library(writexl)   # Excel-Dateien schreiben
+```
+
+
+# Kurz wiederholt: Data Frames und Faktoren
+
+Alles in dieser Einheit dreht sich um **Data Frames**. Hier das Wichtigste aus Einheit 2 auf
+einen Blick — am Beispiel der Planeten.
+
+## Einen Data Frame erstellen und ansehen
+
+Ein Data Frame ist eine Tabelle: jede **Spalte** ein Vektor, alle gleich lang, jede mit ihrem
+eigenen Datentyp. `data.frame()` fügt Vektoren zusammen:
+
+```{r}
+planeten <- data.frame(
+  name        = c("Merkur", "Venus", "Erde", "Mars", "Jupiter", "Saturn", "Uranus", "Neptun"),
+  typ         = c("Gestein", "Gestein", "Gestein", "Gestein", "Gas", "Gas", "Eis", "Eis"),
+  durchmesser = c(0.382, 0.949, 1, 0.532, 11.209, 9.449, 4.007, 3.883),
+  hat_ringe   = c(FALSE, FALSE, FALSE, FALSE, TRUE, TRUE, TRUE, TRUE)
+)
+```
+
+Bei einem unbekannten Datensatz zuerst schauen, was drin ist:
+
+```{r}
+str(planeten)       # Zeilen, Spalten, Datentypen, Beispielwerte
+dim(planeten)       # Anzahl Zeilen und Spalten (nrow(), ncol() einzeln)
+head(planeten, 3)   # die ersten Zeilen
+names(planeten)     # die Spaltennamen
+```
+
+## Spalten mit $
+
+`$` holt eine Spalte als **Vektor** — damit funktioniert alles aus Einheit 1:
+
+```{r}
+planeten$durchmesser
+mean(planeten$durchmesser)
+```
+
+Mit `$` und `<-` legt man auch eine **neue Spalte** an (oder überschreibt eine bestehende):
+
+```{r}
+planeten$durchmesser_km <- round(planeten$durchmesser * 12742)   # Erddurchmesser in km
+```
+
+## Auswählen mit [Zeile, Spalte]
+
+Vor dem Komma stehen die **Zeilen**, nach dem Komma die **Spalten**. Bleibt eine Seite leer,
+heißt das „alle":
+
+```{r}
+planeten[3, "durchmesser"]            # Zeile 3, Spalte durchmesser
+planeten[3, ]                         # ganze Zeile 3
+planeten[, c("name", "typ")]          # zwei Spalten, alle Zeilen
+```
+
+Zeilen **filtern** heißt: eine Bedingung vor das Komma schreiben. Es bleiben die Zeilen, bei
+denen `TRUE` herauskommt — wie bei Vektoren in Einheit 1, nur mit Komma dahinter:
+
+```{r}
+planeten[planeten$durchmesser < 1, ]
+planeten[planeten$typ %in% c("Gas", "Eis"), c("name", "hat_ringe")]
+```
+
+## Kategorien: unique() und table()
+
+```{r}
+unique(planeten$typ)   # welche Werte kommen vor?
+table(planeten$typ)    # wie oft?
+```
+
+## Faktoren
+
+Ein **Faktor** speichert Kategorien samt ihrer festen Liste von **Levels**. Mit `levels`
+legt man die Reihenfolge fest, mit `ordered = TRUE` werden Vergleiche möglich:
+
+```{r}
+groesse <- factor(c("klein", "mittel", "mittel", "klein", "groß", "groß", "groß", "groß"),
+                  levels = c("klein", "mittel", "groß"), ordered = TRUE)
+groesse
+table(groesse)         # in der Reihenfolge der Levels, nicht alphabetisch
+groesse[1] < groesse[5]
+```
+
+In dieser Einheit erzeugt `cut()` Faktoren (Teil 2), und beim Speichern (Teil 3) sehen wir,
+welches Dateiformat die Levels behält.
+
+## Listen
+
+Eine **Liste** sammelt beliebige Objekte. Mit Namen versehen, holt man ein Element mit `$`
+zurück — so übergeben wir in Teil 3 mehrere Tabellen auf einmal an `write_xlsx()`:
+
+```{r}
+kurs <- list(planeten = planeten, anzahl = nrow(planeten))
+kurs$anzahl
+```
+
+### Übung
+
+1. Welche Planeten haben Ringe? Gib nur ihre Namen aus.
+2. Wie groß ist der mittlere Durchmesser der Gesteinsplaneten (`typ == "Gestein"`)?
+3. Mache aus `planeten$typ` einen Faktor mit der Reihenfolge `"Gestein"`, `"Gas"`, `"Eis"`
+   und zähle mit `table()`.
+
+```{r}
+# dein Code
+
 ```
 
 

@@ -4,6 +4,12 @@ loesungen.Rmd
 loesung_*.Rmd
 drafts/
 last_year/
+menti_ablauf.md
+*.pptx
+
+# macOS / Office
+.DS_Store
+~$*
 
 # Alte bzw. lokal erzeugte HTML-Dateien (die Website liegt in docs/)
 /*.html

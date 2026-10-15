@@ -362,7 +362,73 @@
     "href": "einheit-3.html",
     "title": "Einheit 3: Daten einlesen, aufräumen & speichern",
     "section": "",
-    "text": "In Einheit 2 hast du Data Frames selbst erstellt. Meistens liegen Daten aber in Dateien vor und müssen vor der Auswertung noch aufgeräumt werden. In dieser Einheit lernst du:\nFür Excel-Dateien brauchen wir zwei Pakete. Falls noch nicht geschehen, einmalig in der Console installieren: install.packages(c(\"readxl\", \"writexl\")). Geladen werden Pakete immer am Anfang des Dokuments:\nlibrary(readxl)    # Excel-Dateien lesen\nlibrary(writexl)   # Excel-Dateien schreiben",
+    "text": "In Einheit 2 hast du Data Frames selbst erstellt. Meistens liegen Daten aber in Dateien vor und müssen vor der Auswertung noch aufgeräumt werden. Nach einer kurzen Wiederholung zu Data Frames und Faktoren lernst du in dieser Einheit:\nFür Excel-Dateien brauchen wir zwei Pakete. Falls noch nicht geschehen, einmalig in der Console installieren: install.packages(c(\"readxl\", \"writexl\")). Geladen werden Pakete immer am Anfang des Dokuments:\nlibrary(readxl)    # Excel-Dateien lesen\nlibrary(writexl)   # Excel-Dateien schreiben",
+    "crumbs": [
+      "Einheiten",
+      "3 · Daten einlesen, aufräumen & speichern"
+    ]
+  },
+  {
+    "objectID": "einheit-3.html#einen-data-frame-erstellen-und-ansehen",
+    "href": "einheit-3.html#einen-data-frame-erstellen-und-ansehen",
+    "title": "Einheit 3: Daten einlesen, aufräumen & speichern",
+    "section": "Einen Data Frame erstellen und ansehen",
+    "text": "Einen Data Frame erstellen und ansehen\nEin Data Frame ist eine Tabelle: jede Spalte ein Vektor, alle gleich lang, jede mit ihrem eigenen Datentyp. data.frame() fügt Vektoren zusammen:\n\nplaneten &lt;- data.frame(\n  name        = c(\"Merkur\", \"Venus\", \"Erde\", \"Mars\", \"Jupiter\", \"Saturn\", \"Uranus\", \"Neptun\"),\n  typ         = c(\"Gestein\", \"Gestein\", \"Gestein\", \"Gestein\", \"Gas\", \"Gas\", \"Eis\", \"Eis\"),\n  durchmesser = c(0.382, 0.949, 1, 0.532, 11.209, 9.449, 4.007, 3.883),\n  hat_ringe   = c(FALSE, FALSE, FALSE, FALSE, TRUE, TRUE, TRUE, TRUE)\n)\n\nBei einem unbekannten Datensatz zuerst schauen, was drin ist:\n\nstr(planeten)       # Zeilen, Spalten, Datentypen, Beispielwerte\n\n'data.frame':   8 obs. of  4 variables:\n $ name       : chr  \"Merkur\" \"Venus\" \"Erde\" \"Mars\" ...\n $ typ        : chr  \"Gestein\" \"Gestein\" \"Gestein\" \"Gestein\" ...\n $ durchmesser: num  0.382 0.949 1 0.532 11.209 ...\n $ hat_ringe  : logi  FALSE FALSE FALSE FALSE TRUE TRUE ...\n\ndim(planeten)       # Anzahl Zeilen und Spalten (nrow(), ncol() einzeln)\n\n[1] 8 4\n\nhead(planeten, 3)   # die ersten Zeilen\n\n    name     typ durchmesser hat_ringe\n1 Merkur Gestein       0.382     FALSE\n2  Venus Gestein       0.949     FALSE\n3   Erde Gestein       1.000     FALSE\n\nnames(planeten)     # die Spaltennamen\n\n[1] \"name\"        \"typ\"         \"durchmesser\" \"hat_ringe\"",
+    "crumbs": [
+      "Einheiten",
+      "3 · Daten einlesen, aufräumen & speichern"
+    ]
+  },
+  {
+    "objectID": "einheit-3.html#spalten-mit",
+    "href": "einheit-3.html#spalten-mit",
+    "title": "Einheit 3: Daten einlesen, aufräumen & speichern",
+    "section": "Spalten mit $",
+    "text": "Spalten mit $\n$ holt eine Spalte als Vektor — damit funktioniert alles aus Einheit 1:\n\nplaneten$durchmesser\n\n[1]  0.382  0.949  1.000  0.532 11.209  9.449  4.007  3.883\n\nmean(planeten$durchmesser)\n\n[1] 3.926375\n\n\nMit $ und &lt;- legt man auch eine neue Spalte an (oder überschreibt eine bestehende):\n\nplaneten$durchmesser_km &lt;- round(planeten$durchmesser * 12742)   # Erddurchmesser in km",
+    "crumbs": [
+      "Einheiten",
+      "3 · Daten einlesen, aufräumen & speichern"
+    ]
+  },
+  {
+    "objectID": "einheit-3.html#auswählen-mit-zeile-spalte",
+    "href": "einheit-3.html#auswählen-mit-zeile-spalte",
+    "title": "Einheit 3: Daten einlesen, aufräumen & speichern",
+    "section": "Auswählen mit [Zeile, Spalte]",
+    "text": "Auswählen mit [Zeile, Spalte]\nVor dem Komma stehen die Zeilen, nach dem Komma die Spalten. Bleibt eine Seite leer, heißt das „alle”:\n\nplaneten[3, \"durchmesser\"]            # Zeile 3, Spalte durchmesser\n\n[1] 1\n\nplaneten[3, ]                         # ganze Zeile 3\n\n  name     typ durchmesser hat_ringe durchmesser_km\n3 Erde Gestein           1     FALSE          12742\n\nplaneten[, c(\"name\", \"typ\")]          # zwei Spalten, alle Zeilen\n\n     name     typ\n1  Merkur Gestein\n2   Venus Gestein\n3    Erde Gestein\n4    Mars Gestein\n5 Jupiter     Gas\n6  Saturn     Gas\n7  Uranus     Eis\n8  Neptun     Eis\n\n\nZeilen filtern heißt: eine Bedingung vor das Komma schreiben. Es bleiben die Zeilen, bei denen TRUE herauskommt — wie bei Vektoren in Einheit 1, nur mit Komma dahinter:\n\nplaneten[planeten$durchmesser &lt; 1, ]\n\n    name     typ durchmesser hat_ringe durchmesser_km\n1 Merkur Gestein       0.382     FALSE           4867\n2  Venus Gestein       0.949     FALSE          12092\n4   Mars Gestein       0.532     FALSE           6779\n\nplaneten[planeten$typ %in% c(\"Gas\", \"Eis\"), c(\"name\", \"hat_ringe\")]\n\n     name hat_ringe\n5 Jupiter      TRUE\n6  Saturn      TRUE\n7  Uranus      TRUE\n8  Neptun      TRUE",
+    "crumbs": [
+      "Einheiten",
+      "3 · Daten einlesen, aufräumen & speichern"
+    ]
+  },
+  {
+    "objectID": "einheit-3.html#kategorien-unique-und-table",
+    "href": "einheit-3.html#kategorien-unique-und-table",
+    "title": "Einheit 3: Daten einlesen, aufräumen & speichern",
+    "section": "Kategorien: unique() und table()",
+    "text": "Kategorien: unique() und table()\n\nunique(planeten$typ)   # welche Werte kommen vor?\n\n[1] \"Gestein\" \"Gas\"     \"Eis\"    \n\ntable(planeten$typ)    # wie oft?\n\n\n    Eis     Gas Gestein \n      2       2       4",
+    "crumbs": [
+      "Einheiten",
+      "3 · Daten einlesen, aufräumen & speichern"
+    ]
+  },
+  {
+    "objectID": "einheit-3.html#faktoren",
+    "href": "einheit-3.html#faktoren",
+    "title": "Einheit 3: Daten einlesen, aufräumen & speichern",
+    "section": "Faktoren",
+    "text": "Faktoren\nEin Faktor speichert Kategorien samt ihrer festen Liste von Levels. Mit levels legt man die Reihenfolge fest, mit ordered = TRUE werden Vergleiche möglich:\n\ngroesse &lt;- factor(c(\"klein\", \"mittel\", \"mittel\", \"klein\", \"groß\", \"groß\", \"groß\", \"groß\"),\n                  levels = c(\"klein\", \"mittel\", \"groß\"), ordered = TRUE)\ngroesse\n\n[1] klein  mittel mittel klein  groß   groß   groß   groß  \nLevels: klein &lt; mittel &lt; groß\n\ntable(groesse)         # in der Reihenfolge der Levels, nicht alphabetisch\n\ngroesse\n klein mittel   groß \n     2      2      4 \n\ngroesse[1] &lt; groesse[5]\n\n[1] TRUE\n\n\nIn dieser Einheit erzeugt cut() Faktoren (Teil 2), und beim Speichern (Teil 3) sehen wir, welches Dateiformat die Levels behält.",
+    "crumbs": [
+      "Einheiten",
+      "3 · Daten einlesen, aufräumen & speichern"
+    ]
+  },
+  {
+    "objectID": "einheit-3.html#listen",
+    "href": "einheit-3.html#listen",
+    "title": "Einheit 3: Daten einlesen, aufräumen & speichern",
+    "section": "Listen",
+    "text": "Listen\nEine Liste sammelt beliebige Objekte. Mit Namen versehen, holt man ein Element mit $ zurück — so übergeben wir in Teil 3 mehrere Tabellen auf einmal an write_xlsx():\n\nkurs &lt;- list(planeten = planeten, anzahl = nrow(planeten))\nkurs$anzahl\n\n[1] 8\n\n\n\nÜbung\n\nWelche Planeten haben Ringe? Gib nur ihre Namen aus.\nWie groß ist der mittlere Durchmesser der Gesteinsplaneten (typ == \"Gestein\")?\nMache aus planeten$typ einen Faktor mit der Reihenfolge \"Gestein\", \"Gas\", \"Eis\" und zähle mit table().\n\n\n# dein Code",
     "crumbs": [
       "Einheiten",
       "3 · Daten einlesen, aufräumen & speichern"
