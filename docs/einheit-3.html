@@ -249,12 +249,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#zeilennamen-rownames" id="toc-zeilennamen-rownames" class="nav-link" data-scroll-target="#zeilennamen-rownames">Zeilennamen: rownames()</a></li>
   <li><a href="#zeilen-mit-fehlenden-werten-entfernen-na.omit" id="toc-zeilen-mit-fehlenden-werten-entfernen-na.omit" class="nav-link" data-scroll-target="#zeilen-mit-fehlenden-werten-entfernen-na.omit">Zeilen mit fehlenden Werten entfernen: na.omit()</a></li>
   </ul></li>
-  <li><a href="#teil-3-ergebnisse-speichern" id="toc-teil-3-ergebnisse-speichern" class="nav-link" data-scroll-target="#teil-3-ergebnisse-speichern">Teil 3: Ergebnisse speichern</a>
-  <ul class="collapse">
-  <li><a href="#als-csv-write.csv" id="toc-als-csv-write.csv" class="nav-link" data-scroll-target="#als-csv-write.csv">Als CSV: write.csv()</a></li>
-  <li><a href="#als-excel-write_xlsx" id="toc-als-excel-write_xlsx" class="nav-link" data-scroll-target="#als-excel-write_xlsx">Als Excel: write_xlsx()</a></li>
-  <li><a href="#im-r-format-saverds-und-save" id="toc-im-r-format-saverds-und-save" class="nav-link" data-scroll-target="#im-r-format-saverds-und-save">Im R-Format: saveRDS() und save()</a></li>
-  </ul></li>
+  <li><a href="#teil-3-ergebnisse-speichern" id="toc-teil-3-ergebnisse-speichern" class="nav-link" data-scroll-target="#teil-3-ergebnisse-speichern">Teil 3: Ergebnisse speichern</a></li>
   </ul>
 </nav>
     </div>
@@ -280,36 +275,35 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<p>In Einheit 2 hast du Data Frames selbst erstellt. Meistens liegen Daten aber in <strong>Dateien</strong> vor und müssen vor der Auswertung noch aufgeräumt werden. In dieser Einheit lernst du — und wiederholst dabei an echten Daten das Wichtigste aus Einheit 2:</p>
+<p>In Einheit 2 hast du Data Frames selbst erstellt. Meistens liegen Daten aber in <strong>Dateien</strong> vor und müssen erst aufgeräumt werden. In dieser Einheit lernst du — und wiederholst dabei an echten Daten das Wichtigste aus Einheit 2:</p>
 <ol type="1">
 <li><strong>Daten einlesen</strong> — CSV- und Excel-Dateien in R laden</li>
 <li><strong>Daten aufräumen</strong> — Spaltennamen und Texte bereinigen, Kategorien bilden</li>
-<li><strong>Daten speichern</strong> — als CSV, Excel, RDS oder RData</li>
+<li><strong>Daten speichern</strong> — als CSV, Excel oder RDS</li>
 </ol>
-<p>Für Excel-Dateien brauchen wir zwei Pakete. Falls noch nicht geschehen, einmalig <strong>in der Console</strong> installieren: <code>install.packages(c("readxl", "writexl"))</code>. Geladen werden Pakete immer <strong>am Anfang</strong> des Dokuments:</p>
+<p>Für Excel-Dateien brauchen wir zwei Pakete. Falls noch nicht geschehen, einmalig <strong>in der Console</strong> installieren: <code>install.packages(c("readxl", "writexl"))</code>. Geladen werden Pakete <strong>am Anfang</strong> des Dokuments:</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)    <span class="co"># Excel-Dateien lesen</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(writexl)   <span class="co"># Excel-Dateien schreiben</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p>In Skripten aus dem Netz oder von Kolleg:innen siehst du oft eine andere Form: <code>install.packages()</code> steht direkt im Code, und statt <code>library()</code> steht <code>require()</code>. Beides funktioniert, hat aber Nachteile: <code>install.packages()</code> im Skript lädt die Pakete bei <strong>jedem</strong> Durchlauf neu herunter, und <code>require()</code> gibt bei einem fehlenden Paket nur eine Warnung aus — der Fehler kommt dann erst viele Zeilen später. Deshalb: einmal in der Console installieren, im Dokument mit <code>library()</code> laden.</p>
+<p>In fremden Skripten steht oft <code>install.packages()</code> direkt im Code und <code>require()</code> statt <code>library()</code>. Besser: einmal in der Console installieren, im Dokument mit <code>library()</code> laden — sonst wird bei jedem Durchlauf neu heruntergeladen, und ein fehlendes Paket fällt erst viele Zeilen später auf.</p>
 <section id="teil-1-daten-einlesen" class="level1">
 <h1>Teil 1: Daten einlesen</h1>
-<p>Tabellen werden am häufigsten als <strong>CSV</strong>- oder <strong>Excel</strong>-Datei gespeichert. Eine CSV-Datei (<em>comma-separated values</em>) ist eine einfache Textdatei: eine Beobachtung pro Zeile, die Spalten durch ein Trennzeichen getrennt.</p>
-<p>R sucht Dateien relativ zum <strong>Arbeitsverzeichnis</strong>. Wird das Projekt über <code>r-einfuehrung.Rproj</code> geöffnet, ist das der Projektordner (siehe Vorbereitung):</p>
+<p>Tabellen liegen meist als <strong>CSV</strong>- oder <strong>Excel</strong>-Datei vor. Eine CSV-Datei (<em>comma-separated values</em>) ist eine einfache Textdatei: eine Beobachtung pro Zeile, die Spalten durch ein Trennzeichen getrennt.</p>
+<p>R sucht Dateien relativ zum <strong>Arbeitsverzeichnis</strong> — beim Öffnen über <code>r-einfuehrung.Rproj</code> ist das der Projektordner (siehe Vorbereitung):</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">getwd</span>()</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <section id="csv-einlesen-mit-read.csv" class="level2">
 <h2 class="anchored" data-anchor-id="csv-einlesen-mit-read.csv">CSV einlesen mit read.csv()</h2>
-<p><code>read.csv()</code> liest eine CSV-Datei und gibt einen Data Frame zurück.</p>
+<p><code>read.csv()</code> liest eine CSV-Datei und gibt einen Data Frame zurück:</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>gemeinden <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"data/raw/gemeinden.csv"</span>)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p><code>gemeinden.csv</code> enthält 28 österreichische Gemeinden: Gemeindekennziffer, Bundesland, Gemeindetyp, Einwohnerzahl, Fläche, Entfernung zur Landeshauptstadt (Luftlinie in km) und den durchschnittlichen Preis für Baugrundstücke (in € pro m²). Die Werte stammen von Statistik Austria; für den Kurs haben wir 28 Gemeinden ausgewählt und einen Preis entfernt.</p>
+<p><code>gemeinden.csv</code> enthält 28 österreichische Gemeinden: Gemeindekennziffer, Bundesland, Gemeindetyp, Einwohnerzahl, Fläche, Entfernung zur Landeshauptstadt (Luftlinie in km) und den durchschnittlichen Preis für Baugrundstücke (€ pro m²; Quelle: Statistik Austria, bei einer Gemeinde haben wir den Preis entfernt).</p>
 </section>
 <section id="erster-überblick-wiederholung-aus-einheit-2" class="level2">
 <h2 class="anchored" data-anchor-id="erster-überblick-wiederholung-aus-einheit-2">Erster Überblick (Wiederholung aus Einheit 2)</h2>
-<p>Ein eingelesener Datensatz ist ein <strong>Data Frame</strong>: jede Spalte ein Vektor, alle gleich lang, jede mit ihrem eigenen Datentyp.</p>
 <p>Nach dem Einlesen <strong>immer</strong> zuerst prüfen, ob Spaltenzahl und Datentypen stimmen:</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(gemeinden)       <span class="co"># Zeilen, Spalten, Datentypen, Beispielwerte</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
@@ -326,7 +320,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(gemeinden)       <span class="co"># Anzahl Zeilen und Spalten (nrow(), ncol() einzeln)</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(gemeinden)       <span class="co"># Anzahl Zeilen und Spalten</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 28  8</code></pre>
 </div>
@@ -337,7 +331,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 2 70501          Alpbach      Tirol  Land      2510        58.4            44    514.9
 3 10101       Eisenstadt Burgenland Stadt     16396        42.9             0    310.3</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(gemeinden)     <span class="co"># die Spaltennamen (gleichwertig: colnames())</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(gemeinden)     <span class="co"># die Spaltennamen</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "gkz"           "gemeinde"      "bundesland"    "typ"           "einwohner"     "flaeche_km2"  
 [7] "entfernung_km" "preis_m2"     </code></pre>
@@ -345,40 +339,24 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <section id="spalten-mit" class="level3">
 <h3 class="anchored" data-anchor-id="spalten-mit">Spalten mit $</h3>
-<p><code>$</code> holt eine Spalte als <strong>Vektor</strong>:</p>
+<p><code>$</code> holt eine Spalte als <strong>Vektor</strong>; mit <code>&lt;-</code> legt man eine <strong>neue Spalte</strong> an:</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(gemeinden<span class="sc">$</span>einwohner)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 19589.29</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">max</span>(gemeinden<span class="sc">$</span>flaeche_km2)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 171.5</code></pre>
-</div>
-</div>
-<p>Mit <code>$</code> und <code>&lt;-</code> legt man eine <strong>neue Spalte</strong> an (oder überschreibt eine bestehende):</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>gemeinden<span class="sc">$</span>dichte <span class="ot">&lt;-</span> <span class="fu">round</span>(gemeinden<span class="sc">$</span>einwohner <span class="sc">/</span> gemeinden<span class="sc">$</span>flaeche_km2)   <span class="co"># Einwohner pro km²</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>gemeinden<span class="sc">$</span>dichte <span class="ot">&lt;-</span> <span class="fu">round</span>(gemeinden<span class="sc">$</span>einwohner <span class="sc">/</span> gemeinden<span class="sc">$</span>flaeche_km2)   <span class="co"># Einwohner pro km²</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="auswählen-mit-zeile-spalte" class="level3">
 <h3 class="anchored" data-anchor-id="auswählen-mit-zeile-spalte">Auswählen mit [Zeile, Spalte]</h3>
-<p>Vor dem Komma stehen die <strong>Zeilen</strong>, nach dem Komma die <strong>Spalten</strong>. Bleibt eine Seite leer, heißt das „alle”:</p>
+<p>Vor dem Komma stehen die <strong>Zeilen</strong>, nach dem Komma die <strong>Spalten</strong>; eine leere Seite heißt „alle”:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>gemeinden[<span class="dv">1</span>, <span class="st">"gemeinde"</span>]                        <span class="co"># Zeile 1, Spalte gemeinde</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>gemeinden[<span class="dv">1</span>, <span class="st">"gemeinde"</span>]                        <span class="co"># Zeile 1, Spalte gemeinde</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "Aigen im Ennstal"</code></pre>
 </div>
-</div>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>gemeinden[<span class="dv">1</span>, ]                                  <span class="co"># ganze Zeile 1</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>    gkz         gemeinde bundesland  typ einwohner flaeche_km2 entfernung_km preis_m2 dichte
-1 61203 Aigen im Ennstal Steiermark Land      2756        86.4           110     91.4     32</code></pre>
-</div>
-</div>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(gemeinden[, <span class="fu">c</span>(<span class="st">"gemeinde"</span>, <span class="st">"einwohner"</span>)])   <span class="co"># zwei Spalten</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(gemeinden[, <span class="fu">c</span>(<span class="st">"gemeinde"</span>, <span class="st">"einwohner"</span>)])   <span class="co"># zwei Spalten</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>          gemeinde einwohner
 1 Aigen im Ennstal      2756
@@ -389,18 +367,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 6             Graz    306971</code></pre>
 </div>
 </div>
-<p>Zeilen <strong>filtern</strong> heißt: eine Bedingung vor das Komma schreiben. Es bleiben die Zeilen, bei denen <code>TRUE</code> herauskommt — wie bei Vektoren in Einheit 1, nur mit Komma dahinter:</p>
+<p>Zeilen <strong>filtern</strong> heißt: eine Bedingung vor das Komma schreiben. Es bleiben die Zeilen mit <code>TRUE</code>:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>gemeinden[gemeinden<span class="sc">$</span>einwohner <span class="sc">&gt;</span> <span class="dv">50000</span>, <span class="fu">c</span>(<span class="st">"gemeinde"</span>, <span class="st">"einwohner"</span>)]</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>gemeinden[gemeinden<span class="sc">$</span>einwohner <span class="sc">&gt;</span> <span class="dv">50000</span>, <span class="fu">c</span>(<span class="st">"gemeinde"</span>, <span class="st">"einwohner"</span>)]</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   gemeinde einwohner
 6      Graz    306971
 7 Innsbruck    132820</code></pre>
 </div>
 </div>
-<p>Leere Felder in einer Zahlenspalte werden beim Einlesen automatisch zu <code>NA</code> — bei Ischgl fehlt der Preis. <code>is.na()</code> in der Zeilenposition findet die Zeile:</p>
+<p>Leere Felder in einer Zahlenspalte werden beim Einlesen zu <code>NA</code> — bei Ischgl fehlt der Preis:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>gemeinden[<span class="fu">is.na</span>(gemeinden<span class="sc">$</span>preis_m2), ]</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>gemeinden[<span class="fu">is.na</span>(gemeinden<span class="sc">$</span>preis_m2), ]</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>    gkz gemeinde bundesland  typ einwohner flaeche_km2 entfernung_km preis_m2 dichte
 8 70608   Ischgl      Tirol Land      1624       103.3            88       NA     16</code></pre>
@@ -410,13 +388,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="kategorien-unique-und-table" class="level3">
 <h3 class="anchored" data-anchor-id="kategorien-unique-und-table">Kategorien: unique() und table()</h3>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">unique</span>(gemeinden<span class="sc">$</span>typ)          <span class="co"># welche Werte kommen vor?</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">unique</span>(gemeinden<span class="sc">$</span>typ)          <span class="co"># welche Werte kommen vor?</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "Land"   "Stadt"  "Umland"</code></pre>
 </div>
-</div>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(gemeinden<span class="sc">$</span>bundesland)    <span class="co"># wie oft?</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(gemeinden<span class="sc">$</span>bundesland)    <span class="co"># wie oft?</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Burgenland Steiermark      Tirol Vorarlberg 
@@ -427,12 +403,11 @@ Burgenland Steiermark      Tirol Vorarlberg
 </section>
 <section id="andere-trennzeichen-sep-und-dec" class="level2">
 <h2 class="anchored" data-anchor-id="andere-trennzeichen-sep-und-dec">Andere Trennzeichen: sep und dec</h2>
-<p><code>read.csv()</code> erwartet <code>,</code> als Trennzeichen und <code>.</code> als Dezimalzeichen. Viele Dateien sehen anders aus: Ein Excel mit deutschen Spracheinstellungen speichert CSV zum Beispiel mit <code>;</code> als Trennzeichen und <code>,</code> als Dezimalzeichen (<code>86,4</code> statt <code>86.4</code>).</p>
-<p><code>data/raw/gemeinden_de.csv</code> enthält dieselben Gemeinden, so gespeichert. Ohne Argumente bricht <code>read.csv()</code> mit der Meldung <em>„more columns than column names”</em> ab: Es hält die Kommas in den Dezimalzahlen für Trennzeichen.</p>
-<p>Mit <code>sep</code> sagst du, wie die Spalten getrennt sind. Das reicht aber noch nicht:</p>
+<p><code>read.csv()</code> erwartet <code>,</code> als Trennzeichen und <code>.</code> als Dezimalzeichen. Ein Excel mit deutschen Einstellungen speichert CSV aber mit <code>;</code> als Trennzeichen und <code>,</code> als Dezimalzeichen (<code>86,4</code>).</p>
+<p><code>data/raw/gemeinden_de.csv</code> enthält dieselben Gemeinden in diesem Format. Mit <code>sep</code> allein bleiben die Dezimalzahlen Text:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>nur_sep <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"data/raw/gemeinden_de.csv"</span>, <span class="at">sep =</span> <span class="st">";"</span>)</span>
-<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(nur_sep)   <span class="co"># flaeche_km2 und preis_m2 sind Text: "86,4"</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>nur_sep <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"data/raw/gemeinden_de.csv"</span>, <span class="at">sep =</span> <span class="st">";"</span>)</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(nur_sep)   <span class="co"># flaeche_km2 und preis_m2 sind Text: "86,4"</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>'data.frame':   28 obs. of  8 variables:
  $ gkz          : int  61203 70501 10101 70908 70810 60101 70101 70608 61019 70513 ...
@@ -447,8 +422,8 @@ Burgenland Steiermark      Tirol Vorarlberg
 </div>
 <p>Erst mit <code>dec</code> erkennt R auch die Dezimalzahlen:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>richtig <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"data/raw/gemeinden_de.csv"</span>, <span class="at">sep =</span> <span class="st">";"</span>, <span class="at">dec =</span> <span class="st">","</span>)   <span class="co"># ; als Trenner, , als Dezimalzeichen</span></span>
-<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(richtig)   <span class="co"># jetzt sind beide Spalten Zahlen (num)</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>richtig <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"data/raw/gemeinden_de.csv"</span>, <span class="at">sep =</span> <span class="st">";"</span>, <span class="at">dec =</span> <span class="st">","</span>)</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(richtig)   <span class="co"># jetzt sind beide Spalten Zahlen (num)</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>'data.frame':   28 obs. of  8 variables:
  $ gkz          : int  61203 70501 10101 70908 70810 60101 70101 70608 61019 70513 ...
@@ -461,30 +436,25 @@ Burgenland Steiermark      Tirol Vorarlberg
  $ preis_m2     : num  91.4 514.9 310.3 365.9 204.5 ...</code></pre>
 </div>
 </div>
-<p>Für genau dieses Format gibt es die Kurzform <code>read.csv2()</code> — sie setzt <code>sep = ";"</code> und <code>dec = ","</code> automatisch.</p>
-<p>Weitere nützliche Argumente:</p>
+<p>Kurzform für genau dieses Format: <code>read.csv2()</code>. Weitere nützliche Argumente:</p>
 <ul>
 <li><code>skip = 3</code> — die ersten 3 Zeilen überspringen (z. B. Info-Zeilen über der Tabelle)</li>
 <li><code>header = FALSE</code> — wenn die erste Zeile keine Spaltennamen enthält</li>
-<li><code>na.strings = c("", "NA", "-")</code> — welche Einträge als fehlend (<code>NA</code>) gelten sollen</li>
+<li><code>na.strings = c("", "NA", "-")</code> — welche Einträge als fehlend (<code>NA</code>) gelten</li>
 <li><code>fileEncoding = "UTF-8"</code> (oder <code>"latin1"</code>) — bei falsch dargestellten Umlauten</li>
 </ul>
 </section>
 <section id="excel-einlesen-read_excel" class="level2">
 <h2 class="anchored" data-anchor-id="excel-einlesen-read_excel">Excel einlesen: read_excel()</h2>
-<p>Excel-Dateien (<code>.xlsx</code>, <code>.xls</code>) liest das Paket <code>readxl</code>. Eine Excel-Datei kann mehrere <strong>Tabellenblätter</strong> enthalten — <code>excel_sheets()</code> zeigt ihre Namen:</p>
+<p>Excel-Dateien (<code>.xlsx</code>, <code>.xls</code>) liest das Paket <code>readxl</code>. <code>excel_sheets()</code> zeigt die Tabellenblätter, <code>sheet</code> wählt eines aus (Name oder Nummer; ohne Angabe das erste):</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">excel_sheets</span>(<span class="st">"data/raw/gemeinden.xlsx"</span>)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">excel_sheets</span>(<span class="st">"data/raw/gemeinden.xlsx"</span>)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "gemeinden"     "bundeslaender"</code></pre>
 </div>
-</div>
-<p><code>read_excel()</code> liest das erste Tabellenblatt, mit <code>sheet</code> wählst du ein anderes (über den Namen oder die Nummer):</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>gemeinden_xlsx <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"data/raw/gemeinden.xlsx"</span>)</span>
-<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>bundeslaender  <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"data/raw/gemeinden.xlsx"</span>, <span class="at">sheet =</span> <span class="st">"bundeslaender"</span>)</span>
-<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(gemeinden_xlsx)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>gemeinden_xlsx <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"data/raw/gemeinden.xlsx"</span>)</span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>bundeslaender  <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"data/raw/gemeinden.xlsx"</span>, <span class="at">sheet =</span> <span class="st">"bundeslaender"</span>)</span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(gemeinden_xlsx)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>tibble [28 × 8] (S3: tbl_df/tbl/data.frame)
  $ gkz          : num [1:28] 61203 70501 10101 70908 70810 ...
@@ -497,43 +467,34 @@ Burgenland Steiermark      Tirol Vorarlberg
  $ preis_m2     : num [1:28] 91.4 514.9 310.3 365.9 204.5 ...</code></pre>
 </div>
 </div>
-<p>Trennzeichen und Dezimalzeichen spielen hier keine Rolle: Excel speichert Zahlen als Zahlen. Die übrigen Argumente kennst du schon — nur heißt <code>na.strings</code> hier <code>na</code>:</p>
-<ul>
-<li><code>sheet = "bundeslaender"</code> oder <code>sheet = 2</code> — welches Tabellenblatt</li>
-<li><code>skip = 3</code> — die ersten 3 Zeilen überspringen</li>
-<li><code>na = c("", "-")</code> — welche Einträge als fehlend (<code>NA</code>) gelten sollen</li>
-<li><code>range = "A5:D20"</code> — nur einen bestimmten Zellbereich einlesen</li>
-</ul>
-<p><code>read_excel()</code> gibt ein <strong>Tibble</strong> zurück — eine Variante des Data Frames, die du in Einheit 4 kennenlernst. Mit <code>as.data.frame()</code> wird daraus ein gewöhnlicher Data Frame:</p>
+<p>Trenn- und Dezimalzeichen spielen hier keine Rolle — Excel speichert Zahlen als Zahlen. <code>skip</code> gibt es auch hier, <code>na.strings</code> heißt <code>na</code>, und <code>range = "A5:D20"</code> liest nur einen Zellbereich.</p>
+<p><code>read_excel()</code> gibt ein <strong>Tibble</strong> zurück — eine Variante des Data Frames (mehr in Einheit 4). <code>as.data.frame()</code> macht daraus einen gewöhnlichen Data Frame:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>gemeinden_xlsx <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(gemeinden_xlsx)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>gemeinden_xlsx <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(gemeinden_xlsx)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p>Für sehr große CSV-Dateien gibt es außerdem <code>read_csv()</code> aus dem Paket <code>readr</code> — schneller und strenger als <code>read.csv()</code>.</p>
 <section id="übung" class="level3">
 <h3 class="anchored" data-anchor-id="übung">Übung</h3>
-<p>Die Datei <code>data/raw/luftguete.csv</code> enthält die Jahresmittelwerte 2025 der 16 Wiener Luftgüte-Messstellen für Stickstoffdioxid (NO2) und Feinstaub (PM10) — für den Kurs zusammengestellt aus dem Luftgütebericht 2025 der Stadt Wien. Nicht jede Station misst beide Schadstoffe. Öffne die Datei zuerst als Text (im <em>Files</em>-Bereich anklicken → <em>View File</em>).</p>
+<p><code>data/raw/luftguete.csv</code> enthält die Jahresmittelwerte 2025 der Wiener Luftgüte-Messstellen für Stickstoffdioxid (NO2) und Feinstaub (PM10; Quelle: Luftgütebericht 2025 der Stadt Wien). Öffne die Datei zuerst als Text (im <em>Files</em>-Bereich anklicken → <em>View File</em>).</p>
 <ol type="1">
-<li>Welches Trennzeichen verwendet die Datei, und wie viele Info-Zeilen stehen über der Kopfzeile? Lies sie mit <code>sep</code> und <code>skip</code> ein.</li>
-<li>Prüfe das Ergebnis mit <code>str()</code>. Warum sind <code>NO2</code> und <code>PM10</code> Text (<code>chr</code>) statt Zahlen?</li>
-<li>Ergänze <code>na.strings</code>, sodass beide Spalten als Zahlen ankommen.</li>
-<li>Wie viele Werte fehlen in <code>PM10</code>, und wie hoch ist der mittlere <code>NO2</code>-Wert?</li>
-<li>An welcher Station ist der <code>NO2</code>-Wert am höchsten? Liegt er über dem Grenzwert für den Jahresmittelwert von 35 µg/m³?</li>
+<li>Lies die Datei mit passendem <code>sep</code> und <code>skip</code> ein.</li>
+<li>Prüfe mit <code>str()</code>: Warum sind <code>NO2</code> und <code>PM10</code> Text (<code>chr</code>)? Korrigiere das mit <code>na.strings</code>.</li>
+<li>An welcher Station ist der <code>NO2</code>-Wert am höchsten? Liegt er über dem Grenzwert von 35 µg/m³?</li>
 </ol>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="co"># dein Code</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="co"># dein Code</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 </section>
 </section>
 <section id="teil-2-daten-aufräumen" class="level1">
 <h1>Teil 2: Daten aufräumen</h1>
-<p>Echte Dateien sind selten sofort verwendbar: oben stehen Info-Zeilen, Zahlen kommen als Text an, Spaltennamen enthalten Leerzeichen. Die Datei <code>data/raw/bezirke_roh.csv</code> ist so ein Fall — Semikolon-getrennt, mit vier Info-Zeilen vor der eigentlichen Kopfzeile. Sie enthält Einwohnerzahl (1. Jänner 2021), mittleres Netto-Jahreseinkommen pro Arbeitnehmer:in (2021) und Fläche von acht Wiener Bezirken. Die Werte stammen aus den offenen Daten der Stadt Wien; für den Kurs haben wir typische Fehler eingebaut (Leerzeichen, ein fehlender Wert).</p>
+<p><code>data/raw/bezirke_roh.csv</code> enthält Einwohnerzahl (2021), mittleres Netto-Jahreseinkommen und Fläche von acht Wiener Bezirken (Quelle: Stadt Wien). Für den Kurs haben wir typische Fehler eingebaut: Info-Zeilen, Leerzeichen, ein fehlender Wert.</p>
 <section id="einlesen-mit-den-passenden-argumenten" class="level2">
 <h2 class="anchored" data-anchor-id="einlesen-mit-den-passenden-argumenten">Einlesen mit den passenden Argumenten</h2>
-<p>Ein Blick in die Datei (im <em>Files</em>-Bereich anklicken → <em>View File</em>) zeigt, was zu tun ist. Das meiste erledigt <code>read.csv()</code> gleich beim Einlesen: <code>sep = ";"</code> für das Semikolon, <code>skip = 4</code> überspringt die vier Info-Zeilen, <code>dec = ","</code> erkennt das Dezimalkomma, und <code>na.strings = "-"</code> macht aus dem Strich bei Neubau ein <code>NA</code>:</p>
+<p>Ein Blick in die Datei zeigt: Semikolon, vier Info-Zeilen, Dezimalkomma und ein Strich für den fehlenden Wert bei Neubau. Das alles erledigt <code>read.csv()</code> gleich beim Einlesen:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>bezirke <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"data/raw/bezirke_roh.csv"</span>, <span class="at">sep =</span> <span class="st">";"</span>, <span class="at">dec =</span> <span class="st">","</span>, <span class="at">skip =</span> <span class="dv">4</span>, <span class="at">na.strings =</span> <span class="st">"-"</span>)</span>
-<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(bezirke)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>bezirke <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"data/raw/bezirke_roh.csv"</span>, <span class="at">sep =</span> <span class="st">";"</span>, <span class="at">dec =</span> <span class="st">","</span>, <span class="at">skip =</span> <span class="dv">4</span>, <span class="at">na.strings =</span> <span class="st">"-"</span>)</span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(bezirke)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>'data.frame':   8 obs. of  5 variables:
  $ Bezirk.Nummer      : int  1 2 3 4 5 6 7 8
@@ -546,98 +507,56 @@ Burgenland Steiermark      Tirol Vorarlberg
 </section>
 <section id="spaltennamen-ändern-names" class="level2">
 <h2 class="anchored" data-anchor-id="spaltennamen-ändern-names">Spaltennamen ändern: names()</h2>
-<p>Die Namen in der Datei enthalten Leerzeichen (<code>Bezirk Nummer</code>); R hat sie beim Einlesen durch Punkte ersetzt. Mit <code>names()</code> und <code>&lt;-</code> vergibst du neue Namen — in derselben Reihenfolge wie die Spalten:</p>
+<p>Leerzeichen in Spaltennamen hat R durch Punkte ersetzt (<code>Bezirk.Nummer</code>). Mit <code>names()</code> und <code>&lt;-</code> vergibst du neue Namen, in der Reihenfolge der Spalten:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(bezirke)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] "Bezirk.Nummer"       "Bezirk.Name"         "Einwohner"           "Mittleres.Einkommen"
-[5] "Flaeche.km2"        </code></pre>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(bezirke) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"bezirk_nummer"</span>, <span class="st">"bezirk_name"</span>, <span class="st">"einwohner"</span>, <span class="st">"mittleres_einkommen"</span>, <span class="st">"flaeche_km2"</span>)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(bezirke) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"bezirk_nummer"</span>, <span class="st">"bezirk_name"</span>, <span class="st">"einwohner"</span>, <span class="st">"mittleres_einkommen"</span>, <span class="st">"flaeche_km2"</span>)</span>
-<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(bezirke)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] "bezirk_nummer"       "bezirk_name"         "einwohner"           "mittleres_einkommen"
-[5] "flaeche_km2"        </code></pre>
-</div>
-</div>
-<p>Nur eine Spalte umbenennen geht über ihre Position, z. B. <code>names(bezirke)[2] &lt;- "name"</code>. In fremden Skripten steht dafür oft <code>colnames()</code> — das ist dasselbe.</p>
+<p>Eine einzelne Spalte: <code>names(bezirke)[2] &lt;- "name"</code>.</p>
 </section>
 <section id="text-aufräumen-und-zusammensetzen-trimws-paste-substr" class="level2">
 <h2 class="anchored" data-anchor-id="text-aufräumen-und-zusammensetzen-trimws-paste-substr">Text aufräumen und zusammensetzen: trimws(), paste(), substr()</h2>
-<p>Ein häufiges Problem bei von Hand eingegebenen Daten sind überflüssige Leerzeichen. In der Tabelle sieht man sie nicht — aber ein Vergleich findet nichts:</p>
+<p>Überflüssige Leerzeichen sieht man in der Tabelle nicht — aber ein Vergleich findet nichts:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>bezirke[bezirke<span class="sc">$</span>bezirk_name <span class="sc">==</span> <span class="st">"Wieden"</span>, ]   <span class="co"># kein Treffer</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>bezirke[bezirke<span class="sc">$</span>bezirk_name <span class="sc">==</span> <span class="st">"Wieden"</span>, ]   <span class="co"># kein Treffer</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] bezirk_nummer       bezirk_name         einwohner           mittleres_einkommen flaeche_km2        
 &lt;0 rows&gt; (or 0-length row.names)</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a>bezirke<span class="sc">$</span>bezirk_name[<span class="dv">4</span>]                       <span class="co"># in der Datei steht "Wieden  "</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>bezirke<span class="sc">$</span>bezirk_name[<span class="dv">4</span>]                       <span class="co"># in der Datei steht "Wieden  "</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "Wieden  "</code></pre>
 </div>
 </div>
 <p><code>trimws()</code> entfernt Leerzeichen am Anfang und Ende:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a>bezirke<span class="sc">$</span>bezirk_name <span class="ot">&lt;-</span> <span class="fu">trimws</span>(bezirke<span class="sc">$</span>bezirk_name)</span>
-<span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a>bezirke[bezirke<span class="sc">$</span>bezirk_name <span class="sc">==</span> <span class="st">"Wieden"</span>, ]</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>bezirke<span class="sc">$</span>bezirk_name <span class="ot">&lt;-</span> <span class="fu">trimws</span>(bezirke<span class="sc">$</span>bezirk_name)</span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>bezirke[bezirke<span class="sc">$</span>bezirk_name <span class="sc">==</span> <span class="st">"Wieden"</span>, ]</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  bezirk_nummer bezirk_name einwohner mittleres_einkommen flaeche_km2
 4             4      Wieden     33075               29010        1.78</code></pre>
 </div>
 </div>
-<p><code>paste()</code> verbindet Textstücke mit einem Leerzeichen, <code>paste0()</code> ohne Trennzeichen:</p>
+<p><code>paste()</code> verbindet Text mit Leerzeichen, <code>paste0()</code> ohne. <code>substr(text, start, stop)</code> schneidet Zeichen nach Position heraus — z. B. um Codes zu zerlegen:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="fu">paste</span>(<span class="st">"AT"</span>, <span class="st">"13"</span>, <span class="st">"01"</span>)     <span class="co"># "AT 13 01"</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>bezirke<span class="sc">$</span>label <span class="ot">&lt;-</span> <span class="fu">paste0</span>(bezirke<span class="sc">$</span>bezirk_nummer, <span class="st">". "</span>, bezirke<span class="sc">$</span>bezirk_name)</span>
+<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(bezirke<span class="sc">$</span>label, <span class="dv">3</span>)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "AT 13 01"</code></pre>
+<pre><code>[1] "1. Innere Stadt" "2. Leopoldstadt" "3. Landstraße"  </code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="fu">paste0</span>(<span class="st">"AT"</span>, <span class="st">"13"</span>, <span class="st">"01"</span>)    <span class="co"># "AT1301"</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="fu">substr</span>(<span class="fu">c</span>(<span class="st">"AT130"</span>, <span class="st">"AT127"</span>), <span class="dv">1</span>, <span class="dv">2</span>)   <span class="co"># "AT" — das Land</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "AT1301"</code></pre>
-</div>
-</div>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb57"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a>bezirke<span class="sc">$</span>label <span class="ot">&lt;-</span> <span class="fu">paste0</span>(bezirke<span class="sc">$</span>bezirk_nummer, <span class="st">". "</span>, bezirke<span class="sc">$</span>bezirk_name)</span>
-<span id="cb57-2"><a href="#cb57-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(bezirke<span class="sc">$</span>label)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] "1. Innere Stadt" "2. Leopoldstadt" "3. Landstraße"   "4. Wieden"       "5. Margareten"  
-[6] "6. Mariahilf"   </code></pre>
-</div>
-</div>
-<p><code>substr(text, start, stop)</code> schneidet Zeichen nach Position heraus — nützlich, um kombinierte Codes zu trennen:</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb59"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a>codes <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"AT130"</span>, <span class="st">"AT127"</span>, <span class="st">"AT111"</span>)</span>
-<span id="cb59-2"><a href="#cb59-2" aria-hidden="true" tabindex="-1"></a><span class="fu">substr</span>(codes, <span class="dv">1</span>, <span class="dv">2</span>)   <span class="co"># Land</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] "AT" "AT" "AT"</code></pre>
-</div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb61"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a><span class="fu">substr</span>(codes, <span class="dv">3</span>, <span class="dv">5</span>)   <span class="co"># Regionscode</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] "130" "127" "111"</code></pre>
+<pre><code>[1] "AT" "AT"</code></pre>
 </div>
 </div>
 </section>
 <section id="zahlen-in-kategorien-einteilen-cut" class="level2">
 <h2 class="anchored" data-anchor-id="zahlen-in-kategorien-einteilen-cut">Zahlen in Kategorien einteilen: cut()</h2>
-<p><code>cut()</code> teilt eine Zahlenspalte anhand von Grenzen (<code>breaks</code>) in Kategorien ein und liefert einen <strong>Faktor</strong> zurück (siehe Einheit 2, <em>Faktoren</em>):</p>
+<p><code>cut()</code> teilt eine Zahlenspalte anhand von Grenzen (<code>breaks</code>) in Kategorien und liefert einen <strong>Faktor</strong> (Einheit 2):</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb63"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a>bezirke<span class="sc">$</span>groesse <span class="ot">&lt;-</span> <span class="fu">cut</span>(bezirke<span class="sc">$</span>einwohner,</span>
-<span id="cb63-2"><a href="#cb63-2" aria-hidden="true" tabindex="-1"></a>                       <span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">30000</span>, <span class="dv">60000</span>, <span class="cn">Inf</span>),</span>
-<span id="cb63-3"><a href="#cb63-3" aria-hidden="true" tabindex="-1"></a>                       <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"klein"</span>, <span class="st">"mittel"</span>, <span class="st">"groß"</span>))</span>
-<span id="cb63-4"><a href="#cb63-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb63-5"><a href="#cb63-5" aria-hidden="true" tabindex="-1"></a>bezirke[, <span class="fu">c</span>(<span class="st">"bezirk_name"</span>, <span class="st">"einwohner"</span>, <span class="st">"groesse"</span>)]</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>   bezirk_name einwohner groesse
-1 Innere Stadt     15867   klein
-2 Leopoldstadt    105237    groß
-3   Landstraße     93248    groß
-4       Wieden     33075  mittel
-5   Margareten     54373  mittel
-6    Mariahilf     31336  mittel
-7       Neubau     31683  mittel
-8   Josefstadt     24365   klein</code></pre>
-</div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb65"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(bezirke<span class="sc">$</span>groesse)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a>bezirke<span class="sc">$</span>groesse <span class="ot">&lt;-</span> <span class="fu">cut</span>(bezirke<span class="sc">$</span>einwohner,</span>
+<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a>                       <span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">30000</span>, <span class="dv">60000</span>, <span class="cn">Inf</span>),</span>
+<span id="cb50-3"><a href="#cb50-3" aria-hidden="true" tabindex="-1"></a>                       <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"klein"</span>, <span class="st">"mittel"</span>, <span class="st">"groß"</span>))</span>
+<span id="cb50-4"><a href="#cb50-4" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(bezirke<span class="sc">$</span>groesse)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
  klein mittel   groß 
@@ -647,30 +566,25 @@ Burgenland Steiermark      Tirol Vorarlberg
 </section>
 <section id="zeilennamen-rownames" class="level2">
 <h2 class="anchored" data-anchor-id="zeilennamen-rownames">Zeilennamen: rownames()</h2>
-<p>Ein Data Frame hat neben Spaltennamen auch <strong>Zeilennamen</strong>. Meist sind das nur die Nummern 1, 2, 3 … Manche Funktionen verwenden sie aber als Beschriftung — bei Distanzen und Clusteranalysen etwa erscheinen die Zeilennamen in den Ergebnissen und Grafiken. Mit <code>rownames()</code> setzt man sie aus einer Spalte:</p>
+<p>Manche Funktionen (etwa Distanzen und Clusteranalysen) beschriften ihre Ergebnisse mit den <strong>Zeilennamen</strong>. <code>rownames()</code> setzt sie aus einer Spalte:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb67"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(bezirke) <span class="ot">&lt;-</span> bezirke<span class="sc">$</span>bezirk_name</span>
-<span id="cb67-2"><a href="#cb67-2" aria-hidden="true" tabindex="-1"></a>bezirke[<span class="st">"Wieden"</span>, <span class="fu">c</span>(<span class="st">"einwohner"</span>, <span class="st">"flaeche_km2"</span>)]   <span class="co"># Zeile über ihren Namen auswählen</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(bezirke) <span class="ot">&lt;-</span> bezirke<span class="sc">$</span>bezirk_name</span>
+<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a>bezirke[<span class="st">"Wieden"</span>, <span class="fu">c</span>(<span class="st">"einwohner"</span>, <span class="st">"flaeche_km2"</span>)]</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>       einwohner flaeche_km2
 Wieden     33075        1.78</code></pre>
 </div>
 </div>
-<p>Zeilennamen sind keine richtige Spalte: Bei <code>summarise()</code> oder Joins (Einheit 4) gehen sie verloren. Braucht man sie später als Spalte, holt man sie zurück: <code>daten$name &lt;- rownames(daten)</code>.</p>
 </section>
 <section id="zeilen-mit-fehlenden-werten-entfernen-na.omit" class="level2">
 <h2 class="anchored" data-anchor-id="zeilen-mit-fehlenden-werten-entfernen-na.omit">Zeilen mit fehlenden Werten entfernen: na.omit()</h2>
-<p><code>na.rm = TRUE</code> lässt fehlende Werte <strong>innerhalb einer Rechnung</strong> weg (Einheit 1). <code>na.omit()</code> geht weiter: Es entfernt aus einem Data Frame jede <strong>Zeile</strong>, in der irgendwo ein <code>NA</code> steht:</p>
+<p><code>na.rm = TRUE</code> lässt <code>NA</code> <strong>in einer Rechnung</strong> weg. <code>na.omit()</code> entfernt jede <strong>Zeile</strong>, in der irgendwo ein <code>NA</code> steht — deshalb vorher nur die benötigten Spalten auswählen:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb69"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb69-1"><a href="#cb69-1" aria-hidden="true" tabindex="-1"></a>bezirke_komplett <span class="ot">&lt;-</span> <span class="fu">na.omit</span>(bezirke)</span>
-<span id="cb69-2"><a href="#cb69-2" aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>(bezirke_komplett)   <span class="co"># 7 — Neubau ist weg, dort fehlt die Fläche</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>(<span class="fu">na.omit</span>(bezirke))                                              <span class="co"># 7 — Neubau fehlt die Fläche</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 7</code></pre>
 </div>
-</div>
-<p>Vorsicht: <code>na.omit()</code> prüft <strong>alle</strong> Spalten. Fehlt ein Wert in einer Spalte, die du gar nicht brauchst, verlierst du trotzdem die ganze Zeile. Deshalb erst die benötigten Spalten auswählen, dann <code>na.omit()</code>:</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb71"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb71-1"><a href="#cb71-1" aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>(<span class="fu">na.omit</span>(bezirke[, <span class="fu">c</span>(<span class="st">"einwohner"</span>, <span class="st">"mittleres_einkommen"</span>)]))   <span class="co"># alle 8 bleiben</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>(<span class="fu">na.omit</span>(bezirke[, <span class="fu">c</span>(<span class="st">"einwohner"</span>, <span class="st">"mittleres_einkommen"</span>)]))     <span class="co"># alle 8 bleiben</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 8</code></pre>
 </div>
@@ -678,65 +592,34 @@ Wieden     33075        1.78</code></pre>
 <section id="übung-1" class="level3">
 <h3 class="anchored" data-anchor-id="übung-1">Übung</h3>
 <ol type="1">
-<li>Berechne das mittlere Einkommen über alle Bezirke und zeige die Bezirke, die darüber liegen.</li>
-<li>Berechne die Einwohner pro km² als neue Spalte <code>einwohner_pro_km2</code> (gerundet). Welcher Bezirk ist am dichtesten besiedelt (Tipp: <code>which.max()</code>)? Warum fehlt der Wert bei Neubau?</li>
-<li>Zeichne mit <code>barplot()</code> die Einwohner pro Bezirk; beschrifte die Balken mit <code>names.arg = bezirke$bezirk_name</code> (Tipp: <code>las = 2</code> dreht die Beschriftung).</li>
+<li>Zeige die Bezirke, deren mittleres Einkommen über dem Durchschnitt aller Bezirke liegt.</li>
+<li>Berechne die Einwohner pro km² als neue Spalte (gerundet). Welcher Bezirk ist am dichtesten besiedelt (Tipp: <code>which.max()</code>)? Warum fehlt der Wert bei Neubau?</li>
 </ol>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb73"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb73-1"><a href="#cb73-1" aria-hidden="true" tabindex="-1"></a><span class="co"># dein Code</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb58"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a><span class="co"># dein Code</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 </section>
 </section>
 <section id="teil-3-ergebnisse-speichern" class="level1">
 <h1>Teil 3: Ergebnisse speichern</h1>
-<p>Bereinigte Daten speichert man nach <code>data/processed/</code> — <code>data/raw/</code> bleibt unverändert.</p>
-<section id="als-csv-write.csv" class="level2">
-<h2 class="anchored" data-anchor-id="als-csv-write.csv">Als CSV: write.csv()</h2>
-<p>Gut zum Weitergeben. <code>write.csv()</code> schreibt mit <code>,</code> als Trennzeichen und <code>.</code> als Dezimalzeichen; <code>row.names = FALSE</code> verhindert eine zusätzliche Spalte mit Zeilennummern:</p>
+<p>Bereinigte Daten gehören nach <code>data/processed/</code> — <code>data/raw/</code> bleibt unverändert.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb74"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb74-1"><a href="#cb74-1" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(bezirke, <span class="st">"data/processed/bezirke_clean.csv"</span>, <span class="at">row.names =</span> <span class="cn">FALSE</span>)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb59"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="co"># CSV — zum Weitergeben; row.names = FALSE: keine Extraspalte mit Zeilennummern</span></span>
+<span id="cb59-2"><a href="#cb59-2" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(bezirke, <span class="st">"data/processed/bezirke_clean.csv"</span>, <span class="at">row.names =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb59-3"><a href="#cb59-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb59-4"><a href="#cb59-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Excel — für alle ohne R; eine benannte Liste ergibt mehrere Tabellenblätter</span></span>
+<span id="cb59-5"><a href="#cb59-5" aria-hidden="true" tabindex="-1"></a><span class="fu">write_xlsx</span>(bezirke, <span class="st">"data/processed/bezirke_clean.xlsx"</span>)</span>
+<span id="cb59-6"><a href="#cb59-6" aria-hidden="true" tabindex="-1"></a><span class="fu">write_xlsx</span>(<span class="fu">list</span>(<span class="at">bezirke =</span> bezirke, <span class="at">gemeinden =</span> gemeinden), <span class="st">"data/processed/kursdaten.xlsx"</span>)</span>
+<span id="cb59-7"><a href="#cb59-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb59-8"><a href="#cb59-8" aria-hidden="true" tabindex="-1"></a><span class="co"># RDS — R-Format: behält Datentypen und Faktor-Stufen exakt</span></span>
+<span id="cb59-9"><a href="#cb59-9" aria-hidden="true" tabindex="-1"></a><span class="fu">saveRDS</span>(bezirke, <span class="st">"data/processed/bezirke.rds"</span>)</span>
+<span id="cb59-10"><a href="#cb59-10" aria-hidden="true" tabindex="-1"></a>bezirke <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">"data/processed/bezirke.rds"</span>)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p>Nachteil von CSV: Faktor-Stufen gehen verloren, und beim erneuten Einlesen muss R die Datentypen neu erkennen.</p>
-</section>
-<section id="als-excel-write_xlsx" class="level2">
-<h2 class="anchored" data-anchor-id="als-excel-write_xlsx">Als Excel: write_xlsx()</h2>
-<p><code>readxl</code> kann nur lesen; zum Schreiben gibt es das Paket <code>writexl</code>. <code>write_xlsx()</code> speichert einen Data Frame als <code>.xlsx</code>-Datei — praktisch, wenn jemand ohne R mit den Daten weiterarbeiten soll:</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb75"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb75-1"><a href="#cb75-1" aria-hidden="true" tabindex="-1"></a><span class="fu">write_xlsx</span>(bezirke, <span class="st">"data/processed/bezirke_clean.xlsx"</span>)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<p>Für mehrere Tabellenblätter übergibst du eine <strong>benannte Liste</strong> (siehe Einheit 2, <em>Listen</em>) — die Namen werden zu den Namen der Tabellenblätter:</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb76"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb76-1"><a href="#cb76-1" aria-hidden="true" tabindex="-1"></a><span class="fu">write_xlsx</span>(<span class="fu">list</span>(<span class="at">bezirke =</span> bezirke, <span class="at">gemeinden =</span> gemeinden),</span>
-<span id="cb76-2"><a href="#cb76-2" aria-hidden="true" tabindex="-1"></a>           <span class="st">"data/processed/kursdaten.xlsx"</span>)</span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-</section>
-<section id="im-r-format-saverds-und-save" class="level2">
-<h2 class="anchored" data-anchor-id="im-r-format-saverds-und-save">Im R-Format: saveRDS() und save()</h2>
-<p>R hat eigene Dateiformate, die ein Objekt <strong>genau so</strong> speichern, wie es in R vorliegt — mit Datentypen, Faktor-Stufen und Spaltennamen. Beim Laden ist nichts neu zu erkennen oder aufzuräumen. Der Preis: Nur R kann diese Dateien lesen, Excel oder ein Texteditor nicht.</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb77"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb77-1"><a href="#cb77-1" aria-hidden="true" tabindex="-1"></a><span class="co"># RDS — ein Objekt, behält Datentypen und Faktor-Stufen exakt</span></span>
-<span id="cb77-2"><a href="#cb77-2" aria-hidden="true" tabindex="-1"></a><span class="fu">saveRDS</span>(bezirke, <span class="st">"data/processed/bezirke.rds"</span>)</span>
-<span id="cb77-3"><a href="#cb77-3" aria-hidden="true" tabindex="-1"></a>bezirke <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">"data/processed/bezirke.rds"</span>)</span>
-<span id="cb77-4"><a href="#cb77-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb77-5"><a href="#cb77-5" aria-hidden="true" tabindex="-1"></a><span class="co"># RData — mehrere Objekte in einer Datei</span></span>
-<span id="cb77-6"><a href="#cb77-6" aria-hidden="true" tabindex="-1"></a><span class="fu">save</span>(bezirke, gemeinden, <span class="at">file =</span> <span class="st">"data/processed/bezirke.RData"</span>)</span>
-<span id="cb77-7"><a href="#cb77-7" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="st">"data/processed/bezirke.RData"</span>)   <span class="co"># holt sie unter denselben Namen zurück</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
+<p>CSV und Excel verlieren Faktor-Stufen: Beim erneuten Einlesen ist <code>groesse</code> nur noch Text. RDS-Dateien kann dafür nur R lesen. Mehrere Objekte auf einmal speichert <code>save(a, b, file = "x.RData")</code>, <code>load("x.RData")</code> holt sie zurück.</p>
 <p>Faustregel: <strong>CSV</strong> oder <strong>Excel</strong> zum Weitergeben, <strong>RDS</strong> als Zwischenstand für die eigene Weiterarbeit in R.</p>
-<section id="übung-2" class="level3">
-<h3 class="anchored" data-anchor-id="übung-2">Übung</h3>
-<ol type="1">
-<li>Speichere <code>bezirke</code> in <code>data/processed/</code> einmal als CSV und einmal als RDS.</li>
-<li>Lies beide Dateien wieder ein und vergleiche sie mit <code>str()</code>. Was ist in der CSV-Datei mit der Spalte <code>groesse</code> passiert?</li>
-</ol>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb78"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb78-1"><a href="#cb78-1" aria-hidden="true" tabindex="-1"></a><span class="co"># dein Code</span></span></code></pre></div><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
 
 
-</section>
-</section>
 </section>
 
 </main> <!-- /main -->
