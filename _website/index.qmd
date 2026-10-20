@@ -13,6 +13,7 @@ toc: false
 | [3 · Daten einlesen, aufräumen & speichern](einheit-3.Rmd) | CSV und Excel einlesen, Daten bereinigen, als CSV, Excel oder RDS speichern |
 | [4 · Daten auswerten & visualisieren](einheit-4.Rmd) | Auswerten und Verbinden mit `dplyr`, lange und breite Tabellen mit `tidyr`, Grafiken mit `ggplot2` |
 | [5 · Bedingungen, Schleifen & Funktionen](einheit-5.Rmd) | `if`/`else`, `for`, `while`, eigene Funktionen, `sapply()` |
+| [6 · Ergebnisse auf der Karte (optional)](einheit-6.Rmd) | Vektordaten, Geodaten mit `sf` einlesen und verbinden, Karten mit `ggplot2` |
 | [Übungsaufgabe 1](uebungsaufgabe-1.Rmd) | Regionale Bevölkerungsentwicklung in Österreich 2000–2024: Geburtenbilanz und Wanderung |
 | [Cheatsheet](cheatsheet.md) | Die wichtigsten Funktionen aller Einheiten |
 

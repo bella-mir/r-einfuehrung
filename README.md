@@ -16,15 +16,14 @@ entpacken und `r-einfuehrung.Rproj` in RStudio öffnen.
 | `02_datenstrukturen.Rmd` | Einheit 2: Datenstrukturen |
 | `03_daten_einlesen_aufraeumen.Rmd` | Einheit 3: Daten einlesen, aufräumen & speichern |
 | `04_daten_auswerten_visualisieren.Rmd` | Einheit 4: Daten auswerten & visualisieren |
-| `05_funktionen_schleifen.Rmd` | Einheit 5: Bedingungen, Schleifen & Funktionen |
-| `06_uebungsaufgabe_1.Rmd` | Übungsaufgabe 1 |
+| `05_funktionen_schleifen.Rmd` | Einheit 5 (optional): Bedingungen, Schleifen & Funktionen |
+| `06_karten.Rmd` | Einheit 6 (optional): Ergebnisse auf der Karte |
+| `07_uebungsaufgabe_1.Rmd` | Übungsaufgabe 1 |
 | `cheatsheet.md` | Cheatsheet: die wichtigsten Funktionen aller Einheiten |
 | `images/` | Abbildungen für die Notebooks |
 | `data/raw/` | Kursdaten (Quellen siehe Startseite der Website) |
 | `data/uebung/` | Daten für Übungsaufgabe 1 (ARDECO, NUTS-3-Regionen, 2000–2024) |
 
-Die Website wird mit `source("_website/build_site.R")` nach `docs/` gebaut.
-Beim Bearbeiten zeigt `Rscript _website/preview_site.R` eine Live-Vorschau im Browser.
 
 
 ## Impressum

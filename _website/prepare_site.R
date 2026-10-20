@@ -25,7 +25,8 @@ seiten <- c(
   "03_daten_einlesen_aufraeumen.Rmd"     = "einheit-3.Rmd",
   "04_daten_auswerten_visualisieren.Rmd" = "einheit-4.Rmd",
   "05_funktionen_schleifen.Rmd"          = "einheit-5.Rmd",
-  "06_uebungsaufgabe_1.Rmd"              = "uebungsaufgabe-1.Rmd"
+  "06_karten.Rmd"                        = "einheit-6.Rmd",
+  "07_uebungsaufgabe_1.Rmd"              = "uebungsaufgabe-1.Rmd"
 )
 
 # Writes a file only if its content changed, so the preview re-renders only edited pages

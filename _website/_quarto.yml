@@ -9,6 +9,7 @@ project:
     - einheit-3.Rmd
     - einheit-4.Rmd
     - einheit-5.Rmd
+    - einheit-6.Rmd
     - uebungsaufgabe-1.Rmd
     - cheatsheet.md
 
@@ -42,6 +43,8 @@ website:
             text: "4 · Daten auswerten & visualisieren"
           - href: einheit-5.Rmd
             text: "5 · Bedingungen, Schleifen & Funktionen"
+          - href: einheit-6.Rmd
+            text: "6 · Ergebnisse auf der Karte (optional)"
       - href: uebungsaufgabe-1.Rmd
         text: Übungsaufgabe 1
       - href: cheatsheet.md
