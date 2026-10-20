@@ -9,8 +9,8 @@ options(width = 110)   # breite Tabellen nicht umbrechen
 ```
 
 In Einheit 2 hast du Data Frames selbst erstellt. Meistens liegen Daten aber in **Dateien**
-vor und müssen vor der Auswertung noch aufgeräumt werden. Nach einer kurzen Wiederholung zu
-Data Frames und Faktoren lernst du in dieser Einheit:
+vor und müssen vor der Auswertung noch aufgeräumt werden. In dieser Einheit lernst du — und
+wiederholst dabei an echten Daten das Wichtigste aus Einheit 2:
 
 1. **Daten einlesen** — CSV- und Excel-Dateien in R laden
 2. **Daten aufräumen** — Spaltennamen und Texte bereinigen, Kategorien bilden
@@ -25,114 +25,12 @@ library(readxl)    # Excel-Dateien lesen
 library(writexl)   # Excel-Dateien schreiben
 ```
 
-
-# Kurz wiederholt: Data Frames und Faktoren
-
-Alles in dieser Einheit dreht sich um **Data Frames**. Hier das Wichtigste aus Einheit 2 auf
-einen Blick — am Beispiel der Planeten.
-
-## Einen Data Frame erstellen und ansehen
-
-Ein Data Frame ist eine Tabelle: jede **Spalte** ein Vektor, alle gleich lang, jede mit ihrem
-eigenen Datentyp. `data.frame()` fügt Vektoren zusammen:
-
-```{r}
-planeten <- data.frame(
-  name        = c("Merkur", "Venus", "Erde", "Mars", "Jupiter", "Saturn", "Uranus", "Neptun"),
-  typ         = c("Gestein", "Gestein", "Gestein", "Gestein", "Gas", "Gas", "Eis", "Eis"),
-  durchmesser = c(0.382, 0.949, 1, 0.532, 11.209, 9.449, 4.007, 3.883),
-  hat_ringe   = c(FALSE, FALSE, FALSE, FALSE, TRUE, TRUE, TRUE, TRUE)
-)
-```
-
-Bei einem unbekannten Datensatz zuerst schauen, was drin ist:
-
-```{r}
-str(planeten)       # Zeilen, Spalten, Datentypen, Beispielwerte
-dim(planeten)       # Anzahl Zeilen und Spalten (nrow(), ncol() einzeln)
-head(planeten, 3)   # die ersten Zeilen
-names(planeten)     # die Spaltennamen
-```
-
-## Spalten mit $
-
-`$` holt eine Spalte als **Vektor** — damit funktioniert alles aus Einheit 1:
-
-```{r}
-planeten$durchmesser
-mean(planeten$durchmesser)
-```
-
-Mit `$` und `<-` legt man auch eine **neue Spalte** an (oder überschreibt eine bestehende):
-
-```{r}
-planeten$durchmesser_km <- round(planeten$durchmesser * 12742)   # Erddurchmesser in km
-```
-
-## Auswählen mit [Zeile, Spalte]
-
-Vor dem Komma stehen die **Zeilen**, nach dem Komma die **Spalten**. Bleibt eine Seite leer,
-heißt das „alle":
-
-```{r}
-planeten[3, "durchmesser"]            # Zeile 3, Spalte durchmesser
-planeten[3, ]                         # ganze Zeile 3
-planeten[, c("name", "typ")]          # zwei Spalten, alle Zeilen
-```
-
-Zeilen **filtern** heißt: eine Bedingung vor das Komma schreiben. Es bleiben die Zeilen, bei
-denen `TRUE` herauskommt — wie bei Vektoren in Einheit 1, nur mit Komma dahinter:
-
-```{r}
-planeten[planeten$durchmesser < 1, ]
-planeten[planeten$typ %in% c("Gas", "Eis"), c("name", "hat_ringe")]
-```
-
-## Kategorien: unique() und table()
-
-```{r}
-unique(planeten$typ)   # welche Werte kommen vor?
-table(planeten$typ)    # wie oft?
-```
-
-## Faktoren
-
-Ein **Faktor** speichert Kategorien samt ihrer festen Liste von **Levels**. Mit `levels`
-legt man die Reihenfolge fest, mit `ordered = TRUE` werden Vergleiche möglich:
-
-```{r}
-groesse <- factor(c("klein", "mittel", "mittel", "klein", "groß", "groß", "groß", "groß"),
-                  levels = c("klein", "mittel", "groß"), ordered = TRUE)
-groesse
-table(groesse)         # in der Reihenfolge der Levels, nicht alphabetisch
-groesse[1] < groesse[5]
-```
-
-In dieser Einheit erzeugt `cut()` Faktoren (Teil 2), und beim Speichern (Teil 3) sehen wir,
-welches Dateiformat die Levels behält.
-
-## Listen
-
-Eine **Liste** sammelt beliebige Objekte. Mit Namen versehen, holt man ein Element mit `$`
-zurück — so übergeben wir in Teil 3 mehrere Tabellen auf einmal an `write_xlsx()`:
-
-```{r}
-kurs <- list(planeten = planeten, anzahl = nrow(planeten))
-kurs$anzahl
-```
-
-### Übung
-
-1. Welche Planeten haben Ringe? Gib nur ihre Namen aus.
-2. Wie groß ist der mittlere Durchmesser der Gesteinsplaneten (`typ == "Gestein"`)?
-3. Mache aus `planeten$typ` einen Faktor mit der Reihenfolge `"Gestein"`, `"Gas"`, `"Eis"`
-   und zähle mit `table()`.
-
-```{r}
-# dein Code
-
-```
-
+In Skripten aus dem Netz oder von Kolleg:innen siehst du oft eine andere Form:
+`install.packages()` steht direkt im Code, und statt `library()` steht `require()`. Beides
+funktioniert, hat aber Nachteile: `install.packages()` im Skript lädt die Pakete bei **jedem**
+Durchlauf neu herunter, und `require()` gibt bei einem fehlenden Paket nur eine Warnung aus —
+der Fehler kommt dann erst viele Zeilen später. Deshalb: einmal in der Console installieren,
+im Dokument mit `library()` laden.
 
 # Teil 1: Daten einlesen
 
@@ -149,38 +47,115 @@ getwd()
 
 ## CSV einlesen mit read.csv()
 
-`read.csv()` liest eine CSV-Datei und gibt einen Data Frame zurück. `gemeinden.csv` enthält
-28 österreichische Gemeinden: Gemeindekennziffer, Bundesland, Gemeindetyp, Einwohnerzahl,
-Fläche, Entfernung zur Landeshauptstadt (Luftlinie in km) und den durchschnittlichen Preis
-für Baugrundstücke (in € pro m²). Die Werte stammen von Statistik Austria; für den Kurs haben
-wir 28 Gemeinden ausgewählt und einen Preis entfernt.
+`read.csv()` liest eine CSV-Datei und gibt einen Data Frame zurück. 
 
 ```{r}
 gemeinden <- read.csv("data/raw/gemeinden.csv")
 ```
 
-Nach dem Einlesen **immer** prüfen, ob Spaltenzahl und Datentypen stimmen:
+`gemeinden.csv` enthält 28 österreichische Gemeinden: Gemeindekennziffer, Bundesland,
+Gemeindetyp, Einwohnerzahl, Fläche, Entfernung zur Landeshauptstadt (Luftlinie in km) und den
+durchschnittlichen Preis für Baugrundstücke (in € pro m²). Die Werte stammen von Statistik
+Austria; für den Kurs haben wir 28 Gemeinden ausgewählt und einen Preis entfernt.
+
+## Erster Überblick (Wiederholung aus Einheit 2)
+
+Ein eingelesener Datensatz ist ein **Data Frame**:
+jede Spalte ein Vektor, alle gleich lang, jede mit ihrem eigenen Datentyp.
+
+Nach dem Einlesen **immer** zuerst prüfen, ob Spaltenzahl und Datentypen stimmen:
 
 ```{r}
-str(gemeinden)
+str(gemeinden)       # Zeilen, Spalten, Datentypen, Beispielwerte
 ```
 
-Leere Felder in einer Zahlenspalte werden automatisch zu `NA` — bei Ischgl fehlt der Preis:
+```{r}
+dim(gemeinden)       # Anzahl Zeilen und Spalten (nrow(), ncol() einzeln)
+head(gemeinden, 3)   # die ersten Zeilen
+names(gemeinden)     # die Spaltennamen (gleichwertig: colnames())
+```
+
+### Spalten mit $
+
+`$` holt eine Spalte als **Vektor**:
+
+```{r}
+mean(gemeinden$einwohner)
+max(gemeinden$flaeche_km2)
+```
+
+Mit `$` und `<-` legt man eine **neue Spalte** an (oder überschreibt eine bestehende):
+
+```{r}
+gemeinden$dichte <- round(gemeinden$einwohner / gemeinden$flaeche_km2)   # Einwohner pro km²
+```
+
+### Auswählen mit [Zeile, Spalte]
+
+Vor dem Komma stehen die **Zeilen**, nach dem Komma die **Spalten**. Bleibt eine Seite leer,
+heißt das „alle":
+
+```{r}
+gemeinden[1, "gemeinde"]                        # Zeile 1, Spalte gemeinde
+```
+
+```{r}
+gemeinden[1, ]                                  # ganze Zeile 1
+```
+
+```{r}
+head(gemeinden[, c("gemeinde", "einwohner")])   # zwei Spalten
+```
+
+Zeilen **filtern** heißt: eine Bedingung vor das Komma schreiben. Es bleiben die Zeilen, bei
+denen `TRUE` herauskommt — wie bei Vektoren in Einheit 1, nur mit Komma dahinter:
+
+```{r}
+gemeinden[gemeinden$einwohner > 50000, c("gemeinde", "einwohner")]
+```
+
+Leere Felder in einer Zahlenspalte werden beim Einlesen automatisch zu `NA` — bei Ischgl fehlt
+der Preis. `is.na()` in der Zeilenposition findet die Zeile:
 
 ```{r}
 gemeinden[is.na(gemeinden$preis_m2), ]
+```
+
+### Kategorien: unique() und table()
+
+```{r}
+unique(gemeinden$typ)          # welche Werte kommen vor?
+```
+```{r}
+table(gemeinden$bundesland)    # wie oft?
 ```
 
 ## Andere Trennzeichen: sep und dec
 
 `read.csv()` erwartet `,` als Trennzeichen und `.` als Dezimalzeichen. Viele Dateien sehen
 anders aus: Ein Excel mit deutschen Spracheinstellungen speichert CSV zum Beispiel mit `;` als
-Trennzeichen und `,` als Dezimalzeichen (`2,87` statt `2.87`). Mit den Argumenten `sep` und
-`dec` sagst du `read.csv()`, wie die Datei aufgebaut ist:
+Trennzeichen und `,` als Dezimalzeichen (`86,4` statt `86.4`).
 
-```{r, eval=FALSE}
-read.csv("data/raw/datei.csv", sep = ";", dec = ",")   # ; als Trenner, , als Dezimalzeichen
+`data/raw/gemeinden_de.csv` enthält dieselben Gemeinden, so gespeichert. Ohne Argumente bricht
+`read.csv()` mit der Meldung *„more columns than column names"* ab: Es hält die Kommas in
+den Dezimalzahlen für Trennzeichen.
+
+Mit `sep` sagst du, wie die Spalten getrennt sind. Das reicht aber noch nicht:
+
+```{r}
+nur_sep <- read.csv("data/raw/gemeinden_de.csv", sep = ";")
+str(nur_sep)   # flaeche_km2 und preis_m2 sind Text: "86,4"
 ```
+
+Erst mit `dec` erkennt R auch die Dezimalzahlen:
+
+```{r}
+richtig <- read.csv("data/raw/gemeinden_de.csv", sep = ";", dec = ",")   # ; als Trenner, , als Dezimalzeichen
+str(richtig)   # jetzt sind beide Spalten Zahlen (num)
+```
+
+Für genau dieses Format gibt es die Kurzform `read.csv2()` — sie setzt `sep = ";"` und
+`dec = ","` automatisch.
 
 Weitere nützliche Argumente:
 
@@ -246,7 +221,6 @@ Schadstoffe. Öffne die Datei zuerst als Text (im *Files*-Bereich anklicken → 
 
 ```
 
-
 # Teil 2: Daten aufräumen
 
 Echte Dateien sind selten sofort verwendbar: oben stehen Info-Zeilen, Zahlen kommen als Text
@@ -268,21 +242,20 @@ bezirke <- read.csv("data/raw/bezirke_roh.csv", sep = ";", dec = ",", skip = 4, 
 str(bezirke)
 ```
 
-Alle Zahlenspalten kommen als Zahlen an. Übrig bleiben zwei Dinge, die `read.csv()` nicht
-löst: die Spaltennamen und die Texte.
-
-## Spaltennamen säubern: gsub() und tolower()
+## Spaltennamen ändern: names()
 
 Die Namen in der Datei enthalten Leerzeichen (`Bezirk Nummer`); R hat sie beim Einlesen durch
-Punkte ersetzt. `gsub(muster, ersatz, text)` ist Suchen-und-Ersetzen: Wir tauschen die Punkte
-gegen Unterstriche. `fixed = TRUE` sagt, dass der Punkt wörtlich gemeint ist — sonst hat er in
-`gsub()` eine Sonderbedeutung. `tolower()` macht alles klein, damit die Namen snake_case sind:
+Punkte ersetzt. Mit `names()` und `<-` vergibst du neue Namen — in derselben Reihenfolge wie
+die Spalten:
 
 ```{r}
 names(bezirke)
-names(bezirke) <- tolower(gsub(".", "_", names(bezirke), fixed = TRUE))
+names(bezirke) <- c("bezirk_nummer", "bezirk_name", "einwohner", "mittleres_einkommen", "flaeche_km2")
 names(bezirke)
 ```
+
+Nur eine Spalte umbenennen geht über ihre Position, z. B. `names(bezirke)[2] <- "name"`. In
+fremden Skripten steht dafür oft `colnames()` — das ist dasselbe.
 
 ## Text aufräumen und zusammensetzen: trimws(), paste(), substr()
 
@@ -306,7 +279,9 @@ bezirke[bezirke$bezirk_name == "Wieden", ]
 ```{r}
 paste("AT", "13", "01")     # "AT 13 01"
 paste0("AT", "13", "01")    # "AT1301"
+```
 
+```{r}
 bezirke$label <- paste0(bezirke$bezirk_nummer, ". ", bezirke$bezirk_name)
 head(bezirke$label)
 ```
@@ -334,6 +309,40 @@ bezirke[, c("bezirk_name", "einwohner", "groesse")]
 table(bezirke$groesse)
 ```
 
+## Zeilennamen: rownames()
+
+Ein Data Frame hat neben Spaltennamen auch **Zeilennamen**. Meist sind das nur die Nummern
+1, 2, 3 … Manche Funktionen verwenden sie aber als Beschriftung — bei Distanzen und
+Clusteranalysen etwa erscheinen die Zeilennamen in den Ergebnissen und Grafiken. Mit
+`rownames()` setzt man sie aus einer Spalte:
+
+```{r}
+rownames(bezirke) <- bezirke$bezirk_name
+bezirke["Wieden", c("einwohner", "flaeche_km2")]   # Zeile über ihren Namen auswählen
+```
+
+Zeilennamen sind keine richtige Spalte: Bei `summarise()` oder Joins (Einheit 4) gehen sie
+verloren. Braucht man sie später als Spalte, holt man sie zurück:
+`daten$name <- rownames(daten)`.
+
+## Zeilen mit fehlenden Werten entfernen: na.omit()
+
+`na.rm = TRUE` lässt fehlende Werte **innerhalb einer Rechnung** weg (Einheit 1). `na.omit()`
+geht weiter: Es entfernt aus einem Data Frame jede **Zeile**, in der irgendwo ein `NA` steht:
+
+```{r}
+bezirke_komplett <- na.omit(bezirke)
+nrow(bezirke_komplett)   # 7 — Neubau ist weg, dort fehlt die Fläche
+```
+
+Vorsicht: `na.omit()` prüft **alle** Spalten. Fehlt ein Wert in einer Spalte, die du gar
+nicht brauchst, verlierst du trotzdem die ganze Zeile. Deshalb erst die benötigten Spalten
+auswählen, dann `na.omit()`:
+
+```{r}
+nrow(na.omit(bezirke[, c("einwohner", "mittleres_einkommen")]))   # alle 8 bleiben
+```
+
 ### Übung
 
 1. Berechne das mittlere Einkommen über alle Bezirke und zeige die Bezirke, die darüber liegen.
@@ -346,7 +355,6 @@ table(bezirke$groesse)
 # dein Code
 
 ```
-
 
 # Teil 3: Ergebnisse speichern
 

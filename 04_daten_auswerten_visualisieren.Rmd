@@ -8,10 +8,10 @@ knitr::opts_chunk$set(echo = TRUE, message = FALSE)
 options(width = 110)   # breite Tabellen nicht umbrechen
 ```
 
-In Einheit 3 hast du Daten eingelesen und aufgeräumt. Jetzt geht es darum, sie auszuwerten
-und darzustellen:
+In dieser Einheit lernst du:
 
-1. **Datenbearbeitung mit `dplyr`** — filtern, sortieren, neue Spalten berechnen, gruppieren, verbinden, umformen
+1. **Datenbearbeitung mit `dplyr`** — filtern, sortieren, neue Spalten berechnen, gruppieren,
+   verbinden, umformen
 2. **Visualisierung mit `ggplot2`** — Grafiken schichtweise aufbauen
 
 Dafür werden drei Pakete gebraucht. Falls noch nicht geschehen, einmalig **in der Console**
@@ -46,8 +46,12 @@ Jedes Verb bekommt einen Data Frame und gibt einen neuen Data Frame zurück.
 
 ```{r}
 filter(gemeinden, preis_m2 > 400)
+```
+
+```{r}
 filter(gemeinden, typ %in% c("Stadt", "Umland"), entfernung_km <= 20)
 ```
+
 
 Zeilen, bei denen die Bedingung `NA` ergibt (hier: Ischgl), fallen bei `filter()` weg.
 
@@ -55,6 +59,13 @@ Zeilen, bei denen die Bedingung `NA` ergibt (hier: Ischgl), fallen bei `filter()
 
 ```{r}
 select(gemeinden, gemeinde, bundesland, einwohner)
+```
+
+Ein Minus schließt Spalten aus — praktisch, wenn man fast alle behalten will. Mehrere auf
+einmal: `-c(gkz, entfernung_km)`.
+
+```{r}
+select(gemeinden, -c(gkz, entfernung_km))
 ```
 
 ## arrange() — sortieren
@@ -112,40 +123,19 @@ gemeinden |>
   arrange(desc(preis_m2))
 ```
 
-| | `%>%` | <code>&#124;&gt;</code> |
-|---|---|---|
-| Name | magrittr-Pipe | native Pipe (eingebaut) |
-| Herkunft | Paket `magrittr`, wird von `dplyr` mitgeladen | fester Bestandteil von R seit Version 4.1 (2021) |
-| braucht ein Paket? | ja — ohne `library(dplyr)` gibt es einen Fehler | nein |
-| auf der Tastatur | *Strg/Cmd + Shift + M* (Standard in RStudio) | dasselbe Kürzel, wenn unter *Tools → Global Options → Code* „Use native pipe operator" angehakt ist. Von Hand: <code>&#124;</code> mit *AltGr + <* (Windows) bzw. *Option + 7* (Mac), dann `>` |
+`%>%` kommt aus dem Paket `magrittr` und wird mit `dplyr` mitgeladen — ohne
+`library(dplyr)` gibt es einen Fehler. `|>` ist seit R 4.1 (2021) eingebaut und braucht kein
+Paket. `%>%` steht in den meisten Büchern, Tutorials und in diesem Kurs, neuere Texte nutzen
+öfter `|>`. Beide sind richtig — wichtig ist, dass du **beide lesen kannst**.
 
-`%>%` war viele Jahre lang die einzige Pipe und steht deshalb in den meisten Büchern,
-Tutorials und auch in diesem Kurs; neuere Texte verwenden immer öfter `|>`. Beide sind richtig.
-Wichtig ist, dass du **beide lesen kannst**.
-
-### Zwei kleine Unterschiede
-
-Für den Anfang selten wichtig, aber gut zu wissen, wenn Code aus dem Netz nicht funktioniert:
-
-1. **Klammern:** Bei `|>` muss rechts immer ein Funktions*aufruf* mit Klammern stehen.
-   `gemeinden %>% head` funktioniert, `gemeinden |> head` nicht — richtig ist
-   `gemeinden |> head()`. Einfachste Regel: **immer Klammern schreiben.**
-2. **Platzhalter:** Soll das Ergebnis *nicht* an die erste Stelle, markiert man die Stelle mit
-   einem Platzhalter — bei `%>%` ein Punkt `.`, bei `|>` ein Unterstrich `_` (nur mit
-   Argumentnamen). Beispiel: `lm()` berechnet eine Regression und erwartet die Daten erst im
-   Argument `data`:
-
-```{r}
-gemeinden %>% lm(preis_m2 ~ entfernung_km, data = .)
-gemeinden |>  lm(preis_m2 ~ entfernung_km, data = _)
-```
+Tastenkürzel: *Strg/Cmd + Shift + M* fügt `%>%` ein — oder `|>`, wenn unter *Tools → Global
+Options → Code* „Use native pipe operator" angehakt ist.
 
 
 ## mutate() — neue Spalten berechnen
 
-`mutate()` berechnet eine neue Spalte aus bestehenden — elementweise für jede Zeile. Hier die
-Bevölkerungsdichte, wie in Einheit 1. Gleichwertig in Basis-R wäre
-`gemeinden$dichte <- gemeinden$einwohner / gemeinden$flaeche_km2`.
+`mutate()` berechnet eine neue Spalte aus bestehenden — elementweise für jede Zeile. Gleichwertig
+in Basis-R wäre `gemeinden$dichte <- gemeinden$einwohner / gemeinden$flaeche_km2`.
 
 ```{r}
 gemeinden <- gemeinden %>%
@@ -164,12 +154,12 @@ Bedingung gewinnt, `TRUE ~` fängt alles Übrige auf:
 gemeinden <- gemeinden %>%
   mutate(preisniveau = case_when(
     is.na(preis_m2) ~ NA,          # fehlende Werte zuerst abfangen
-    preis_m2 > 400  ~ "hoch",
-    preis_m2 > 100  ~ "mittel",
-    TRUE            ~ "niedrig"
-  ))
+    preis_m2 > 400  ~ "hoch",      # über 400
+    preis_m2 > 100  ~ "mittel",    # über 100 bis 400 — alles über 400 ist schon "hoch"
+    TRUE            ~ "niedrig"    # TRUE ist immer wahr: alle übrigen Zeilen
+  ))  # eine Klammer schließt case_when(), eine mutate()
 
-gemeinden %>% select(gemeinde, preis_m2, preisniveau) %>% head(8)
+filter(gemeinden, gemeinde == "Ischgl")
 ```
 
 Ohne die erste Zeile würde Ischgl als `"niedrig"` eingestuft: Die Vergleiche ergeben dort
@@ -207,7 +197,7 @@ gemeinden %>%
   )
 ```
 
-Die Ausgabe beginnt mit `# A tibble` — mehr dazu im Kasten.
+Das Ergebnis ist ein **Tibble** — mehr dazu im Kasten.
 
 ::: {.callout-note title="Was ist ein Tibble?"}
 Ein **Tibble** ist eine modernere Variante des Data Frames. Viele Funktionen aus `dplyr`,
@@ -224,7 +214,7 @@ drei Dinge sind anders:
   `as_tibble()` geht den umgekehrten Weg.
 :::
 
-Bei Tirol steht `NA`, weil der Preis von Ischgl fehlt (siehe Einheit 1, *Fehlende Werte: NA*).
+Bei Tirol steht `NA`, weil der Preis von Ischgl fehlt.
 Mit `na.rm = TRUE` wird der fehlende Wert ausgelassen:
 
 ```{r}
@@ -232,6 +222,21 @@ gemeinden %>%
   group_by(bundesland) %>%
   summarise(anzahl = n(), preis_mean = mean(preis_m2, na.rm = TRUE))
 ```
+
+Nach mehreren Spalten gruppiert man mit `group_by(bundesland, typ)` — dann gibt es eine
+Ergebniszeile pro Kombination:
+
+```{r}
+gemeinden %>%
+  group_by(bundesland, typ) %>%
+  summarise(anzahl = n(), preis_mean = mean(preis_m2, na.rm = TRUE))
+```
+
+In RStudio erscheint dabei die Meldung `summarise() has grouped output by 'bundesland'`. Das
+ist nur ein Hinweis, kein Fehler — das Ergebnis stimmt.
+
+Statt 4 Zeilen sind es jetzt 10: In Vorarlberg gibt es nur eine Umland-Gemeinde, deshalb nur
+eine Zeile.
 
 ## Datensätze verbinden: Joins
 
@@ -247,12 +252,12 @@ den Kurs so eingerichtet):
 
 Die vier Join-Varianten unterscheiden sich genau darin, was mit solchen Zeilen passiert:
 
-| Funktion | Behält |
-|---|---|
-| `left_join(x, y)` | alle Zeilen von `x`; fehlt die Entsprechung in `y` → `NA` |
-| `right_join(x, y)` | alle Zeilen von `y` |
-| `inner_join(x, y)` | nur Zeilen, die in **beiden** vorkommen |
-| `full_join(x, y)` | alle Zeilen aus **beiden** |
+- **Left Join** behält alle Gemeinden. Viktorsberg bleibt drin, bekommt aber keine Region
+  (`NA`).
+- **Right Join** behält alle Bundesländer. Salzburg kommt dazu (ohne Gemeinde), Viktorsberg
+  fällt weg.
+- **Inner Join** behält nur, was in **beiden** Tabellen vorkommt. Viktorsberg fällt weg.
+- **Full Join** behält **alles** aus beiden Tabellen: Viktorsberg und Salzburg.
 
 ![Die vier Join-Varianten: Blau ist, was im Ergebnis bleibt.](images/joins.svg)
 
@@ -273,6 +278,11 @@ gemeinden_join %>% filter(is.na(region))
 
 Über mehrere Spalten verbindet man mit `by = c("spalte1", "spalte2")`. In Basis-R heißt die
 Funktion `merge()` (`merge(x, y, by = "bundesland", all.x = TRUE)` entspricht `left_join`).
+
+Manchmal sieht man statt eines Joins `cbind()` (Einheit 2): Es klebt Spalten einfach
+nebeneinander. Das geht nur, wenn beide Tabellen gleich viele Zeilen in **derselben
+Reihenfolge** haben — R prüft das nicht.
+
 
 ## Breite und lange Tabellen: pivot_longer() und pivot_wider()
 
@@ -324,6 +334,14 @@ head(bev_lang, 3)
 
 Aus 1374 Zeilen mit 68 Jahresspalten sind 1374 · 68 = 93 432 Zeilen geworden. Jetzt lässt
 sich nach dem Jahr filtern wie nach jeder anderen Spalte.
+
+Wie bei `select()` kann `cols` die Spalten auch umgekehrt angeben, als „alle außer":
+`cols = -c(TERRITORY_ID, LEVEL_ID, NAME_HTML, VERSIONS, SEX, AGE, UNIT)` — alle Spalten außer
+den sieben, die keine Jahre sind.
+
+> **Hinweis:** Die ältere Version von `pivot_longer()` heißt `gather()` — du siehst sie noch
+> in manchen Dateien. `gather(daten, key = "variable", value = "wert", -c(id, gruppe))`
+> entspricht `pivot_longer(daten, cols = -c(id, gruppe), names_to = "variable", values_to = "wert")`.
 
 `pivot_wider()` geht den umgekehrten Weg: Die Werte einer Spalte (`names_from`, orange) werden
 zu Spaltennamen, eine zweite Spalte (`values_from`, blau) füllt die Zellen — praktisch, um
@@ -414,7 +432,24 @@ teuer, obwohl es fast 70 km von Innsbruck entfernt liegt.
 `color = "steelblue"` **außerhalb** von `aes()` setzt eine feste Farbe; `color = bundesland`
 **innerhalb** von `aes()` färbt nach den Werten einer Spalte.
 
+## Häufigkeiten: geom_bar()
+
+`geom_bar()` braucht nur eine x-Spalte und **zählt selbst**, wie viele Zeilen es pro
+Kategorie gibt — das grafische Gegenstück zu `count()`:
+
+```{r}
+ggplot(gemeinden_plot, aes(x = bundesland)) +
+  geom_bar(fill = "steelblue") +
+  labs(title = "Anzahl Gemeinden pro Bundesland", x = "Bundesland", y = "Anzahl") +
+  theme_minimal()
+```
+
 ## Balkendiagramm einer Kennzahl: geom_col()
+
+Steht der Wert für die Balkenhöhe schon in einer Spalte, nimmt man `geom_col()`.
+
+> **Hinweis:** In manchen Dateien steht dafür noch `geom_bar(stat = "identity")` — das ist
+> dasselbe wie `geom_col()`.
 
 `dplyr` und `ggplot2` greifen ineinander: erst die Kennzahl berechnen, dann direkt an
 `ggplot()` weiterreichen. Gemeinden ohne Region (Viktorsberg) filtern wir vorher heraus. Die
@@ -449,6 +484,26 @@ gemeinden_plot %>%
        x = "Region", y = "Ø Preis (€ pro m²)") +
   theme_minimal()
 ```
+
+## Gruppierte Balken: position = "dodge"
+
+Kommt eine zweite Gruppe auf `fill`, stapelt `geom_col()` die Balken übereinander.
+`position = "dodge"` stellt sie nebeneinander — hier der Preis pro Region **und**
+Gemeindetyp:
+
+```{r}
+gemeinden_plot %>%
+  filter(!is.na(region)) %>%
+  group_by(region, typ) %>%
+  summarise(preis_mean = mean(preis_m2)) %>%
+  ggplot(aes(x = region, y = preis_mean, fill = typ)) +
+  geom_col(position = "dodge") +
+  labs(title = "Durchschnittlicher Baugrundstückspreis nach Region und Gemeindetyp",
+       x = "Region", y = "Ø Preis (€ pro m²)", fill = "Gemeindetyp") +
+  theme_minimal()
+```
+
+`position = position_dodge()` ist die ausführliche Schreibweise derselben Einstellung.
 
 ## Zeitverläufe: geom_line()
 
@@ -500,6 +555,11 @@ ggplot(gemeinden_plot, aes(x = entfernung_km, y = preis_m2)) +
 ```
 
 Vorarlberg ist nur mit einer Gemeinde vertreten, deshalb steht dort ein einzelner Punkt.
+
+Alle Teilgrafiken haben dieselben Achsen — so lassen sie sich direkt vergleichen. Mit
+`facet_wrap(~bundesland, scales = "free")` bekommt jede Teilgrafik eigene Achsen
+(`"free_y"`: nur die y-Achse). Das zeigt Unterschiede **innerhalb** einer Gruppe besser,
+erschwert aber den Vergleich **zwischen** den Gruppen.
 
 ## Grafik speichern: ggsave()
 
